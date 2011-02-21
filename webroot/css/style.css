@@ -66,15 +66,15 @@ div#header > h1 a {
 /* ****************************************************************************/
 /* Content styles
 /* ****************************************************************************/
-div#cat_menu {
+div#left_menu {
 	float: left;
 }
 
-div#cat_menu h1 {
+div#left_menu h1 {
 	font-size: 1em;
 }
 
-ul#cat_menu ul ul {
+ul#left_menu ul ul {
 	font-size: 0.8em;
 }
 

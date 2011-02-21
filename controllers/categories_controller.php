@@ -11,7 +11,7 @@ class CategoriesController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'view', 'menu');
+        $this->Auth->allow('index', 'view');
     }
 
     function index() {
@@ -115,7 +115,7 @@ class CategoriesController extends AppController {
         }
 
         $this->set('parents', $this->Category->find('list'));
-        $this->set('items', $this->Category->Item->find('list'));
+        //$this->set('items', $this->Category->Item->find('list'));
     }
 
     function admin_delete($id = null) {
@@ -129,43 +129,6 @@ class CategoriesController extends AppController {
         }
         $this->Session->setFlash(__('Category was not deleted', true));
         $this->redirect(array('action' => 'index'));
-    }
-
-    function admin_menuitems() {
-        $root = 0;
-        if(isset($this->request->params['form']['node'])) {
-            $root = (int)$this->request->params['form']['node'];
-        }
-        if ($root == 0) {
-            $root = $this->Category->field('id', array('Tag'=>'catrootnode'));
-        }
-
-        $categories = $this->Category->find('all', array(
-            'conditions' => array('Category.parent_id' => $root),
-            'fields' => array('Category.id', 'Category.name', 'Category.parent_id')
-        ));
-
-        $nodes = array();
-        foreach ($categories as $category) {
-            $node = array();
-            $node['id'] = $category['Category']['id'];
-            $node['text'] = $category['Category']['name'];
-            $node['cls'] = 'category';
-            $node['iconCls'] = 'category';
-            $count = $this->Category->find('count', array(
-                'conditions' => array('Category.parent_id' => $category['Category']['id'])
-            ));
-            if ($count>0) {
-                $node['leaf'] = false;
-            } else {
-                $node['leaf'] = true;
-            }
-            $nodes[] = $node;
-        }
-
-        $this->set('data', $nodes);
-        $this->viewPath = 'elements';
-        $this->render('js_data');
     }
 
 }

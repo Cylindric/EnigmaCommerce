@@ -7,16 +7,10 @@
 	</title>
 	<?php echo $this->Html->charset(); ?>
 	<?php echo $this->Html->meta('icon'); ?>
-    <?php echo $this->Html->css('extjs/ext-all.css'); ?>
 	<?php echo $this->Html->css('cake.generic'); ?>
 	<?php echo $this->Html->css('structure'); ?>
 	<?php echo $this->Html->css('style'); ?>
 	<?php echo $this->Html->css('chrome.blue'); ?>
-
-    <?php echo $this->Html->script('extjs/adapter/ext/ext-base.js'); ?>
-    <?php echo $this->Html->script('extjs/ext-all-debug.js'); ?>
-    <script type="text/javascript">Ext.BLANK_IMAGE_URL = '<?php echo $this->request->webroot;?>/img/extjs/default/s.gif';</script>
-	
     <?php echo $scripts_for_layout; ?>
 </head>
   <body>
