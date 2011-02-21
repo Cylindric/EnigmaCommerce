@@ -194,7 +194,7 @@ class MigrationController extends AppController
         $this->migrate_offset += $this->migrate_chunk;
         $msg .= sprintf(__('Processing %d to %d...'), $this->migrate_offset, ($this->migrate_offset + $this->migrate_chunk));
 
-        $rootnode = $this->Category->find('first', array('conditions'=>array('Category.tag' => 'catrootnode')));
+        $rootnode = $this->Category->find('first', array('conditions'=>array('Category.slug' => 'catrootnode')));
 
         $newcats = $this->Category->find('all', $params);
         if (count($newcats) < $this->migrate_chunk) {

@@ -11,7 +11,7 @@ class Category extends AppModel {
     var $actsAs = array(
         'Containable',
         'Tree',
-        'Sluggable' => array('label'=>'name', 'slug'=>'tag', 'ignore'=>array()),
+        'Sluggable' => array('label'=>'name', 'ignore'=>array()),
     );
 
     var $belongsTo = array(
@@ -39,7 +39,7 @@ class Category extends AppModel {
         ), $settings);
 
         $categories = $this->find('all', array(
-            'fields' => array('Category.id', 'Category.name', 'Category.tag'),
+            'fields' => array('Category.id', 'Category.name', 'Category.slug'),
             'contain' => array(),
             'conditions' => array('Category.parent_id' => $parent_id),
             'order' => $settings['order']

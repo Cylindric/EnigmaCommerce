@@ -265,6 +265,19 @@ class SluggableBehavior extends ModelBehavior {
         $this->settings[$model->alias] = array_merge($this->settings[$model->alias], $settings);
     }
 
+//    public function beforeFind($model, $queryData) {
+//        parent::beforeFind($model, $queryData);
+//        
+//        $idField = $model->name.'.id';
+//        if (isset($queryData['conditions']) && isset($queryData['conditions'][$idField])) {
+//            $slug = $queryData['conditions'][$idField];
+//            if (!is_numeric($slug)) {
+//                $queryData['conditions'][$idField] = $model->field('id', array('slug'=>$slug));
+//            }
+//        }
+//        return $queryData;
+//    }
+    
     /**
      * Run before a model is saved, used to set up slug for model.
      *
@@ -401,4 +414,5 @@ class SluggableBehavior extends ModelBehavior {
 
         return $string;
     }
+    
 }

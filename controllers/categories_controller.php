@@ -14,18 +14,18 @@ class CategoriesController extends AppController {
         $this->Auth->allow('index', 'view');
         
         $menu_categories = $this->Category->find('threaded', array(
-            'fields'=>array('Category.id', 'Category.name', 'Category.tag', 'Category.parent_id'),
+            'fields'=>array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
             'contain'=>array()
         ));
         $this->set('menu_categories', $menu_categories);
     }
 
     function index() {
-        $parentid = $this->Category->field('id', array('Category.tag'=>'catrootnode'));
+        $parentid = $this->Category->field('id', array('Category.slug'=>'catrootnode'));
         $this->Category->recursive = 0;
         
         $categories = $this->Category->find('all', array(
-            'fields'=>array('Category.id', 'Category.name', 'Category.tag'),
+            'fields'=>array('Category.id', 'Category.name', 'Category.slug'),
             'contain'=>array(),
             'conditions'=>array('Category.parent_id'=>$parentid)
         ));
@@ -42,7 +42,7 @@ class CategoriesController extends AppController {
         if (is_numeric($id)) {
             $category = $this->Category->findById($id);
         } else {
-            $category = $this->Category->findByTag($id);
+            $category = $this->Category->findBySlug($id);
         }
 
         $this->set('subCategories', $this->Category->subCategories($id));        

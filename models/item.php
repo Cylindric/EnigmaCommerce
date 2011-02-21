@@ -1,17 +1,23 @@
 <?php
+/**
+ * Enigma : Online Sales Management. (http://www.enigmagen.org)
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ */
+
 class Item extends AppModel {
 
     var $name = 'Item';
 
     var $actsAs = array(
-        'Sluggable' => array('label'=>'name', 'slug'=>'tag'),
+        'Sluggable' => array('label'=>'name'),
         'Containable'
     );
 
-    var $hasMany = array('CategoryItem', 'Detail');
+    var $hasMany = array('CategoryItem', 'Variant');
 
     var $validate = array(
-        'tag' => array(
+        'slug' => array(
             'rule' => 'isUnique',
             'message' => 'Must be unique'
         ),
@@ -41,31 +47,32 @@ class Item extends AppModel {
  
         // Using a manual join, as at time of writing there seems to be a problem 
         // with table prefixes and complex joins.
-        $items = $this->find(
-            'all', array(
-                'joins'=>array(
-                    array(
-                        'table'=>$categoryItems->tablePrefix.$categoryItems->table,
-                        'alias'=>'CategoryItems',
-                        'type'=>'inner',
-                        'foreignKey'=>false,
-                        'conditions'=>array('CategoryItems.item_id = Item.id'),
-                    ),
-                    array(
-                        'table'=>$category->tablePrefix.$category->table,
-                        'alias'=>'Category',
-                        'type'=>'inner',
-                        'foreignKey'=>false,
-                        'conditions'=>array(
-                            'Category.id = CategoryItems.category_id',
-                            'Category.lft >=' => $category->data['Category']['lft'],
-                            'Category.rght <=' => $category->data['Category']['rght']
-                        ),
-                    )
-                ),
-                'order' => $settings['order']
-            )
-        );
+        $items = array();
+//        $items = $this->find(
+//            'all', array(
+//                'joins'=>array(
+//                    array(
+//                        'table'=>$categoryItems->tablePrefix.$categoryItems->table,
+//                        'alias'=>'CategoryItems',
+//                        'type'=>'inner',
+//                        'foreignKey'=>false,
+//                        'conditions'=>array('CategoryItems.item_id = Item.id'),
+//                    ),
+//                    array(
+//                        'table'=>$category->tablePrefix.$category->table,
+//                        'alias'=>'Category',
+//                        'type'=>'inner',
+//                        'foreignKey'=>false,
+//                        'conditions'=>array(
+//                            'Category.id = CategoryItems.category_id',
+//                            'Category.lft >=' => $category->data['Category']['lft'],
+//                            'Category.rght <=' => $category->data['Category']['rght']
+//                        ),
+//                    )
+//                ),
+//                'order' => $settings['order']
+//            )
+//        );
         return $items;
     }
     

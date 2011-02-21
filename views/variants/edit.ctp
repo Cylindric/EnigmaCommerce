@@ -8,7 +8,7 @@
 		echo $this->Form->input('unit_id');
 		echo $this->Form->input('size');
 		echo $this->Form->input('name');
-		echo $this->Form->input('tag');
+		echo $this->Form->input('slug');
 		echo $this->Form->input('price');
 		echo $this->Form->input('rrp');
 		echo $this->Form->input('stockcode');

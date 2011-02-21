@@ -28,7 +28,7 @@ class ItemsController extends AppController {
         if (is_numeric($id)) {
             $item = $this->Item->findById($id);
         } else {
-            $item = $this->Item->findByTag($id);
+            $item = $this->Item->findBySlug($id);
         }
 
         $this->set('item', $item);

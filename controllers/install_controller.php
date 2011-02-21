@@ -206,12 +206,12 @@ class InstallController extends AppController {
         $this->Session->setFlash(__("Inserted sample data.", true));
     }
 
-    private function createCategory($name, $parentTag) {
-        $parentId = $this->Category->field('id', array('Category.tag'=>$parentTag));
+    private function createCategory($name, $parentSlug) {
+        $parentId = $this->Category->field('id', array('Category.slug'=>$parentSlug));
         $this->Category->saveAll($this->Category->create(array('name'=>$name, 'parent_id'=>$parentId)));
     }
 
-    private function createItem($name, $categoryTags, $details) {
+    private function createItem($name, $categorySlugs, $details) {
         $newDetails = array();
         foreach($details as $detailkey=>$detailvalue) {
             $newDetails[] = array('name'=>$detailkey, 'price'=>$detailvalue);
@@ -225,10 +225,10 @@ class InstallController extends AppController {
         $itemId = $this->Item->id;
         
         $categories = array();
-        if (is_array($categoryTags)) {
-            $categories = $categoryTags;
+        if (is_array($categorySlugs)) {
+            $categories = $categorySlugs;
         } else {
-            $categories[] = $categoryTags;
+            $categories[] = $categorySlugs;
         }
         
         $catdata = array();
@@ -236,7 +236,7 @@ class InstallController extends AppController {
         foreach ($categories as $cat) {
             $ic = $this->CategoryItem->create();
             $ic['CategoryItem']['item_id'] = $itemId;
-            $ic['CategoryItem']['category_id'] = $this->Category->field('id', array('Category.tag'=>$cat));
+            $ic['CategoryItem']['category_id'] = $this->Category->field('id', array('Category.slug'=>$cat));
             $ic['CategoryItem']['is_primary'] = $primary;
             $catdata[] = $ic;
             $primary = false;
