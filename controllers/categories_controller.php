@@ -12,17 +12,25 @@ class CategoriesController extends AppController {
     function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('index', 'view');
+        
+        $menu_categories = $this->Category->find('threaded', array(
+            'fields'=>array('Category.id', 'Category.name', 'Category.tag', 'Category.parent_id'),
+            'contain'=>array()
+        ));
+        $this->set('menu_categories', $menu_categories);
     }
 
     function index() {
         $parentid = $this->Category->field('id', array('Category.tag'=>'catrootnode'));
         $this->Category->recursive = 0;
-        $this->paginate = array(
+        
+        $categories = $this->Category->find('all', array(
             'fields'=>array('Category.id', 'Category.name', 'Category.tag'),
             'contain'=>array(),
             'conditions'=>array('Category.parent_id'=>$parentid)
-        );
-        $this->set('categories', $this->paginate());
+        ));
+
+        $this->set('categories', $categories);
     }
 
     function view($id = null) {
@@ -36,6 +44,13 @@ class CategoriesController extends AppController {
         } else {
             $category = $this->Category->findByTag($id);
         }
+
+        $categories = $this->Category->find('all', array(
+            'fields'=>array('Category.id', 'Category.name', 'Category.tag'),
+            'contain'=>array(),
+            'conditions'=>array('Category.parent_id'=>$id)
+        ));
+        $this->set('categories', $categories);
 
         $lft = $category['Category']['lft'];
         $rght = $category['Category']['rght'];

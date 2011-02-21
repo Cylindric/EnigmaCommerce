@@ -3,10 +3,7 @@ class Unit extends AppModel {
 
     var $name = 'Unit';
 
-    var $actsAs = array(
-        'Containable',
-        'Treenodes'
-    );
+    var $actsAs = array('Containable');
 
     var $belongsTo = array(
         'ParentUnit' => array(

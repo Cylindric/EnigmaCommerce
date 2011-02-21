@@ -4,9 +4,10 @@
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  **/
+
 class AppController extends Controller {
     var $components = array('Auth', 'RequestHandler', 'Session');
-    var $helpers = array('Form', 'Html', 'Js', 'Session', 'Text', 'Number');
+    var $helpers = array('Form', 'Html', 'Js', 'Session', 'Text', 'Number', 'Tree');
     var $user = null;
 
     var $paginate = array(

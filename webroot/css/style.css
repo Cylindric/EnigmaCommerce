@@ -70,12 +70,12 @@ div#left_menu {
 	float: left;
 }
 
-div#left_menu h1 {
-	font-size: 1em;
+div#left_menu ul {
+	font-size: 0.9em;
+    margin: 0em;
 }
-
-ul#left_menu ul ul {
-	font-size: 0.8em;
+div#left_menu li {
+    margin-left: 1em;
 }
 
 div.view {
