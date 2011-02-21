@@ -11,4 +11,10 @@
     1. If EC is not in the webroot, set RewriteBase to the webroot (/ec3)
 2. Copy /ec3/config/database.php.default to database.php and configure with db settings
 
-http://e3.enigmagen.org/git-post-receive-hook.php
+## Worked Example
+
+Some examples files to highlight the file structure:
+    /var/www/vhosts/enigmagen/cakephp/README
+    /var/www/vhosts/enigmagen/httpdocs/ec3/app_controller.php
+    /var/www/vhosts/enigmagen/httpdocs/ec3/config/database.php
+    /var/www/vhosts/enigmagen/httpdocs/ec3/webroot/css.php

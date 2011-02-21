@@ -49,7 +49,7 @@
  *
  */
 	if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-		define('CAKE_CORE_INCLUDE_PATH', ROOT);
+		define('CAKE_CORE_INCLUDE_PATH', "D:\webserver\e3.enigmagen.org\cakephp");
 	}
 
 /**
