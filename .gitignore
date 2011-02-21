@@ -1,0 +1,5 @@
+!.gitignore
+/tmp/cache/models/*
+/tmp/cache/persistent/*
+/tmp/logs/*
+!empty

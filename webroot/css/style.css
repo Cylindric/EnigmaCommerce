@@ -1,0 +1,115 @@
+body {
+  font-family: Arial, Arial, Helvetica, sans-serif;
+	font-size: 0.9em;
+}
+
+p {
+  text-align: justify;
+	margin-top: 0.3em;
+}
+
+/* Paragraphs that follow other paragraphs have a paragraph-indent */
+p + p {
+	text-indent: 1em;
+	margin-top: 0.3em;
+}
+
+a {
+	text-decoration: none;
+}
+
+h1, h1 > a {
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+h3 {
+    padding-top: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+div#header ul {
+  list-style-type: none;
+}
+
+div#header ul li a {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+div#flashMessage {
+	clear: both;
+	color: #fff;
+	font-size: 140%;
+	font-weight: bold;
+	background: rgb(0,127,0);
+	padding-left: 4px;
+}
+
+div#footer {
+	text-align: center;
+	font-size: 0.7em;
+	padding-bottom: 8px;
+}
+
+div#header > h1 a {
+	font-size: 55px;
+}
+
+
+/* ****************************************************************************/
+/* Content styles
+/* ****************************************************************************/
+div#cat_menu {
+	float: left;
+}
+
+div#cat_menu h1 {
+	font-size: 1em;
+}
+
+ul#cat_menu ul ul {
+	font-size: 0.8em;
+}
+
+div.view {
+	float:right;
+	width:76%;
+}
+
+.treeview ul {margin: 0;}
+.treeview li {margin: 0;}
+
+/* ****************************************************************************/
+/* Menu styles
+/* ****************************************************************************/
+ul.mktree  li { list-style: none; }
+ul.mktree, ul.mktree ul , ul.mktree li { padding:0px; }
+ul.mktree  li           .bullet { padding-left: 15px; }
+ul.mktree  li.liOpen    .bullet { cursor: pointer; }
+ul.mktree  li.liClosed  .bullet { cursor: pointer; }
+ul.mktree  li.liBullet  .bullet { cursor: default; }
+ul.mktree  li.liOpen    ul { display: block; }
+ul.mktree  li.liClosed  ul { display: none; }
+ul.mktree  li ul li { font-size: 90% }
+/* ****************************************************************************/
+
+div.progress_bar {
+  border: 1px solid #ccc;
+  width: 100px;
+  margin: 2px 5px 2px 0;
+  padding: 1px;
+  float: left;
+  background: white;
+}
+
+div.progress_bar > div {
+  background-color: #ACE97C;
+  height: 12px
+}
