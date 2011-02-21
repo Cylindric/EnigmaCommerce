@@ -22,4 +22,29 @@ class Category extends AppModel {
 
     var $hasMany = array('CategoryItem');
 
+    /**
+     * Returns all categories that are children of the specified category.
+     * 
+     * The sort order can be specified by passing in a settings array with the 
+     * field to sort by:
+     * array('order' => 'Category.name')
+     * 
+     * @param int $parent_id
+     * @param array $settings
+     * @return array
+     */
+    public function subCategories($parent_id, array $settings = array()) {
+        $settings = array_merge(array(
+            'order' => array('Category.name')
+        ), $settings);
+
+        $categories = $this->find('all', array(
+            'fields' => array('Category.id', 'Category.name', 'Category.tag'),
+            'contain' => array(),
+            'conditions' => array('Category.parent_id' => $parent_id),
+            'order' => $settings['order']
+        ));
+        return $categories;
+    }
+
 }

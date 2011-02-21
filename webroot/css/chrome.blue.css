@@ -1,38 +1,38 @@
 body {
-	background-color: #E0E0E0;
-	color: #444;
+    background-color: #E0E0E0;
+    color: #444;
 }
 
 h1, h2, h1 > a {
-	color: #CC3D05;
+    color: #CC3D05;
 }
 
 h1 > a:hover {
-	color: darkblue;
+    color: darkblue;
 }
 
 a {
-	color: darkblue;
+    color: darkblue;
 }
 
 a:hover {
-	color: #CC3D05;
+    color: #CC3D05;
 }
 
 div#title h1 {
-	color: #E0E0E0;
-	background-color: transparent;
+    color: #E0E0E0;
+    background-color: transparent;
 }
 
 
 div#header h1 {
-	background: url(../img/chrome.blue/logo.png) no-repeat left top;
+    background: url(../img/chrome.blue/logo.png) no-repeat left top;
 }
 @media print {div#header h1 {background-image: none;}}
 
 div#header h1 a,
 div#header h1 a:hover {
-		background-color: transparent;
+        background-color: transparent;
 }
 
 div#separator_m {background: url(../img/chrome.blue/separator_m.png) repeat-x left top;}
@@ -57,7 +57,7 @@ div#content_br {background: url(../img/chrome.blue/content_br.png) no-repeat rig
 
 
 div#footer {
-	color: #666;
+    color: #666;
 }
 
 #ajax-save-message {
@@ -70,7 +70,18 @@ div#footer {
 /* ****************************************************************************/
 /* Content styles
 /* ****************************************************************************/
-th.actions { text-align: center; }
+th.actions { text-align: center;}
+
+div.x-list div.category {
+    border: 2px solid darkBlue;
+    background-color: #ccccff;
+}
+
+div.x-list div.item {
+    border: 2px solid darkRed;
+    background-color: #ffcccc;
+}
+
 
 /* ****************************************************************************/
 /* Menu styles

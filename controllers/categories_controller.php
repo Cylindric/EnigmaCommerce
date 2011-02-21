@@ -45,43 +45,8 @@ class CategoriesController extends AppController {
             $category = $this->Category->findByTag($id);
         }
 
-        $categories = $this->Category->find('all', array(
-            'fields'=>array('Category.id', 'Category.name', 'Category.tag'),
-            'contain'=>array(),
-            'conditions'=>array('Category.parent_id'=>$id)
-        ));
-        $this->set('categories', $categories);
-
-        $lft = $category['Category']['lft'];
-        $rght = $category['Category']['rght'];
-        $items = $this->Item->find(
-            'all', array(
-                'joins'=>array(
-                    array(
-                        'table'=>$this->Category->tablePrefix.'category_items',
-                        'alias'=>'CategoryItems',
-                        'type'=>'inner',
-                        'foreignKey'=>false,
-                        'conditions'=>array('CategoryItems.item_id = Item.id'),
-                    ),
-                    array(
-                        'table'=>$this->Category->tablePrefix.'categories',
-                        'alias'=>'Category',
-                        'type'=>'inner',
-                        'foreignKey'=>false,
-                        'conditions'=>array(
-                            'Category.id = CategoryItems.category_id',
-                            'Category.lft >=' => $lft,
-                            'Category.rght <=' => $rght
-                        ),
-                    )
-                ),
-            )
-        );
-
-        $category['RelatedItems'] = $items;
-        
-        $this->set('items', $items);
+        $this->set('subCategories', $this->Category->subCategories($id));        
+        $this->set('relatedItems', $this->Item->withinCategory($id));
         $this->set('category', $category);
     }
 
