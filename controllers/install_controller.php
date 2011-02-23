@@ -15,29 +15,18 @@ class InstallController extends AppController {
     var $uses = array();
     var $db;
 
-    /**
-     * Before every action, allow access and define default database.
-     *
-     * @access public
-     * @return void
-     */
     function beforeFilter() {
+        parent::beforeFilter();
+
         // Make sure we disable Auth for the installer, otherwise we get lots
         // of complaints about missing tables etc
         $this->Auth->enabled = false;
+        $this->Auth->authorize = false;
 
-        parent::beforeFilter();
-        $this->Auth->allow('index', 'createBlank', 'createSample');
+        $this->Auth->allow('*');
         $this->db = ConnectionManager::getDataSource('default');
     }
 
-
-    /**
-     * Index page
-     *
-     * @access public
-     * @return void
-     */
     function index() {
     }
 

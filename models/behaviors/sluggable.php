@@ -277,7 +277,7 @@ class SluggableBehavior extends ModelBehavior {
         parent::beforeFind($model, $queryData);
         $settings = $this->settings[$model->alias];
         
-        if ((array_key_exists('conditions', $queryData)) && (!is_null($queryData['conditions']))) {
+        if ((array_key_exists('conditions', $queryData)) && (is_array($queryData['conditions']))) {
             foreach ($queryData['conditions'] as $field=>$condition) {
                 if ($field == $model->alias.'.id') {
                     if (!is_numeric($condition)) {

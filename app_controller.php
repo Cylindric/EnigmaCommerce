@@ -6,8 +6,12 @@
  **/
 
 class AppController extends Controller {
-    var $components = array('Auth', 'RequestHandler', 'Session');
-    var $helpers = array('Form', 'Html', 'Js', 'Session', 'Text', 'Number', 'Tree');
+    var $components = array(
+        'Auth', 
+        'RequestHandler', 
+        'Session'
+    );
+    var $helpers = array('Form', 'Html', 'Js', 'Number', 'Session', 'Text', 'Tree');
     var $user = null;
 
     var $paginate = array(
