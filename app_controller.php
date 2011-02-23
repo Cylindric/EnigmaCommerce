@@ -15,25 +15,17 @@ class AppController extends Controller {
     );
     
     function beforeFilter() {
+        $this->Auth->authenticate = array('Form');
         $this->Auth->autoRedirect = false;
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
         $this->Auth->loginRedirect = array('controller' => 'categories', 'action' => 'index');
-
-        if ($this->Auth->user()) {
-           $this->user = $this->Auth->getModel();
-           $this->user->read(null, $this->Auth->user('id'));
-        }
         
         if (isset($this->params['admin']) && $this->params['admin']) {
            $this->layout = 'admin'; 
         }
 
         $this->set('webRoot', $this->params->webroot);
-        if ($this->user == null) {
-            $this->set('user', null);
-        } else {
-            $this->set('user', $this->user->data);
-        }
+        $this->set('user', $this->Auth->user());
 
     }
 

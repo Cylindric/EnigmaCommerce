@@ -211,15 +211,15 @@ class InstallController extends AppController {
         $this->Category->saveAll($this->Category->create(array('name'=>$name, 'parent_id'=>$parentId)));
     }
 
-    private function createItem($name, $categorySlugs, $details) {
-        $newDetails = array();
-        foreach($details as $detailkey=>$detailvalue) {
-            $newDetails[] = array('name'=>$detailkey, 'price'=>$detailvalue);
+    private function createItem($name, $categorySlugs, $variations) {
+        $newVariations = array();
+        foreach($variations as $variationkey=>$variationvalue) {
+            $newVariations[] = array('name'=>$variationkey, 'price'=>$variationvalue);
         }
         
         $this->Item->saveAll(array(
             'Item' => array('name'=>$name),
-            'Detail' =>$newDetails,
+            'Variation' =>$newVariations,
         ));
         
         $itemId = $this->Item->id;

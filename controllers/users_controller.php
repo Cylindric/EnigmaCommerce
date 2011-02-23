@@ -11,6 +11,7 @@ class UsersController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
+        $this->Auth->allow('login');
     }
     
     function index() {
@@ -77,35 +78,23 @@ class UsersController extends AppController {
     }
 
     function login() {
-        if ($this->Auth->user()) {
-            $redirect = $this->Auth->loginRedirect;
-            
-            if ($this->User->isAdmin($this->Auth->user('id'))) {
-                $redirect['admin'] = true;
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                $redirect = $this->Auth->loginRedirect;
+
+                if ($this->User->isAdmin($this->Auth->user('id'))) {
+                    $redirect['admin'] = true;
+                }
+                return $this->redirect($redirect);
+            } else {
+                $this->Session->setFlash(__('Username or password is incorrect'));
             }
-                $this->redirect($redirect);
         }
     }
     
     function logout() {
-        $this->Session->setFlash('Good-Bye');
+        $this->Session->setFlash(__('Good-Bye'));
         $this->redirect($this->Auth->logout());
-    }
-    
-    function admin_menuitems() {
-        $users = $this->User->find('all');
-        $nodes = array();
-        foreach ($users as $user) {
-            $nodes[] = array(
-                'id'   => $user['User']['id'],
-                'text' => $user['User']['username'],
-                'leaf' => true,
-                'cls'  => 'user'
-            );
-        }
-        $this->set('data', $nodes);
-        $this->viewPath = 'elements';
-        $this->render('js_data');
     }
     
 }

@@ -5,15 +5,16 @@
  * Redistributions of files must retain the above copyright notice.
  */
 
-class Variant extends AppModel {
+class Variantion extends AppModel {
 
-    var $name = 'Variant';
+    var $name = 'Variantion';
 
     var $actsAs = array(
+        'Containable',
         'Sluggable' => array(
-            'label'=>'name', 
-            'ignore'=>array(),
-            'unique_conditions'=>array(array('foreignField'=>'Variant.item_id', 'localField'=>'item_id'))),
+            'label' => 'name', 
+            'ignore' => array(),
+            'unique_conditions'=>array(array('foreignField' => 'Variation.item_id', 'localField' => 'item_id'))),
     );
     
     var $belongsTo = array('Item');

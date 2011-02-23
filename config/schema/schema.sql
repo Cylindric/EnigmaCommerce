@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS `enigma3_category_items` (
 ) ENGINE=MyISAM;
 
 
-DROP TABLE IF EXISTS `enigma3_variants`;
-CREATE TABLE IF NOT EXISTS `enigma3_variants` (
+DROP TABLE IF EXISTS `enigma3_variations`;
+CREATE TABLE IF NOT EXISTS `enigma3_variations` (
     `id` int NOT NULL AUTO_INCREMENT,
     `item_id` int NOT NULL,
     `unit_id` int NOT NULL DEFAULT 0,

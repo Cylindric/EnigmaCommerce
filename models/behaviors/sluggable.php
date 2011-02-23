@@ -265,18 +265,30 @@ class SluggableBehavior extends ModelBehavior {
         $this->settings[$model->alias] = array_merge($this->settings[$model->alias], $settings);
     }
 
-//    public function beforeFind($model, $queryData) {
-//        parent::beforeFind($model, $queryData);
-//        
-//        $idField = $model->name.'.id';
-//        if (isset($queryData['conditions']) && isset($queryData['conditions'][$idField])) {
-//            $slug = $queryData['conditions'][$idField];
-//            if (!is_numeric($slug)) {
-//                $queryData['conditions'][$idField] = $model->field('id', array('slug'=>$slug));
-//            }
-//        }
-//        return $queryData;
-//    }
+    /**
+     * If a Find is being performed on the id field of the model, with a non-numeric
+     * id, the search is changed to look for a slug instead.
+     * 
+     * @param type $model
+     * @param type $queryData
+     * @return type
+     */
+    public function beforeFind($model, $queryData) {
+        parent::beforeFind($model, $queryData);
+        $settings = $this->settings[$model->alias];
+        
+        if ((array_key_exists('conditions', $queryData)) && (!is_null($queryData['conditions']))) {
+            foreach ($queryData['conditions'] as $field=>$condition) {
+                if ($field == $model->alias.'.id') {
+                    if (!is_numeric($condition)) {
+                        $queryData['conditions'][$model->alias.'.'.$settings['slug']] = $condition;
+                        unset($queryData['conditions'][$model->alias.'.id']);
+                    }
+                }
+            }
+        }
+        return $queryData;
+    }
     
     /**
      * Run before a model is saved, used to set up slug for model.
