@@ -11,7 +11,7 @@ class AppController extends Controller {
         'RequestHandler', 
         'Session'
     );
-    var $helpers = array('Form', 'Html', 'Js', 'Number', 'Session', 'Text', 'Tree');
+    var $helpers = array('Form', 'Html', 'Js', 'Link', 'Number', 'Session', 'Text', 'Tree');
     var $user = null;
 
     var $paginate = array(

@@ -1,9 +1,15 @@
 <?php
+/**
+ * Enigma : Online Sales Management. (http://www.enigmagen.org)
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ **/
+
 class TreeHelper extends AppHelper {
 
     var $name = 'Tree';
     var $settings = array();
-    var $helpers = array ('Html');
+    var $helpers = array ('Html', 'Link');
 
     function generate ($data, array $settings = array()) {
 
@@ -12,9 +18,14 @@ class TreeHelper extends AppHelper {
             'title' => 'name',
             'link' => true,
             'div' => 'tree',
+            'showRoot' => true,
             'action' => null
         ), $settings);
         extract($this->settings);
+
+        if ($showRoot == false) {
+            $data = $data[0]['children'];
+        }
         
         $out = '<div id="'.$div.'">';
         $out .= $this->drawNodes($data);
@@ -33,7 +44,10 @@ class TreeHelper extends AppHelper {
             $nodeaction = $action;
             $nodeaction[] = $node[$model]['id'];
             if ($link) {
-                $out .= $this->Html->link($node[$model][$title], $nodeaction);
+                $out .= $this->Link->link($model, $node[$model], array(
+                    'action' => $nodeaction,
+                    'name' => $title
+                ));
             } else {
                 $out .= $node[$model][$title].'<br/>';
             }

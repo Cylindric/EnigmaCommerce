@@ -14,7 +14,7 @@ App::import('model', 'connection_manager');
 class MigrationController extends AppController
 {
     var $components = array();
-    var $uses = array();
+    var $uses = array('Category', 'CategoryItem', 'Item', 'Variation');
     var $db;
     var $old_db;
     var $migrate_chunk = 50;
@@ -33,6 +33,7 @@ class MigrationController extends AppController
         parent::beforeFilter();
         $this->Auth->allow('index', 'migrate');
         $this->db = ConnectionManager::getDataSource('default');
+
     }
 
 
@@ -96,7 +97,7 @@ class MigrationController extends AppController
                 $this->__migrateItemCategories();
                 break;
 
-            case ('details'):
+            case ('variations'):
                 $this->__migrateDetails();
                 break;
 
@@ -179,7 +180,6 @@ class MigrationController extends AppController
      */
     private function __migrateCategoryParents()
     {
-        $this->loadModel('Category');
         $msg = sprintf(__('Processing %s...'), __('category') . ' ' . __('joins'));
 
         // Fix category hierarchy
@@ -239,7 +239,7 @@ class MigrationController extends AppController
         $num = 0;
         $msg .= sprintf(__('found %d...'), count($olds));
         if (count($olds) < $this->migrate_chunk) {
-            $this->migrate_section = 'details';
+            $this->migrate_section = 'variations';
             $this->migrate_offset = 0;
         }
         foreach ($olds as $old) {
@@ -297,15 +297,12 @@ class MigrationController extends AppController
             $old = $old[$this->old_db->config['prefix'] . 'itemcategory'];
             $item = $this->Item->find('first', array('conditions'=>array('Item.legacy_id'=>$old['ItemID'])));
             $cat = $this->Category->find('first', array('conditions'=>array('Category.legacy_id'=>$old['CategoryID'])));
-var_dump($old);
-// var_dump($item);
-// var_dump($cat);
             $newdata = $new->create();
-            $newdata['item_id'] = $item['Item']['id'];
-            $newdata['category_id'] = $cat['Category']['id'];
-            $newdata['is_primary'] = $old['IsPrimary'];
-            $newdata['created'] = $old['CreateDate'];
-            $newdata['modified'] = $old['ModifyDate'];
+            $newdata['CategoryItem']['item_id'] = $item['Item']['id'];
+            $newdata['CategoryItem']['category_id'] = $cat['Category']['id'];
+            $newdata['CategoryItem']['is_primary'] = $old['IsPrimary'];
+            $newdata['CategoryItem']['created'] = $old['CreateDate'];
+            $newdata['CategoryItem']['modified'] = $old['ModifyDate'];
 
             if ($old['DeleteDate'] == 0) {
                 $new->save($newdata);
@@ -320,7 +317,7 @@ var_dump($old);
     }
 
     /**
-     * Migrate the Item Details
+     * Migrate the Item Variations
      *
      * @access private
      * @return void
@@ -329,23 +326,23 @@ var_dump($old);
     {
         $this->loadModel('Item');
         $this->loadModel('Unit');
-        $this->loadModel('Detail');
-        $new = new Detail();
-        $msg = sprintf(__('Processing %s...'), __('details'));
+        $this->loadModel('Variation');
+        $new = new Variation();
+        $msg = sprintf(__('Processing %s...'), __('variations'));
 
         $q = 'SELECT * ';
         $q .= 'FROM ' . $this->old_db->config['prefix'] . 'detail ';
-        $q .= 'LEFT JOIN ' . $this->old_db->config['prefix'] . 'unit ON (' . $this->old_db->config['prefix'] . 'detail.UnitID=' . $this->old_db->config['prefix'] . 'unit.UnitID) ';
-        if($this->Session->check('MigrationDetailCount')) {
-            $detailCount = $this->Session->read('MigrationDetailCount');
+        $q .= 'LEFT JOIN ' . $this->old_db->config['prefix'] . 'unit ON (' . $this->old_db->config['prefix'] . 'variation.UnitID=' . $this->old_db->config['prefix'] . 'unit.UnitID) ';
+        if($this->Session->check('MigrationVariationCount')) {
+            $variationCount = $this->Session->read('MigrationVariationCount');
         } else {
             $this->old_db->query($q);
-            $detailCount = $this->old_db->lastNumRows();
-            $this->Session->write('MigrationDetailCount', $detailCount);
+            $variationCount = $this->old_db->lastNumRows();
+            $this->Session->write('MigrationVariationCount', $variationCount);
         }
         $q .= 'LIMIT ' . $this->migrate_offset . ', ' . $this->migrate_chunk;
         $this->migrate_offset += $this->migrate_chunk;
-        $msg .= sprintf(__('Processing %d to %d of %d...'), $this->migrate_offset, ($this->migrate_offset + $this->migrate_chunk), $detailCount);
+        $msg .= sprintf(__('Processing %d to %d of %d...'), $this->migrate_offset, ($this->migrate_offset + $this->migrate_chunk), $variationCount);
 
         $olds = $this->old_db->query($q);
         $num = 0;

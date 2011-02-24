@@ -82,34 +82,3 @@ div.view {
 	float:right;
 	width:76%;
 }
-
-.treeview ul {margin: 0;}
-.treeview li {margin: 0;}
-
-/* ****************************************************************************/
-/* Menu styles
-/* ****************************************************************************/
-ul.mktree  li { list-style: none; }
-ul.mktree, ul.mktree ul , ul.mktree li { padding:0px; }
-ul.mktree  li           .bullet { padding-left: 15px; }
-ul.mktree  li.liOpen    .bullet { cursor: pointer; }
-ul.mktree  li.liClosed  .bullet { cursor: pointer; }
-ul.mktree  li.liBullet  .bullet { cursor: default; }
-ul.mktree  li.liOpen    ul { display: block; }
-ul.mktree  li.liClosed  ul { display: none; }
-ul.mktree  li ul li { font-size: 90% }
-/* ****************************************************************************/
-
-div.progress_bar {
-  border: 1px solid #ccc;
-  width: 100px;
-  margin: 2px 5px 2px 0;
-  padding: 1px;
-  float: left;
-  background: white;
-}
-
-div.progress_bar > div {
-  background-color: #ACE97C;
-  height: 12px
-}

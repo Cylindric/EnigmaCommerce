@@ -12,7 +12,7 @@
     <div class="x-list">
         <?php foreach ($subCategories as $category): ?>
         <div class="x-item category">
-            <?php echo $this->Html->link($category['Category']['name'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id'])); ?>
+            <?php echo $this->Html->link($category['Category']['name'], array('controller' => 'categories', 'action' => 'view', $category['Category']['slug'])); ?>
         </div>
         <?php endforeach; ?>
     </div>

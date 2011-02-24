@@ -82,12 +82,7 @@ div.x-list div.item {
     background-color: #ffcccc;
 }
 
-
-/* ****************************************************************************/
-/* Menu styles
-/* ****************************************************************************/
-ul.mktree  li.liOpen    .bullet { background: url(../img/chrome.blue/tree-minus.gif)  center left no-repeat; }
-ul.mktree  li.liClosed  .bullet { background: url(../img/chrome.blue/tree-plus.gif)   center left no-repeat; }
-ul.mktree  li.liBullet  .bullet { background: url(../img/chrome.blue/tree-bullet.gif) center left no-repeat; }
-/* ****************************************************************************/
-
+div.x-list div.variation {
+    border: 2px solid darkGreen;
+    background-color: #ccffcc;
+}

@@ -69,7 +69,7 @@ DROP TABLE IF EXISTS `enigma3_variations`;
 CREATE TABLE IF NOT EXISTS `enigma3_variations` (
     `id` int NOT NULL AUTO_INCREMENT,
     `item_id` int NOT NULL,
-    `unit_id` int NOT NULL DEFAULT 0,
+    `unit_id` int NOT NULL,
     `size` decimal(10,2) NOT NULL DEFAULT 0.00,
     `name` varchar(128) NOT NULL,
     `slug` varchar(100) NOT NULL default '',
