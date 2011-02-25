@@ -7,223 +7,197 @@
 
 App::import('model', 'connection_manager');
 
-/**
- * Manages the installation of new database structures and the migration of
- * data from previous versions.
- */
 class MigrationController extends AppController
 {
     var $components = array();
     var $uses = array('Category', 'CategoryItem', 'Item', 'Variation');
     var $db;
     var $old_db;
-    var $migrate_chunk = 50;
-    var $migrate_offset = 0;
-    var $migrate_section = 'start';
-    var $migrate_messages = array();
 
-    /**
-     * Before every action, allow access and define default database.
-     *
-     * @access public
-     * @return void
-     */
+    private $sequence = array(
+        'Categories',
+        'CategoryParents',
+        'Items',
+        'CategoryItems',
+        'ItemDetails'
+    );
+    
+    private $settings = array();
+    
     function beforeFilter()
     {
         parent::beforeFilter();
         $this->Auth->allow('index', 'migrate');
         $this->db = ConnectionManager::getDataSource('default');
-
     }
 
-
-    /**
-     * Index page
-     *
-     * @access public
-     * @return void
-     */
     function index()
     {
+        $this->Session->delete('migration_settings');
     }
 
-
-    /**
-     * Migrate data from a previous version of Enigma.
-     *
-     * Currently this only supports migrating data from Enigma 2.0.    As that's
-     * the only version out there "in the wild", that shouldn't be a problem
-     * yet...
-     *
-     * All data structures need to exist already, so should be run after
-     * create().
-     * The Data Source 'upgrade' must be defined in the database.php config.
-     *
-     * @access public
-     * @return void
-     */
-    function migrate($section, $offset)
+    function migrate()
     {
-        @$this->old_db = ConnectionManager::getDataSource('upgrade');
+        $this->settings = array();
+        if ($this->Session->check('migration_settings')) {
+            $this->settings = $this->Session->read('migration_settings');
+        } 
+
+        $this->settings = array_merge(array(
+            'queue' => $this->sequence,
+            'offset' => 0,
+            'limit' => 50,
+            'count' => array(),
+            'source' => 'upgrade',
+            'status' => 'start',
+            'messages' => array()
+        ), $this->settings);
+
+        @$this->old_db = ConnectionManager::getDataSource($this->settings['source']);
         if (is_null($this->old_db)) {
-            $this->Session->setFlash(__("Error - you need to define an 'upgrade' db connection to migrate."));
+            $this->Session->setFlash(__("Error - you need to define a '%s' db connection to migrate.", $this->settings['source']));
             $this->redirect(array('action'=>'index'));
         }
-
-        $this->migrate_messages = $this->Session->read('migrate_messages');
-
-        if ($section == 'start') {
-            $section = 'categories';
-            $this->migrate_messages = array();
-        }
-        $this->migrate_section = $section;
-        $this->migrate_offset = $offset;
-
-        // categories
-        switch ($this->migrate_section) {
-            case ('categories'):
-                $this->__migrateCategories();
-                break;
-
-            case ('catparents'):
-                $this->__migrateCategoryParents();
-                break;
-
-            case ('items'):
-                $this->__migrateItems();
-                break;
-
-            case ('itemcats'):
-                $this->__migrateItemCategories();
-                break;
-
-            case ('variations'):
-                $this->__migrateDetails();
-                break;
-
-            case ('done'):
-                $this->migrate_messages[] = array('text' => __('Done'));
-                break;
-        }
-
-        $next_page = '/migration/migrate/' . $this->migrate_section . '/' . $this->migrate_offset;
-        if ($this->migrate_section != 'done') {
-            $this->Session->write('migrate_messages', $this->migrate_messages);
-        }
-
-        $this->set('next_page', $next_page);
-        $this->set('section', $this->migrate_section);
-        $this->set('msgs', $this->migrate_messages);
-    }
-
-    /**
-     * Migrate all Categories.
-     *
-     * @access private
-     * @return void
-     */
-    private function __migrateCategories()
-    {
-        App::import('Model', 'Category');
-        $newcat = new Category();
-        $msg = sprintf(__('Processing %s...'), __('categories'));
-
-        $q = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'category ';
-        if($this->Session->check('MigrationCategoryCount')) {
-            $catCount = $this->Session->read();
+        
+        if ($this->settings['status'] == 'done') {
+            $this->settings['offset'] = 0;
+            array_shift($this->settings['queue']);
+        } 
+        
+        if(count($this->settings['queue']) == 0) {
+            $this->settings['status'] = 'finished';
+            $this->msg('Migration', 'Complete!');
+            $this->Session->delete('migration_settings');
         } else {
-            $this->old_db->query($q);
-            $catCount = $this->old_db->lastNumRows();
-            $this->Session->write('MigrationCategoryCount', $catCount);
+            $method = 'migrate'.$this->settings['queue'][0];
+            $this->{$method}();
         }
 
-        $q .= 'LIMIT ' . $this->migrate_offset . ', ' . $this->migrate_chunk;
-        $this->migrate_offset += $this->migrate_chunk;
-        $msg .= sprintf(__('Processing %d to %d of %d...'), $this->migrate_offset, ($this->migrate_offset + $this->migrate_chunk), $catCount);
+        $this->Session->write('migration_settings', $this->settings);
 
-        $oldcats = $this->old_db->query($q);
-        $num = 0;
-        $msg .= sprintf(__('found %d...'), count($oldcats));
-        if (count($oldcats) < $this->migrate_chunk) {
-            $this->migrate_section = 'catparents';
-            $this->migrate_offset = 0;
-        }
-        foreach ($oldcats as $oldcat) {
-            $oldcat = $oldcat[$this->old_db->config['prefix'] . 'category'];
-            $newdata = array();
-            $newdata['legacy_id'] = $oldcat['CategoryID'];
-            $newdata['legacy_parent_id'] = $oldcat['ParentID'];
-            $newdata['name'] = html_entity_decode($oldcat['CategoryName']);
-            $newdata['description'] = $oldcat['Description'];
-            $newdata['stockcodeprefix'] = $oldcat['StockCodePrefix'];
-            $newdata['created'] = $oldcat['CreateDate'];
-            $newdata['modified'] = $oldcat['ModifyDate'];
-            if ($oldcat['DeleteDate'] == 0) {
-                $newdata['status'] = 1;
-            } else {
-                $newdata['status'] = 0;
-            }
-            $newcat->create();
-            $newcat->save($newdata);
-            $num += 1;
-        }
-
-        $msg .= sprintf(__('processed %d...'), $num);
-        $this->migrate_messages[] = array('text' => $msg);
+        $this->set('status', $this->settings['status']);
+        $this->set('messages', $this->settings['messages']);
     }
 
-    /**
-     * Update migrated Categories with their new Parent IDs.
-     *
-     * @access private
-     * @return void
-     */
-    private function __migrateCategoryParents()
-    {
-        $msg = sprintf(__('Processing %s...'), __('category') . ' ' . __('joins'));
+    private function migrateCategories() {
+        $name = 'Categories';     
+        $count = $this->getCount($name, 
+            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'category ');
 
+        $msg = __('Processing %d %s...', $count, __(Inflector::pluralize($name)));
+
+        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'category ';
+        $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
+        
+        $msg .= __('Processing %d to %d...', 
+            $this->settings['offset'], 
+            min($count, ($this->settings['offset'] + $this->settings['limit'])));
+
+        $rows = $this->old_db->query($query);
+        foreach ($rows as $row) {
+            $oldObject = $row[$this->old_db->config['prefix'] . 'category'];
+            $newObject = $this->Category->create();
+            $newObject['legacy_id'] = $oldObject['CategoryID'];
+            $newObject['legacy_parent_id'] = $oldObject['ParentID'];
+            $newObject['name'] = html_entity_decode($oldObject['CategoryName']);
+            $newObject['description'] = $oldObject['Description'];
+            $newObject['stockcodeprefix'] = $oldObject['StockCodePrefix'];
+            $newObject['created'] = $oldObject['CreateDate'];
+            $newObject['modified'] = $oldObject['ModifyDate'];
+            if ($oldObject['DeleteDate'] == 0) {
+                $newObject['status'] = 1;
+            } else {
+                $newObject['status'] = 0;
+            }
+            $this->Category->save($newObject);
+        }
+
+        $this->settings['offset'] += $this->settings['limit'];
+
+        if (count($rows) < $this->settings['limit']) {
+            $this->settings['status'] = 'done';
+            $msg .= 'done';
+        }
+
+        $this->msg($name, $msg);
+    }
+
+    private function migrateCategoryParents() {
+        $name = 'CategoryParents';     
+//        $count = $this->getCount($name, 
+//            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'category ');
+//
+//        $msg = __('Processing %d %s...', $count, __(Inflector::pluralize($name)));
+//
+//        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'category ';
+//        $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
+//        
+//        $msg .= __('Processing %d to %d...', 
+//        
         // Fix category hierarchy
         $num = 0;
 
         $conditions = array('Category.legacy_id !=' => 0);
         $params = array(
             'conditions' => $conditions,
-            'limit' => $this->migrate_chunk,
-            'offset' => $this->migrate_offset
+            'limit' => $this->settings['limit'],
+            'offset' => $this->settings['offset']
         );
         $this->migrate_offset += $this->migrate_chunk;
-        $msg .= sprintf(__('Processing %d to %d...'), $this->migrate_offset, ($this->migrate_offset + $this->migrate_chunk));
+//        $msg .= sprintf(__('Processing %d to %d...'), $this->migrate_offset, ($this->migrate_offset + $this->migrate_chunk));
+//
+//        $rootnode = $this->Category->find('first', array('conditions'=>array('Category.slug' => 'catrootnode')));
+//
+//        $newcats = $this->Category->find('all', $params);
+//        if (count($newcats) < $this->migrate_chunk) {
+//            $this->migrate_section = 'items';
+//            $this->migrate_offset = 0;
+//        }
+//        if (!count($newcats) == 0) {
+//            foreach ($newcats as $cat) {
+//                if ($cat['Category']['legacy_parent_id'] == 0) {
+//                    $parentcat = $rootnode;
+//                } else {
+//                    $parentcat = $this->Category->find('first', array('conditions'=>array('Category.legacy_id' => $cat['Category']['legacy_parent_id'])));
+//                }
+//                $this->Category->id = $cat['Category']['id'];
+//                $this->Category->saveField('parent_id', $parentcat['Category']['id']);
+//                $num += 1;
+//            }
+//
+//            $msg .= sprintf(__('processed %d...'), $num);
+//            $this->msg('Categories', $msg);
+//        }
 
-        $rootnode = $this->Category->find('first', array('conditions'=>array('Category.slug' => 'catrootnode')));
+        $this->settings['offset'] += $this->settings['limit'];
 
-        $newcats = $this->Category->find('all', $params);
-        if (count($newcats) < $this->migrate_chunk) {
-            $this->migrate_section = 'items';
-            $this->migrate_offset = 0;
+        if (count($rows) < $this->settings['limit']) {
+            $this->settings['status'] = 'done';
+            $msg .= 'done';
         }
-        if (!count($newcats) == 0) {
-            foreach ($newcats as $cat) {
-                if ($cat['Category']['legacy_parent_id'] == 0) {
-                    $parentcat = $rootnode;
-                } else {
-                    $parentcat = $this->Category->find('first', array('conditions'=>array('Category.legacy_id' => $cat['Category']['legacy_parent_id'])));
-                }
-                $this->Category->id = $cat['Category']['id'];
-                $this->Category->saveField('parent_id', $parentcat['Category']['id']);
-                $num += 1;
-            }
 
-            $msg .= sprintf(__('processed %d...'), $num);
-            $this->migrate_messages[] = array('text' => $msg);
-        }
+        $this->msg($name, $msg);
     }
 
-    /**
-     * Migrate the Items
-     *
-     * @access private
-     * @return void
-     */
+    private function migrateItems() {
+        $this->msg('Items', 'done');
+        $this->settings['status'] = 'done';
+    }
+
+    private function migrateCategoryItems() {
+        $this->msg('CategoryItems', 'done');
+        $this->settings['status'] = 'done';
+    }
+
+    private function migrateItemDetails() {
+        $this->msg('ItemDetails', 'done');
+        $this->settings['status'] = 'done';
+    }
+    
+    private function msg($section, $message) {
+        $this->settings['messages'][$section] = $message;
+    }
+
     private function __migrateItems()
     {
         $this->loadModel('Item');
@@ -316,12 +290,6 @@ class MigrationController extends AppController
         $this->migrate_messages[] = array('text' => $msg);
     }
 
-    /**
-     * Migrate the Item Variations
-     *
-     * @access private
-     * @return void
-     */
     private function __migrateDetails()
     {
         $this->loadModel('Item');
@@ -390,4 +358,14 @@ class MigrationController extends AppController
         $this->migrate_messages[] = array('text' => $msg);
     }
 
+    private function getCount($name, $query) {
+        if (!array_key_exists($name, $this->settings['count'])) {
+            $result = $this->old_db->query($query);
+            $count = $result[0][0]['count'];
+            $this->settings['count'][$name] = $count;
+        } else {
+            $count = $this->settings['count'][$name];
+        }
+        return $count;
+    }
 }
