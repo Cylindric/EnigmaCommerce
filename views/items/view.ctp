@@ -1,45 +1,23 @@
-	<div id="cat_menu">
-	</div>
-	<div id="body" class="view">
-	<div id="bodycontent">
+<?php echo $this->element('categorymenu'); ?>
+<div id="body" class="view">
+    <div id="bodycontent">
 
+    <?php echo $this->Session->flash(); ?>
 
-<?php if (!empty($title)): ?>
-		<h1><?php echo($title); ?></h1>
-<?php endif; ?>
-
-<?php echo $this->Session->flash(); ?>
-
-<h2><?php echo $item['Item']['name']; ?></h2>
-<?php echo $item['Item']['description']; ?>
-
-    <div class="related">
-        <h3><?php __('Details');?></h3>
-        <?php if (!empty($item['Detail'])):?>
-        <table cellpadding = "0" cellspacing = "0">
-        <tr>
-            <th><?php __('Name'); ?></th>
-            <th><?php __('Price'); ?></th>
-            <th><?php __('Actions'); ?></th>
-        </tr>
-        <?php
-            $i = 0;
-            foreach ($item['Detail'] as $detail):
-                $class = null;
-                if ($i++ % 2 == 0) {
-                    $class = ' class="altrow"';
-                }
-            ?>
-            <tr<?php echo $class;?>>
-                <td><?php echo $detail['name'];?></td>
-                <td><?php echo $this->Number->currency($detail['price'], 'GBP');?></td>
-                <td><?php echo $this->Html->link(__('Add to Basket'), array('controller' => 'basket', 'action' => 'basket', $detail['id'])); ?></td>
-            </tr>
-        <?php endforeach; ?>
-        </table>
+        <h1><?php echo $item['Item']['name']; ?></h1>
+        <p><?php echo $item['Item']['description']; ?></p>
+    <?php if (count($item['Variation'])>0): ?>
+        <div class="x-list">
+            <?php foreach ($item['Variation'] as $variation): ?>
+            <div class="x-item variation">
+                <?php echo $variation['name']; ?><br />
+                <?php echo $variation['price']; ?><br />
+                <?php echo $this->Html->link(__('Buy'), array('controller' => 'basket', 'action' => 'add', $item['Item']['slug'], $variation['slug'])); ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
     <?php endif; ?>
-    </div>
 
-	</div>
-	</div>
-	<div class="clear"></div>
+    </div>
+</div>
+<div class="clear"></div>

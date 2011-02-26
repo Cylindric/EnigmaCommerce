@@ -25,12 +25,10 @@ class ItemsController extends AppController {
             $this->redirect(array('action' => 'index'));
         }
 
-        if (is_numeric($id)) {
-            $item = $this->Item->findById($id);
-        } else {
-            $item = $this->Item->findBySlug($id);
-        }
-
+        $item = $this->Item->find('first', array(
+            'contain' => array('Variation'),
+            'conditions' => array('Item.id' => $id)
+        ));
         $this->set('item', $item);
     }
 

@@ -197,7 +197,8 @@ class InstallController extends AppController {
 
     private function createCategory($name, $parentSlug) {
         $parentId = $this->Category->field('id', array('Category.slug'=>$parentSlug));
-        $this->Category->saveAll($this->Category->create(array('name'=>$name, 'parent_id'=>$parentId)));
+        $category = $this->Category->create(array('name'=>$name, 'parent_id'=>$parentId));
+        $this->Category->saveAll($category);
     }
 
     private function createItem($name, $categorySlugs, $variations) {

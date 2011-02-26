@@ -12,13 +12,7 @@ class CategoriesController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'view');
-        
-        $menu_categories = $this->Category->find('threaded', array(
-            'fields'=>array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
-            'contain'=>array()
-        ));
-        $this->set('menu_categories', $menu_categories);
+        $this->Auth->allow('index', 'view', 'menu_nodes');
     }
 
     function index() {
@@ -45,6 +39,14 @@ class CategoriesController extends AppController {
         $this->set('relatedItems', $this->Item->withinCategory($category['Category']['id']));
     }
 
+    function menu_nodes() {
+        $menuCategories = $this->Category->find('threaded', array(
+            'fields'=>array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
+            'contain'=>array()
+        ));
+        return $menuCategories;
+    }
+    
     function admin_view($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Invalid category', true));
