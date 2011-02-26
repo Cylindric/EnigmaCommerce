@@ -15,11 +15,12 @@ class MigrationController extends AppController
     var $old_db;
 
     private $sequence = array(
-        'Categories',
-        'CategoryParents',
-        'Items',
+//        'Categories',
+//        'CategoryParents',
+//        'CategoryTreeRepair',
+//        'Items',
         'CategoryItems',
-        'ItemDetails'
+//        'ItemDetails'
     );
     
     private $settings = array();
@@ -46,7 +47,7 @@ class MigrationController extends AppController
         $this->settings = array_merge(array(
             'queue' => $this->sequence,
             'offset' => 0,
-            'limit' => 50,
+            'limit' => 100,
             'count' => array(),
             'source' => 'upgrade',
             'status' => 'start',
@@ -61,6 +62,7 @@ class MigrationController extends AppController
         
         if ($this->settings['status'] == 'done') {
             $this->settings['offset'] = 0;
+            $this->settings['status'] = 'migrating';
             array_shift($this->settings['queue']);
         } 
         
@@ -84,39 +86,48 @@ class MigrationController extends AppController
         $count = $this->getCount($name, 
             'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'category ');
 
+        if ($count == 0) {
+            $this->settings['status'] = 'done';
+            $this->msg($name, 'none found');
+            return;
+        }
+
         $msg = __('Processing %d %s...', $count, __(Inflector::pluralize($name)));
 
+        // Prevent the MPTT behavior from making the import take a long time
+        // Tree will need rebuilding afterwards
+        $this->Category->Behaviors->disable('Tree');
+        
         $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'category ';
         $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
-        
-        $msg .= __('Processing %d to %d...', 
-            $this->settings['offset'], 
-            min($count, ($this->settings['offset'] + $this->settings['limit'])));
 
         $rows = $this->old_db->query($query);
         foreach ($rows as $row) {
             $oldObject = $row[$this->old_db->config['prefix'] . 'category'];
             $newObject = $this->Category->create();
-            $newObject['legacy_id'] = $oldObject['CategoryID'];
-            $newObject['legacy_parent_id'] = $oldObject['ParentID'];
-            $newObject['name'] = html_entity_decode($oldObject['CategoryName']);
-            $newObject['description'] = $oldObject['Description'];
-            $newObject['stockcodeprefix'] = $oldObject['StockCodePrefix'];
-            $newObject['created'] = $oldObject['CreateDate'];
-            $newObject['modified'] = $oldObject['ModifyDate'];
+            $newObject['Category']['legacy_id'] = $oldObject['CategoryID'];
+            $newObject['Category']['legacy_parent_id'] = $oldObject['ParentID'];
+            $newObject['Category']['name'] = html_entity_decode($oldObject['CategoryName']);
+            $newObject['Category']['description'] = $oldObject['Description'];
+            $newObject['Category']['stockcodeprefix'] = $oldObject['StockCodePrefix'];
+            $newObject['Category']['created'] = $oldObject['CreateDate'];
+            $newObject['Category']['modified'] = $oldObject['ModifyDate'];
             if ($oldObject['DeleteDate'] == 0) {
-                $newObject['status'] = 1;
+                $newObject['Category']['status'] = 1;
             } else {
-                $newObject['status'] = 0;
+                $newObject['Category']['status'] = 0;
             }
             $this->Category->save($newObject);
         }
+        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
 
-        $this->settings['offset'] += $this->settings['limit'];
+        // Reenable the MPTT behavior
+        $this->Category->Behaviors->enable('Tree');
 
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
-            $msg .= 'done';
+        } else {
+            $this->settings['offset'] += $this->settings['limit'];
         }
 
         $this->msg($name, $msg);
@@ -124,69 +135,154 @@ class MigrationController extends AppController
 
     private function migrateCategoryParents() {
         $name = 'CategoryParents';     
-//        $count = $this->getCount($name, 
-//            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'category ');
-//
-//        $msg = __('Processing %d %s...', $count, __(Inflector::pluralize($name)));
-//
-//        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'category ';
-//        $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
-//        
-//        $msg .= __('Processing %d to %d...', 
-//        
-        // Fix category hierarchy
-        $num = 0;
+        $count = $this->Category->find('count');
 
-        $conditions = array('Category.legacy_id !=' => 0);
+        if ($count == 0) {
+            $this->settings['status'] = 'done';
+            $this->msg($name, 'none found');
+            return;
+        }
+
+        $msg = __('Processing %d %s cross-links...', $count, __('Category'));
+
+        // Prevent the MPTT behavior from making the import take a long time
+        // Tree will need rebuilding afterwards
+        $this->Category->Behaviors->disable('Tree');
+        
         $params = array(
-            'conditions' => $conditions,
+            'conditions' => array('Category.legacy_id !=' => 0),
             'limit' => $this->settings['limit'],
             'offset' => $this->settings['offset']
         );
-        $this->migrate_offset += $this->migrate_chunk;
-//        $msg .= sprintf(__('Processing %d to %d...'), $this->migrate_offset, ($this->migrate_offset + $this->migrate_chunk));
-//
-//        $rootnode = $this->Category->find('first', array('conditions'=>array('Category.slug' => 'catrootnode')));
-//
-//        $newcats = $this->Category->find('all', $params);
-//        if (count($newcats) < $this->migrate_chunk) {
-//            $this->migrate_section = 'items';
-//            $this->migrate_offset = 0;
-//        }
-//        if (!count($newcats) == 0) {
-//            foreach ($newcats as $cat) {
-//                if ($cat['Category']['legacy_parent_id'] == 0) {
-//                    $parentcat = $rootnode;
-//                } else {
-//                    $parentcat = $this->Category->find('first', array('conditions'=>array('Category.legacy_id' => $cat['Category']['legacy_parent_id'])));
-//                }
-//                $this->Category->id = $cat['Category']['id'];
-//                $this->Category->saveField('parent_id', $parentcat['Category']['id']);
-//                $num += 1;
-//            }
-//
-//            $msg .= sprintf(__('processed %d...'), $num);
-//            $this->msg('Categories', $msg);
-//        }
+        $rootnode = $this->Category->find('first', array('conditions'=>array('Category.slug' => 'catrootnode')));
 
-        $this->settings['offset'] += $this->settings['limit'];
+        $rows = $this->Category->find('all', $params);
+
+        if (!count($rows) == 0) {
+            foreach ($rows as $row) {
+                if ($row['Category']['legacy_parent_id'] == 0) {
+                    $parentcat = $rootnode;
+                } else {
+                    $parentcat = $this->Category->find('first', array('conditions'=>array('Category.legacy_id' => $row['Category']['legacy_parent_id'])));
+                }
+                $this->Category->id = $row['Category']['id'];
+                $this->Category->saveField('parent_id', $parentcat['Category']['id']);
+            }
+        }
+
+        // Reenable the MPTT behavior
+        $this->Category->Behaviors->enable('Tree');
 
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
-            $msg .= 'done';
+            $msg .= $this->progressBar($count, $count);
+        } else {
+            $msg .= $this->progressBar($this->settings['offset'] + count($rows), $count);
+            $this->settings['offset'] += $this->settings['limit'];
+        }
+
+        $this->msg($name, $msg);
+    }
+    
+    private function migrateCategoryTreeRepair() {
+        $name = 'CategoryTreeRepair';
+        $msg = __('Repairing %s tree...', __('Category'));
+        if ($this->settings['offset'] == 0) {
+            $msg .= $this->progressBar(0, 100);
+            $this->settings['offset'] = 1;
+        } else {
+            $parentId = $this->Category->field('id', array('conditions'=>array('Category.slug' => 'catrootnode')));
+            $this->Category->recover('parent', $parentId);
+            $msg .= $this->progressBar(100, 100);
+            $this->settings['status'] = 'done';
+        }
+        $this->msg($name, $msg);
+    }
+
+    private function migrateItems() {
+        $name = 'Items';     
+        $count = $this->getCount($name, 
+            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'item ');
+
+        if ($count == 0) {
+            $this->settings['status'] = 'done';
+            $this->msg($name, 'none found');
+            return;
+        }
+
+        $msg = __('Processing %d %s...', $count, __('Items'));
+        
+        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'item ';
+        $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
+
+        $rows = $this->old_db->query($query);
+        foreach ($rows as $row) {
+            $oldObject = $row[$this->old_db->config['prefix'] . 'item'];
+            $newObject = $this->Item->create();
+            $newObject['Item']['legacy_id'] = $oldObject['ItemID'];
+            $newObject['Item']['name'] = html_entity_decode($oldObject['ItemName']);
+            $newObject['Item']['description'] = $oldObject['Description'];
+            $newObject['Item']['created'] = $oldObject['CreateDate'];
+            $newObject['Item']['modified'] = $oldObject['ModifyDate'];
+            if ($oldObject['DeleteDate'] == 0) {
+                $newObject['Item']['status'] = 1;
+            } else {
+                $newObject['Item']['status'] = 0;
+            }
+            $this->Item->save($newObject);
+        }
+        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+
+        if (count($rows) < $this->settings['limit']) {
+            $this->settings['status'] = 'done';
+        } else {
+            $this->settings['offset'] += $this->settings['limit'];
         }
 
         $this->msg($name, $msg);
     }
 
-    private function migrateItems() {
-        $this->msg('Items', 'done');
-        $this->settings['status'] = 'done';
-    }
-
     private function migrateCategoryItems() {
-        $this->msg('CategoryItems', 'done');
-        $this->settings['status'] = 'done';
+        $name = 'CategoryItems';     
+        $count = $this->getCount($name, 
+            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'itemcategory ');
+
+        if ($count == 0) {
+            $this->settings['status'] = 'done';
+            $this->msg($name, 'none found');
+            return;
+        }
+
+        $msg = __('Processing %d %s-%s links...', $count, _('Category'), _('Item'));
+        
+        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'itemcategory ';
+        $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
+
+        $rows = $this->old_db->query($query);
+        foreach ($rows as $row) {
+            $oldObject = $row[$this->old_db->config['prefix'] . 'itemcategory'];
+            $item = $this->Item->find('first', array('conditions'=>array('Item.legacy_id'=>$oldObject['ItemID'])));
+            $cat = $this->Category->find('first', array('conditions'=>array('Category.legacy_id'=>$oldObject['CategoryID'])));
+            
+            $newObject = $this->CategoryItem->create();
+            $newObject['CategoryItem']['item_id'] = $oldObject['ItemID'];
+            $newObject['CategoryItem']['category_id'] = html_entity_decode($oldObject['CategoryID']);
+            $newObject['CategoryItem']['is_primary'] = $oldObject['IsPrimary'];
+            $newObject['CategoryItem']['created'] = $oldObject['CreateDate'];
+            $newObject['CategoryItem']['modified'] = $oldObject['ModifyDate'];
+            if ($oldObject['DeleteDate'] == 0) {
+                $this->CategoryItem->save($newObject);
+            }
+        }
+        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+
+        if (count($rows) < $this->settings['limit']) {
+            $this->settings['status'] = 'done';
+        } else {
+            $this->settings['offset'] += $this->settings['limit'];
+        }
+
+        $this->msg($name, $msg);
     }
 
     private function migrateItemDetails() {
@@ -196,46 +292,6 @@ class MigrationController extends AppController
     
     private function msg($section, $message) {
         $this->settings['messages'][$section] = $message;
-    }
-
-    private function __migrateItems()
-    {
-        $this->loadModel('Item');
-        $new = new Item();
-        $msg = sprintf(__('Processing %s...'), __('items'));
-
-        $q = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'item ';
-        $q .= 'LIMIT ' . $this->migrate_offset . ', ' . $this->migrate_chunk;
-        $this->migrate_offset += $this->migrate_chunk;
-        $msg .= sprintf(__('Processing %d to %d...'), $this->migrate_offset, ($this->migrate_offset + $this->migrate_chunk));
-
-        $olds = $this->old_db->query($q);
-        $num = 0;
-        $msg .= sprintf(__('found %d...'), count($olds));
-        if (count($olds) < $this->migrate_chunk) {
-            $this->migrate_section = 'variations';
-            $this->migrate_offset = 0;
-        }
-        foreach ($olds as $old) {
-            $old = $old[$this->old_db->config['prefix'] . 'item'];
-            $newdata = array();
-            $newdata['legacy_id'] = $old['ItemID'];
-            $newdata['name'] = $old['ItemName'];
-            $newdata['description'] = $old['Description'];
-            $newdata['created'] = $old['CreateDate'];
-            $newdata['modified'] = $old['ModifyDate'];
-            if ($old['DeleteDate'] == 0) {
-                $newdata['status'] = 1;
-            } else {
-                $newdata['status'] = 0;
-            }
-            $new->create();
-            $new->save($newdata);
-            $num += 1;
-        }
-
-        $msg .= sprintf(__('processed %d...'), $num);
-        $this->migrate_messages[] = array('text' => $msg);
     }
 
     private function __migrateItemCategories()
@@ -368,4 +424,25 @@ class MigrationController extends AppController
         }
         return $count;
     }
+    
+    private function progressBar($current, $max) {
+        $width = 20;
+        $current = (float)$current;
+        $max = (float)$max;
+        $percent = ($current/$max);
+ 
+        $left = max(0, floor($percent*$width));
+        $right = min($width, $width-$left);
+        
+        $barLeft = str_repeat('=', $left);
+        $barRight = str_repeat('-', $right);
+        $bar = "[$barLeft$barRight]";
+        
+        $out  = '<span class="progress_bar">';
+        $out .= '<span class="progress_a">' . $barLeft . '</span>';
+        $out .= '<span class="progress_b">' . $barRight . '</span>';
+        $out .= '</span>';
+        return sprintf('%s%d/%d: %d%%', $out, $current, $max, ($percent*100));
+    }
+    
 }

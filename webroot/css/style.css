@@ -82,3 +82,21 @@ div.view {
 	float:right;
 	width:76%;
 }
+
+/* ****************************************************************************/
+/* Progress Bars
+/* ****************************************************************************/
+span.progress_bar {
+    font-family: monospace;
+    background-color: lightgrey;
+    color: lightgrey;
+    border: 1px solid darkgrey;
+}
+
+span.progress_bar span.progress_a {
+    background-color: darkgreen;
+    color: darkgreen;
+}
+
+span.progress_bar span.progress_b {
+}
