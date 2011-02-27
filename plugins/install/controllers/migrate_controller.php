@@ -7,7 +7,7 @@
 
 App::import('model', 'connection_manager');
 
-class MigrationController extends AppController
+class MigrateController extends AppController
 {
     var $components = array();
     var $uses = array('Category', 'CategoryItem', 'Item', 'Variation');
@@ -15,10 +15,11 @@ class MigrationController extends AppController
     var $old_db;
 
     private $sequence = array(
-//        'Categories',
-//        'CategoryParents',
-//        'CategoryTreeRepair',
-//        'Items',
+        'CreateBlank',
+        'Categories',
+        'CategoryParents',
+        'CategoryTreeRepair',
+        'Items',
         'CategoryItems',
 //        'ItemDetails'
     );
@@ -28,7 +29,7 @@ class MigrationController extends AppController
     function beforeFilter()
     {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'migrate');
+        $this->Auth->allow('index', 'start');
         $this->db = ConnectionManager::getDataSource('default');
     }
 
@@ -37,7 +38,7 @@ class MigrationController extends AppController
         $this->Session->delete('migration_settings');
     }
 
-    function migrate()
+    function start()
     {
         $this->settings = array();
         if ($this->Session->check('migration_settings')) {
@@ -81,6 +82,20 @@ class MigrationController extends AppController
         $this->set('messages', $this->settings['messages']);
     }
 
+    private function migrateCreateBlank() {
+        $name = 'CreateBlank';
+        $msg = __('Creating blank database...');
+        if ($this->settings['offset'] == 0) {
+            $msg .= $this->progressBar(0, 1);
+            $this->settings['offset'] = 1;
+        } else {
+            $this->requestAction('/install/create/blank');
+            $msg .= $this->progressBar(1, 1);
+            $this->settings['status'] = 'done';
+        }
+        $this->msg($name, $msg);
+    }
+    
     private function migrateCategories() {
         $name = 'Categories';     
         $count = $this->getCount($name, 
@@ -188,12 +203,12 @@ class MigrationController extends AppController
         $name = 'CategoryTreeRepair';
         $msg = __('Repairing %s tree...', __('Category'));
         if ($this->settings['offset'] == 0) {
-            $msg .= $this->progressBar(0, 100);
+            $msg .= $this->progressBar(0, 1);
             $this->settings['offset'] = 1;
         } else {
             $parentId = $this->Category->field('id', array('conditions'=>array('Category.slug' => 'catrootnode')));
             $this->Category->recover('parent', $parentId);
-            $msg .= $this->progressBar(100, 100);
+            $msg .= $this->progressBar(1, 1);
             $this->settings['status'] = 'done';
         }
         $this->msg($name, $msg);

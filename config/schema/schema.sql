@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_categories` (
     `slug` varchar(100) NOT NULL default '',
     `description` text NOT NULL default '',
     `stockcode_prefix` varchar(10) NOT NULL default '',
-    `status` int(11) NOT NULL default 1,
+    `status_id` int(11) NOT NULL default 1,
     `created` datetime DEFAULT NULL,
     `modified` datetime DEFAULT NULL,
     `legacy_id` int(11) NOT NULL default 0,
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_categories` (
     PRIMARY KEY (`id`),
     KEY `ixSlug` (`slug`),
     KEY `ixName` (`name`),
-    KEY `ixStatus` (`status`),
+    KEY `ixStatusId` (`status_id`),
     KEY `ixParentId` (`parent_id`),
     KEY `ixLft` (`lft`),
     KEY `ixRght` (`rght`),
@@ -82,12 +82,12 @@ CREATE TABLE IF NOT EXISTS `enigma3_items` (
     `name` varchar(128) NOT NULL,
     `slug` varchar(100) NOT NULL default '',
     `description` text NOT NULL default '',
-    `status` int(11) NOT NULL default 1,
+    `status_id` int(11) NOT NULL default 1,
     `created` datetime DEFAULT NULL,
     `modified` datetime DEFAULT NULL,
     `legacy_id` int(11) NOT NULL default 0,
     KEY `ixSlug` (`slug`),
-    KEY `ixStatus` (`status`),
+    KEY `ixStatusId` (`status_id`),
     PRIMARY KEY (`id`)
 );
 
@@ -143,14 +143,14 @@ CREATE TABLE IF NOT EXISTS `enigma3_variations` (
     `price` decimal(10,2) NOT NULL DEFAULT 0.00,
     `rrp` decimal(10,2) NOT NULL DEFAULT 0.00,
     `stockcode` varchar(10) NOT NULL default '',
-    `status` int(11) NOT NULL default 1,
+    `status_id` int(11) NOT NULL default 1,
     `created` datetime DEFAULT NULL,
     `modified` datetime DEFAULT NULL,
     `legacy_id` int(11) NOT NULL default 0,
     PRIMARY KEY (`id`),
     KEY `ixItemId` (`item_id`),
     KEY `ixSlug` (`slug`),
-    KEY `ixStatus` (`status`)
+    KEY `ixStatusId` (`status_id`)
 ) ENGINE=MyISAM;
 
 

@@ -11,7 +11,7 @@ App::import('model', 'connection_manager');
  * Manages the installation of new database structures and the migration of
  * data from previous versions.
  */
-class InstallController extends AppController {
+class CreateController extends AppController {
     var $uses = array();
     var $db;
 
@@ -30,18 +30,18 @@ class InstallController extends AppController {
     function index() {
     }
 
-    function createBlank() {
-        $this->create();
+    function blank() {
+        $this->createDatabase();
         $this->render('index');
     }
 
-    function createSample() {
-        $this->create();
-        $this->sample();
+    function sample() {
+        $this->createDatabase();
+        $this->insertSampleData();
         $this->render('index');
     }
 
-    private function create() {
+    private function createDatabase() {
         $count = 0;
         $count += $this->executeSQL(CONFIGS . 'schema' . DS . 'schema.sql');
 
@@ -107,7 +107,7 @@ class InstallController extends AppController {
         $this->Session->setFlash(__("Executed %d installation statements.", $count));
     }
 
-    private function sample() {
+    private function insertSampleData() {
         $this->loadModel('Category');
         $this->loadModel('Item');
         $this->loadModel('CategoryItem');

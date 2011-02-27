@@ -30,7 +30,6 @@ class AppController extends Controller {
 
         $this->set('webRoot', $this->params->webroot);
         $this->set('user', $this->Auth->user());
-
     }
 
 }
