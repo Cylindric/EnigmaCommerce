@@ -40,11 +40,7 @@ class CategoriesController extends AppController {
     }
 
     function menu_nodes() {
-        $menuCategories = $this->Category->find('threaded', array(
-            'fields'=>array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
-            'contain'=>array()
-        ));
-        return $menuCategories;
+        return $this->Category->menuNodes();
     }
     
     function admin_view($id = null) {

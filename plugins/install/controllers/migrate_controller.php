@@ -124,6 +124,8 @@ class MigrateController extends AppController
             $newObject['Category']['legacy_parent_id'] = $oldObject['ParentID'];
             $newObject['Category']['name'] = html_entity_decode($oldObject['CategoryName']);
             $newObject['Category']['description'] = $oldObject['Description'];
+            $newObject['Category']['visible_on_web'] = $oldObject['WebView'];
+            $newObject['Category']['visible_on_catalogue'] = $oldObject['CatalogueView'];
             $newObject['Category']['stockcodeprefix'] = $oldObject['StockCodePrefix'];
             $newObject['Category']['created'] = $oldObject['CreateDate'];
             $newObject['Category']['modified'] = $oldObject['ModifyDate'];

@@ -23,6 +23,15 @@ class Category extends AppModel {
 
     var $hasMany = array('CategoryItem');
 
+    public function menuNodes() {
+        $categories = $this->find('threaded', array(
+            'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
+            'contain' => array(),
+            'conditions' => array('Category.visible_on_web' => true),
+        ));
+        return $categories;    
+    }
+
     /**
      * Returns all categories that are children of the specified category.
      * 
@@ -42,7 +51,10 @@ class Category extends AppModel {
         $categories = $this->find('all', array(
             'fields' => array('Category.id', 'Category.name', 'Category.slug'),
             'contain' => array(),
-            'conditions' => array('Category.parent_id' => $parent_id),
+            'conditions' => array(
+                'Category.parent_id' => $parent_id,
+                'Category.name' => 'Air Pumps',
+            ),
             'order' => $settings['order']
         ));
         return $categories;

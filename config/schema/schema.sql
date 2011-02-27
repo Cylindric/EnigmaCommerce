@@ -36,6 +36,8 @@ CREATE TABLE IF NOT EXISTS `enigma3_categories` (
     `slug` varchar(100) NOT NULL default '',
     `description` text NOT NULL default '',
     `stockcode_prefix` varchar(10) NOT NULL default '',
+    `visible_on_web` boolean NOT NULL default true,
+    `visible_on_catalogue` boolean NOT NULL default true,
     `status_id` int(11) NOT NULL default 1,
     `created` datetime DEFAULT NULL,
     `modified` datetime DEFAULT NULL,
