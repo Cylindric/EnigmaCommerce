@@ -14,6 +14,8 @@ class Item extends AppModel {
         'Containable'
     );
 
+    var $belongsTo = array('Status');
+    
     var $hasMany = array('CategoryItem', 'Variation');
 
     var $validate = array(

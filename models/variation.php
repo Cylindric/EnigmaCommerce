@@ -19,6 +19,6 @@ class Variation extends AppModel {
                 'localField' => 'item_id'))),
     );
     
-    var $belongsTo = array('Item');
+    var $belongsTo = array('Item', 'Status');
     
 }

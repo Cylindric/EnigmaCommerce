@@ -65,28 +65,6 @@ CREATE TABLE IF NOT EXISTS `enigma3_category_items` (
 ) ENGINE=MyISAM;
 
 
-DROP TABLE IF EXISTS `enigma3_variations`;
-CREATE TABLE IF NOT EXISTS `enigma3_variations` (
-    `id` int NOT NULL AUTO_INCREMENT,
-    `item_id` int NOT NULL,
-    `unit_id` int NOT NULL,
-    `size` decimal(10,2) NOT NULL DEFAULT 0.00,
-    `name` varchar(128) NOT NULL,
-    `slug` varchar(100) NOT NULL default '',
-    `price` decimal(10,2) NOT NULL DEFAULT 0.00,
-    `rrp` decimal(10,2) NOT NULL DEFAULT 0.00,
-    `stockcode` varchar(10) NOT NULL default '',
-    `status` int(11) NOT NULL default 1,
-    `created` datetime DEFAULT NULL,
-    `modified` datetime DEFAULT NULL,
-    `legacy_id` int(11) NOT NULL default 0,
-    PRIMARY KEY (`id`),
-    KEY `ixItemId` (`item_id`),
-    KEY `ixSlug` (`slug`),
-    KEY `ixStatus` (`status`)
-) ENGINE=MyISAM;
-
-
 DROP TABLE IF EXISTS `enigma3_groups`;
 CREATE TABLE IF NOT EXISTS `enigma3_groups` (
     `id` int NOT NULL AUTO_INCREMENT,
@@ -112,6 +90,16 @@ CREATE TABLE IF NOT EXISTS `enigma3_items` (
     KEY `ixStatus` (`status`),
     PRIMARY KEY (`id`)
 );
+
+
+DROP TABLE IF EXISTS `enigma3_statuses`;
+CREATE TABLE IF NOT EXISTS `enigma3_statuses` (
+    `id` int NOT NULL,
+    `name` varchar(128) NOT NULL,
+    `created` datetime DEFAULT NULL,
+    `modified` datetime DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM;
 
 
 DROP TABLE IF EXISTS `enigma3_units`;
@@ -141,6 +129,28 @@ CREATE TABLE IF NOT EXISTS `enigma3_users` (
     UNIQUE KEY `ixUsername` (`username`),
     KEY `ixGroup` (`group_id`),
     KEY `ixUsernamePassword` (`username`, `password`)
+) ENGINE=MyISAM;
+
+
+DROP TABLE IF EXISTS `enigma3_variations`;
+CREATE TABLE IF NOT EXISTS `enigma3_variations` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `item_id` int NOT NULL,
+    `unit_id` int NOT NULL,
+    `size` decimal(10,2) NOT NULL DEFAULT 0.00,
+    `name` varchar(128) NOT NULL,
+    `slug` varchar(100) NOT NULL default '',
+    `price` decimal(10,2) NOT NULL DEFAULT 0.00,
+    `rrp` decimal(10,2) NOT NULL DEFAULT 0.00,
+    `stockcode` varchar(10) NOT NULL default '',
+    `status` int(11) NOT NULL default 1,
+    `created` datetime DEFAULT NULL,
+    `modified` datetime DEFAULT NULL,
+    `legacy_id` int(11) NOT NULL default 0,
+    PRIMARY KEY (`id`),
+    KEY `ixItemId` (`item_id`),
+    KEY `ixSlug` (`slug`),
+    KEY `ixStatus` (`status`)
 ) ENGINE=MyISAM;
 
 

@@ -17,7 +17,8 @@ class Category extends AppModel {
     var $belongsTo = array(
         'ParentCategory' => array(
             'className' => 'Category',
-            'foreignKey' => 'parent_id')
+            'foreignKey' => 'parent_id'),
+        'Status'
     );
 
     var $hasMany = array('CategoryItem');

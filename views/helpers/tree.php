@@ -19,7 +19,7 @@ class TreeHelper extends AppHelper {
             'link' => true,
             'div' => 'tree',
             'showRoot' => true,
-            'action' => null
+            'action' => null,
         ), $settings);
         extract($this->settings);
 
@@ -51,10 +51,11 @@ class TreeHelper extends AppHelper {
             } else {
                 $out .= $node[$model][$title].'<br/>';
             }
-            
+
             if (count($node['children']) > 0) {
                 $out .= $this->drawNodes($node['children']);
             }
+            
             $out .= '</li>';
         }
         $out .= '</ul>';

@@ -45,6 +45,14 @@ class InstallController extends AppController {
         $count = 0;
         $count += $this->executeSQL(CONFIGS . 'schema' . DS . 'schema.sql');
 
+        App::import('Model', 'Status');
+        $status = new Status();
+        $data = array();
+        $data[] = $status->create(array('id'=>0, 'name'=>'disabled'));
+        $data[] = $status->create(array('id'=>1, 'name'=>'active'));
+        $status->saveAll($data);
+        $count += count($data);
+        
         App::import('Model', 'Group');
         $group = new Group();
         $data = array();

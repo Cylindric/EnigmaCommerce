@@ -26,7 +26,7 @@
         ?>
         <?php for ($itemNum = 0; $itemNum < $leaders; $itemNum++): ?>
         <div class="x-item item">
-            <?php echo $this->Html->link($relatedItems[$itemNum]['Item']['name'], array('controller' => 'items', 'action' => 'view', $relatedItems[$itemNum]['Item']['id'])); ?>
+            <?php echo var_dump($relatedItems[$itemNum]['Item']['name']); echo $this->Html->link($relatedItems[$itemNum]['Item']['name'], array('controller' => 'items', 'action' => 'view', $relatedItems[$itemNum]['Item']['id'])); ?>
         </div>        
         <?php endfor;?>
     </div>
