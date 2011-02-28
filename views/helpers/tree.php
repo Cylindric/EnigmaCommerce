@@ -22,7 +22,6 @@ class TreeHelper extends AppHelper {
             'action' => null,
         ), $settings);
         extract($this->settings);
-
         if ($showRoot == false) {
             $data = $data[0]['children'];
         }

@@ -30,13 +30,13 @@ class LinkHelper extends AppHelper {
         $linkText = $data[$name];
         
         $linkController = Inflector::tableize($model);
-        
+        $linkAction = $action['action'];
         if (($sef) && (array_key_exists($slug, $data))) {
             $Linkid = $data[$slug];        
         } else {
             $Linkid = $data[$id];
         }
-        $out = $this->Html->link($linkText, array('controller' => $linkController, 'action' => 'view', $Linkid));
+        $out = $this->Html->link($linkText, array('controller' => $linkController, 'action' => $linkAction, $Linkid));
 
         return $out;
     }

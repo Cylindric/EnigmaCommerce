@@ -1,4 +1,14 @@
 <div id="left_menu">
+<?php
+    $nodes = $this->requestAction('/categories/menu_nodes');
+    echo $this->Tree->generate(
+        $nodes, array(
+            'model' => 'Category',
+            'showRoot' => false,
+            'action' => array('controller'=>'categories', 'action'=>'edit')
+        )
+    );
+?>
 </div>
 <div id="body" class="view">
 <div id="bodycontent">
@@ -26,8 +36,8 @@
             <td><?php echo $this->Form->input('parent_id', array('label'=>false)); ?></td>
         </tr>
         <tr>
-            <th><label for="CategoryTag" ><?php echo __('Tag'); ?></label></th>
-            <td><?php echo $this->Form->input('tag', array('label'=>false)); ?></td>
+            <th><label for="CategorySlug" ><?php echo __('Slug'); ?></label></th>
+            <td><?php echo $this->Form->input('slug', array('label'=>false)); ?></td>
         </tr>
         <tr>
             <th><label for="CategoryDescription"><?php echo __('Description'); ?></label></th>
@@ -36,6 +46,10 @@
         <tr>
             <th><label for="CategoryStockcodeprefix"><?php echo __('Stock Code Prefix'); ?></label></th>
             <td><?php echo $this->Form->input('stockcodeprefix', array('label'=>false)); ?></td>
+        </tr>
+        <tr>
+            <th><label for="CategoryVisibleOnWeb"><?php echo __('Visible on Web'); ?></label></th>
+            <td><?php echo $this->Form->input('visible_on_web', array('label'=>false)); ?></td>
         </tr>
         <tr>
             <th></th>
