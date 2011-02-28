@@ -76,9 +76,10 @@ class CategoriesController extends AppController {
             $this->redirect(array('action' => 'index'));
         }
         if (!empty($this->data)) {
+            var_dump($this->data);
             if ($this->Category->save($this->data)) {
                 $this->Session->setFlash(__('The category has been saved', true));
-                $this->redirect(array('action' => 'index'));
+//                $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The category could not be saved. Please, try again.', true));
             }

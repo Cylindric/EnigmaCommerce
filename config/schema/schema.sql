@@ -165,3 +165,5 @@ CREATE TABLE IF NOT EXISTS `enigma3_vatrates` (
     `modified` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
+
+
