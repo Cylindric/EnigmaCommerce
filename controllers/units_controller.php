@@ -43,7 +43,7 @@ class UnitsController extends AppController {
 
     function admin_edit($id = null) {
         parent::admin_edit();
-        if(!empty($this->data)) {
+        if (!empty($this->data)) {
             $this->Unit->save($this->data);
         }
         if (!empty($id)) {

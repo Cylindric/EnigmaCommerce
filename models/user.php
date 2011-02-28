@@ -38,7 +38,7 @@ class User extends AppModel {
      * @return boolean
      */
     function isAdmin($id=null) {
-        if(!empty($id)) {
+        if (!empty($id)) {
             $this->read('*', $id);
         }
 

@@ -7,7 +7,7 @@
 
 class UnitFixture extends CakeTestFixture {
 
-	public $name = 'Units';
+    public $name = 'Units';
 
     public $import = array('table' => 'units');
     
