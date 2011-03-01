@@ -249,16 +249,21 @@ class MigrateController extends AppController
 
         $msg = __('Processing %d %s...', $count, __('Items'));
         
-        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'item ';
+$this->settings['offset'] = 1022;
+$this->settings['limit'] = 1;
+        
+        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'item ORDER BY ItemID ';
         $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
 
         $rows = $this->old_db->query($query);
         foreach ($rows as $row) {
             $oldObject = $row[$this->old_db->config['prefix'] . 'item'];
+echo('Beginning '.$oldObject['ItemID']."<br/>");
+var_dump($oldObject);
             $newObject = $this->Item->create();
             $newObject['Item']['legacy_id'] = $oldObject['ItemID'];
             $newObject['Item']['name'] = html_entity_decode($oldObject['ItemName']);
-            $newObject['Item']['description'] = $oldObject['Description'];
+            $newObject['Item']['description'] = str_replace('?','', $oldObject['Description']);
             $newObject['Item']['created'] = $oldObject['CreateDate'];
             $newObject['Item']['modified'] = $oldObject['ModifyDate'];
             if ($oldObject['DeleteDate'] == 0) {
@@ -267,9 +272,10 @@ class MigrateController extends AppController
                 $newObject['Item']['status'] = 0;
             }
             $this->Item->save($newObject);
+echo('...saved '.$newObject['Item']['name']."<br/>");
         }
         $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
-
+die();
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
         } else {
