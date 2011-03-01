@@ -36,10 +36,12 @@ class MigrateController extends AppController
     function index()
     {
         $this->Session->delete('migration_settings');
+        $this->set('sequence', array('Sequence'=>$this->sequence));
     }
 
     function start()
     {
+
         $this->settings = array();
         if ($this->Session->check('migration_settings')) {
             $this->settings = $this->Session->read('migration_settings');
@@ -48,13 +50,20 @@ class MigrateController extends AppController
         $this->settings = array_merge(array(
             'queue' => $this->sequence,
             'offset' => 0,
-            'limit' => 100,
+            'limit' => 50,
             'count' => array(),
             'source' => 'upgrade',
             'status' => 'start',
             'messages' => array(),
-            'disableTrees' => true,
+            'disableTrees' => false,
         ), $this->settings);
+
+        if ($this->data) {
+            $this->settings['queue'] = array();
+            foreach ($this->data['sequence'] as $item) {
+                $this->settings['queue'][] = $this->sequence[$item];
+            }
+        }
 
         @$this->old_db = ConnectionManager::getDataSource($this->settings['source']);
         if (is_null($this->old_db)) {

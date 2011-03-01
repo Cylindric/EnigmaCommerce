@@ -1,5 +1,16 @@
-<div class="install">
-	<ul class="menu">
-		<li><?php echo $this->Html->link(__('Migrate'), '/install/migrate/start', array(), __('Are you sure you want to migrate all tables?'));?></li>
-	</ul>
+<div id="body" class="view">
+    <div id="bodycontent">
+<?php
+
+    echo $this->Form->create(false, array('action'=>'start'));
+    echo $this->Form->input('sequence', array(
+        'label' => __('Select desired actions:'),
+        'type' => 'select', 
+        'multiple'=>'checkbox', 
+        'options' => $sequence['Sequence']));
+    echo $this->Form->end('Migrate!');
+
+?>
+    </div>
 </div>
+<div class="clear"></div>

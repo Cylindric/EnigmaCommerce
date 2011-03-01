@@ -26,10 +26,15 @@ CREATE TABLE IF NOT EXISTS `enigma3_baskets_details` (
 ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
+/*
+ * Note that this table implements an MPTT structure in it's model, so parent_id 
+ * MUST be nullable, otherwise the Tree Behavior will break.
+ * See the CakeBook chapter 6.4.1 (Core Behaviors/Tree/Requirements)
+ */
 DROP TABLE IF EXISTS `enigma3_categories`;
 CREATE TABLE IF NOT EXISTS `enigma3_categories` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `parent_id` int(11) NOT NULL default 0,
+    `parent_id` int(11) NULL default 0,
     `lft` int(11) NOT NULL default 0,
     `rght` int(11) NOT NULL default 0,
     `name` varchar(100) NOT NULL,
