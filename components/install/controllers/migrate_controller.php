@@ -226,7 +226,7 @@ class MigrateController extends AppController
             $msg .= $this->progressBar(0, 1);
             $this->settings['offset'] = 1;
         } else {
-            $parentId = $this->Category->field('id', array('conditions'=>array('Category.slug' => 'catrootnode')));
+            $parentId = $this->Category->field('id', array('Category.slug' => 'catrootnode'));
             if ($this->settings['disableTrees']) {
                 $this->Category->recover('parent', $parentId);
             }
@@ -249,21 +249,24 @@ class MigrateController extends AppController
 
         $msg = __('Processing %d %s...', $count, __('Items'));
         
-$this->settings['offset'] = 1022;
-$this->settings['limit'] = 1;
+//$this->settings['offset'] = 1000;
+//$this->settings['limit'] = 50;
         
-        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'item ORDER BY ItemID ';
-        $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
+        $query  = 'SELECT * '
+                . 'FROM ' . $this->old_db->config['prefix'] . 'item '
+                . 'ORDER BY ItemID '
+                . 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
 
         $rows = $this->old_db->query($query);
         foreach ($rows as $row) {
             $oldObject = $row[$this->old_db->config['prefix'] . 'item'];
-echo('Beginning '.$oldObject['ItemID']."<br/>");
-var_dump($oldObject);
+//echo('Beginning '.$oldObject['ItemID']."<br/>");
+//var_dump($oldObject);
             $newObject = $this->Item->create();
             $newObject['Item']['legacy_id'] = $oldObject['ItemID'];
             $newObject['Item']['name'] = html_entity_decode($oldObject['ItemName']);
-            $newObject['Item']['description'] = str_replace('?','', $oldObject['Description']);
+//$newObject['Item']['description'] = str_replace('','', $oldObject['Description']);
+            $newObject['Item']['description'] = $oldObject['Description'];
             $newObject['Item']['created'] = $oldObject['CreateDate'];
             $newObject['Item']['modified'] = $oldObject['ModifyDate'];
             if ($oldObject['DeleteDate'] == 0) {
@@ -272,10 +275,10 @@ var_dump($oldObject);
                 $newObject['Item']['status'] = 0;
             }
             $this->Item->save($newObject);
-echo('...saved '.$newObject['Item']['name']."<br/>");
+//echo('...saved '.$newObject['Item']['name']."<br/>");
         }
         $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
-die();
+//die();
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
         } else {
@@ -298,8 +301,10 @@ die();
 
         $msg = __('Processing %d %s-%s links...', $count, _('Category'), _('Item'));
         
-        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'itemcategory ';
-        $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
+        $query  = 'SELECT * '
+                . 'FROM ' . $this->old_db->config['prefix'] . 'itemcategory '
+                . 'ORDER BY CategoryID, ItemID '
+                . 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
 
         $rows = $this->old_db->query($query);
         foreach ($rows as $row) {

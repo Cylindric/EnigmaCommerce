@@ -7,10 +7,9 @@ Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 
 Router::connect(
-'/categories/view/:tag',
-array('controller' => 'categories', 'action' => 'view'),
-array('pass' => array('tag'),
-'tag' => '[a-zA-Z]+[\w]*')
+    '/categories/view/:tag',
+    array('controller' => 'categories', 'action' => 'view'),
+    array('pass' => array('tag'), 'tag' => '[a-zA-Z]+[\w]*')
 );
 
 Router::parseExtensions('js');

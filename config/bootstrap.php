@@ -39,6 +39,9 @@
  * ));
  *
  */
+App::build(array(
+     'plugins' => array(ROOT.DS.APP_DIR.DS.'components'.DS),
+));
 
 /**
  * As of 1.3, additional rules for the inflector are added below
