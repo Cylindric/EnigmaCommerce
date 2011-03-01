@@ -10,7 +10,7 @@ App::import('model', 'connection_manager');
 class MigrateController extends AppController
 {
     var $components = array();
-    var $uses = array('Category', 'CategoryItem', 'Item', 'Variation');
+    var $uses = array('Category', 'CategoryItem', 'Item', 'Unit', 'Variation');
     var $db;
     var $old_db;
 
@@ -21,7 +21,7 @@ class MigrateController extends AppController
         'CategoryTreeRepair',
         'Items',
         'CategoryItems',
-//        'ItemDetails'
+        'ItemDetails'
     );
     
     private $settings = array();
@@ -52,7 +52,8 @@ class MigrateController extends AppController
             'count' => array(),
             'source' => 'upgrade',
             'status' => 'start',
-            'messages' => array()
+            'messages' => array(),
+            'disableTrees' => true,
         ), $this->settings);
 
         @$this->old_db = ConnectionManager::getDataSource($this->settings['source']);
@@ -111,7 +112,9 @@ class MigrateController extends AppController
 
         // Prevent the MPTT behavior from making the import take a long time
         // Tree will need rebuilding afterwards
-        $this->Category->Behaviors->disable('Tree');
+        if ($this->settings['disableTrees']) {
+            $this->Category->Behaviors->disable('Tree');
+        }
         
         $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'category ';
         $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
@@ -139,7 +142,9 @@ class MigrateController extends AppController
         $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
 
         // Reenable the MPTT behavior
-        $this->Category->Behaviors->enable('Tree');
+        if ($this->settings['disableTrees']) {
+            $this->Category->Behaviors->enable('Tree');
+        }
 
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
@@ -164,7 +169,9 @@ class MigrateController extends AppController
 
         // Prevent the MPTT behavior from making the import take a long time
         // Tree will need rebuilding afterwards
-        $this->Category->Behaviors->disable('Tree');
+        if ($this->settings['disableTrees']) {
+            $this->Category->Behaviors->disable('Tree');
+        }
         
         $params = array(
             'conditions' => array('Category.legacy_id !=' => 0),
@@ -188,7 +195,9 @@ class MigrateController extends AppController
         }
 
         // Reenable the MPTT behavior
-        $this->Category->Behaviors->enable('Tree');
+        if ($this->settings['disableTrees']) {
+            $this->Category->Behaviors->enable('Tree');
+        }
 
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
@@ -209,7 +218,9 @@ class MigrateController extends AppController
             $this->settings['offset'] = 1;
         } else {
             $parentId = $this->Category->field('id', array('conditions'=>array('Category.slug' => 'catrootnode')));
-            $this->Category->recover('parent', $parentId);
+            if ($this->settings['disableTrees']) {
+                $this->Category->recover('parent', $parentId);
+            }
             $msg .= $this->progressBar(1, 1);
             $this->settings['status'] = 'done';
         }
@@ -283,7 +294,7 @@ class MigrateController extends AppController
             
             $newObject = $this->CategoryItem->create();
             $newObject['CategoryItem']['item_id'] = $oldObject['ItemID'];
-            $newObject['CategoryItem']['category_id'] = html_entity_decode($oldObject['CategoryID']);
+            $newObject['CategoryItem']['category_id'] = htmlentities($oldObject['CategoryID']);
             $newObject['CategoryItem']['is_primary'] = $oldObject['IsPrimary'];
             $newObject['CategoryItem']['created'] = $oldObject['CreateDate'];
             $newObject['CategoryItem']['modified'] = $oldObject['ModifyDate'];
@@ -303,134 +314,75 @@ class MigrateController extends AppController
     }
 
     private function migrateItemDetails() {
-        $this->msg('ItemDetails', 'done');
-        $this->settings['status'] = 'done';
+//        echo('12mm ( ½" ) to 9mm ( &#8540;" ) ');die();
+        $name = 'Variations';     
+        $count = $this->getCount($name, 
+            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'detail ');
+
+        if ($count == 0) {
+            $this->settings['status'] = 'done';
+            $this->msg($name, 'none found');
+            return;
+        }
+
+        $msg = __('Processing %d %s...', $count, __('Variations'));
+        
+        $query  = 'SELECT d.*, u.Code FROM ' . $this->old_db->config['prefix'] . 'detail d ';
+        $query .= 'LEFT JOIN ' . $this->old_db->config['prefix'] . 'unit u ON (d.UnitID=u.UnitID) ';
+        $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
+
+        $rows = $this->old_db->query($query);
+        foreach ($rows as $row) {
+            $oldObject = $row['d'];
+            $oldUnit = $row['u'];
+            $item = $this->Item->find('first', array('conditions'=>array('Item.legacy_id'=>$oldObject['ItemID'])));
+            $unit = $this->Unit->find('first', array('conditions'=>array('Unit.unit'=>$oldUnit['Code'])));
+            $newObject = $this->Variation->create();
+            $newObject['Variation']['item_id'] = $item['Item']['id'];
+            $newObject['Variation']['legacy_id'] = $oldObject['DetailID'];
+            $newObject['Variation']['unit_id'] = $unit['Unit']['id'];
+            $newObject['Variation']['name'] = $this->cleanString($oldObject['DetailName']);
+            $newObject['Variation']['price'] = $oldObject['WebPrice'];
+            $newObject['Variation']['price_rrp'] = $oldObject['RecommendedPrice'];
+            $newObject['Variation']['created'] = $oldObject['CreateDate'];
+            $newObject['Variation']['size'] = $oldObject['Size'];
+            $newObject['Variation']['modified'] = $oldObject['ModifyDate'];            
+            if ($oldObject['DeleteDate'] == 0) {
+                $newObject['Variation']['status'] = 1;
+            } else {
+                $newObject['Variation']['status'] = 0;
+            }
+            $this->Variation->save($newObject);
+        }
+        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+
+        if (count($rows) < $this->settings['limit']) {
+            $this->settings['status'] = 'done';
+        } else {
+            $this->settings['offset'] += $this->settings['limit'];
+        }
+
+        $this->msg($name, $msg);
     }
     
     private function msg($section, $message) {
         $this->settings['messages'][$section] = $message;
     }
 
-    private function __migrateItemCategories()
-    {
-        $this->loadModel('Category');
-        $this->loadModel('Item');
-        $this->loadModel('CategoryItem');
-
-        $new = new CategoryItem();
-        $msg = sprintf(__('Processing %s-%s links...'), __('item'), __('category'));
-
-        $q = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'itemcategory ';
-        if($this->Session->check('MigrationItemCategoryCount')) {
-            $itemCatCount = $this->Session->read();
-        } else {
-            $this->old_db->query($q);
-            $itemCatCount = $this->old_db->lastNumRows();
-            $this->Session->write('MigrationItemCategoryCount', $itemCatCount);
-        }
-
-        $q .= 'LIMIT ' . $this->migrate_offset . ', ' . $this->migrate_chunk;
-        $this->migrate_offset += $this->migrate_chunk;
-        $msg .= sprintf(__('Processing %d to %d of %d...'), $this->migrate_offset, ($this->migrate_offset + $this->migrate_chunk), $itemCatCount);
-
-        $olds = $this->old_db->query($q);
-        $num = 0;
-        $msg .= sprintf(__('found %d...'), count($olds));
-        if (count($olds) < $this->migrate_chunk) {
-            $this->migrate_section = 'done';
-            $this->migrate_offset = 0;
-        }
-        foreach ($olds as $old) {
-            $old = $old[$this->old_db->config['prefix'] . 'itemcategory'];
-            $item = $this->Item->find('first', array('conditions'=>array('Item.legacy_id'=>$old['ItemID'])));
-            $cat = $this->Category->find('first', array('conditions'=>array('Category.legacy_id'=>$old['CategoryID'])));
-            $newdata = $new->create();
-            $newdata['CategoryItem']['item_id'] = $item['Item']['id'];
-            $newdata['CategoryItem']['category_id'] = $cat['Category']['id'];
-            $newdata['CategoryItem']['is_primary'] = $old['IsPrimary'];
-            $newdata['CategoryItem']['created'] = $old['CreateDate'];
-            $newdata['CategoryItem']['modified'] = $old['ModifyDate'];
-
-            if ($old['DeleteDate'] == 0) {
-                $new->save($newdata);
-            } else {
-//                 $newdata['status'] = 0;
-            }
-            $num += 1;
-        }
-
-        $msg .= sprintf(__('processed %d...'), $num);
-        $this->migrate_messages[] = array('text' => $msg);
+    /**
+     * Converts HTML strings to plain strings.
+     * Many strings in Enigma2 are only partially correct HTML, as they were all
+     * manually entered by users.  This means it's not uncommon to have correct uses
+     * of &amp; mixed with non-ASCII characters.
+     * @param type $string
+     * @return type 
+     */
+    private function cleanString($string) {
+        $out = html_entity_decode($string);
+        $out = strip_tags($out);
+        return $out;
     }
-
-    private function __migrateDetails()
-    {
-        $this->loadModel('Item');
-        $this->loadModel('Unit');
-        $this->loadModel('Variation');
-        $new = new Variation();
-        $msg = sprintf(__('Processing %s...'), __('variations'));
-
-        $q = 'SELECT * ';
-        $q .= 'FROM ' . $this->old_db->config['prefix'] . 'detail ';
-        $q .= 'LEFT JOIN ' . $this->old_db->config['prefix'] . 'unit ON (' . $this->old_db->config['prefix'] . 'variation.UnitID=' . $this->old_db->config['prefix'] . 'unit.UnitID) ';
-        if($this->Session->check('MigrationVariationCount')) {
-            $variationCount = $this->Session->read('MigrationVariationCount');
-        } else {
-            $this->old_db->query($q);
-            $variationCount = $this->old_db->lastNumRows();
-            $this->Session->write('MigrationVariationCount', $variationCount);
-        }
-        $q .= 'LIMIT ' . $this->migrate_offset . ', ' . $this->migrate_chunk;
-        $this->migrate_offset += $this->migrate_chunk;
-        $msg .= sprintf(__('Processing %d to %d of %d...'), $this->migrate_offset, ($this->migrate_offset + $this->migrate_chunk), $variationCount);
-
-        $olds = $this->old_db->query($q);
-        $num = 0;
-        $msg .= sprintf(__('found %d...'), count($olds));
-        if (count($olds) < $this->migrate_chunk) {
-            $this->migrate_section = 'itemcats';
-            $this->migrate_offset = 0;
-        }
-        foreach ($olds as $old) {
-            $old_unit = $old[$this->old_db->config['prefix'] . 'unit'];
-            $old = $old[$this->old_db->config['prefix'] . 'detail'];
-            $newdata = array();
-            $newdata['legacy_id'] = $old['DetailID'];
-            $newdata['name'] = $old['DetailName'];
-            $newdata['price'] = $old['RetailPrice'];
-            $newdata['rrp'] = $old['RecommendedPrice'];
-            $newdata['stockcode'] = $old['StockCode'];
-            $newdata['size'] = $old['Size'];
-            $newdata['created'] = $old['CreateDate'];
-            $newdata['modified'] = $old['ModifyDate'];
-            if ($old['DeleteDate'] == 0) {
-                $newdata['status'] = 1;
-            } else {
-                $newdata['status'] = 0;
-            }
-
-            $newdata['item_id'] = 0;
-            $parentitem = $this->Item->find('first', array('conditions'=>array('Item.legacy_id'=>$old['ItemID'])));
-            if ($parentitem) {
-                $newdata['item_id'] = $parentitem['Item']['id'];
-            }
-
-            $newdata['unit_id'] = 0;
-            $parentunit = $this->Unit->find('first', array('conditions'=>array('Unit.unit'=>$old_unit['Code'])));
-            if ($parentunit) {
-                $newdata['unit_id'] = $parentunit['Unit']['id'];
-            }
-
-            $new->create();
-            $new->save($newdata);
-            $num += 1;
-        }
-
-        $msg .= sprintf(__('processed %d...'), $num);
-        $this->migrate_messages[] = array('text' => $msg);
-    }
-
+    
     private function getCount($name, $query) {
         if (!array_key_exists($name, $this->settings['count'])) {
             $result = $this->old_db->query($query);

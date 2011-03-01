@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_baskets` (
     `created` datetime DEFAULT NULL,
     `modified` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `enigma3_baskets_details`;
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_baskets_details` (
     `modified` datetime DEFAULT NULL,
     UNIQUE KEY ixBasketDetailID (`basket_id`, `detail_id`),
     PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `enigma3_categories`;
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_categories` (
     KEY `ixLft` (`lft`),
     KEY `ixRght` (`rght`),
     KEY `ixTree` (`lft`, `rght`)
-) ENGINE=MyISAM;
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `enigma3_category_items`;
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_category_items` (
     `modified` datetime DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY ixCategoryItemID (`category_id`, `item_id`)
-) ENGINE=MyISAM;
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `enigma3_groups`;
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_groups` (
     `created` datetime DEFAULT NULL,
     `modified` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `enigma3_items`;
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_items` (
     KEY `ixSlug` (`slug`),
     KEY `ixStatusId` (`status_id`),
     PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `enigma3_statuses`;
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_statuses` (
     `created` datetime DEFAULT NULL,
     `modified` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `enigma3_units`;
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_units` (
     `modified` datetime DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `ixParentId` (`parent_id`)
-) ENGINE=MyISAM;
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `enigma3_users`;
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_users` (
     UNIQUE KEY `ixUsername` (`username`),
     KEY `ixGroup` (`group_id`),
     KEY `ixUsernamePassword` (`username`, `password`)
-) ENGINE=MyISAM;
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `enigma3_variations`;
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_variations` (
     `name` varchar(128) NOT NULL,
     `slug` varchar(100) NOT NULL default '',
     `price` decimal(10,2) NOT NULL DEFAULT 0.00,
-    `rrp` decimal(10,2) NOT NULL DEFAULT 0.00,
+    `price_rrp` decimal(10,2) NOT NULL DEFAULT 0.00,
     `stockcode` varchar(10) NOT NULL default '',
     `status_id` int(11) NOT NULL default 1,
     `created` datetime DEFAULT NULL,
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_variations` (
     KEY `ixItemId` (`item_id`),
     KEY `ixSlug` (`slug`),
     KEY `ixStatusId` (`status_id`)
-) ENGINE=MyISAM;
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `enigma3_vatrates`;
@@ -164,6 +164,4 @@ CREATE TABLE IF NOT EXISTS `enigma3_vatrates` (
     `created` datetime DEFAULT NULL,
     `modified` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
-
-
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;

@@ -222,6 +222,9 @@ class SluggableBehavior extends ModelBehavior {
      *
      * - length:    (integer, optional) maximum length the generated slug can have.
      *                 DEFAULTS TO: 100
+     * 
+     * - htmlDecode:   (boolean, optional) wether or not to decode HTML entities before
+     *                   generating slugs.  Defaults to true.
      *
      * - overwrite: (boolean, optional) set to true if slugs should be re-generated when
      *                 updating an existing record. DEFAULTS TO: false
@@ -240,6 +243,7 @@ class SluggableBehavior extends ModelBehavior {
             'length' => 100,
             'overwrite' => false,
             'translation' => null,
+            'htmlDecode' => true,
             'ignore' => array(
                 'and', 'for', 'is', 'of', 'the'
             ),
@@ -371,6 +375,9 @@ class SluggableBehavior extends ModelBehavior {
      * @return string Slug for given string
      */
     protected function _slug($string, $settings) {
+        if ($settings['htmlDecode']) {
+            $string = html_entity_decode($string);
+        }
         if (!empty($settings['ignore'])) {
             $words = array();
             foreach((array) $settings['ignore'] as $word) {
