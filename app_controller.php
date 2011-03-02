@@ -21,12 +21,8 @@ class AppController extends Controller {
     function beforeFilter() {
         $this->Auth->authenticate = array('Form');
         $this->Auth->autoRedirect = false;
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->loginRedirect = array('controller' => 'categories', 'action' => 'index');
-        
-        if (isset($this->params['admin']) && $this->params['admin']) {
-           $this->layout = 'admin'; 
-        }
 
         $this->set('webRoot', $this->params->webroot);
         $this->set('user', $this->Auth->user());

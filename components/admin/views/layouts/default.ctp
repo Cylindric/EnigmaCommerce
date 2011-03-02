@@ -13,7 +13,7 @@
 
         <?php echo $this->Html->css('chrome.blue'); ?>
 
-        <?php echo $this->Html->css('admin'); ?>
+        <?php echo $this->Html->css('/admin/css/admin_style'); ?>
 
         <?php echo $scripts_for_layout; ?>
 

@@ -16,7 +16,6 @@
 <?php echo $this->Session->flash(); ?>
 
 <?php 
-    var_dump($this->data);
     $delete_text = __('Delete %s', __('category'));
     $delete_url = array('controller' => 'categories', 'action' => 'delete', $this->data['Category']['id']);
     
