@@ -311,6 +311,11 @@ class SluggableBehavior extends ModelBehavior {
                 }
             }
         }
+       
+        // blank slugs get overridden
+        if($model->hasField($settings['slug'])) {
+            var_dump();
+        }
 
         if ((!$settings['real'] || $model->hasField($settings['slug'])) && ($settings['overwrite'] || empty($model->id))) {
             $label = '';

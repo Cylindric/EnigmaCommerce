@@ -23,6 +23,15 @@ class Category extends AppModel {
 
     var $hasMany = array('CategoryItem');
 
+    var $validate = array(
+        'slug' => array(
+            'uniqueSlug' => array(
+                'rule' => 'isUnique',
+                'message' => 'The slug must be unique'
+            )
+        )
+    );
+    
     public function menuNodes() {
         $categories = $this->find('threaded', array(
             'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),

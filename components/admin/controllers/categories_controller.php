@@ -38,30 +38,29 @@ class CategoriesController extends AppController {
     }
 
     function edit($id = null) {
-        if (!$id && empty($this->data)) {
-            $this->Session->setFlash(__('Invalid category', true));
-            $this->redirect(array('action' => 'index'));
+        $this->Category->id = $id;
+        if (!$this->Category->exists()) {
+            throw new NotFoundException(__('Invalid %s', 'Category'));
         }
-        if (!empty($this->data)) {
-            var_dump($this->data);
-            if ($this->Category->save($this->data)) {
-                $this->Session->setFlash(__('The category has been saved', true));
-//                $this->redirect(array('action' => 'index'));
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->Category->save($this->request->data)) {
+                    $this->Session->setFlash(__('The %s has been saved', 'Category'));
+//                    $this->redirect(array('action' => 'index'));
+                    $this->redirect(array('action' => 'edit', $id));
             } else {
-                $this->Session->setFlash(__('The category could not be saved. Please, try again.', true));
+                    $this->Session->setFlash(__('The %s could not be saved. Please, try again.', 'Category'));
             }
-        }
-        if (empty($this->data)) {
-            $this->data = $this->Category->read(null, $id);
+        } else {
+            $this->request->data = $this->Category->read(null, $id);
         }
 
         $this->set('parents', $this->Category->find('list'));
-        //$this->set('items', $this->Category->Item->find('list'));
+//        $this->set('items', $this->Category->Item->find('list'));
     }
 
     function delete($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid id for category', true));
+            $this->Session->setFlash(__('Invalid id for category'));
             $this->redirect(array('action'=>'index'));
         }
         if ($this->Category->delete($id)) {

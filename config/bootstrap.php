@@ -40,7 +40,7 @@
  *
  */
 App::build(array(
-     'plugins' => array(ROOT.DS.APP_DIR.DS.'components'.DS),
+    'plugins' => array(ROOT.DS.APP_DIR.DS.'components'.DS),
 ));
 
 /**

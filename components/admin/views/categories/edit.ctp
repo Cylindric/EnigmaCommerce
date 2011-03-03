@@ -1,6 +1,6 @@
 <div id="left_menu">
 <?php
-    $nodes = $this->requestAction('/categories/menu_nodes');
+    $nodes = $this->requestAction('/admin/categories/menu_nodes');
     echo $this->Tree->generate(
         $nodes, array(
             'model' => 'Category',
@@ -23,7 +23,10 @@
     $create_child_url = array('controller' => 'categories', 'action' => 'add', 'parent_id' => $this->data['Category']['id']);
 ?>
 
-<?php echo $this->Form->create(); ?>
+<?php 
+    echo $this->Form->create('Category'); 
+    echo $this->Form->input('id');
+?>
 
     <h2><?php  __('Category');?></h2>
     <table>

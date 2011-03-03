@@ -19,7 +19,7 @@ class LinkHelper extends AppHelper {
     function link($model, $data, array $settings = array()) {
 
         $this->settings = array_merge(array(
-            'sef' => true,
+            'sef' => false,
             'action' => null,
             'id' => 'id',
             'slug' => 'slug',
