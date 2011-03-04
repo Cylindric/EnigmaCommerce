@@ -284,3 +284,5 @@
  *
  */
     Cache::config('default', array('engine' => 'File'));
+
+    Configure::write('Migrate.productImages', ROOT.DS.'products'.DS);

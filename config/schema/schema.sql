@@ -14,18 +14,6 @@ CREATE TABLE IF NOT EXISTS `enigma3_baskets` (
 ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
-DROP TABLE IF EXISTS `enigma3_baskets_details`;
-CREATE TABLE IF NOT EXISTS `enigma3_baskets_details` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `basket_id` int(11) NOT NULL,
-    `detail_id` int(11) NOT NULL,
-    `created` datetime DEFAULT NULL,
-    `modified` datetime DEFAULT NULL,
-    UNIQUE KEY ixBasketDetailID (`basket_id`, `detail_id`),
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
-
-
 /*
  * Note that this table implements an MPTT structure in it's model, so parent_id 
  * MUST be nullable, otherwise the Tree Behavior will break.

@@ -21,7 +21,8 @@ class MigrateController extends AppController
         'CategoryTreeRepair',
         'Items',
         'CategoryItems',
-        'ItemDetails'
+        'ItemDetails',
+        'Pictures'
     );
     
     private $settings = array();
@@ -249,9 +250,6 @@ class MigrateController extends AppController
 
         $msg = __('Processing %d %s...', $count, __('Items'));
         
-//$this->settings['offset'] = 1000;
-//$this->settings['limit'] = 50;
-        
         $query  = 'SELECT * '
                 . 'FROM ' . $this->old_db->config['prefix'] . 'item '
                 . 'ORDER BY ItemID '
@@ -260,12 +258,9 @@ class MigrateController extends AppController
         $rows = $this->old_db->query($query);
         foreach ($rows as $row) {
             $oldObject = $row[$this->old_db->config['prefix'] . 'item'];
-//echo('Beginning '.$oldObject['ItemID']."<br/>");
-//var_dump($oldObject);
             $newObject = $this->Item->create();
             $newObject['Item']['legacy_id'] = $oldObject['ItemID'];
             $newObject['Item']['name'] = html_entity_decode($oldObject['ItemName']);
-//$newObject['Item']['description'] = str_replace('','', $oldObject['Description']);
             $newObject['Item']['description'] = $oldObject['Description'];
             $newObject['Item']['created'] = $oldObject['CreateDate'];
             $newObject['Item']['modified'] = $oldObject['ModifyDate'];
@@ -275,10 +270,9 @@ class MigrateController extends AppController
                 $newObject['Item']['status'] = 0;
             }
             $this->Item->save($newObject);
-//echo('...saved '.$newObject['Item']['name']."<br/>");
         }
         $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
-//die();
+
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
         } else {
@@ -334,7 +328,6 @@ class MigrateController extends AppController
     }
 
     private function migrateItemDetails() {
-//        echo('12mm ( ½" ) to 9mm ( &#8540;" ) ');die();
         $name = 'Variations';     
         $count = $this->getCount($name, 
             'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'detail ');
@@ -373,6 +366,46 @@ class MigrateController extends AppController
                 $newObject['Variation']['status'] = 0;
             }
             $this->Variation->save($newObject);
+        }
+        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+
+        if (count($rows) < $this->settings['limit']) {
+            $this->settings['status'] = 'done';
+        } else {
+            $this->settings['offset'] += $this->settings['limit'];
+        }
+
+        $this->msg($name, $msg);
+    }
+    
+    private function migratePictures() {
+        $name = 'Pictures';     
+        $count = $this->getCount($name, 
+            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'picture ');
+
+        if ($count == 0) {
+            $this->settings['status'] = 'done';
+            $this->msg($name, 'none found');
+            return;
+        }
+
+        $msg = __('Processing %d %s...', $count, __('Pictures'));
+        
+        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . ' picture ';
+        $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
+
+        $rows = $this->old_db->query($query);
+        foreach ($rows as $row) {
+            $oldObject = $row['picture'];
+
+            $newObject = $this->Picture->create();
+            $newObject['Picture']['picture_id'] = $oldObject['PictureID'];
+            $newObject['Picture']['name'] = $this->cleanString($oldObject['PictureName']);
+            $newObject['Picture']['created'] = $oldObject['CreateDate'];
+            $newObject['Picture']['modified'] = $oldObject['ModifyDate'];            
+            if ($oldObject['DeleteDate'] == 0) {
+                $this->Variation->save($newObject);
+            }
         }
         $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
 
