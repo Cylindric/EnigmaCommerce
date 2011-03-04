@@ -3,7 +3,7 @@ App::import('Model', 'Basket');
 
 class BasketTestCase extends CakeTestCase {
 
-    function  setUp() {
+    function setUp() {
         parent::setUp();
         $this->Basket =& ClassRegistry::init('Basket');
         $this->Detail =& ClassRegistry::init('Detail');
