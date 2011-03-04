@@ -7,7 +7,7 @@
 
 App::import('model', 'connection_manager');
 
-class MigrateController extends AppController
+class MigrateController extends InstallAppController
 {
     var $components = array();
     var $uses = array('Category', 'CategoryItem', 'Item', 'Unit', 'Variation');
@@ -110,7 +110,7 @@ class MigrateController extends AppController
     private function migrateCategories() {
         $name = 'Categories';     
         $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'category ');
+            'SELECT COUNT(*) count FROM #__category ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -240,7 +240,7 @@ class MigrateController extends AppController
     private function migrateItems() {
         $name = 'Items';     
         $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'item ');
+            'SELECT COUNT(*) count FROM #__item ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -285,7 +285,7 @@ class MigrateController extends AppController
     private function migrateCategoryItems() {
         $name = 'CategoryItems';     
         $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'itemcategory ');
+            'SELECT COUNT(*) count FROM #__itemcategory ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -330,7 +330,7 @@ class MigrateController extends AppController
     private function migrateItemDetails() {
         $name = 'Variations';     
         $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'detail ');
+            'SELECT COUNT(*) count FROM #__detail ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -381,7 +381,7 @@ class MigrateController extends AppController
     private function migratePictures() {
         $name = 'Pictures';     
         $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM ' . $this->old_db->config['prefix'] . 'picture ');
+            'SELECT COUNT(*) count FROM #__picture ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -391,7 +391,7 @@ class MigrateController extends AppController
 
         $msg = __('Processing %d %s...', $count, __('Pictures'));
         
-        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . ' picture ';
+        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'picture ';
         $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
 
         $rows = $this->old_db->query($query);
@@ -437,6 +437,7 @@ class MigrateController extends AppController
     }
     
     private function getCount($name, $query) {
+        $query = str_replace('#__', $this->old_db->config['prefix'], $query);
         if (!array_key_exists($name, $this->settings['count'])) {
             $result = $this->old_db->query($query);
             $count = $result[0][0]['count'];

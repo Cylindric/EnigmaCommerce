@@ -11,7 +11,6 @@ class Item extends AppModel {
 
     var $actsAs = array(
         'Sluggable' => array('label'=>'name'),
-        'Containable'
     );
 
     var $belongsTo = array('Status');

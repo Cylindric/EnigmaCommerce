@@ -5,7 +5,7 @@
  * Redistributions of files must retain the above copyright notice.
  */
 
-class InstallController extends AppController {
+class InstallController extends InstallAppController {
     var $uses = array();
 
     function beforeFilter() {

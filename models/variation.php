@@ -10,7 +10,6 @@ class Variation extends AppModel {
     var $name = 'Variation';
 
     var $actsAs = array(
-        'Containable',
         'Sluggable' => array(
             'label' => 'name', 
             'ignore' => array(),

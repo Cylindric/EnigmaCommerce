@@ -11,7 +11,7 @@ App::import('model', 'connection_manager');
  * Manages the installation of new database structures and the migration of
  * data from previous versions.
  */
-class CreateController extends AppController {
+class CreateController extends InstallAppController {
     var $uses = array();
     var $db;
 
@@ -128,7 +128,7 @@ class CreateController extends AppController {
         App::import('Model', 'Picture');
         $picture = new Picture();
         $data = array();
-        $data[] = $picture->create(array('id'=>1, 'filename'=>'blank', 'name'=>__('Blank')));
+        $data[] = $picture->create(array('id'=>1, 'filename'=>'blank.png', 'name'=>__('Blank')));
         $picture->saveAll($data);
         return count($data);        
     }
@@ -137,6 +137,7 @@ class CreateController extends AppController {
         $this->loadModel('Category');
         $this->loadModel('Item');
         $this->loadModel('CategoryItem');
+        $this->loadModel('Picture');
 
         // Add some categories and items
         // aquarium
@@ -185,6 +186,11 @@ class CreateController extends AppController {
                 'filter-equipment',
                 'Filter Media Grid',
                 array('each'=>5.50));
+        
+        $imgbase = dirname(dirname(__FILE__)).DS.'webroot'.DS.'img'.DS.'products'.DS;
+        $img = $imgbase.'filter-media-grid.jpg';
+        $this->Picture->import($img);
+        
         $this->createItem(
                 'filter-equipment',
                 'Filter Media Grid - Stainless Steel',

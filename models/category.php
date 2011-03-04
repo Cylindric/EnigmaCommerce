@@ -9,7 +9,6 @@ class Category extends AppModel {
     var $name = 'Category';
 
     var $actsAs = array(
-        'Containable',
         'Tree',
         'Sluggable' => array('label'=>'name', 'ignore'=>array()),
     );
