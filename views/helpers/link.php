@@ -17,9 +17,8 @@ class LinkHelper extends AppHelper {
     }
     
     function link($model, $data, array $settings = array()) {
-
         $this->settings = array_merge(array(
-            'sef' => false,
+            'sef' => true,
             'action' => null,
             'id' => 'id',
             'slug' => 'slug',
@@ -30,7 +29,13 @@ class LinkHelper extends AppHelper {
         $linkText = $data[$name];
         
         $linkController = Inflector::tableize($model);
-        $linkAction = $action['action'];
+        
+        if (is_array($action)) {
+            $linkAction = $action['action'];
+        } else {
+            $linkAction = $action;
+        }
+
         if (($sef) && (array_key_exists($slug, $data))) {
             $Linkid = $data[$slug];        
         } else {

@@ -11,7 +11,7 @@
             <?php foreach ($item['Variation'] as $variation): ?>
             <div class="x-item variation">
                 <?php echo $variation['name']; ?><br />
-                <?php echo $variation['price']; ?><br />
+                <?php echo $this->Format->currency($variation['price']); ?><br />
                 <?php echo $this->Html->link(__('Buy'), array('controller' => 'basket', 'action' => 'add', $item['Item']['slug'], $variation['slug'])); ?>
             </div>
             <?php endforeach; ?>

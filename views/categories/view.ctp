@@ -9,45 +9,40 @@
     <?php echo $this->Session->flash(); ?>
 
     <?php if (count($subCategories)>0): ?>
-        <div class="x-list">
+        <table class="list">
+            <tr>
+                <th><?php echo __('Sub-categories'); ?></th>
+            </tr>
             <?php foreach ($subCategories as $category): ?>
-            <div class="x-item category">
-                <?php echo $this->Html->link($category['Category']['name'], array('controller' => 'categories', 'action' => 'view', $category['Category']['slug'])); ?>
-            </div>
+            <tr>
+                <td>
+                    <?php
+                        echo $this->Html->image('icons/category.png', array('alt' => __('View')));
+                        echo $this->Link->view('Category', $category['Category']);
+                    ?>
+                </td>
+            </tr>
             <?php endforeach; ?>
-        </div>
+        </table>
     <?php endif; ?>
 
     <?php if (count($relatedItems)>0): ?>
-        <div class="x-list">
-            <?php 
-                $leaders = min(6, count($relatedItems));
-                $list = count($relatedItems) - $leaders;
-            ?>
-            <?php for ($itemNum = 0; $itemNum < $leaders; $itemNum++): ?>
-            <div class="x-item item">
-                <?php echo $this->Html->link($relatedItems[$itemNum]['Item']['name'], array('controller' => 'items', 'action' => 'view', $relatedItems[$itemNum]['Item']['id'])); ?>
-            </div>        
-            <?php endfor;?>
-        </div>
 
-        <?php if ($list > 0): ?>
         <table class="list">
             <tr>
                 <th><?php echo __('Items'); ?></th>
             </tr>
-            <?php for ($itemNum = $leaders; $itemNum < count($relatedItems); $itemNum++): ?>
+            <?php foreach ($relatedItems as $item): ?>
             <tr>
                 <td>
                     <?php
-                        echo $this->Html->image('icons/item.png', array('alt' => __('Edit')));
-                        echo $this->Html->link($relatedItems[$itemNum]['Item']['name'], array('controller' => 'items', 'action' => 'view', $relatedItems[$itemNum]['Item']['id']));
+                        echo $this->Html->image('icons/item.png', array('alt' => __('View')));
+                        echo $this->Link->view('Item', $item['Item']);
                     ?>
                 </td>
             </tr>
-            <?php endfor; ?>
+            <?php endforeach; ?>
         </table>
-        <?php endif; ?>
     <?php endif; ?>
 
     </div>

@@ -1,8 +1,8 @@
 /**
-* Enigma : Online Sales Management. (http://www.enigmagen.org)
-* Licensed under The MIT License
-* Redistributions of files must retain the above copyright notice.
-**/
+ * Enigma : Online Sales Management. (http://www.enigmagen.org)
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ **/
 
 DROP TABLE IF EXISTS `enigma3_baskets`;
 CREATE TABLE IF NOT EXISTS `enigma3_baskets` (
@@ -95,6 +95,29 @@ CREATE TABLE IF NOT EXISTS `enigma3_items` (
     `legacy_id` int(11) NOT NULL default 0,
     KEY `ixSlug` (`slug`),
     KEY `ixStatusId` (`status_id`),
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+DROP TABLE IF EXISTS `enigma3_item_pictures`;
+CREATE TABLE IF NOT EXISTS `enigma3_item_pictures` (
+    `id` int NOT NULL,
+    `item_id` int NOT NULL,
+    `picture_id` int NOT NULL,
+    `is_primary` tinyint(1) NOT NULL DEFAULT 0,
+    `created` datetime DEFAULT NULL,
+    `modified` datetime DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+DROP TABLE IF EXISTS `enigma3_pictures`;
+CREATE TABLE IF NOT EXISTS `enigma3_pictures` (
+    `id` int NOT NULL,
+    `filename` varchar(128) NOT NULL,
+    `name` varchar(128) NOT NULL,
+    `created` datetime DEFAULT NULL,
+    `modified` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
