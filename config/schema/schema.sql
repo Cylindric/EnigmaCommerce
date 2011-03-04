@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_items` (
 
 DROP TABLE IF EXISTS `enigma3_item_pictures`;
 CREATE TABLE IF NOT EXISTS `enigma3_item_pictures` (
-    `id` int NOT NULL,
+    `id` int NOT NULL AUTO_INCREMENT,
     `item_id` int NOT NULL,
     `picture_id` int NOT NULL,
     `is_primary` tinyint(1) NOT NULL DEFAULT 0,
@@ -101,9 +101,13 @@ CREATE TABLE IF NOT EXISTS `enigma3_item_pictures` (
 
 DROP TABLE IF EXISTS `enigma3_pictures`;
 CREATE TABLE IF NOT EXISTS `enigma3_pictures` (
-    `id` int NOT NULL,
-    `filename` varchar(128) NOT NULL,
+    `id` int NOT NULL AUTO_INCREMENT,
     `name` varchar(128) NOT NULL,
+    `slug` varchar(128) NOT NULL default '',
+    `filename` varchar(128) NOT NULL,
+    `width` int NOT NULL,
+    `height` int NOT NULL,
+    `aspect` int NOT NULL,
     `created` datetime DEFAULT NULL,
     `modified` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
