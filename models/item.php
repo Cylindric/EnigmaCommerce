@@ -15,7 +15,7 @@ class Item extends AppModel {
 
     var $belongsTo = array('Status');
     
-    var $hasMany = array('CategoryItem', 'Variation');
+    var $hasMany = array('CategoryItem', 'ItemPicture' , 'Variation');
 
     var $validate = array(
         'slug' => array(

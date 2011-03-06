@@ -15,6 +15,8 @@ class Picture extends AppModel {
         ),
     );
     
+    var $hasMany = array('ItemPicture');
+
     public function beforeDelete() {
         $picture = $this->read();
         $filename = $this->productPath() . $picture['Picture']['filename'];

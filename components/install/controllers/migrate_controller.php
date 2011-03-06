@@ -10,7 +10,7 @@ App::import('model', 'connection_manager');
 class MigrateController extends InstallAppController
 {
     var $components = array();
-    var $uses = array('Category', 'CategoryItem', 'Item', 'Picture', 'Unit', 'Variation');
+    var $uses = array('Category', 'CategoryItem', 'Item', 'ItemPicture', 'Picture', 'Unit', 'Variation');
     var $db;
     var $old_db;
 
@@ -22,7 +22,8 @@ class MigrateController extends InstallAppController
         'Items',
         'CategoryItems',
         'ItemDetails',
-        'Pictures'
+        'Pictures',
+        'ItemPictures',
     );
     
     private $settings = array();
@@ -307,7 +308,7 @@ class MigrateController extends InstallAppController
             
             $newObject = $this->CategoryItem->create();
             $newObject['CategoryItem']['item_id'] = $oldObject['ItemID'];
-            $newObject['CategoryItem']['category_id'] = htmlentities($oldObject['CategoryID']);
+            $newObject['CategoryItem']['category_id'] = $oldObject['CategoryID'];
             $newObject['CategoryItem']['is_primary'] = $oldObject['IsPrimary'];
             $newObject['CategoryItem']['created'] = $oldObject['CreateDate'];
             $newObject['CategoryItem']['modified'] = $oldObject['ModifyDate'];
@@ -438,6 +439,51 @@ class MigrateController extends InstallAppController
         $this->msg($name, $msg);
     }
     
+    private function migrateItemPictures() {
+        $name = 'ItemPictures';
+        $count = $this->getCount($name, 
+            'SELECT COUNT(*) count FROM #__itempicture ');
+
+        if ($count == 0) {
+            $this->settings['status'] = 'done';
+            $this->msg($name, 'none found');
+            return;
+        }
+
+        $msg = __('Processing %d %s-%s links...', $count, _('Item'), _('Picture'));
+        
+        $query  = 'SELECT * '
+                . 'FROM ' . $this->old_db->config['prefix'] . 'itempicture '
+                . 'ORDER BY ItemID, PictureID '
+                . 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
+
+        $rows = $this->old_db->query($query);
+        foreach ($rows as $row) {
+            $oldObject = $row[$this->old_db->config['prefix'] . 'itempicture'];
+            $item = $this->Item->find('first', array('conditions'=>array('Item.legacy_id'=>$oldObject['ItemID'])));
+            $cat = $this->Picture->find('first', array('conditions'=>array('Picture.legacy_id'=>$oldObject['PictureID'])));
+            
+            $newObject = $this->ItemPicture->create();
+            $newObject['ItemPicture']['item_id'] = $oldObject['ItemID'];
+            $newObject['ItemPicture']['picture_id'] = $oldObject['PictureID'];
+            $newObject['ItemPicture']['is_primary'] = $oldObject['IsPrimary'];
+            $newObject['ItemPicture']['created'] = $oldObject['CreateDate'];
+            $newObject['ItemPicture']['modified'] = $oldObject['ModifyDate'];
+            if ($oldObject['DeleteDate'] == 0) {
+                $this->ItemPicture->save($newObject);
+            }
+        }
+        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+
+        if (count($rows) < $this->settings['limit']) {
+            $this->settings['status'] = 'done';
+        } else {
+            $this->settings['offset'] += $this->settings['limit'];
+        }
+
+        $this->msg($name, $msg);
+    }
+
     private function msg($section, $message) {
         $this->settings['messages'][$section] = $message;
     }
