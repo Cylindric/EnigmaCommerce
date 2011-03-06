@@ -130,7 +130,9 @@ class SluggableBehavior extends ModelBehavior {
             //var_dump();
         }
 
-        if ((!$settings['real'] || $model->hasField($settings['slug'])) && ($settings['overwrite'] || empty($model->id))) {
+        $modelHasSlugField = $model->hasField($settings['slug']);
+        $recordIsNew = empty($model->id);
+        if ((!$settings['real'] || $modelHasSlugField) && ($settings['overwrite'] || $recordIsNew)) {
             $label = '';
 
             foreach($fields as $field) {

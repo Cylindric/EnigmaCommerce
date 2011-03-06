@@ -110,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `enigma3_pictures` (
     `aspect` int NOT NULL,
     `created` datetime DEFAULT NULL,
     `modified` datetime DEFAULT NULL,
+    `legacy_id` int(11) NOT NULL default 0,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 

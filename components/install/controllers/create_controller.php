@@ -128,7 +128,7 @@ class CreateController extends InstallAppController {
         App::import('Model', 'Picture');
         $picture = new Picture();
         $data = array();
-        $data[] = $picture->create(array('id'=>1, 'filename'=>'blank.png', 'name'=>__('Blank')));
+        $data[] = $picture->create(array('filename'=>'blank.png', 'name'=>__('Blank')));
         $picture->saveAll($data);
         return count($data);        
     }

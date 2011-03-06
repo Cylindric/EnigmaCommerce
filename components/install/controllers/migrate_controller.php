@@ -10,7 +10,7 @@ App::import('model', 'connection_manager');
 class MigrateController extends InstallAppController
 {
     var $components = array();
-    var $uses = array('Category', 'CategoryItem', 'Item', 'Unit', 'Variation');
+    var $uses = array('Category', 'CategoryItem', 'Item', 'Picture', 'Unit', 'Variation');
     var $db;
     var $old_db;
 
@@ -42,7 +42,6 @@ class MigrateController extends InstallAppController
 
     function start()
     {
-
         $this->settings = array();
         if ($this->Session->check('migration_settings')) {
             $this->settings = $this->Session->read('migration_settings');
@@ -389,22 +388,43 @@ class MigrateController extends InstallAppController
             return;
         }
 
+        $imgPath = Configure::Read('Migrate.productImages');
+
         $msg = __('Processing %d %s...', $count, __('Pictures'));
         
-        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'picture ';
+        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'picture picture ';
+        $query .= 'LEFT JOIN ' . $this->old_db->config['prefix'] . 'itempicture itempicture ON (picture.PictureID=itempicture.PictureID) ';
+        $query .= 'LEFT JOIN ' . $this->old_db->config['prefix'] . 'item item ON (itempicture.ItemID=item.ItemID) ';
         $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
 
         $rows = $this->old_db->query($query);
         foreach ($rows as $row) {
-            $oldObject = $row['picture'];
-
             $newObject = $this->Picture->create();
-            $newObject['Picture']['picture_id'] = $oldObject['PictureID'];
-            $newObject['Picture']['name'] = $this->cleanString($oldObject['PictureName']);
-            $newObject['Picture']['created'] = $oldObject['CreateDate'];
-            $newObject['Picture']['modified'] = $oldObject['ModifyDate'];            
-            if ($oldObject['DeleteDate'] == 0) {
-                $this->Variation->save($newObject);
+            $newObject['Picture']['picture_id'] = $row['picture']['PictureID'];
+            $newObject['Picture']['name'] = $this->cleanString($row['picture']['PictureName']);
+            $newObject['Picture']['legacy_id'] = $this->cleanString($row['picture']['PictureID']);
+            $newObject['Picture']['created'] = $row['picture']['CreateDate'];
+            $newObject['Picture']['modified'] = $row['picture']['ModifyDate'];
+            
+            if (strlen($newObject['Picture']['name']) == 0) {
+                $itemName = $this->cleanString($row['item']['ItemName']);
+                if (strlen($itemName) == 0) {
+                    $newObject['Picture']['name'] = 'picture';
+                } else {
+                    $newObject['Picture']['name'] = $itemName;
+                }
+            }
+            
+            if ($row['picture']['DeleteDate'] == 0) {
+                $this->Picture->save($newObject);
+                try {
+                    $this->Picture->import(array(
+                        'filename' => $imgPath . $row['picture']['FileName'],
+                        'overwrite' => true,
+                    ));
+                } catch (Exception $exception) {
+                    // failed to import image
+                }
             }
         }
         $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);

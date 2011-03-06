@@ -34,42 +34,90 @@ class Picture extends AppModel {
      * If $name is specified, that will be used for the destination file name,
      * otherwise the existing name will be used.  Sluggable is used to create a 
      * unique name in either case.
-     * @param string $img The full filesystem path to the image to import.
+     * @param string $$filename The full filesystem path to the image to import.
      * @param string $name The name to give the file, or null to use the existing name.
      * @return array The created Picture array.
      */
-    public function import($img, $name = null) {
-        $file = pathinfo($img);
-        $imageInfo = getimagesize($img);
+    public function import($filename, $settings = array()) {
+        $defaultSettings = array(
+            'filename' => null,
+            'overwrite' => false,
+            'create' => false,
+            'name' => null,
+            'imgPath' => $this->productPath(),
+        );
 
-        if (empty($name)) {
-            $name = $file['filename'];
+        if (is_array($filename)) {
+            $settings = array_merge($defaultSettings, $filename);            
+        } else {
+            $settings = array_merge($defaultSettings, $settings);
+            $settings['filename'] = $filename;
         }
-        $width = $imageInfo[0];
-        $height = $imageInfo[1];
+        extract($settings);
         
-        // Create a new Picture object
-        $picture = $this->create();
-        $picture['name'] = $name;
-        $picture['width'] = $width;
-        $picture['height'] = $height;
-        $picture = $this->save($picture);
+        if (!file_exists($filename)) {
+            throw new InvalidArgumentException('Source file missing');
+        }
         
+        $file = pathinfo($filename);
+        $imageInfo = getimagesize($filename);
+        if ($imageInfo !== false) {
+            $width = $imageInfo[0];
+            $height = $imageInfo[1];
+        }
+
+        if (!$this->id) {
+            if (!$create) {
+                throw new InvalidArgumentException('No Picture specified');
+            } else {
+                // Create a new Picture object
+                if (empty($name)) {
+                    $name = $file['filename'];
+                }
+                $picture = $this->create();
+                $picture['name'] = $name;
+                $picture = $this->save($picture);        
+            }
+        }
+        $picture = $this->read();
+
         // Move the image to the correct location
-        $destination = $this->productPath() . $picture['Picture']['slug'].'.'.$file['extension'];
+        $destination = $imgPath . $this->data['Picture']['slug'].'.'.strtolower($file['extension']);
         
+        $tmpName = '';
         if (file_exists($destination)) {
-            $this->delete();
-            throw new FileExistsException($destination);
+            if ($overwrite) {
+                $tmpName = $destination.'.old';
+                rename($destination, $tmpName);
+            } else {
+                $this->delete();
+                throw new FileExistsException($destination);                
+            }
         }
         
-        if (!@copy($img, $destination)) {
+        // If the copy fails, delete the just-created record, and if a backup was made 
+        // of a clobbered destination-file, put it back.
+        try {
+            copy($filename, $destination);
+        } catch (Exception $e) {
+            if ((strlen($tmpName) > 0) && (file_exists($tmpName))) {
+                rename($tmpName, $destination);
+            }
             $this->delete();
             throw new AccessDeniedException($destination);
         }
 
+        // Update the image info
         $picture['Picture']['filename'] = basename($destination);
+        $picture['Picture']['width'] = $width;
+        $picture['Picture']['height'] = $height;
+        
         $picture = $this->save($picture);
+        
+        if ((strlen($tmpName) > 0) && (file_exists($tmpName)) && (file_exists($destination)) ) {
+            unlink($tmpName);
+        }
+        
         return $picture;
     }
     
