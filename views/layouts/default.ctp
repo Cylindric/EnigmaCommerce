@@ -70,7 +70,7 @@
             <div id="footer">Copyright © 2011 Mark Hanford</div>
 
             <?php echo $this->Js->writeBuffer(); ?>
-            <?php //echo $this->element('sql_dump'); ?>
+            <?php echo $this->element('sql_dump'); ?>
 
         </div>
 

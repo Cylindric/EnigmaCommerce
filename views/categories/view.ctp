@@ -37,6 +37,7 @@
                 <td>
                     <?php
                         echo $this->Html->image('icons/item.png', array('alt' => __('View')));
+                        echo $this->Html->image($item['Item']['image']);
                         echo $this->Link->view('Item', $item['Item']);
                     ?>
                 </td>

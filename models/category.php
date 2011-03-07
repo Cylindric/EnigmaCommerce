@@ -34,7 +34,6 @@ class Category extends AppModel {
     public function menuNodes() {
         $categories = $this->find('threaded', array(
             'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
-            'contain' => array(),
             'conditions' => array('Category.visible_on_web' => true),
         ));
         return $categories;    
@@ -53,19 +52,56 @@ class Category extends AppModel {
      */
     public function subCategories($parent_id, array $settings = array()) {
         $settings = array_merge(array(
-            'order' => array('Category.name')
+            'order' => array('Category.name'),
+            'find' => 'all',
         ), $settings);
-
-        $categories = $this->find('all', array(
-            'fields' => array('Category.id', 'Category.name', 'Category.slug'),
-            'contain' => array(),
+        
+        $categories = $this->find($settings['find'], array(
+            'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.id AS innerid'),
             'conditions' => array(
                 'Category.parent_id' => $parent_id,
-                'Category.name' => 'Air Pumps',
             ),
             'order' => $settings['order']
         ));
         return $categories;
+    }
+
+    /**
+     * Returns all items that are children of the specified category and all it's
+     * subcategories.
+     * 
+     * The sort order can be specified by passing in a settings array with the 
+     * field to sort by:
+     * array('order' => 'Item.name')
+     * 
+     * @param int $category_id
+     * @param array $settings
+     * @return array
+     */
+    public function subItems($category_id, array $settings = array()) {
+        $settings = array_merge(array(
+            'order' => array('Item.name')
+        ), $settings);
+        
+        $subCategories = $this->subCategories($category_id, array('find'=>'list'));
+        $subCategories = array_keys($subCategories);
+
+        $items = $this->find(
+            'all', array(
+                'contain' => array(
+                    'CategoryItem' => array(
+                        'fields' => array('id as fakeid'),
+                        'conditions' => array(
+                            'category_id' => $subCategories,
+                        ),
+                    ),
+                ),
+                'conditions' => array()
+            )
+        );
+
+        var_dump($items[0]);
+        return $items;
     }
 
 }
