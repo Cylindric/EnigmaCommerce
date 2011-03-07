@@ -461,11 +461,11 @@ class MigrateController extends InstallAppController
         foreach ($rows as $row) {
             $oldObject = $row[$this->old_db->config['prefix'] . 'itempicture'];
             $item = $this->Item->find('first', array('conditions'=>array('Item.legacy_id'=>$oldObject['ItemID'])));
-            $cat = $this->Picture->find('first', array('conditions'=>array('Picture.legacy_id'=>$oldObject['PictureID'])));
+            $pic = $this->Picture->find('first', array('conditions'=>array('Picture.legacy_id'=>$oldObject['PictureID'])));
             
             $newObject = $this->ItemPicture->create();
-            $newObject['ItemPicture']['item_id'] = $oldObject['ItemID'];
-            $newObject['ItemPicture']['picture_id'] = $oldObject['PictureID'];
+            $newObject['ItemPicture']['item_id'] = $item['Item']['id'];
+            $newObject['ItemPicture']['picture_id'] = $pic['Picture']['id'];
             $newObject['ItemPicture']['is_primary'] = $oldObject['IsPrimary'];
             $newObject['ItemPicture']['created'] = $oldObject['CreateDate'];
             $newObject['ItemPicture']['modified'] = $oldObject['ModifyDate'];

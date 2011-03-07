@@ -22,11 +22,16 @@ class LinkHelper extends AppHelper {
             'action' => null,
             'id' => 'id',
             'slug' => 'slug',
-            'name' => 'name'
+            'name' => 'name',
+            'content' => null,
         ), $settings);
         extract($this->settings);
 
-        $linkText = $data[$name];
+        if ($name === false) {
+            $linkText = $content;
+        } else {
+            $linkText = $data[$name];
+        }
         
         $linkController = Inflector::tableize($model);
         
@@ -41,7 +46,13 @@ class LinkHelper extends AppHelper {
         } else {
             $Linkid = $data[$id];
         }
-        $out = $this->Html->link($linkText, array('controller' => $linkController, 'action' => $linkAction, $Linkid));
+        
+        unset($settings['content']);
+        unset($settings['link']);
+        unset($settings['id']);
+        unset($settings['name']);
+        unset($settings['action']);
+        $out = $this->Html->link($linkText, array('controller' => $linkController, 'action' => $linkAction, $Linkid), $settings);
 
         return $out;
     }

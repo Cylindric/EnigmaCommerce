@@ -96,9 +96,13 @@ class SluggableBehavior extends ModelBehavior {
         if ((array_key_exists('conditions', $queryData)) && (is_array($queryData['conditions']))) {
             foreach ($queryData['conditions'] as $field=>$condition) {
                 if ($field === ($model->alias.'.id')) {
-                    if (!is_numeric($condition)) {
-                        $queryData['conditions'][$model->alias.'.'.$settings['slug']] = $condition;
-                        unset($queryData['conditions'][$model->alias.'.id']);
+                    if (is_array($condition)) {
+                        //TODO: What if conditions is an array of some-int, some-slug?
+                    } else {
+                        if (!is_numeric($condition)) {
+                            $queryData['conditions'][$model->alias.'.'.$settings['slug']] = $condition;
+                            unset($queryData['conditions'][$model->alias.'.id']);
+                        }
                     }
                 }
             }

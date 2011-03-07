@@ -85,23 +85,51 @@ class Category extends AppModel {
         
         $subCategories = $this->subCategories($category_id, array('find'=>'list'));
         $subCategories = array_keys($subCategories);
+        $subCategories[] = (int)$category_id;
 
-        $items = $this->find(
+        $subItems = $this->find(
             'all', array(
-                'contain' => array(
-                    'CategoryItem' => array(
-                        'fields' => array('id as fakeid'),
-                        'conditions' => array(
-                            'category_id' => $subCategories,
-                        ),
+                'contain' => array(),
+                'fields' => array(
+                    'Item.id', 'Item.name', 'Item.description',
+                    'Picture.filename',
+                ),
+                'joins' => array(
+                    array(
+                        'table' => 'category_items',
+                        'alias' => 'CategoryItem',
+                        'type' => 'inner',
+                        'foreignKey' => false,
+                        'conditions' => array('CategoryItem.category_id = Category.id'),
+                    ),
+                    array(
+                        'table' => 'items',
+                        'alias' => 'Item',
+                        'type' => 'left',
+                        'foreignKey' => false,
+                        'conditions' => array('CategoryItem.item_id = Item.id'),                        
+                    ),
+                    array(
+                        'table' => 'item_pictures',
+                        'alias' => 'ItemPicture',
+                        'type' => 'left',
+                        'foreignKey' => false,
+                        'conditions' => array('ItemPicture.item_id = Item.id'),                        
+                    ),
+                    array(
+                        'table' => 'pictures',
+                        'alias' => 'Picture',
+                        'type' => 'left',
+                        'foreignKey' => false,
+                        'conditions' => array('ItemPicture.picture_id = Picture.id'),                        
                     ),
                 ),
-                'conditions' => array()
+                'conditions' => array('Category.id' => $subCategories),
+                'order' => array('Item.name'),
             )
         );
 
-        var_dump($items[0]);
-        return $items;
+        return $subItems;
     }
 
 }

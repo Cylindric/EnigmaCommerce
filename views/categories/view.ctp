@@ -35,11 +35,7 @@
             <?php foreach ($relatedItems as $item): ?>
             <tr>
                 <td>
-                    <?php
-                        echo $this->Html->image('icons/item.png', array('alt' => __('View')));
-                        echo $this->Html->image($item['Item']['image']);
-                        echo $this->Link->view('Item', $item['Item']);
-                    ?>
+                    <?php echo $this->element('categories/list_item', array('item' => $item)); ?>
                 </td>
             </tr>
             <?php endforeach; ?>
