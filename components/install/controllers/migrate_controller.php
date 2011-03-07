@@ -78,7 +78,7 @@ class MigrateController extends InstallAppController
             array_shift($this->settings['queue']);
         } 
         
-        if(count($this->settings['queue']) == 0) {
+        if (count($this->settings['queue']) == 0) {
             $this->settings['status'] = 'finished';
             $this->msg('Migration', 'Complete!');
             $this->Session->delete('migration_settings');

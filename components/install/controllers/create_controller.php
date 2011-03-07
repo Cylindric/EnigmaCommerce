@@ -329,7 +329,7 @@ class CreateController extends InstallAppController {
 
     private function createItem($categorySlugs, $name, $variations) {
         $newVariations = array();
-        foreach($variations as $variationkey=>$variationvalue) {
+        foreach ($variations as $variationkey=>$variationvalue) {
             $newVariations[] = array('name'=>$variationkey, 'price'=>$variationvalue);
         }
         
