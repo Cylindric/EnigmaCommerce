@@ -39,8 +39,22 @@ class CategoriesController extends AppController {
         $this->set('relatedItems', $this->Category->subItems($category['Category']['id']));
     }
 
+    function menu() {
+        $this->ext = '.js';
+    }
+    
     function menu_nodes() {
-        return $this->Category->menuNodes();
+        $root = 0;
+        if (isset($this->request->params['form']['node'])) {
+            $root = (int)$this->request->params['form']['node'];
+        }
+        if ($root == 0) {
+            $root = $this->Category->field('id', array('slug' => 'catrootnode'));
+        }
+        $data = $this->Category->menuNodes($root);
+        $this->set('data', $data);
+        $this->viewPath = 'elements';
+        $this->render('js_data');
     }
 
 }

@@ -1,11 +1,22 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+.clear {
+    clear: both;
+}
+
 body {
-  font-family: Arial, Arial, Helvetica, sans-serif;
-	font-size: 0.9em;
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    background-color: #E0E0E0;
+    color: #444;
 }
 
 p {
-  text-align: justify;
-	margin-top: 0.3em;
+    text-align: justify;
+    margin-top: 0.3em;
 }
 
 /* Paragraphs that follow other paragraphs have a paragraph-indent */
@@ -16,16 +27,27 @@ p + p {
 
 a {
 	text-decoration: none;
+    color: darkblue;
+}
+
+a:hover {
+    color: #CC3D05;
 }
 
 h1, h1 > a {
 	font-size: 1.3em;
 	font-weight: bold;
+    color: #CC3D05;
 }
 
-h2 {
+h1 > a:hover {
+    color: darkblue;
+}
+
+h2, h2 > a {
 	font-size: 1.2em;
 	font-weight: bold;
+    color: #CC3D05;
 }
 
 h3 {
@@ -34,38 +56,131 @@ h3 {
     font-weight: bold;
 }
 
+div#wrapper {
+    margin: 0 5%;
+    height: 100%;
+}
+
+div#header {
+    height: 100px;
+    position: relative;
+}
+@media print {div#header {display: none;}}
+
+div#header > h1 {
+    position: absolute;
+    width: 330px;
+    height: 70px;
+    font-size: 2em;
+    margin-top: 15px;
+    background: url(../img/chrome.blue/logo.png) no-repeat left top;
+}
+@media print {div#header h1 {background-image: none;}}
+
+div#header > h1 a {
+    display: block;
+    width: 333px;
+    text-indent: -9999px;
+	font-size: 55px;
+    background-color: transparent;
+}
+
 div#header ul {
-  list-style-type: none;
+    position: absolute;
+    right: 30px;
+    bottom: 25px;
+    list-style-type: none;
+}
+
+div#header ul li {
+    float: left;
+    margin: 0 1em;
 }
 
 div#header ul li a {
-  font-size: 1.2em;
-  font-weight: bold;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
-div#flashMessage {
-	clear: both;
-	color: #fff;
-	font-size: 140%;
-	font-weight: bold;
-	background: rgb(0,127,0);
-	padding-left: 4px;
+div#separator_m {background: url(../img/chrome.blue/separator_m.png) repeat-x left top;}
+div#separator_l {background: url(../img/chrome.blue/separator_l.png) repeat-y left top;}
+div#separator_r {background: url(../img/chrome.blue/separator_r.png) repeat-y right top;}
+@media print {div#separator_m {background: none;}}
+@media print {div#separator_l {background: none;}}
+@media print {div#separator_r {background: none;}}
+
+div#separator {
+    height: 60px;
+}
+
+div#tite {
+    padding: 0 20px;
+    display: table-cell;
+    vertical-align: middle;
+    height: 60px;
+}
+
+div#title h1 {
+    padding-left: 10px;
+    padding-top: 20px;
+    color: #E0E0E0;
+    background-color: transparent;
+}
+
+div#content {background-color: transparent;}
+div#content_l {background: #ffffff url(../img/chrome.blue/content_l.png) repeat-y left top;}
+div#content_r {background: url(../img/chrome.blue/content_r.png) repeat-y right top;}
+div#content_b {background: url(../img/chrome.blue/content_b.png) repeat-x center bottom;}
+div#content_bl {background: url(../img/chrome.blue/content_bl.png) no-repeat left bottom;}
+div#content_br {background: url(../img/chrome.blue/content_br.png) no-repeat right bottom;}
+@media print {div#content_l {background: none;}}
+@media print {div#content_r {background: none;}}
+@media print {div#content_b {background: none;}}
+@media print {div#content_bl {background: none;}}
+@media print {div#content_br {background: none;}}
+
+div#content {
+    padding: 0px 10px 10px 10px;
+}
+
+div#left-navigation {
+    width: 200px;
+    float: left;
+}
+
+div.body-wide {
+    left: 200px;
 }
 
 div#footer {
-	text-align: center;
+    text-align: center;
+    padding-bottom: 8px;
 	font-size: 0.7em;
-	padding-bottom: 8px;
-}
-
-div#header > h1 a {
-	font-size: 55px;
+    color: #666;
 }
 
 
 /* ****************************************************************************/
 /* Content styles
 /* ****************************************************************************/
+/*
+th.actions { text-align: center;}
+
+div.x-list div.category {
+    border: 2px solid darkBlue;
+    background-color: #ccccff;
+}
+
+div.x-list div.item {
+    border: 2px solid darkRed;
+    background-color: #ffcccc;
+}
+
+div.x-list div.variation {
+    border: 2px solid darkGreen;
+    background-color: #ccffcc;
+}
+
 div#left_menu {
 	float: left;
 }
@@ -87,18 +202,13 @@ img.thumb {
     width: 150px;
     float: left;
 }
-/* ****************************************************************************/
-/* Forms
-/* ****************************************************************************/
+
 form div {
     margin-bottom: 0px;
     padding-top: 0px;
     padding-bottom: 0px;
 }
 
-/* ****************************************************************************/
-/* Progress Bars
-/* ****************************************************************************/
 span.progress_bar {
     font-family: monospace;
     background-color: lightgrey;
@@ -113,3 +223,4 @@ span.progress_bar span.progress_a {
 
 span.progress_bar span.progress_b {
 }
+*/

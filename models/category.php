@@ -31,12 +31,29 @@ class Category extends AppModel {
         )
     );
     
-    public function menuNodes() {
+    public function menuNodes($parent_id) {
         $categories = $this->find('threaded', array(
             'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
-            'conditions' => array('Category.visible_on_web' => true),
+            'conditions' => array(
+                'Category.parent_id' => $parent_id,
+                'Category.visible_on_web' => true,
+            ),
         ));
-        return $categories;    
+        $nodes = array();
+        foreach ($categories as $category) {
+            $count = $this->find('count', array(
+                'conditions' => array('Category.parent_id' => $category['Category']['id']),
+            ));
+            $node = array();
+            $node['id'] = $category['Category']['id'];
+            $node['text'] = $category['Category']['name'];
+            $node['cls'] = 'category';
+            $node['iconCls'] = 'category';
+            $node['leaf'] = ($count == 0);
+            $node['action'] = 'edit';
+            $nodes[] = $node;
+        }
+        return $nodes;    
     }
 
     /**

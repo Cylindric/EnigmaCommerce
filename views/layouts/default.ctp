@@ -7,16 +7,17 @@
 
         <?php echo $this->Html->meta('icon'); ?>
 
-        <?php echo $this->Html->css('cake.generic'); ?>
-
-        <?php echo $this->Html->css('structure'); ?>
-
+        <?php 
+        echo $this->Html->css('extjs/ext-all.css');
+        echo $this->Html->script('extjs/adapter/ext/ext-base.js');
+        echo $this->Html->script('extjs/ext-all-debug.js');
+        echo $this->Html->scriptBlock(
+            "Ext.BLANK_IMAGE_URL = '".$this->Html->url('/img/extjs/default/s.gif')."';"
+        );
+        ?>
+        <?php //echo $this->Html->css('cake.generic'); ?>
         <?php echo $this->Html->css('style'); ?>
-
-        <?php echo $this->Html->css('chrome.blue'); ?>
-
         <?php echo $scripts_for_layout; ?>
-
     </head>
     <body>
 
@@ -53,13 +54,11 @@
                         <div id="content_bl">
                             <div id="content_br">
                                 <div id="content">
-                                    <div id="maincontent">
 
                                         <?php echo $this->Session->flash(); ?>
                                         <?php echo $content_for_layout; ?>
                                         <div class="clear">&nbsp;</div>
 
-                                    </div>
                                 </div>
                             </div>
                         </div>
