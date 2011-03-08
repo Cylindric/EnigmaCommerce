@@ -34,9 +34,12 @@ class CategoriesController extends AppController {
         }
 
         $category = $this->Category->findById($id);
+        $subCategories = $this->Category->subCategories($category['Category']['id']);
+        $relatedItems = $this->Category->subItems($category['Category']['id']);
+
         $this->set('category', $category);
-        $this->set('subCategories', $this->Category->subCategories($category['Category']['id']));        
-        $this->set('relatedItems', $this->Category->subItems($category['Category']['id']));
+        $this->set('subCategories', $subCategories);
+        $this->set('relatedItems', $relatedItems);
     }
 
     function menu() {

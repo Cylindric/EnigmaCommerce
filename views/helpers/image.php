@@ -13,29 +13,37 @@ class ImageHelper extends AppHelper {
 
     function itemThumb($item, array $settings = array()) {
 
-        $settings = array_merge(array(
+        $this->settings = array_merge(array(
             'alt' => $item['Item']['name'],
             'action' => 'view',
             'link' => true,
             'class' => 'thumb',
             'escape' => false,
+            'blank' => true,
         ), $settings);
+        extract($this->settings);
         
-        if (empty($item['Picture']['filename'])) {
+        $src = '';
+        if ($blank && empty($item['Picture']['filename'])) {
             $src = 'products' . DS . 'blank.png';
         } else {
             $src = 'products' . DS . $item['Picture']['filename'];
         }
-        
-        $imgSettings = $settings;
-        unset($imgSettings['action']);
-        unset($imgSettings['link']);
-        $img = $this->Html->image($src, $imgSettings);
 
-        $linkSettings = $settings;
-        $linkSettings['content'] = $img;
-        $linkSettings['name'] = false;
-        $out = $this->Link->link('Item', $item['Item'], $linkSettings);
+        $out = '';
+        if (!empty($src)) {
+            $imgSettings = $this->settings;
+            unset($imgSettings['action']);
+            unset($imgSettings['link']);
+            $out = $this->Html->image($src, $imgSettings);
+
+            if ($link) {
+                $linkSettings = $this->settings;
+                $linkSettings['content'] = $out;
+                $linkSettings['name'] = false;
+                $out = $this->Link->link('Item', $item, $linkSettings);
+            }
+        }
         
         return $out;
     }

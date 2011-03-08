@@ -24,11 +24,7 @@ class ItemsController extends AppController {
             $this->Session->setFlash(__('Invalid item', true));
             $this->redirect(array('action' => 'index'));
         }
-
-        $item = $this->Item->find('first', array(
-            'contain' => array('Variation'),
-            'conditions' => array('Item.id' => $id)
-        ));
+        $item = $this->Item->details($id);
         $this->set('item', $item);
     }
 

@@ -30,7 +30,7 @@ class LinkHelper extends AppHelper {
         if ($name === false) {
             $linkText = $content;
         } else {
-            $linkText = $data[$name];
+            $linkText = $data[$model][$name];
         }
         
         $linkController = Inflector::tableize($model);
@@ -42,9 +42,9 @@ class LinkHelper extends AppHelper {
         }
 
         if (($sef) && (array_key_exists($slug, $data))) {
-            $Linkid = $data[$slug];        
+            $Linkid = $data[$model][$slug];        
         } else {
-            $Linkid = $data[$id];
+            $Linkid = $data[$model][$id];
         }
         
         unset($settings['content']);

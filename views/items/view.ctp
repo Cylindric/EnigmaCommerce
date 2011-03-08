@@ -1,11 +1,9 @@
-<?php echo $this->element('categorymenu'); ?>
-<div id="body" class="view">
-    <div id="bodycontent">
+<?php echo $this->element('categories/menu'); ?>
+<div class="body-wide" id="body">
 
-    <?php echo $this->Session->flash(); ?>
-
-        <h1><?php echo $item['Item']['name']; ?></h1>
-        <p><?php echo $item['Item']['description']; ?></p>
+    <?php echo $this->Image->itemThumb($item, array('link' => false, 'blank' => false)); ?>
+    <h1><?php echo $item['Item']['name']; ?></h1>
+    <p><?php echo $item['Item']['description']; ?></p>
     <?php if (count($item['Variation'])>0): ?>
         <div class="x-list">
             <?php foreach ($item['Variation'] as $variation): ?>
@@ -18,6 +16,4 @@
         </div>
     <?php endif; ?>
 
-    </div>
 </div>
-<div class="clear"></div>

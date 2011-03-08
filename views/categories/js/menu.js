@@ -16,7 +16,10 @@ var MenuTree = function(){
                 containerScroll: true,
                 border: false,
                 autoHeight: true,
-                rootVisible: false
+                rootVisible: false,
+                listeners: {
+                    'click': onNodeClick
+                }
             });
 
             // add a tree sorter in folder mode

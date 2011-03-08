@@ -16,6 +16,10 @@ class Picture extends AppModel {
     );
     
     var $hasMany = array('ItemPicture');
+    
+    const ASPECT_SQUARE = 0;
+    const ASPECT_LANDSCAPE = 1;
+    const ASPECT_PORTRAIT = 2;
 
     public function beforeDelete() {
         $picture = $this->read();
@@ -68,7 +72,7 @@ class Picture extends AppModel {
             $height = $imageInfo[1];
         }
 
-        if (!$this->id) {
+        if (($create) || (!$this->id)) {
             if (!$create) {
                 throw new InvalidArgumentException('No Picture specified');
             } else {
@@ -77,7 +81,7 @@ class Picture extends AppModel {
                     $name = $file['filename'];
                 }
                 $picture = $this->create();
-                $picture['name'] = $name;
+                $picture['Picture']['name'] = $name;
                 $picture = $this->save($picture);        
             }
         }
@@ -113,6 +117,13 @@ class Picture extends AppModel {
         $picture['Picture']['filename'] = basename($destination);
         $picture['Picture']['width'] = $width;
         $picture['Picture']['height'] = $height;
+        if ($width > $height) {
+            $picture['Picture']['aspect'] = Picture::ASPECT_LANDSCAPE;
+        } elseif ($width < $height) {
+            $picture['Picture']['aspect'] = Picture::ASPECT_PORTRAIT;            
+        } else {
+            $picture['Picture']['aspect'] = Picture::ASPECT_SQUARE;
+        }
         
         $picture = $this->save($picture);
         
