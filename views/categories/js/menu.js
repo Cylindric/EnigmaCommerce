@@ -10,7 +10,7 @@ var MenuTree = function(){
     return {
         init : function(){
             var tree = new Tree.TreePanel({
-                animate: true,
+                animate: false,
                 autoScroll: true,
                 loader: new Tree.TreeLoader({dataUrl:'<?php echo $this->Html->url("/categories/menu_nodes.js");?>'}),
                 containerScroll: true,
@@ -43,8 +43,6 @@ var MenuTree = function(){
         var content = Ext.get('body');
         content.load({
            url: node.attributes.action,
-           params: '',
-           test: 'Updating...',
            loadScripts: true,
            scripts: true
         });

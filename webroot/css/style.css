@@ -227,3 +227,22 @@ span.progress_bar span.progress_a {
 span.progress_bar span.progress_b {
 }
 */
+
+/* Debug */
+table.cake-sql-log {
+	background: #f4f4f4;
+    border: 1px solid black;
+	xfont-family: Monaco, Consolas, "Courier New", monospaced;
+}
+.cake-sql-log tr {
+    vertical-align: top;
+}
+.cake-sql-log td {
+	padding: 4px 8px;
+	text-align: left;
+    border-bottom: 1px solid #555;
+    border-right: 1px solid #aaa;
+}
+.cake-sql-log caption {
+	color:#fff;
+}

@@ -20,6 +20,7 @@ class ImageHelper extends AppHelper {
             'class' => 'thumb',
             'escape' => false,
             'blank' => true,
+            'width' => 150,
         ), $settings);
         extract($this->settings);
         

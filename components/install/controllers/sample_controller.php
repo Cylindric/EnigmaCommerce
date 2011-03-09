@@ -139,7 +139,8 @@ class SampleController extends InstallAppController
                 'is_primary' => true, 'category_id' => $cats['pond/pumps/external']),
             ),
             'ItemPicture' => array(array(
-                'is_primary' => true, 'picture_id' => $pics['itt-argonaut']),
+                'is_primary' => true, 'picture_id' => $pics['itt-argonaut']), array(
+                'is_primary' => false, 'picture_id' => $pics['itt-argonaut-2'])
             ),
         )));
 

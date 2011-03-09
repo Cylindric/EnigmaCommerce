@@ -50,7 +50,7 @@ class Category extends AppModel {
             $node['cls'] = 'category';
             $node['iconCls'] = 'category';
             $node['leaf'] = ($count == 0);
-            $node['action'] = 'categories/view/'.$category['Category']['id'];
+            $node['action'] = Router::url('/categories/view/'.$category['Category']['id']);
             $nodes[] = $node;
         }
         return $nodes;    
