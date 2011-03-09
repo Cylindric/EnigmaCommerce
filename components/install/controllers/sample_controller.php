@@ -95,7 +95,8 @@ class SampleController extends InstallAppController
         
         $this->Item->saveAll($this->Item->create(array(
             'Item' => array(
-                'name'=>'Mega Sump Pump - Dirty Water'
+                'name'=>'Mega Sump Pump - Dirty Water',
+                'description'=>'A fairly standard item, with a couple of variants.',
              ),
             'Variation' => array(array(
                 'name' => 'Q400 with float', 'price' => 99.95), array(
@@ -111,7 +112,8 @@ class SampleController extends InstallAppController
 
         $this->Item->saveAll($this->Item->create(array(
             'Item' => array(
-                'name'=>'Mega Sump Pump - Clean Water'
+                'name'=>'Mega Sump Pump - Clean Water',
+                'description'=>'A fairly standard item, with a couple of variants.',
              ),
             'Variation' => array(array(
                 'name' => 'Q2501 with float', 'price' => 82.49), array(
@@ -127,7 +129,8 @@ class SampleController extends InstallAppController
 
         $this->Item->saveAll($this->Item->create(array(
             'Item' => array(
-                'name'=>'ITT Argonaut AG Series Pump'
+                'name'=>'ITT Argonaut AG Series Pump',
+                'description'=>'A fairly standard item, with several variants and multiple pictures.',
              ),
             'Variation' => array(array(
                 'name' => 'ITT Series 8', 'price' => 214.99), array(
@@ -146,7 +149,8 @@ class SampleController extends InstallAppController
 
         $this->Item->saveAll($this->Item->create(array(
             'Item' => array(
-                'name'=>'Badu Magic Pond Pumps'
+                'name'=>'Badu Magic Pond Pumps',
+                'description'=>'A fairly standard item, with a couple of variants.',
              ),
             'Variation' => array(array(
                 'name' => 'Magic 4', 'price' => 219.95), array(
@@ -163,7 +167,8 @@ class SampleController extends InstallAppController
 
         $this->Item->saveAll($this->Item->create(array(
             'Item' => array(
-                'name'=>'Filter Media Grid'
+                'name'=>'Filter Media Grid',
+                'description'=>'A fairly standard item, with a couple of variants.',
              ),
             'Variation' => array(array(
                 'name' => 'each', 'price' => 5.50),
@@ -173,6 +178,23 @@ class SampleController extends InstallAppController
             ),
             'ItemPicture' => array(array(
                 'is_primary' => true, 'picture_id' => $pics['filter-media-grid']),
+            ),
+        )));
+
+        $this->Item->saveAll($this->Item->create(array(
+            'Item' => array(
+                'name'=>'Poly Bead',
+                'description'=>'This item h as multiple pictures, but no primary one!',
+             ),
+            'Variation' => array(array(
+                'name' => 'each', 'price' => 5.50),
+            ),
+            'CategoryItem' => array(array(
+                'is_primary' => true, 'category_id' => $cats['pond/filters/equipment']),
+            ),
+            'ItemPicture' => array(
+                array('is_primary' => false, 'picture_id' => $pics['poly-bead']), 
+                array('is_primary' => false, 'picture_id' => $pics['poly-bead-2']),
             ),
         )));
 

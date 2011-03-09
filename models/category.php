@@ -104,49 +104,27 @@ class Category extends AppModel {
         $subCategories = array_keys($subCategories);
         $subCategories[] = (int)$category_id;
 
-        $subItems = $this->find(
-            'all', array(
-                'contain' => array(),
-                'fields' => array(
-                    'Item.id', 'Item.name', 'Item.description',
-                    'Picture.filename',
+        $catItems = $this->find('all', array(
+            'contain' => array(
+                'CategoryItem' => array(
+                    'Item' => array(
+                        'ItemPicture' => array(
+                            'Picture'
+                        )
+                    )
                 ),
-                'joins' => array(
-                    array(
-                        'table' => 'category_items',
-                        'alias' => 'CategoryItem',
-                        'type' => 'inner',
-                        'foreignKey' => false,
-                        'conditions' => array('CategoryItem.category_id = Category.id'),
-                    ),
-                    array(
-                        'table' => 'items',
-                        'alias' => 'Item',
-                        'type' => 'left',
-                        'foreignKey' => false,
-                        'conditions' => array('CategoryItem.item_id = Item.id'),                        
-                    ),
-                    array(
-                        'table' => 'item_pictures',
-                        'alias' => 'ItemPicture',
-                        'type' => 'left',
-                        'foreignKey' => false,
-                        'conditions' => array('ItemPicture.item_id = Item.id'),                        
-                    ),
-                    array(
-                        'table' => 'pictures',
-                        'alias' => 'Picture',
-                        'type' => 'left',
-                        'foreignKey' => false,
-                        'conditions' => array('ItemPicture.picture_id = Picture.id'),                        
-                    ),
-                ),
-                'conditions' => array('Category.id' => $subCategories),
-                'order' => array('Item.name'),
-            )
-        );
+            ),
+            'conditions' => array('Category.id' => $subCategories),
+        ));
 
-        return $subItems;
+        $items = array();
+        foreach ($catItems as $cat) {
+            foreach ($cat['CategoryItem'] as $catItem) {
+                $items[] = array('Item'=>$catItem['Item']);
+            }
+        }
+
+        return $items;
     }
 
 }

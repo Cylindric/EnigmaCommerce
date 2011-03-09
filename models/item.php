@@ -28,31 +28,16 @@ class Item extends AppModel {
         if (empty($id)) {
             $id = $this->id;
         }
-        $item = $this->find('first', array(
-            'contain' => array(),
-            'fields' => array(
-                'Item.id', 'Item.name', 'Item.description', 'Item.slug',
-                'Picture.id', 'Picture.filename',
-                'Variation.id',
+        $item = $this->find('all', array(
+            'contain' => array(
+                'ItemPicture' => array(
+                    'Picture'
+                ),
+                'Variation',
             ),
-            'joins' => array(
-                array(
-                    'table' => 'item_pictures', 'alias' => 'ItemPicture', 'type' => 'left', 'foreignKey' => false,
-                    'conditions' => array('ItemPicture.item_id = Item.id'),                        
-                ),
-                array(
-                    'table' => 'pictures', 'alias' => 'Picture', 'type' => 'left', 'foreignKey' => false,
-                    'conditions' => array('ItemPicture.picture_id = Picture.id'),                        
-                ),
-                array(
-                    'table' => 'variations', 'alias' => 'Variation', 'type' => 'left', 'foreignKey' => false,
-                    'conditions' => array('Variation.item_id = Item.id'),                        
-                ),
-            ),
-            'conditions' => array('Item.id' => $id)
+            'conditions' => array('Item.id' => $id),
         ));
-        var_dump($item);
-        return $item;
+        return $item[0];
     }
     
 }

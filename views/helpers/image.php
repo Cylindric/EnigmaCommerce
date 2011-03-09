@@ -25,10 +25,25 @@ class ImageHelper extends AppHelper {
         extract($this->settings);
         
         $src = '';
-        if ($blank && empty($item['Picture']['filename'])) {
+        // pull out the primary picture
+        $picture = null;
+        if (array_key_exists('ItemPicture', $item)) {
+            $itemPics = $item['ItemPicture'];
+        } else {
+            $itemPics = $item['Item']['ItemPicture'];
+        }
+
+        foreach ($itemPics as $itemPic) {
+            $picture = $itemPic['Picture'];
+            if ($itemPic['is_primary'] == true) {
+                break;
+            }
+        }
+
+        if (!$blank && empty($picture)) {
             $src = 'products' . DS . 'blank.png';
         } else {
-            $src = 'products' . DS . $item['Picture']['filename'];
+            $src = 'products' . DS . $picture['filename'];
         }
 
         $out = '';
