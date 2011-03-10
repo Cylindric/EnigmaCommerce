@@ -2,22 +2,17 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB" lang="en-GB">
     <head>
-        <title><?php echo __('Enigma: '); ?><?php echo $title_for_layout; ?></title>
-        <?php echo $this->Html->charset(); ?>
-
-        <?php echo $this->Html->meta('icon'); ?>
-
-        <?php 
-        echo $this->Html->css('extjs/ext-all.css');
-        echo $this->Html->script('extjs/adapter/ext/ext-base.js');
-        echo $this->Html->script('extjs/ext-all-debug.js');
-        echo $this->Html->scriptBlock(
-            "Ext.BLANK_IMAGE_URL = '".$this->Html->url('/img/extjs/default/s.gif')."';"
-        );
+        <?php
+            echo $this->Html->charset();
+            echo $this->Html->meta('icon'); 
+            echo $this->Html->css('extjs/ext-all.css');
+            echo $this->Html->css('style');
+            echo $this->Html->script('extjs/adapter/ext/ext-base.js');
+            echo $this->Html->script('extjs/ext-all-debug.js');
+            echo $this->Html->scriptBlock("Ext.BLANK_IMAGE_URL = '".$this->Html->url('/img/extjs/default/s.gif')."';");
+            echo $scripts_for_layout;
         ?>
-        <?php //echo $this->Html->css('cake.generic'); ?>
-        <?php echo $this->Html->css('style'); ?>
-        <?php echo $scripts_for_layout; ?>
+        <title><?php echo __('Enigma: '); ?><?php echo $title_for_layout; ?></title>
     </head>
     <body>
 

@@ -1,0 +1,143 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+.clear {
+    clear: both;
+}
+
+body {
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    background-color: #E0E0E0;
+    color: #444;
+}
+
+p {
+    text-align: justify;
+    margin-top: 0.3em;
+}
+
+/* Paragraphs that follow other paragraphs have a paragraph-indent */
+p + p {
+	text-indent: 1em;
+	margin-top: 0.3em;
+}
+
+a {
+	text-decoration: none;
+    color: darkblue;
+}
+
+a:hover {
+    color: #CC3D05;
+}
+
+h1, h1 > a {
+	font-size: 1.3em;
+	font-weight: bold;
+    color: #CC3D05;
+}
+
+h1 > a:hover {
+    color: darkblue;
+}
+
+h2, h2 > a {
+	font-size: 1.2em;
+	font-weight: bold;
+    color: #CC3D05;
+}
+
+h3 {
+    padding-top: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+div#wrapper {
+    margin: 0 5%;
+    height: 100%;
+}
+
+div#header {
+    height: 2em;
+    position: relative;
+}
+@media print {div#header {display: none;}}
+
+div#header ul {
+    position: absolute;
+    right: 30px;
+    list-style-type: none;
+}
+
+div#header ul li {
+    float: left;
+    margin: 0 1em;
+}
+
+div#header ul li a {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+div#tite {
+    padding: 0 20px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+div#title h1 {
+    padding-left: 10px;
+    background-color: transparent;
+}
+
+div#content {
+    padding: 0px 10px 10px 0px;
+    background-color: #fff;
+    border: 1px solid black;
+}
+
+div#left-navigation {
+    width: 200px;
+    float: left;
+}
+
+div.body-wide {
+    left: 200px;
+}
+
+div#footer {
+    text-align: center;
+    padding-bottom: 8px;
+	font-size: 0.7em;
+    color: #666;
+}
+
+
+/* ****************************************************************************/
+/* Content styles
+/* ****************************************************************************/
+img.thumb {
+    float: left;
+}
+
+/* Debug */
+table.cake-sql-log {
+	background: #f4f4f4;
+    border: 1px solid black;
+}
+.cake-sql-log tr {
+    vertical-align: top;
+}
+.cake-sql-log td {
+	padding: 4px 8px;
+	text-align: left;
+    border-bottom: 1px solid #555;
+    border-right: 1px solid #aaa;
+}
+.cake-sql-log caption {
+	color:#fff;
+}

@@ -10,12 +10,12 @@ class CategoriesController extends AppController {
     var $name = 'Categories';
     var $uses = array('Category', 'Item');
 
-    function beforeFilter() {
+    public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('*');
     }
 
-    function index() {
+    public function index() {
         $parentid = $this->Category->field('id', array('Category.slug'=>'catrootnode'));
         
         $categories = $this->Category->find('all', array(
@@ -27,7 +27,7 @@ class CategoriesController extends AppController {
         $this->set('categories', $categories);
     }
 
-    function view($id = null) {
+    public function view($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Invalid category'));
             $this->redirect(array('action' => 'index'));
@@ -42,11 +42,16 @@ class CategoriesController extends AppController {
         $this->set('relatedItems', $relatedItems);
     }
 
-    function menu() {
+    public function menu() {
         $this->ext = '.js';
     }
     
-    function menu_nodes() {
+    /**
+     * Retrieves a list of Categories suitable for use in the menus.
+     * Note that this always returns it's data using the json encoding of the
+     * js_data element.
+     */
+    public function menu_nodes() {
         $root = 0;
         if (isset($this->request->params['form']['node'])) {
             $root = (int)$this->request->params['form']['node'];
