@@ -389,7 +389,7 @@ class MigrateController extends InstallAppController
             return;
         }
 
-        $imgPath = Configure::Read('Migrate.productImages');
+        $imgPath = Configure::Read('migrate.productImages');
 
         $msg = __('Processing %d %s...', $count, __('Pictures'));
         

@@ -1,3 +1,5 @@
+<div class="body-wide" id="body">
+
 <?php
 $this->Session->flash('auth');
 echo $this->Form->create('User', array('action' => 'login'));
@@ -7,3 +9,6 @@ echo $this->Form->inputs(array(
 	'password'
 ));
 echo $this->Form->end('Login');
+?>
+    
+</div>

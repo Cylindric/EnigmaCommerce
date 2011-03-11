@@ -41,16 +41,7 @@ class CategoriesController extends AppController {
         $this->set('subCategories', $subCategories);
         $this->set('relatedItems', $relatedItems);
     }
-
-    public function menu() {
-        $this->ext = '.js';
-    }
     
-    /**
-     * Retrieves a list of Categories suitable for use in the menus.
-     * Note that this always returns it's data using the json encoding of the
-     * js_data element.
-     */
     public function menu_nodes() {
         $root = 0;
         if (isset($this->request->params['form']['node'])) {
@@ -60,9 +51,7 @@ class CategoriesController extends AppController {
             $root = $this->Category->field('id', array('slug' => 'catrootnode'));
         }
         $data = $this->Category->menuNodes($root);
-        $this->set('data', $data);
-        $this->viewPath = 'elements';
-        $this->render('js_data');
+        return $data;
     }
 
 }

@@ -22,11 +22,12 @@ class TreeHelper extends AppHelper {
             'action' => null,
         ), $settings);
         extract($this->settings);
+        
         if ($showRoot == false) {
             $data = $data[0]['children'];
         }
-        
-        $out = '<div id="'.$div.'">';
+
+        $out = '<div class="'.$div.'">';
         $out .= $this->drawNodes($data);
         $out .= '</div>';
 
@@ -43,7 +44,7 @@ class TreeHelper extends AppHelper {
             $nodeaction = $action;
             $nodeaction[] = $node[$model]['id'];
             if ($link) {
-                $out .= $this->Link->link($model, $node[$model], array(
+                $out .= $this->Link->link($model, $node, array(
                     'action' => $nodeaction,
                     'name' => $title
                 ));

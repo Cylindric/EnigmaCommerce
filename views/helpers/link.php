@@ -8,24 +8,36 @@
 class LinkHelper extends AppHelper {
 
     var $name = 'Link';
-    var $settings = array();
     var $helpers = array ('Html');
+    
+    private $settings = array(
+        'sef' => false,
+    );
 
+	public function __construct(View $View, $settings = array()) {
+		parent::__construct($View, $settings);
+        if (empty($settings['sef'])) {
+            $this->settings['sef'] = Configure::read('sef');
+        } else {
+            $this->settings['sef'] = $settings['sef'];
+		}
+	}
+    
     function view($model, $data, array $settings = array()) {
         $settings = array_merge(array('action' => 'view'), $settings);
         return $this->link($model, $data, $settings);
     }
     
     function link($model, $data, array $settings = array()) {
-        $this->settings = array_merge(array(
-            'sef' => true,
+        $settings = array_merge(array(
+            'sef' => $this->settings['sef'],
             'action' => null,
             'id' => 'id',
             'slug' => 'slug',
             'name' => 'name',
             'content' => null,
         ), $settings);
-        extract($this->settings);
+        extract($settings);
 
         if ($name === false) {
             $linkText = $content;
@@ -41,12 +53,13 @@ class LinkHelper extends AppHelper {
             $linkAction = $action;
         }
 
-        if (($sef) && (array_key_exists($slug, $data))) {
+        if (($sef) && (array_key_exists($slug, $data[$model]))) {
             $Linkid = $data[$model][$slug];        
         } else {
             $Linkid = $data[$model][$id];
         }
         
+        unset($settings['sef']);
         unset($settings['content']);
         unset($settings['link']);
         unset($settings['id']);

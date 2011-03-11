@@ -1,10 +1,14 @@
-<?php
-if ($ajaxFrame == 'body') :
-    echo $this->Html->script('/admin/categories/menu.js', array('inline'=>false));
-?>
-
 <div id="left-navigation">
-    <div id="left-navigation-tree"></div>
-</div>
+<?php
+    $nodes = $this->requestAction('/admin/categories/menu_nodes');
 
-<?php endif; ?>
+    echo $this->Tree->generate(
+        $nodes, array(
+            'model' => 'Category',
+            'showRoot' => false,
+            'element' => 'categorymenu_item',
+            'action' => array('controller'=>'categories', 'action'=>'edit')
+        )
+    );
+?>
+</div>

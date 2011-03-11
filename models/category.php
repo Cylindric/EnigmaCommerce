@@ -35,25 +35,10 @@ class Category extends AppModel {
         $categories = $this->find('threaded', array(
             'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
             'conditions' => array(
-                'Category.parent_id' => $parent_id,
                 'Category.visible_on_web' => true,
             ),
         ));
-        $nodes = array();
-        foreach ($categories as $category) {
-            $count = $this->find('count', array(
-                'conditions' => array('Category.parent_id' => $category['Category']['id']),
-            ));
-            $node = array();
-            $node['id'] = $category['Category']['id'];
-            $node['text'] = $category['Category']['name'];
-            $node['cls'] = 'category';
-            $node['iconCls'] = 'category';
-            $node['leaf'] = ($count == 0);
-            $node['action'] = Router::url('/categories/view/'.$category['Category']['id']);
-            $nodes[] = $node;
-        }
-        return $nodes;    
+        return $categories;
     }
 
     /**

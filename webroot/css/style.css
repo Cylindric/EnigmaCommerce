@@ -159,6 +159,17 @@ div#footer {
     color: #666;
 }
 
+/* ****************************************************************************/
+/* Menu Styles
+/* ****************************************************************************/
+div.tree ul {
+    padding-left: 0.5em;
+    font-size: 0.9em;
+}
+
+div.tree li {
+    list-style-type: none;
+}
 
 /* ****************************************************************************/
 /* Content styles
@@ -166,6 +177,73 @@ div#footer {
 img.thumb {
     float: left;
 }
+
+
+/* ****************************************************************************/
+/* Forms
+/* ****************************************************************************/
+form {
+	clear: both;
+	margin: 0 20px;
+	padding: 0;
+}
+
+fieldset {
+	border: 1px solid #ccc;
+	margin-bottom: 1em;
+	padding: 16px 20px;
+}
+
+fieldset legend {
+	color: darkblue;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+form div {
+	clear: both;
+	vertical-align: text-top;
+}
+
+form .required {
+	font-weight: bold;
+}
+
+form .required label:after {
+	color: red;
+	content: '*';
+	display: inline;
+}
+
+form div.submit {
+	border: 0;
+	clear: both;
+	margin-top: 10px;
+}
+
+input[type=submit] {
+	display: inline;
+	font-size: 110%;
+	width: auto;
+    padding: 0 1em;
+}
+
+label {
+	display: block;
+	margin-bottom: 3px;
+}
+
+
+div.message {
+	clear: both;
+	color: #fff;
+	font-size: 110%;
+	font-weight: bold;
+	margin: 0 0 1em 0;
+	background: #c73e14;
+	padding: 5px;
+}
+
 /*
 th.actions { text-align: center;}
 
@@ -232,17 +310,20 @@ span.progress_bar span.progress_b {
 table.cake-sql-log {
 	background: #f4f4f4;
     border: 1px solid black;
-	xfont-family: Monaco, Consolas, "Courier New", monospaced;
+	font-family: Monaco, Consolas, "Courier New", monospaced;
 }
+
 .cake-sql-log tr {
     vertical-align: top;
 }
+
 .cake-sql-log td {
 	padding: 4px 8px;
 	text-align: left;
     border-bottom: 1px solid #555;
     border-right: 1px solid #aaa;
 }
+
 .cake-sql-log caption {
 	color:#fff;
 }

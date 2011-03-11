@@ -1,4 +1,5 @@
 <?php echo $this->element('categories/menu'); ?>
+
 <div class="body-wide" id="body">
 
     <h2>Sub-Categories</h3>
