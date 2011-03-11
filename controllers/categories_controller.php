@@ -16,6 +16,7 @@ class CategoriesController extends AppController {
     }
 
     public function index() {
+        
         $parentid = $this->Category->field('id', array('Category.slug'=>'catrootnode'));
         
         $categories = $this->Category->find('all', array(

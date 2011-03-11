@@ -30,7 +30,7 @@ class Category extends AppModel {
             )
         )
     );
-    
+
     public function menuNodes($parent_id) {
         $categories = $this->find('threaded', array(
             'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
@@ -43,11 +43,11 @@ class Category extends AppModel {
 
     /**
      * Returns all categories that are children of the specified category.
-     * 
-     * The sort order can be specified by passing in a settings array with the 
+     *
+     * The sort order can be specified by passing in a settings array with the
      * field to sort by:
      * array('order' => 'Category.name')
-     * 
+     *
      * @param int $parent_id
      * @param array $settings
      * @return array
@@ -57,7 +57,7 @@ class Category extends AppModel {
             'order' => array('Category.name'),
             'find' => 'all',
         ), $settings);
-        
+
         $categories = $this->find($settings['find'], array(
             'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.id AS innerid'),
             'conditions' => array(
@@ -71,11 +71,11 @@ class Category extends AppModel {
     /**
      * Returns all items that are children of the specified category and all it's
      * subcategories.
-     * 
-     * The sort order can be specified by passing in a settings array with the 
+     *
+     * The sort order can be specified by passing in a settings array with the
      * field to sort by:
      * array('order' => 'Item.name')
-     * 
+     *
      * @param int $category_id
      * @param array $settings
      * @return array
@@ -84,7 +84,7 @@ class Category extends AppModel {
         $settings = array_merge(array(
             'order' => array('Item.name')
         ), $settings);
-        
+
         $subCategories = $this->subCategories($category_id, array('find'=>'list'));
         $subCategories = array_keys($subCategories);
         $subCategories[] = (int)$category_id;
