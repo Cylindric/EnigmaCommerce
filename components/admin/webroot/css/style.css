@@ -1,140 +1,127 @@
-* {
-    margin:0;
-    padding:0;
+<?php
+    $rightColWidth = 25;
+    $rightPaddingRight = 2;
+    $rightPaddingLeft = 2;
+
+    $middleColWidth = 50;
+    $middlePaddingRight = 2;
+    $middlePaddingLeft = 2;
+
+    $leftColWidth = (100 - $rightColWidth - $middleColWidth);
+    $leftPaddingRight = 2;
+    $leftPaddingLeft = 1;
+
+?>
+/* http: //matthewjamestaylor.com/blog/perfect-stacked-columns.htm */
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    background: #fff;
+    min-width: 600px;
+    font-family: sans-serif;
 }
 
-.clear {
-    clear: both;
-}
-
-body {
-    font-family: Arial, Arial, Helvetica, sans-serif;
-    font-size: 0.9em;
-    background-color: #E0E0E0;
-    color: #444;
-}
-
-p {
-    text-align: justify;
-    margin-top: 0.3em;
-}
-
-/* Paragraphs that follow other paragraphs have a paragraph-indent */
-p + p {
-	text-indent: 1em;
-	margin-top: 0.3em;
-}
-
-a {
-	text-decoration: none;
+a, a:visited {
+    text-decoration: none;
     color: darkblue;
 }
 
 a:hover {
-    color: #CC3D05;
+    color: red;
 }
 
-h1, h1 > a {
-	font-size: 1.3em;
-	font-weight: bold;
-    color: #CC3D05;
+#header {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+#header {
+    border-bottom: 1px solid #000;
 }
 
-h1 > a:hover {
-    color: darkblue;
+.col-mask {
+    position: relative;	/* This fixes the IE7 overflow hidden bug */
+    clear: both;
+    float: left;
+    width: 100%;			/* width of whole page */
+    overflow: hidden;		/* This chops off any overhanging divs */
 }
 
-h2, h2 > a {
-	font-size: 1.2em;
-	font-weight: bold;
-    color: #CC3D05;
-}
-
-h3 {
-    padding-top: 0.5em;
-    font-size: 1em;
-    font-weight: bold;
-}
-
-div#wrapper {
-    margin: 0 5%;
-    height: 100%;
-}
-
-div#header {
-    height: 2em;
+.col-mid,
+.col-left {
+    float: left;
+    width: 100%;
     position: relative;
 }
-@media print {div#header {display: none;}}
+.content-1,
+.content-2,
+.content-3 {
+    float: left;
+    position: relative;
+    padding: 0 0 1em 0;
+    overflow: hidden;
+}
 
-div#header ul {
-    position: absolute;
-    right: 30px;
+/* Two Column Specifics */
+.two-col .col-left {
+    right: 75%;			/* right column width */
+}
+
+.two-col .content-1 {
+    width: 71%;			/* right column content width */
+    left: 102%;			/* 100% plus left column left padding */
+}
+
+.two-col .content-2 {
+    width: 21%;			/* left column content width (column width minus left and right padding) */
+    left: 6%;			/* (right column left and right padding) plus (left column left padding) */
+}
+
+/* Three Column Specifics */
+.three-col .col-mid {
+    right: <?php echo $rightColWidth;?>%; /* width of the right column */
+}
+
+.three-col .col-left {
+    right: <?php echo $middleColWidth;?>%; /* width of the middle column */
+}
+
+.three-col .content-1 {
+    width: 46%; /* width of center column content (column width minus padding on either side) */
+    left: <?php echo (100+$middlePaddingLeft);?>%; /* 100% plus left padding of center column */
+}
+
+.three-col .content-2 {
+    width: <?php echo ($leftColWidth - $leftPaddingLeft - $leftPaddingRight);?>%;  /* Width of left column content (column width minus padding on either side) */
+    left: <?php echo ($rightColWidth + ($middlePaddingLeft + $middlePaddingRight) + ($leftPaddingLeft));?>%;
+}
+
+.three-col .content-3 {
+    width: <?php echo ($rightColWidth - $rightPaddingLeft - $rightPaddingRight);?>%; /* Width of right column content (column width minus padding on either side) */
+    left: <?php echo ((100- $leftColWidth) + ($middlePaddingLeft + $middlePaddingRight) + ($leftPaddingLeft + $leftPaddingRight));?>%;
+}
+
+/* Footer styles */
+#footer {
+    clear: both;
+    float: left;
+    width: 100%;
+    border-top: 1px solid #000;
+}
+
+
+/* Menus */
+.menutree ul {
+    padding: 0;
+    margin: 0;
     list-style-type: none;
+    font-size: 90%;
 }
 
-div#header ul li {
-    float: left;
-    margin: 0 1em;
-}
-
-div#header ul li a {
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-div#tite {
-    padding: 0 20px;
-    display: table-cell;
-    vertical-align: middle;
-}
-
-div#title h1 {
-    padding-left: 10px;
-    background-color: transparent;
-}
-
-div#content {
-    padding: 0px 10px 10px 0px;
-    background-color: #fff;
-    border: 1px solid black;
-}
-
-div#left-navigation {
-    width: 200px;
-    float: left;
-}
-
-div.body-wide {
-    left: 200px;
-}
-
-div#footer {
-    text-align: center;
-    padding-bottom: 8px;
-	font-size: 0.7em;
-    color: #666;
-}
-
-
-
-/* ****************************************************************************/
-/* Menu Styles
-/* ****************************************************************************/
-div.tree ul {
+.menutree ul ul {
     padding-left: 0.5em;
-    font-size: 0.9em;
-}
-
-div.tree li {
-    list-style-type: none;
-}
-
-/* ****************************************************************************/
-/* Content styles
-/* ****************************************************************************/
-img.thumb {
-    float: left;
 }
 
 /* Debug */
@@ -152,5 +139,10 @@ table.cake-sql-log {
     border-right: 1px solid #aaa;
 }
 .cake-sql-log caption {
-	color:#fff;
+	color: #fff;
+}
+
+p.error {
+    xposition: fixed;
+    xleft: 1em;
 }

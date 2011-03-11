@@ -1,4 +1,3 @@
-<div id="left-navigation">
 <?php
     $nodes = $this->requestAction('/admin/categories/menu_nodes');
 
@@ -7,8 +6,7 @@
             'model' => 'Category',
             'showRoot' => false,
             'element' => 'categorymenu_item',
+            'div' => 'menutree',
             'action' => array('controller'=>'categories', 'action'=>'edit')
         )
     );
-?>
-</div>

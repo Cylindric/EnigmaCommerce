@@ -28,26 +28,24 @@ class CategoriesController extends AppController {
     }
 
     public function edit($id = null) {
-        $this->Category->id = $id;
-        if (!$this->Category->exists()) {
-            throw new NotFoundException(__('Invalid %s', 'Category'));
+        if (!$id) {
+            $this->Session->setFlash(__('Invalid category'));
+            $this->redirect(array('action' => 'index'));
         }
+
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
                 $this->Session->setFlash(__('The %s has been saved', 'Category'));
-//                    $this->redirect(array('action' => 'index'));
                 $this->redirect(array('action' => 'edit', $id));
             } else {
                 $this->Session->setFlash(__('The %s could not be saved. Please, try again.', 'Category'));
             }
         } else {
-            $this->request->data = $this->Category->read(null, $id);
+            $this->request->data = $this->Category->findById($id);
         }
 
         $this->set('parents', $this->Category->find('list'));
-//        $this->set('items', $this->Category->Item->find('list'));
         $this->set('data', $this->request->data);
-        $this->ext = '.js';
     }
 
     public function delete($id = null) {
