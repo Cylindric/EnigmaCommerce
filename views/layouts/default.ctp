@@ -61,7 +61,10 @@
                 </div>
             </div>
 
-            <div id="footer">Copyright © 2011 Mark Hanford</div>
+            <div id="footer">
+                <div id="moduleB"><?php echo $this->element('footer_menu'); ?></div>
+                <div id="footer">Copyright © 2011 Mark Hanford</div>
+            </div>
 
             <?php echo $this->Js->writeBuffer(); ?>
             <?php echo $this->element('sql_dump'); ?>

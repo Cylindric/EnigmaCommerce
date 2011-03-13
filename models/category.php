@@ -23,12 +23,12 @@ class Category extends AppModel {
     var $hasMany = array('CategoryItem');
 
     var $validate = array(
+        'name' => array(
+            'notEmpty' => array('rule' => 'notEmpty'),
+        ),
         'slug' => array(
-            'uniqueSlug' => array(
-                'rule' => 'isUnique',
-                'message' => 'The slug must be unique'
-            )
-        )
+            'unique' => array('rule' => 'isUnique'),
+        ),
     );
 
     public function menuNodes($parent_id) {

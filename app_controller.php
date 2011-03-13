@@ -7,7 +7,8 @@
 
 class AppController extends Controller {
     var $components = array(
-        'Auth', 
+        'Auth',
+        'Layout',
         'RequestHandler',
         'Session',
     );
@@ -17,21 +18,28 @@ class AppController extends Controller {
     var $paginate = array(
         'limit' => 10
     );
-    
+
     function beforeFilter() {
         $this->Auth->authenticate = array('Form');
         $this->Auth->autoRedirect = false;
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->loginRedirect = array('controller' => 'categories', 'action' => 'index');
 
+        $user = $this->Auth->user();
+        if ($user) {
+            if ($user['group_id'] == 1) {
+                $this->Layout->addFooterMenuItem('admin');
+            }
+        }
+        
         $this->set('webRoot', $this->params->webroot);
         $this->set('user', $this->Auth->user());
-        
+
         // Determine if the page is being loaded via an Ajax request
         // Many views render differently if it is.
         $isAjax = $this->RequestHandler->isAjax();
         $this->set('isAjax', $isAjax);
-        
+
         // Ajax requests come in different flavours.  Some update the entire
         // controller frame, some only the detail frame.
         // If this isn't an Ajax request, update everything.
@@ -44,7 +52,7 @@ class AppController extends Controller {
                 $this->set('ajaxFrame', $this->request->query['resetFrame']);
             }
         }
-        
+
     }
 
 }

@@ -35,10 +35,10 @@ class CategoriesController extends AppController {
 
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
-                $this->Session->setFlash(__('The %s has been saved', 'Category'));
-                $this->redirect(array('action' => 'edit', $id));
+                $this->Session->setFlash(__('The %s has been saved', 'Category'), 'flash_success');
+                $this->redirect(array('action' => 'edit', $this->Category->id));
             } else {
-                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', 'Category'));
+                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', 'Category'), 'flash_failure');
             }
         } else {
             $this->request->data = $this->Category->findById($id);

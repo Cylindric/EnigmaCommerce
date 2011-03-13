@@ -5,15 +5,11 @@
  * Redistributions of files must retain the above copyright notice.
  **/
 
-class AdminController extends AdminAppController {
-
-    var $name = 'Admin';
+class AdminAppController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-    }
- 
-    function index() {
+        var_dump("test");
     }
     
 }

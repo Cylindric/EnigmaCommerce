@@ -27,13 +27,14 @@
         </div> 
 
         <div id="footer">
+            <div id="menu">
+                <?php echo $this->element('footer_menu'); ?>
+            </div>
             Copyright © 2011 Mark Hanford
         </div>
-        
-        
-<?php //echo $this->Session->flash(); ?>                    
+                
 <?php //echo $this->Js->writeBuffer(); ?>
-<?php //echo $this->element('sql_dump'); ?>
+<?php echo $this->element('sql_dump'); ?>
 
     </body>
 </html>

@@ -111,6 +111,23 @@ a:hover {
     border-top: 1px solid #000;
 }
 
+/* Flash Messages */
+.flash {
+    margin: 1em 0;
+    padding: 0.3em;    
+}
+
+.flash_failure {
+    color: #a00;
+    border: 1px solid #a00;
+    background-color: #fdd;
+}
+
+.flash_success {
+    color: #0a0;
+    border: 1px solid #0a0;
+    background-color: #dfd;
+}
 
 /* Menus */
 .menutree ul {
@@ -124,10 +141,36 @@ a:hover {
     padding-left: 0.5em;
 }
 
+/* Forms */
+label {
+    font-size: 90%;
+    color: #0a0;
+    font-weight: bold;
+}
+
+.text label,
+.textarea label {
+    display: block;
+}
+
+.text label:after,
+.textarea label:after {
+    content: ":";
+}
+
+div.error {
+    color: #a00;    
+}
+
+div.error input {
+    border: 2px solid #a00;
+}
+
 /* Debug */
 table.cake-sql-log {
 	background: #f4f4f4;
     border: 1px solid black;
+    font-size: 80%;
 }
 .cake-sql-log tr {
     vertical-align: top;
