@@ -8,7 +8,8 @@
 class AppController extends Controller {
     var $components = array(
         'Auth',
-        'Layout',
+        'PluginHandler',
+        'Renderer',
         'RequestHandler',
         'Session',
     );
@@ -24,13 +25,6 @@ class AppController extends Controller {
         $this->Auth->autoRedirect = false;
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->loginRedirect = array('controller' => 'categories', 'action' => 'index');
-
-        $user = $this->Auth->user();
-        if ($user) {
-            if ($user['group_id'] == 1) {
-                $this->Layout->addFooterMenuItem('admin');
-            }
-        }
         
         $this->set('webRoot', $this->params->webroot);
         $this->set('user', $this->Auth->user());
@@ -51,8 +45,7 @@ class AppController extends Controller {
             if(isset($this->request->query['resetFrame'])) {
                 $this->set('ajaxFrame', $this->request->query['resetFrame']);
             }
-        }
-
+        }        
     }
 
 }

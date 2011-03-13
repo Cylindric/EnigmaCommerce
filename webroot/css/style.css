@@ -171,6 +171,19 @@ div.tree li {
     list-style-type: none;
 }
 
+ul.footer_menu li {
+    display: inline;
+    list-style-type: none;
+}
+
+ul.footer_menu li:before {
+    content: ' | ';
+}
+
+ul.footer_menu li:first-child:before {
+    content: '';
+}
+
 /* ****************************************************************************/
 /* Content styles
 /* ****************************************************************************/

@@ -62,7 +62,7 @@
             </div>
 
             <div id="footer">
-                <div id="moduleB"><?php echo $this->element('footer_menu'); ?></div>
+                <div id="footer_menu"><?php echo $this->element('footer_menu'); ?></div>
                 <div id="footer">Copyright © 2011 Mark Hanford</div>
             </div>
 

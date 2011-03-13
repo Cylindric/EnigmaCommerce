@@ -5,17 +5,17 @@
  * Redistributions of files must retain the above copyright notice.
  **/
 
-class LayoutComponent extends Object {
+class RendererComponent extends Component {
 
     private $controller;
     
     private $footerMenu = array();
 
-    public function startup($controller) {
-        $this->controller = $controller;
+    public function initialize($controller) {
     }
     
-    public function initialize() {
+    public function startup($controller) {
+        $this->controller = $controller;
     }
     
     public function shutdown() {

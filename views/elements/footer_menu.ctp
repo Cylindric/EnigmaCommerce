@@ -1,11 +1,11 @@
 <?php
 if (count($footerMenuItems) > 0):
 ?>
-<ul>
+<ul class="footer_menu">
 
 <?php foreach ($footerMenuItems as $footerItem): ?>
     <li>
-        <?php echo $footerItem; ?>
+        <?php echo $this->Html->link($footerItem['title'], $footerItem['url'], $footerItem['options']); ?>
     </li>    
 <?php endforeach; ?>
 

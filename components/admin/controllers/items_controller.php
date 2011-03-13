@@ -5,7 +5,7 @@
  * Redistributions of files must retain the above copyright notice.
  **/
 
-class ItemsController extends AppController {
+class ItemsController extends AdminAppController {
 
     var $name = 'Items';
     

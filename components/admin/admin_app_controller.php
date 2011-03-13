@@ -5,11 +5,12 @@
  * Redistributions of files must retain the above copyright notice.
  **/
 
-class AdminController extends AdminAppController {
+class AdminAppController extends AppController {
 
-    var $name = 'Admin';
-
-    function index() {
+    var $components = array('Layout');
+    
+    function beforeFilter() {
+        parent::beforeFilter();
     }
     
 }

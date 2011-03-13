@@ -5,11 +5,12 @@
  * Redistributions of files must retain the above copyright notice.
  **/
 
-class AdminAppController extends AppController {
+class AdminComponent extends Object {
 
-    function beforeFilter() {
-        parent::beforeFilter();
-        var_dump("test");
+    var $components = array('Layout');
+    
+    public function register() {
+        $this->Layout->addFooterMenuItem('admin');
     }
     
 }

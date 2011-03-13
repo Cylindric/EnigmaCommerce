@@ -5,7 +5,7 @@
  * Redistributions of files must retain the above copyright notice.
  **/
 
-class UsersController extends AppController {
+class UsersController extends AdminAppController {
 
     var $name = 'Users';
 

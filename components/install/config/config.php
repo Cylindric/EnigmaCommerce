@@ -5,11 +5,4 @@
  * Redistributions of files must retain the above copyright notice.
  **/
 
-class AdminController extends AdminAppController {
-
-    var $name = 'Admin';
-
-    function index() {
-    }
-    
-}
+Configure::write('install.productImages', ROOT.DS.'products'.DS);

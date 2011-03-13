@@ -5,7 +5,7 @@
  * Redistributions of files must retain the above copyright notice.
  **/
 
-class CategoriesController extends AppController {
+class CategoriesController extends AdminAppController {
 
     var $name = 'Categories';
     var $uses = array('Category', 'Item');
