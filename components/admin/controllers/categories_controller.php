@@ -14,17 +14,19 @@ class CategoriesController extends AdminAppController {
     }
 
     public function add() {
-        if (!empty($this->data)) {
-            $this->Category->create();
-            if ($this->Category->save($this->data)) {
-                $this->Session->setFlash(__('The category has been saved', true));
-                $this->redirect(array('action' => 'view', $this->Category->id));
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->Category->save($this->request->data)) {
+                $this->Session->setFlash(__('The %s has been saved', __('category')));
+                $this->redirect(array('action' => 'edit', $this->Category->id));
             } else {
-                $this->Session->setFlash(__('The category could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('category')));
             }
+        } else {
+            $this->request->data = $this->Category->create();
         }
+        
         $this->set('parents', $this->Category->find('list'));
-        $this->set('items', $this->Category->Item->find('list'));
+        $this->set('data', $this->request->data);
     }
 
     public function edit($id = null) {
@@ -35,7 +37,7 @@ class CategoriesController extends AdminAppController {
 
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
-                $this->Session->setFlash(__('The %s has been saved', 'Category'), 'flash_success');
+                $this->Session->setFlash(__('The %s has been saved', 'category'), 'flash_success');
                 $this->redirect(array('action' => 'edit', $this->Category->id));
             } else {
                 $this->Session->setFlash(__('The %s could not be saved. Please, try again.', 'Category'), 'flash_failure');

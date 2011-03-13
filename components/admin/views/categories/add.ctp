@@ -24,8 +24,8 @@
             'legend' => __('Visbility'),
             'visible_on_web', 
             'visible_on_catalogue'));
-        
-        echo $this->Form->submit(__('Save'));
+
+        echo $this->Form->submit(__('Create'));
         echo $this->Form->end();
     ?>
 </div>

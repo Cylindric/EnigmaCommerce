@@ -27,7 +27,9 @@ class Category extends AppModel {
             'notEmpty' => array('rule' => 'notEmpty'),
         ),
         'slug' => array(
-            'unique' => array('rule' => 'isUnique'),
+            'unique' => array(
+                'rule' => 'isUnique',
+                'allowEmpty' => true),
         ),
     );
 

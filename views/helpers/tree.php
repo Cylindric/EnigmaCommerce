@@ -11,7 +11,7 @@ class TreeHelper extends AppHelper {
     var $settings = array();
     var $helpers = array ('Html', 'Link');
 
-    function generate ($data, array $settings = array()) {
+    function generate($data, array $settings = array()) {
 
         $this->settings = array_merge(array(
             'model' => null,
@@ -20,6 +20,7 @@ class TreeHelper extends AppHelper {
             'div' => 'tree',
             'showRoot' => true,
             'action' => null,
+            'extraNodes' => array(),
         ), $settings);
         extract($this->settings);
         
@@ -38,6 +39,13 @@ class TreeHelper extends AppHelper {
         extract($this->settings);
         
         $out = '<ul>';
+        foreach($this->settings['extraNodes'] as $extraNode) {
+            $out .= '<li>';
+            $out .= $this->Html->link($extraNode['title'], $extraNode['url']);
+            $out .= '</li>';
+        }
+        $this->settings['extraNodes'] = array();
+
         foreach($data as $node) {
             $out .= '<li>';
             
