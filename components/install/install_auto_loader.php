@@ -9,7 +9,7 @@ class InstallAutoLoader extends object {
     
     private $Renderer = null;
     
-    function startup(&$controller) {
+    function startup($controller) {
     }
     
     function beforeRender($controller) {

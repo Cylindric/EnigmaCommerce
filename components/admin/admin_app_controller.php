@@ -7,8 +7,6 @@
 
 class AdminAppController extends AppController {
 
-    var $components = array('Layout');
-    
     function beforeFilter() {
         parent::beforeFilter();
     }

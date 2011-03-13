@@ -109,6 +109,7 @@ a:hover {
     float: left;
     width: 100%;
     border-top: 1px solid #000;
+    text-align: center;
 }
 
 /* Flash Messages */
@@ -139,6 +140,24 @@ a:hover {
 
 .menutree ul ul {
     padding-left: 0.5em;
+}
+
+ul.footer {
+    padding: 0;
+    margin: 0;
+}
+
+ul.footer_menu li {
+    display: inline;
+    list-style-type: none;
+}
+
+ul.footer_menu li:before {
+    content: ' | ';
+}
+
+ul.footer_menu li:first-child:before {
+    content: '';
 }
 
 /* Forms */

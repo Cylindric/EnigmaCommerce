@@ -9,19 +9,20 @@
             echo $scripts_for_layout; 
         ?>
         <title><?php echo __('Enigma: '); ?><?php echo $title_for_layout; ?></title>
-
     </head>
     <body>
 
         <div id="header">
             <?php echo $title_for_layout; ?> :
-            <?php echo $this->Html->link(__('Categories'), '/admin/categories'); ?> |
+            <?php echo $this->Html->link(__('Categories'), '/admin/categories'); ?>
         </div>
 
         <div class="col-mask three-col"> 
             <div class="col-mid"> 
-                <div class="col-left"> 
+                <div class="col-left">
+                    <?php echo ($title_for_layout=='Errors') ? '<div class="content-1">' : '';?>
                     <?php echo $content_for_layout; ?>
+                    <?php echo ($title_for_layout=='Errors') ? '</div>' : '';?>
                 </div> 
             </div> 
         </div> 
@@ -34,7 +35,7 @@
         </div>
                 
 <?php //echo $this->Js->writeBuffer(); ?>
-<?php echo $this->element('sql_dump'); ?>
+<?php //echo $this->element('sql_dump'); ?>
 
     </body>
 </html>
