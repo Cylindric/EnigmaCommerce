@@ -118,7 +118,7 @@ class MigrateController extends InstallAppController
             return;
         }
 
-        $msg = __('Processing %d %s...', $count, __(Inflector::pluralize($name)));
+        $msg = __('Processing %d %s...', $count, $name);
 
         // Prevent the MPTT behavior from making the import take a long time
         // Tree will need rebuilding afterwards

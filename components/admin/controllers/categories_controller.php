@@ -31,7 +31,7 @@ class CategoriesController extends AdminAppController {
 
     public function edit($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid category'));
+            $this->Session->setFlash(__('Invalid %s', __('category')));
             $this->redirect(array('action' => 'index'));
         }
 
@@ -52,14 +52,14 @@ class CategoriesController extends AdminAppController {
 
     public function delete($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid id for category'));
+            $this->Session->setFlash(__('Invalid id for %s', __('category')));
             $this->redirect(array('action'=>'index'));
         }
         if ($this->Category->delete($id)) {
-            $this->Session->setFlash(__('Category deleted', true));
+            $this->Session->setFlash(__('%s deleted', __('Category')));
             $this->redirect(array('action'=>'index'));
         }
-        $this->Session->setFlash(__('Category was not deleted', true));
+        $this->Session->setFlash(__('%s was not deleted', __('Category')));
         $this->redirect(array('action' => 'index'));
     }
 

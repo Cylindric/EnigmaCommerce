@@ -167,16 +167,20 @@ label {
     font-weight: bold;
 }
 
-.select label,
-.text label,
-.textarea label {
+label {
     display: block;
 }
 
-.select label:after,
-.text label:after,
-.textarea label:after {
+label:after {
     content: ":";
+}
+
+.checkbox label {
+    display: inline;
+}
+
+.checkbox label:after {
+    content: "";
 }
 
 div.error {

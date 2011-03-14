@@ -258,51 +258,6 @@ div.message {
 }
 
 /*
-th.actions { text-align: center;}
-
-div.x-list div.category {
-    border: 2px solid darkBlue;
-    background-color: #ccccff;
-}
-
-div.x-list div.item {
-    border: 2px solid darkRed;
-    background-color: #ffcccc;
-}
-
-div.x-list div.variation {
-    border: 2px solid darkGreen;
-    background-color: #ccffcc;
-}
-
-div#left_menu {
-	float: left;
-}
-
-div#left_menu ul {
-	font-size: 0.9em;
-    margin: 0em;
-}
-div#left_menu li {
-    margin-left: 1em;
-}
-
-div.view {
-	float:right;
-	width:76%;
-}
-
-img.thumb {
-    width: 150px;
-    float: left;
-}
-
-form div {
-    margin-bottom: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-
 span.progress_bar {
     font-family: monospace;
     background-color: lightgrey;
