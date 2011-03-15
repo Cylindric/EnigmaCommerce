@@ -1,5 +1,6 @@
 <div class="content-1">
     <?php echo $this->Session->flash(); ?>                    
+    <h1><?php echo __('Category'); ?></h1>
     <?php 
         echo $this->Form->create('Category', array('inputDefaults' => array('label' => false)));
         
@@ -15,7 +16,7 @@
         echo $this->Form->input(
             'slug', array(
             'error' => array('unique'=>__('%s must be unique', __('Slug')))));
-        
+
         echo $this->Html->tag('label', __('Parent'));
         echo $this->Form->input(
             'parent_id');
@@ -32,6 +33,9 @@
         echo $this->Form->submit(__('Save'));
         echo $this->Form->end();
     ?>
+
+    <h1><?php echo __('Items'); ?></h1>
+    <?php var_dump($items);?>
 </div>
 
 <div class="content-2"> 
