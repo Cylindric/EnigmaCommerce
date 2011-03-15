@@ -19,7 +19,7 @@ class CategoriesController extends AdminAppController {
                 $this->Session->setFlash(__('The %s has been saved', __('category')));
                 $this->redirect(array('action' => 'edit', $this->Category->id));
             } else {
-                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('category')));
+                $this->Session->setFlash(__('The %s could not be created. Please, try again.', __('category')));
             }
         } else {
             $this->request->data = $this->Category->create();
@@ -37,10 +37,10 @@ class CategoriesController extends AdminAppController {
 
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
-                $this->Session->setFlash(__('The %s has been saved', 'category'), 'flash_success');
+                $this->Session->setFlash(__('The %s has been saved', __('category')), 'flash_success');
                 $this->redirect(array('action' => 'edit', $this->Category->id));
             } else {
-                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', 'Category'), 'flash_failure');
+                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('Category')), 'flash_failure');
             }
         } else {
             $this->request->data = $this->Category->findById($id);

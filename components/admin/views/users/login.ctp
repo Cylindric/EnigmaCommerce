@@ -3,7 +3,7 @@
 $this->Session->flash('auth');
 echo $this->Form->create('User', array('action' => 'login', 'inputDefaults' => array('label' => false)));
 echo $this->Form->inputs(array(
-	'legend' => __('Login', true),
+	'legend' => __('Login'),
 	'username' => array('label' => __('Username')),
 	'password' => array('label' => __('Password'))
 ));

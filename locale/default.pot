@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-03-15 08:38+0000\n"
+"POT-Creation-Date: 2011-03-15 08:46+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -23,21 +23,30 @@ msgstr ""
 msgid "The %s has been saved"
 msgstr ""
 
-#: /components/admin/controllers/categories_controller.php:19;22;34;55
+#: /components/admin/controllers/categories_controller.php:19;22;34;40;55
 #: /components/admin/views/elements/categories/menu.ctp:5
 #: /controllers/categories_controller.php:33
 msgid "category"
 msgstr ""
 
-#: /components/admin/controllers/categories_controller.php:22;43
-#: /components/admin/controllers/items_controller.php:27
-msgid "The %s could not be saved. Please, try again."
+#: /components/admin/controllers/categories_controller.php:22
+msgid "The %s could not be created. Please, try again."
 msgstr ""
 
 #: /components/admin/controllers/categories_controller.php:34
 #: /controllers/categories_controller.php:33
 #: /controllers/items_controller.php:24
 msgid "Invalid %s"
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:43
+#: /components/admin/controllers/items_controller.php:27
+msgid "The %s could not be saved. Please, try again."
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:43;59;62
+#: /components/install/controllers/migrate_controller.php:178;225
+msgid "Category"
 msgstr ""
 
 #: /components/admin/controllers/categories_controller.php:55
@@ -48,11 +57,6 @@ msgstr ""
 #: /components/admin/controllers/categories_controller.php:59
 #: /components/admin/controllers/items_controller.php:51
 msgid "%s deleted"
-msgstr ""
-
-#: /components/admin/controllers/categories_controller.php:59;62
-#: /components/install/controllers/migrate_controller.php:178;225
-msgid "Category"
 msgstr ""
 
 #: /components/admin/controllers/categories_controller.php:62
@@ -98,12 +102,12 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: /components/admin/views/categories/edit.ctp:9
+#: /components/admin/views/categories/edit.ctp:9;12
 #: /views/items/index.ctp:24
 msgid "Name"
 msgstr ""
 
-#: /components/admin/views/categories/edit.ctp:14
+#: /components/admin/views/categories/edit.ctp:14;17
 msgid "Slug"
 msgstr ""
 

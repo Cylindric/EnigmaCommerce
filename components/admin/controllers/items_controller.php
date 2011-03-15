@@ -24,7 +24,7 @@ class ItemsController extends AdminAppController {
                 $this->Session->setFlash(__('The %s has been saved', __('item')));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('item')));
+                $this->Session->setFlash(__('The %s could not be created. Please, try again.', __('item')));
             }
         }
         $categories = $this->Item->Category->find('list');

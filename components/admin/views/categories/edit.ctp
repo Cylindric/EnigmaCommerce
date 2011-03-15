@@ -9,12 +9,12 @@
         echo $this->Html->tag('label', __('Name'));
         echo $this->Form->input(
             'name', array(
-            'error' => array('notEmpty'=>__('%s cannot be blank', 'Name'))));
+            'error' => array('notEmpty'=>__('%s cannot be blank', __('Name')))));
         
         echo $this->Html->tag('label', __('Slug'));
         echo $this->Form->input(
             'slug', array(
-            'error' => array('unique'=>__('%s must be unique', 'Slug'))));
+            'error' => array('unique'=>__('%s must be unique', __('Slug')))));
         
         echo $this->Html->tag('label', __('Parent'));
         echo $this->Form->input(
