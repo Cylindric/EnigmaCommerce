@@ -51,7 +51,7 @@ class ItemsController extends AdminAppController {
             $this->Session->setFlash(__('%s deleted', __('Item')));
             $this->redirect(array('action'=>'index'));
         }
-        $this->Session->setFlash(__('%w was not deleted', __('Item')));
+        $this->Session->setFlash(__('%s was not deleted', __('Item')));
         $this->redirect(array('action' => 'index'));
     }
 

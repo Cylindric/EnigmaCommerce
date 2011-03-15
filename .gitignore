@@ -1,5 +1,6 @@
 !.gitignore
 /config/database.php
+/locale/xxx
 /tmp/cache/models/*
 /tmp/cache/persistent/*
 /tmp/logs/*
