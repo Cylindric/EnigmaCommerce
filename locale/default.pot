@@ -1,0 +1,399 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2011-03-14 22:52+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /components/admin/admin_auto_loader.php:25
+msgid "Administrator"
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:19;40
+#: /components/admin/controllers/items_controller.php:24
+msgid "The %s has been saved"
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:19;22;34;55
+#: /components/admin/views/elements/categories/menu.ctp:5
+#: /controllers/categories_controller.php:33
+msgid "category"
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:22;43
+#: /components/admin/controllers/items_controller.php:27
+msgid "The %s could not be saved. Please, try again."
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:34
+#: /controllers/categories_controller.php:33
+#: /controllers/items_controller.php:24
+msgid "Invalid %s"
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:55
+#: /components/admin/controllers/items_controller.php:47
+msgid "Invalid id for %s"
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:59
+#: /components/admin/controllers/items_controller.php:51
+msgid "%s deleted"
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:59;62
+#: /components/install/controllers/migrate_controller.php:178;225
+msgid "Category"
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:62
+#: /components/admin/controllers/items_controller.php:54
+msgid "%s was not deleted"
+msgstr ""
+
+#: /components/admin/controllers/items_controller.php:24;27;47
+#: /controllers/items_controller.php:24
+msgid "item"
+msgstr ""
+
+#: /components/admin/controllers/items_controller.php:51;54
+msgid "Item"
+msgstr ""
+
+#: /components/admin/controllers/users_controller.php:22
+#: /controllers/users_controller.php:22
+msgid "Username or password is incorrect"
+msgstr ""
+
+#: /components/admin/controllers/users_controller.php:28
+#: /controllers/users_controller.php:28
+msgid "Good-Bye"
+msgstr ""
+
+#: /components/admin/views/categories/add.ctp:11
+#: /components/admin/views/categories/edit.ctp:12
+msgid "%s cannot be blank"
+msgstr ""
+
+#: /components/admin/views/categories/add.ctp:15
+#: /components/admin/views/categories/edit.ctp:17
+msgid "%s must be unique"
+msgstr ""
+
+#: /components/admin/views/categories/add.ctp:24
+#: /components/admin/views/categories/edit.ctp:28
+msgid "Visbility"
+msgstr ""
+
+#: /components/admin/views/categories/add.ctp:28
+msgid "Create"
+msgstr ""
+
+#: /components/admin/views/categories/edit.ctp:9
+#: /views/items/index.ctp:24
+msgid "Name"
+msgstr ""
+
+#: /components/admin/views/categories/edit.ctp:14
+msgid "Slug"
+msgstr ""
+
+#: /components/admin/views/categories/edit.ctp:19
+msgid "Parent"
+msgstr ""
+
+#: /components/admin/views/categories/edit.ctp:23
+msgid "Description"
+msgstr ""
+
+#: /components/admin/views/categories/edit.ctp:29
+msgid "Web"
+msgstr ""
+
+#: /components/admin/views/categories/edit.ctp:30
+msgid "Catalogue"
+msgstr ""
+
+#: /components/admin/views/categories/edit.ctp:32
+msgid "Save"
+msgstr ""
+
+#: /components/admin/views/elements/categories/menu.ctp:5
+msgid "Add new %s"
+msgstr ""
+
+#: /components/admin/views/layouts/default.ctp:11
+#: /views/layouts/default.ctp:15
+msgid "Enigma: "
+msgstr ""
+
+#: /components/admin/views/layouts/default.ctp:17
+msgid "Categories"
+msgstr ""
+
+#: /components/admin/views/users/login.ctp:6
+#: /views/layouts/default.ctp:29
+#: /views/users/login.ctp:7
+msgid "Login"
+msgstr ""
+
+#: /components/admin/views/users/login.ctp:7
+msgid "Username"
+msgstr ""
+
+#: /components/admin/views/users/login.ctp:8
+msgid "Password"
+msgstr ""
+
+#: /components/install/install_auto_loader.php:20
+msgid "Install"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:49
+msgid "Executed %d installation statements."
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:84
+msgid "Administrators"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:85
+msgid "Managers"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:86
+msgid "Users"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:97;97
+msgid "-none-"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:98;98
+msgid "gallons per hour"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:100
+msgid "watt"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:100
+msgid "watts"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:101;101
+msgid "horsepower"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:103
+msgid "metre"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:103
+msgid "metres"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:104
+msgid "millimetre"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:104
+msgid "millimetres"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:105
+msgid "centimetre"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:105
+msgid "centimetres"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:106
+msgid "inch"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:106
+msgid "inches"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:107
+msgid "foot"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:107
+msgid "feet"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:108
+msgid "yard"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:108
+msgid "yards"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:110
+msgid "kilogramme"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:110
+msgid "kilogrammes"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:111
+msgid "gram"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:111
+msgid "grammes"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:113
+msgid "litre"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:113
+msgid "litres"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:114
+msgid "millilitre"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:114
+msgid "millilitres"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:115
+msgid "gallon"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:115
+msgid "gallons"
+msgstr ""
+
+#: /components/install/controllers/create_controller.php:125
+msgid "Blank"
+msgstr ""
+
+#: /components/install/controllers/migrate_controller.php:71
+msgid "Error - you need to define a '%s' db connection to migrate."
+msgstr ""
+
+#: /components/install/controllers/migrate_controller.php:98
+msgid "Creating blank database..."
+msgstr ""
+
+#: /components/install/controllers/migrate_controller.php:121;251;341;394
+msgid "Processing %d %s..."
+msgstr ""
+
+#: /components/install/controllers/migrate_controller.php:178
+msgid "Processing %d %s cross-links..."
+msgstr ""
+
+#: /components/install/controllers/migrate_controller.php:225
+msgid "Repairing %s tree..."
+msgstr ""
+
+#: /components/install/controllers/migrate_controller.php:251
+msgid "Items"
+msgstr ""
+
+#: /components/install/controllers/migrate_controller.php:296;453
+msgid "Processing %d %s-%s links..."
+msgstr ""
+
+#: /components/install/controllers/migrate_controller.php:341
+msgid "Variations"
+msgstr ""
+
+#: /components/install/controllers/migrate_controller.php:394
+msgid "Pictures"
+msgstr ""
+
+#: /components/install/views/create/index.ctp:3
+#: /components/install/views/install/index.ctp:3
+msgid "Create Blank"
+msgstr ""
+
+#: /components/install/views/create/index.ctp:3
+msgid "Are you sure you want to recreate all tables?"
+msgstr ""
+
+#: /components/install/views/create/index.ctp:4
+#: /components/install/views/install/index.ctp:4
+#: /components/install/views/sample/index.ctp:3
+#: /components/install/views/sample/start.ctp:3
+msgid "Create Sample"
+msgstr ""
+
+#: /components/install/views/create/index.ctp:4
+#: /components/install/views/sample/index.ctp:3
+#: /components/install/views/sample/start.ctp:3
+msgid "Are you sure you want to insert sample data?"
+msgstr ""
+
+#: /components/install/views/install/index.ctp:3;4
+msgid "Are you sure?"
+msgstr ""
+
+#: /components/install/views/install/index.ctp:3;4
+msgid "This will delete all data"
+msgstr ""
+
+#: /components/install/views/migrate/index.ctp:7
+msgid "Select desired actions:"
+msgstr ""
+
+#: /views/elements/categories/list_category.ctp:2
+#: /views/items/index.ctp:30
+msgid "Edit"
+msgstr ""
+
+#: /views/items/index.ctp:43
+msgid "First"
+msgstr ""
+
+#: /views/items/index.ctp:44
+msgid "Previous"
+msgstr ""
+
+#: /views/items/index.ctp:46
+msgid "Next"
+msgstr ""
+
+#: /views/items/index.ctp:47
+msgid "Last"
+msgstr ""
+
+#: /views/items/view.ctp:13
+msgid "Buy"
+msgstr ""
+
+#: /views/layouts/default.ctp:25
+msgid "Hello, %s"
+msgstr ""
+
+#: /views/layouts/default.ctp:27
+msgid "Home"
+msgstr ""
+
+#: /views/layouts/default.ctp:31
+msgid "Logout"
+msgstr ""
+
+#: /webroot/test.php:82
+msgid "Debug setting does not allow access to this url."
+msgstr ""
+
