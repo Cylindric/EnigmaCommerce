@@ -28,6 +28,11 @@ class LinkHelper extends AppHelper {
         return $this->link($model, $data, $settings);
     }
     
+    function edit($model, $data, array $settings = array()) {
+        $settings = array_merge(array('action' => 'edit'), $settings);
+        return $this->link($model, $data, $settings);
+    }
+    
     function link($model, $data, array $settings = array()) {
         $settings = array_merge(array(
             'sef' => $this->settings['sef'],

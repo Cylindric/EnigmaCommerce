@@ -61,7 +61,7 @@ class Category extends AppModel {
         ), $settings);
 
         $categories = $this->find($settings['find'], array(
-            'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.id AS innerid'),
+            'fields' => array('Category.id', 'Category.name', 'Category.slug'),
             'conditions' => array(
                 'Category.parent_id' => $parent_id,
             ),
@@ -87,7 +87,7 @@ class Category extends AppModel {
             'order' => array('Item.name')
         ), $settings);
 
-        $subCategories = $this->subCategories($category_id, array('find'=>'list'));
+        $subCategories = $this->subCategories($category_id, array('find' => 'list'));
         $subCategories = array_keys($subCategories);
         $subCategories[] = (int)$category_id;
 
@@ -104,14 +104,7 @@ class Category extends AppModel {
             'conditions' => array('Category.id' => $subCategories),
         ));
 
-        $items = array();
-        foreach ($catItems as $cat) {
-            foreach ($cat['CategoryItem'] as $catItem) {
-                $items[] = array('Item'=>$catItem['Item']);
-            }
-        }
-
-        return $items;
+        return $catItems[0];
     }
 
 }

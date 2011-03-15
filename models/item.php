@@ -40,4 +40,28 @@ class Item extends AppModel {
         return $item[0];
     }
     
+    public function findInCategory($category_id) {
+        $joins = array(
+            array(
+                'table' => 'category_items',
+                'alias' => 'CategoryItem',
+                'type' => 'inner',
+                'conditions' => array(
+                    'Item.id = CategoryItem.item_id',
+                    'CategoryItem.category_id' => $category_id,
+                ),
+            ),
+        );
+        
+        $contain = array(
+            'CategoryItem', 
+            'ItemPicture' => 'Picture');
+        
+        $options = array('joins' => $joins, 'contain' => $contain);
+
+        $items = $this->find('all', $options);
+
+        return $items;
+    }
+    
 }

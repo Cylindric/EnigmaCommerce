@@ -45,9 +45,9 @@ class CategoriesController extends AdminAppController {
         } else {
             $this->request->data = $this->Category->findById($id);
         }
-
+        
         $this->set('parents', $this->Category->find('list'));
-        $this->set('items', $this->Category->subItems($this->Category->id));
+        $this->set('items', $this->Item->findInCategory($this->request->data['Category']['id']));
         $this->set('data', $this->request->data);
     }
 

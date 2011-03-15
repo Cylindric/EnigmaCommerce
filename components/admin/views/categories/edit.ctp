@@ -35,7 +35,11 @@
     ?>
 
     <h1><?php echo __('Items'); ?></h1>
-    <?php var_dump($items);?>
+    <?php 
+        foreach ($items as $item) {
+            echo $this->element('items/compact_list', array('item' => $item));
+        }
+    ?>
 </div>
 
 <div class="content-2"> 
