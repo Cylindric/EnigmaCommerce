@@ -40,7 +40,7 @@ class Item extends AppModel {
         return $item[0];
     }
     
-    public function findInCategory($category_id) {
+    public function findInCategory($category_id, $options = array()) {
         $joins = array(
             array(
                 'table' => 'category_items',
@@ -55,9 +55,17 @@ class Item extends AppModel {
         
         $contain = array(
             'CategoryItem', 
-            'ItemPicture' => 'Picture');
+            'ItemPicture' => 'Picture',
+        );
         
-        $options = array('joins' => $joins, 'contain' => $contain);
+        $order = array(
+            'Item.name',
+        );
+        
+        $options = array_merge(
+            array('joins' => $joins, 'contain' => $contain, 'order' => $order),
+            $options
+        );
 
         $items = $this->find('all', $options);
 

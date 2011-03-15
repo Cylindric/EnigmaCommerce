@@ -14,7 +14,8 @@
 
         <div id="header">
             <?php echo $title_for_layout; ?> :
-            <?php echo $this->Html->link(__('Categories'), '/admin/categories'); ?>
+            <?php echo $this->Html->link(__('Categories'), '/admin/categories'); ?> |
+            <?php echo $this->Html->link(__('Items'), '/admin/items'); ?>
         </div>
 
         <div class="col-mask three-col"> 

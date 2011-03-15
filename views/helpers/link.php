@@ -50,11 +50,12 @@ class LinkHelper extends AppHelper {
             $linkText = $data[$model][$name];
         }
         
-        $linkController = Inflector::tableize($model);
         
         if (is_array($action)) {
+            $linkController = $action['controller'];
             $linkAction = $action['action'];
         } else {
+            $linkController = Inflector::tableize($model);
             $linkAction = $action;
         }
 

@@ -13,6 +13,16 @@ class CategoriesController extends AdminAppController {
     public function index() {
     }
 
+    public function view($id) {
+        if (!$id) {
+            $this->Session->setFlash(__('Invalid %s', __('category')));
+            $this->redirect(array('action' => 'index'));
+        }
+        $category = $this->Category->findById($id);
+        $this->set('category', $category);
+        $this->set('items', $this->Item->findInCategory($category['Category']['id']));
+    }
+    
     public function add() {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
@@ -40,28 +50,15 @@ class CategoriesController extends AdminAppController {
                 $this->Session->setFlash(__('The %s has been saved', __('category')), 'flash_success');
                 $this->redirect(array('action' => 'edit', $this->Category->id));
             } else {
-                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('Category')), 'flash_failure');
+                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('category')), 'flash_failure');
             }
         } else {
             $this->request->data = $this->Category->findById($id);
         }
-        
+
         $this->set('parents', $this->Category->find('list'));
         $this->set('items', $this->Item->findInCategory($this->request->data['Category']['id']));
         $this->set('data', $this->request->data);
-    }
-
-    public function delete($id = null) {
-        if (!$id) {
-            $this->Session->setFlash(__('Invalid id for %s', __('category')));
-            $this->redirect(array('action'=>'index'));
-        }
-        if ($this->Category->delete($id)) {
-            $this->Session->setFlash(__('%s deleted', __('Category')));
-            $this->redirect(array('action'=>'index'));
-        }
-        $this->Session->setFlash(__('%s was not deleted', __('Category')));
-        $this->redirect(array('action' => 'index'));
     }
 
     public function menu_nodes() {

@@ -8,51 +8,44 @@
 class ItemsController extends AdminAppController {
 
     var $name = 'Items';
-    
-    function beforeFilter() {
-        parent::beforeFilter();
-    }
-    
-    function index() {
-        $this->set('items', $this->paginate());
-    }
+    var $uses = array('Category', 'Item');
 
-    function add() {
-        if (!empty($this->data)) {
-            $this->Item->create();
-            if ($this->Item->save($this->data)) {
-                $this->Session->setFlash(__('The %s has been saved', __('item')));
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The %s could not be created. Please, try again.', __('item')));
-            }
+    /**
+     * Shows a list of all items in the specified category.
+     * TODO: Do something interesting for the "all" case (id=null)
+     * @param mixed $category_id 
+     */
+    function index($category_id = null) {
+        if (!$category_id) {
+            $category = array();
+            $items = array();
+        } else {
+            $category = $this->Category->findById($category_id);
+            $items = $this->Item->findInCategory($category['Category']['id']);            
         }
-        $categories = $this->Item->Category->find('list');
-        $this->set(compact('categories'));
+        
+        $this->set('category', $category);
+        $this->set('items', $items);
     }
 
     function edit($id = null) {
-        parent::admin_edit();
-        if (!empty($this->data)) {
-            $this->Item->save($this->data);
+        if (!$id) {
+            $this->Session->setFlash(__('Invalid %s', __('item')));
+            $this->redirect(array('action' => 'index'));
         }
-        if (!empty($id)) {
-            $data = $this->Item->findById($id);
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->Item->save($this->request->data)) {
+                $this->Session->setFlash(__('The %s has been saved', __('item')), 'flash_success');
+                $this->redirect(array('action' => 'edit', $this->Item->id));
+            } else {
+                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('item')), 'flash_failure');
+            }
+        } else {
+            $this->request->data = $this->Item->findById($id);
         }
-        $this->set('data', $data);
+        
+        $this->set('data', $this->request->data);
     }
     
-    function delete($id = null) {
-        if (!$id) {
-            $this->Session->setFlash(__('Invalid id for %s', __('item')));
-            $this->redirect(array('action'=>'index'));
-        }
-        if ($this->Item->delete($id)) {
-            $this->Session->setFlash(__('%s deleted', __('Item')));
-            $this->redirect(array('action'=>'index'));
-        }
-        $this->Session->setFlash(__('%s was not deleted', __('Item')));
-        $this->redirect(array('action' => 'index'));
-    }
-
 }
