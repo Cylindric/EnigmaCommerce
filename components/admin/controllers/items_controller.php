@@ -10,10 +10,15 @@ class ItemsController extends AdminAppController {
     var $name = 'Items';
     var $uses = array('Category', 'Item');
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->set('title_for_layout', __('Items'));
+    }
+
     /**
      * Shows a list of all items in the specified category.
      * TODO: Do something interesting for the "all" case (id=null)
-     * @param mixed $category_id 
+     * @param mixed $category_id
      */
     function index($category_id = null) {
         if (!$category_id) {
@@ -21,9 +26,9 @@ class ItemsController extends AdminAppController {
             $items = array();
         } else {
             $category = $this->Category->findById($category_id);
-            $items = $this->Item->findInCategory($category['Category']['id']);            
+            $items = $this->Item->findInCategory($category['Category']['id']);
         }
-        
+
         $this->set('category', $category);
         $this->set('items', $items);
     }
@@ -44,8 +49,8 @@ class ItemsController extends AdminAppController {
         } else {
             $this->request->data = $this->Item->findById($id);
         }
-        
+
         $this->set('data', $this->request->data);
     }
-    
+
 }

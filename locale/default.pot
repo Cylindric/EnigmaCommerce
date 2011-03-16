@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-03-15 08:46+0000\n"
+"POT-Creation-Date: 2011-03-15 22:49+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -18,83 +18,78 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
-#: /components/admin/controllers/categories_controller.php:19;40
-#: /components/admin/controllers/items_controller.php:24
-msgid "The %s has been saved"
+#: /components/admin/controllers/categories_controller.php:15
+#: /components/admin/views/layouts/default.ctp:17
+msgid "Categories"
 msgstr ""
 
-#: /components/admin/controllers/categories_controller.php:19;22;34;40;55
-#: /components/admin/views/elements/categories/menu.ctp:5
-#: /controllers/categories_controller.php:33
-msgid "category"
-msgstr ""
-
-#: /components/admin/controllers/categories_controller.php:22
-msgid "The %s could not be created. Please, try again."
-msgstr ""
-
-#: /components/admin/controllers/categories_controller.php:34
+#: /components/admin/controllers/categories_controller.php:23;49
+#: /components/admin/controllers/items_controller.php:38
 #: /controllers/categories_controller.php:33
 #: /controllers/items_controller.php:24
 msgid "Invalid %s"
 msgstr ""
 
-#: /components/admin/controllers/categories_controller.php:43
-#: /components/admin/controllers/items_controller.php:27
+#: /components/admin/controllers/categories_controller.php:23;34;37;49;55;58
+#: /components/admin/views/elements/categories/menu.ctp:5
+#: /controllers/categories_controller.php:33
+msgid "category"
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:34;55
+#: /components/admin/controllers/items_controller.php:44
+msgid "The %s has been saved"
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:37
+msgid "The %s could not be created. Please, try again."
+msgstr ""
+
+#: /components/admin/controllers/categories_controller.php:58
+#: /components/admin/controllers/items_controller.php:47
 msgid "The %s could not be saved. Please, try again."
 msgstr ""
 
-#: /components/admin/controllers/categories_controller.php:43;59;62
-#: /components/install/controllers/migrate_controller.php:178;225
-msgid "Category"
+#: /components/admin/controllers/items_controller.php:15
+#: /components/admin/views/categories/edit.ctp:37
+#: /components/admin/views/items/index.ctp:4
+#: /components/admin/views/layouts/default.ctp:18
+#: /components/install/controllers/migrate_controller.php:251
+msgid "Items"
 msgstr ""
 
-#: /components/admin/controllers/categories_controller.php:55
-#: /components/admin/controllers/items_controller.php:47
-msgid "Invalid id for %s"
-msgstr ""
-
-#: /components/admin/controllers/categories_controller.php:59
-#: /components/admin/controllers/items_controller.php:51
-msgid "%s deleted"
-msgstr ""
-
-#: /components/admin/controllers/categories_controller.php:62
-#: /components/admin/controllers/items_controller.php:54
-msgid "%s was not deleted"
-msgstr ""
-
-#: /components/admin/controllers/items_controller.php:24;27;47
+#: /components/admin/controllers/items_controller.php:38;44;47
 #: /controllers/items_controller.php:24
 msgid "item"
 msgstr ""
 
-#: /components/admin/controllers/items_controller.php:51;54
-msgid "Item"
+#: /components/admin/controllers/users_controller.php:15
+#: /components/install/controllers/create_controller.php:86
+msgid "Users"
 msgstr ""
 
-#: /components/admin/controllers/users_controller.php:22
+#: /components/admin/controllers/users_controller.php:24
 #: /controllers/users_controller.php:22
 msgid "Username or password is incorrect"
 msgstr ""
 
-#: /components/admin/controllers/users_controller.php:28
+#: /components/admin/controllers/users_controller.php:30
 #: /controllers/users_controller.php:28
 msgid "Good-Bye"
 msgstr ""
 
 #: /components/admin/views/categories/add.ctp:11
-#: /components/admin/views/categories/edit.ctp:12
+#: /components/admin/views/categories/edit.ctp:13
 msgid "%s cannot be blank"
 msgstr ""
 
 #: /components/admin/views/categories/add.ctp:15
-#: /components/admin/views/categories/edit.ctp:17
+#: /components/admin/views/categories/edit.ctp:18
 msgid "%s must be unique"
 msgstr ""
 
 #: /components/admin/views/categories/add.ctp:24
-#: /components/admin/views/categories/edit.ctp:28
+#: /components/admin/views/categories/edit.ctp:29
 msgid "Visbility"
 msgstr ""
 
@@ -102,32 +97,41 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: /components/admin/views/categories/edit.ctp:9;12
+#: /components/admin/views/categories/edit.ctp:3
+#: /components/install/controllers/migrate_controller.php:178;225
+msgid "Category"
+msgstr ""
+
+#: /components/admin/views/categories/edit.ctp:10;13
+#: /components/admin/views/items/edit.ctp:10
 #: /views/items/index.ctp:24
 msgid "Name"
 msgstr ""
 
-#: /components/admin/views/categories/edit.ctp:14;17
+#: /components/admin/views/categories/edit.ctp:15;18
+#: /components/admin/views/items/edit.ctp:15
 msgid "Slug"
 msgstr ""
 
-#: /components/admin/views/categories/edit.ctp:19
+#: /components/admin/views/categories/edit.ctp:20
 msgid "Parent"
 msgstr ""
 
-#: /components/admin/views/categories/edit.ctp:23
+#: /components/admin/views/categories/edit.ctp:24
+#: /components/admin/views/items/edit.ctp:20
 msgid "Description"
 msgstr ""
 
-#: /components/admin/views/categories/edit.ctp:29
+#: /components/admin/views/categories/edit.ctp:30
 msgid "Web"
 msgstr ""
 
-#: /components/admin/views/categories/edit.ctp:30
+#: /components/admin/views/categories/edit.ctp:31
 msgid "Catalogue"
 msgstr ""
 
-#: /components/admin/views/categories/edit.ctp:32
+#: /components/admin/views/categories/edit.ctp:33
+#: /components/admin/views/items/edit.ctp:24
 msgid "Save"
 msgstr ""
 
@@ -135,13 +139,29 @@ msgstr ""
 msgid "Add new %s"
 msgstr ""
 
+#: /components/admin/views/items/edit.ctp:3
+msgid "Item"
+msgstr ""
+
+#: /components/admin/views/items/edit.ctp:13
+msgid "The %s cannot be blank"
+msgstr ""
+
+#: /components/admin/views/items/edit.ctp:13
+msgid "name"
+msgstr ""
+
+#: /components/admin/views/items/edit.ctp:18
+msgid "The %s must be unique"
+msgstr ""
+
+#: /components/admin/views/items/edit.ctp:18
+msgid "slug"
+msgstr ""
+
 #: /components/admin/views/layouts/default.ctp:11
 #: /views/layouts/default.ctp:15
 msgid "Enigma: "
-msgstr ""
-
-#: /components/admin/views/layouts/default.ctp:17
-msgid "Categories"
 msgstr ""
 
 #: /components/admin/views/users/login.ctp:6
@@ -172,10 +192,6 @@ msgstr ""
 
 #: /components/install/controllers/create_controller.php:85
 msgid "Managers"
-msgstr ""
-
-#: /components/install/controllers/create_controller.php:86
-msgid "Users"
 msgstr ""
 
 #: /components/install/controllers/create_controller.php:97;97
@@ -308,10 +324,6 @@ msgstr ""
 
 #: /components/install/controllers/migrate_controller.php:225
 msgid "Repairing %s tree..."
-msgstr ""
-
-#: /components/install/controllers/migrate_controller.php:251
-msgid "Items"
 msgstr ""
 
 #: /components/install/controllers/migrate_controller.php:296;453

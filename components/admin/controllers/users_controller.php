@@ -12,8 +12,10 @@ class UsersController extends AdminAppController {
     function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('login');
+        $this->set('title_for_layout', __('Users'));
+
     }
-    
+
     function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -23,10 +25,10 @@ class UsersController extends AdminAppController {
             }
         }
     }
-    
+
     function logout() {
         $this->Session->setFlash(__('Good-Bye'));
         $this->redirect($this->Auth->logout());
     }
-    
+
 }

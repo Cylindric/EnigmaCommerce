@@ -10,6 +10,11 @@ class CategoriesController extends AdminAppController {
     var $name = 'Categories';
     var $uses = array('Category', 'Item');
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->set('title_for_layout', __('Categories'));        
+    }
+
     public function index() {
     }
 
