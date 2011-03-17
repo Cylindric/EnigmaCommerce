@@ -14,4 +14,4 @@ Configure::write('migrate.productImages', ROOT.DS.'products'.DS);
  * files in /locale/.
  * Set to 'xxx' to use the test strings; useful for finding untranslated strings.
  */
-Configure::write('Config.language', 'xxx');
+//Configure::write('Config.language', 'xxx');

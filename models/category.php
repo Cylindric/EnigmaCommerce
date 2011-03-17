@@ -70,41 +70,4 @@ class Category extends AppModel {
         return $categories;
     }
 
-    /**
-     * Returns all items that are children of the specified category and all it's
-     * subcategories.
-     *
-     * The sort order can be specified by passing in a settings array with the
-     * field to sort by:
-     * array('order' => 'Item.name')
-     *
-     * @param int $category_id
-     * @param array $settings
-     * @return array
-     */
-    public function subItems($category_id, array $settings = array()) {
-        $settings = array_merge(array(
-            'order' => array('Item.name')
-        ), $settings);
-
-        $subCategories = $this->subCategories($category_id, array('find' => 'list'));
-        $subCategories = array_keys($subCategories);
-        $subCategories[] = (int)$category_id;
-
-        $catItems = $this->find('all', array(
-            'contain' => array(
-                'CategoryItem' => array(
-                    'Item' => array(
-                        'ItemPicture' => array(
-                            'Picture'
-                        )
-                    )
-                ),
-            ),
-            'conditions' => array('Category.id' => $subCategories),
-        ));
-
-        return $catItems[0];
-    }
-
 }
