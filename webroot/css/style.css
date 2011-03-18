@@ -1,174 +1,156 @@
-* {
-    margin:0;
-    padding:0;
+<?php
+    header("Content-type: text/css");
+    $rightColWidth = 25;
+    $rightPaddingRight = 2;
+    $rightPaddingLeft = 2;
+
+    $middleColWidth = 50;
+    $middlePaddingRight = 2;
+    $middlePaddingLeft = 2;
+
+    $leftColWidth = (100 - $rightColWidth - $middleColWidth);
+    $leftPaddingRight = 2;
+    $leftPaddingLeft = 1;
+
+?>
+/* http: //matthewjamestaylor.com/blog/perfect-stacked-columns.htm */
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    background: #fff;
+    min-width: 600px;
+    font-family: sans-serif;
 }
 
-.clear {
-    clear: both;
+h1 {
+    margin-top: 0.5em;
+    font-size: 1.2em;
 }
 
-body {
-    font-family: Arial, Arial, Helvetica, sans-serif;
-    font-size: 0.9em;
-    background-color: #E0E0E0;
-    color: #444;
-}
-
-p {
-    text-align: justify;
-    margin-top: 0.3em;
-}
-
-/* Paragraphs that follow other paragraphs have a paragraph-indent */
-p + p {
-	text-indent: 1em;
-	margin-top: 0.3em;
-}
-
-a {
-	text-decoration: none;
+a, a:visited {
+    text-decoration: none;
     color: darkblue;
 }
 
 a:hover {
-    color: #CC3D05;
+    color: red;
 }
 
-h1, h1 > a {
-	font-size: 1.3em;
-	font-weight: bold;
-    color: #CC3D05;
+#header {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+#header {
+    border-bottom: 1px solid #000;
 }
 
-h1 > a:hover {
-    color: darkblue;
+.col-mask {
+    position: relative;	/* This fixes the IE7 overflow hidden bug */
+    clear: both;
+    float: left;
+    width: 100%;			/* width of whole page */
+    overflow: hidden;		/* This chops off any overhanging divs */
 }
 
-h2, h2 > a {
-	font-size: 1.2em;
-	font-weight: bold;
-    color: #CC3D05;
-}
-
-h3 {
-    padding-top: 0.5em;
-    font-size: 1em;
-    font-weight: bold;
-}
-
-div#wrapper {
-    margin: 0 5%;
-    height: 100%;
-}
-
-div#header {
-    height: 100px;
+.col-mid,
+.col-left {
+    float: left;
+    width: 100%;
     position: relative;
 }
-@media print {div#header {display: none;}}
-
-div#header > h1 {
-    position: absolute;
-    width: 330px;
-    height: 70px;
-    font-size: 2em;
-    margin-top: 15px;
-    background: url(../img/chrome.blue/logo.png) no-repeat left top;
-}
-@media print {div#header h1 {background-image: none;}}
-
-div#header > h1 a {
-    display: block;
-    width: 333px;
-    text-indent: -9999px;
-	font-size: 55px;
-    background-color: transparent;
-}
-
-div#header ul {
-    position: absolute;
-    right: 30px;
-    bottom: 25px;
-    list-style-type: none;
-}
-
-div#header ul li {
+.content-1,
+.content-2,
+.content-3 {
     float: left;
-    margin: 0 1em;
+    position: relative;
+    padding: 0 0 1em 0;
+    overflow: hidden;
 }
 
-div#header ul li a {
-    font-size: 1.2em;
-    font-weight: bold;
+/* Two Column Specifics */
+.two-col .col-left {
+    right: 75%;			/* right column width */
 }
 
-div#separator_m {background: url(../img/chrome.blue/separator_m.png) repeat-x left top;}
-div#separator_l {background: url(../img/chrome.blue/separator_l.png) repeat-y left top;}
-div#separator_r {background: url(../img/chrome.blue/separator_r.png) repeat-y right top;}
-@media print {div#separator_m {background: none;}}
-@media print {div#separator_l {background: none;}}
-@media print {div#separator_r {background: none;}}
-
-div#separator {
-    height: 60px;
+.two-col .content-1 {
+    width: 71%;			/* right column content width */
+    left: 102%;			/* 100% plus left column left padding */
 }
 
-div#tite {
-    padding: 0 20px;
-    display: table-cell;
-    vertical-align: middle;
-    height: 60px;
+.two-col .content-2 {
+    width: 21%;			/* left column content width (column width minus left and right padding) */
+    left: 6%;			/* (right column left and right padding) plus (left column left padding) */
 }
 
-div#title h1 {
-    padding-left: 10px;
-    padding-top: 20px;
-    color: #E0E0E0;
-    background-color: transparent;
+/* Three Column Specifics */
+.three-col .col-mid {
+    right: <?php echo $rightColWidth;?>%; /* width of the right column */
 }
 
-div#content {background-color: transparent;}
-div#content_l {background: #ffffff url(../img/chrome.blue/content_l.png) repeat-y left top;}
-div#content_r {background: url(../img/chrome.blue/content_r.png) repeat-y right top;}
-div#content_b {background: url(../img/chrome.blue/content_b.png) repeat-x center bottom;}
-div#content_bl {background: url(../img/chrome.blue/content_bl.png) no-repeat left bottom;}
-div#content_br {background: url(../img/chrome.blue/content_br.png) no-repeat right bottom;}
-@media print {div#content_l {background: none;}}
-@media print {div#content_r {background: none;}}
-@media print {div#content_b {background: none;}}
-@media print {div#content_bl {background: none;}}
-@media print {div#content_br {background: none;}}
-
-div#content {
-    padding: 0px 10px 10px 10px;
+.three-col .col-left {
+    right: <?php echo $middleColWidth;?>%; /* width of the middle column */
 }
 
-div#left-navigation {
-    width: 200px;
+.three-col .content-1 {
+    width: 46%; /* width of center column content (column width minus padding on either side) */
+    left: <?php echo (100+$middlePaddingLeft);?>%; /* 100% plus left padding of center column */
+}
+
+.three-col .content-2 {
+    width: <?php echo ($leftColWidth - $leftPaddingLeft - $leftPaddingRight);?>%;  /* Width of left column content (column width minus padding on either side) */
+    left: <?php echo ($rightColWidth + ($middlePaddingLeft + $middlePaddingRight) + ($leftPaddingLeft));?>%;
+}
+
+.three-col .content-3 {
+    width: <?php echo ($rightColWidth - $rightPaddingLeft - $rightPaddingRight);?>%; /* Width of right column content (column width minus padding on either side) */
+    left: <?php echo ((100- $leftColWidth) + ($middlePaddingLeft + $middlePaddingRight) + ($leftPaddingLeft + $leftPaddingRight));?>%;
+}
+
+/* Footer styles */
+#footer {
+    clear: both;
     float: left;
-}
-
-div.body-wide {
-    left: 200px;
-}
-
-div#footer {
+    width: 100%;
+    border-top: 1px solid #000;
     text-align: center;
-    padding-bottom: 8px;
-	font-size: 0.7em;
-    color: #666;
 }
 
-/* ****************************************************************************/
-/* Menu Styles
-/* ****************************************************************************/
-div.tree ul {
-    padding-left: 0.5em;
-    font-size: 0.9em;
+/* Flash Messages */
+.flash {
+    margin: 1em 0;
+    padding: 0.3em;    
 }
 
-div.tree li {
+.flash_failure {
+    color: #a00;
+    border: 1px solid #a00;
+    background-color: #fdd;
+}
+
+.flash_success {
+    color: #0a0;
+    border: 1px solid #0a0;
+    background-color: #dfd;
+}
+
+/* Menus */
+.menutree ul {
+    padding: 0;
+    margin: 0;
     list-style-type: none;
+    font-size: 90%;
+}
+
+.menutree ul ul {
+    padding-left: 0.5em;
+}
+
+ul.footer {
+    padding: 0;
+    margin: 0;
 }
 
 ul.footer_menu li {
@@ -184,114 +166,57 @@ ul.footer_menu li:first-child:before {
     content: '';
 }
 
-/* ****************************************************************************/
-/* Content styles
-/* ****************************************************************************/
-img.thumb {
-    float: left;
-}
-
-
-/* ****************************************************************************/
-/* Forms
-/* ****************************************************************************/
-form {
-	clear: both;
-	margin: 0 20px;
-	padding: 0;
-}
-
-fieldset {
-	border: 1px solid #ccc;
-	margin-bottom: 1em;
-	padding: 16px 20px;
-}
-
-fieldset legend {
-	color: darkblue;
-	font-size: 1.2em;
-	font-weight: bold;
-}
-
-form div {
-	clear: both;
-	vertical-align: text-top;
-}
-
-form .required {
-	font-weight: bold;
-}
-
-form .required label:after {
-	color: red;
-	content: '*';
-	display: inline;
-}
-
-form div.submit {
-	border: 0;
-	clear: both;
-	margin-top: 10px;
-}
-
-input[type=submit] {
-	display: inline;
-	font-size: 110%;
-	width: auto;
-    padding: 0 1em;
+/* Forms */
+label {
+    font-size: 90%;
+    color: #0a0;
+    font-weight: bold;
 }
 
 label {
-	display: block;
-	margin-bottom: 3px;
+    display: block;
 }
 
-
-div.message {
-	clear: both;
-	color: #fff;
-	font-size: 110%;
-	font-weight: bold;
-	margin: 0 0 1em 0;
-	background: #c73e14;
-	padding: 5px;
+label:after {
+    content: ":";
 }
 
-/*
-span.progress_bar {
-    font-family: monospace;
-    background-color: lightgrey;
-    color: lightgrey;
-    border: 1px solid darkgrey;
+.checkbox label {
+    display: inline;
 }
 
-span.progress_bar span.progress_a {
-    background-color: darkgreen;
-    color: darkgreen;
+.checkbox label:after {
+    content: "";
 }
 
-span.progress_bar span.progress_b {
+div.error {
+    color: #a00;    
 }
-*/
+
+div.error input {
+    border: 2px solid #a00;
+}
 
 /* Debug */
 table.cake-sql-log {
 	background: #f4f4f4;
     border: 1px solid black;
-	font-family: Monaco, Consolas, "Courier New", monospaced;
+    font-size: 80%;
 }
-
 .cake-sql-log tr {
     vertical-align: top;
 }
-
 .cake-sql-log td {
 	padding: 4px 8px;
 	text-align: left;
     border-bottom: 1px solid #555;
     border-right: 1px solid #aaa;
 }
-
 .cake-sql-log caption {
-	color:#fff;
+	color: #fff;
+}
+
+p.error {
+    xposition: fixed;
+    xleft: 1em;
 }

@@ -1,5 +1,4 @@
-<?php echo $this->element('categories/menu'); ?>
-<div class="body-wide" id="body">
+<div class="content-1">
 
     <?php echo $this->Image->itemThumb($item, array('link' => false, 'blank' => false)); ?>
     <h1><?php echo $item['Item']['name']; ?></h1>
@@ -17,3 +16,8 @@
     <?php endif; ?>
 
 </div>
+
+<div class="content-2">
+    <?php echo $this->element('categories/menu'); ?>
+</div>
+    

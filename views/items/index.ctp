@@ -1,17 +1,4 @@
-<div id="cat_menu">
-<?php
-echo $this->TreeMenu->generate(
-    $this->requestAction('categories/menu'),
-    array(
-        'model'=>'Category',
-        'controller'=>'categories',
-        'action'=>'view'
-    )
-);
-?>
-</div>
-<div id="body" class="view">
-<div id="bodycontent">
+<div class="content-1"> 
 
 <?php if (!empty($title)): ?>
 		<h1><?php echo($title); ?></h1>
@@ -50,5 +37,16 @@ echo $this->TreeMenu->generate(
 	?>
 
 </div>
+
+<div id="content-2">
+<?php
+echo $this->TreeMenu->generate(
+    $this->requestAction('categories/menu'),
+    array(
+        'model'=>'Category',
+        'controller'=>'categories',
+        'action'=>'view'
+    )
+);
+?>
 </div>
-<div class="clear"></div>
