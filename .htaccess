@@ -1,6 +1,6 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine on
-    RewriteBase /ec3
-    RewriteRule    ^$   webroot/    [L]
-    RewriteRule    (.*) webroot/$1  [L]
-</IfModule>
+php_flag session.use_trans_sid off
+php_flag short_open_tag on
+
+<Files go>
+	ForceType application/x-httpd-php
+</Files>

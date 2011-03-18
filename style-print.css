@@ -1,0 +1,24 @@
+<?php
+	header("Content-type: text/css");
+?>
+
+#outer {
+	position: absolute;
+	left: 0%;
+	margin-left: 0px;
+	padding: 0px;
+	width: 100%;
+}
+
+
+#header,
+.noprint,
+.critical,
+.leftnav,
+.rightnav,
+.topnav,
+.icons,
+table.pagetabs tr.header td.selected,
+table.wizard td.print_item {
+	display: none;
+}

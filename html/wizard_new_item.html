@@ -1,0 +1,210 @@
+<!-- BEGIN: main --><form name="frmwiznewitem" action="" method="post" >
+<input type="hidden" name="currentpage" value="{PAGE}" />
+<table class="wizard" cellspacing="0" cellpadding="0">
+	<tr>
+		<td rowspan="2" class="new_item" style="background: url({ENIGMA_ROOT}img/ui/wiz_new_item{FRAME}.png);">
+			<h1>New Item</h1>
+			<!-- BEGIN: progress --><ul>
+				<!-- BEGIN: row --><li>{PROGRESS}</li><!-- END: row-->
+			</ul><!-- END: progress -->
+		</td>
+		<td>
+			<!-- BEGIN: page_1 -->
+			<h2>Welcome to the<br />New Item Wizard</h2>
+
+			<table style="margin: 0 auto;">
+				<tr>
+					<td>Item Name:</td>
+					<td><input type="text" name="txtItemName" value="{ITEM_NAME}" tabindex="1" /></td>
+				</tr>
+				<tr>
+					<td>Description:</td>
+					<td><textarea name="txtItemDescription" tabindex="2" rows="10" cols="40">{ITEM_DESCRIPTION}</textarea></td>
+				</tr>
+				<tr>
+					<td>Recommended:</td>
+					<td><input type="checkbox" name="chkItemRecommended" value="1" {ITEM_RECOMMENDED} tabindex="3" /></td>
+				</tr>
+				<tr>
+					<td>Article Code:</td>
+					<td><input type="text" name="txtItemArticle" value="{ITEM_ARTICLE}" tabindex="4" /></td>
+				</tr>
+				<tr>
+					<td>Visible to public:</td>
+					<td><input type="checkbox" name="chkItemVisible" value="1" {ITEM_VISIBLE} tabindex="5" /></td>
+				</tr>
+			</table>
+			<!-- END: page_1 -->
+
+			<!-- BEGIN: page_2 -->
+			<h2>Category Selection</h2>
+
+			<table style="margin: 0 auto;">
+				<!-- BEGIN: row --><tr>
+					<td class="label">&nbsp;</td>
+					<td>{CATEGORY_NAME}</td>
+					<td>{SPACER_14}</td>
+					<td>{INPUT_DELCAT}</td>
+				</tr>
+				<!-- END: row -->
+				<tr>
+					<td class="label">&nbsp;</td>
+					<td>{CATEGORY_SELECTOR}</td>
+					<td>{SPACER_14}</td>
+					<td>{INPUT_ADDCAT}</td>
+				</tr>
+			</table>
+			<!-- END: page_2 -->
+
+			<!-- BEGIN: page_3 -->
+			<h2>Add Details</h2>
+			<table style="margin: 0 auto;">
+				<tr class="header">
+					<td>Name</td>
+					<td>Size</td>
+					<td>Units</td>
+					<td>RRP</td>
+					<td>&nbsp</td>
+				</tr>
+				<tr>
+					<td><input type="text" name="txtDetailName" size="10" value="{DETAIL_NAME}" tabindex="1" /></td>
+					<td><input type="text" name="txtDetailSize" size="3" value="{DETAIL_SIZE}" tabindex="2" /></td>
+					<td>{UNIT_SELECTOR}</td>
+					<td><input type="text" name="txtDetailRRP" size="3" value="{DETAIL_RRP}" tabindex="4" /></td>
+					<td>{INPUT_ADDDETAIL}</td>
+				</tr>
+				<!-- BEGIN: row --><tr>
+					<td>{DETAIL_NAME}</td>
+					<td class="numeric">{DETAIL_SIZE}</td>
+					<td>{DETAIL_UNIT}</td>
+					<td class="numeric">{DETAIL_RRP}</td>
+					<td>{INPUT_DELDETAIL}</td>
+				</tr>
+				<!-- END: row -->
+			</table>
+			<!-- END: page_3 -->
+
+			<!-- BEGIN: page_4 -->
+			<h2>Add Suppliers</h2>
+			<p>&nbsp;</p>
+			<table style="margin: 0 auto;">
+				<tr class="header">
+					<td colspan="2">Add New Supplier Link</td>
+				</tr>
+				<tr>
+					<td>Item:</td>
+					<td>{DETAIL_SELECTOR}</td>
+				</tr>
+				<tr>
+					<td>Supplier:</td>
+					<td>{SUPPLIER_SELECTOR}</td>
+				</tr>
+				<tr>
+					<td>Trade Price:</td>
+					<td><input class="numeric" type="text" name="txtSupplierPrice" size="3" value="{SUPPLIER_PRICE}" tabindex="3" /></td>
+				</tr>
+				<tr>
+					<td>Basic Discount:</td>
+					<td><input class="numeric" type="text" name="txtSupplierRate1" size="3" value="{SUPPLIER_RATE1}" tabindex="4" />%</td>
+				</tr>
+				<tr>
+					<td>Pre-Season Discount:</td>
+					<td><input class="numeric" type="text" name="txtSupplierRate2" size="3" value="{SUPPLIER_RATE2}" tabindex="5" />%</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>{INPUT_ADDSUPPLIER}</td>
+				</tr>
+			</table>
+			<!-- BEGIN: existing -->
+			<table style="margin: 0 auto;">
+				<tr class="header">
+					<td>&nbsp;<br />Item</td>
+					<td>&nbsp;<br />Supplier</td>
+					<td>Trade<br />Price</td>
+					<td>Standard<br />Rate</td>
+					<td>Pre-Season<br />Rate</td>
+					<td>&nbsp;</td>
+				</tr>
+				<!-- BEGIN: row --><tr>
+					<td>{SUPPLIER_DETAIL}</td>
+					<td>{SUPPLIER_NAME}</td>
+					<td class="numeric">{SUPPLIER_PRICE}</td>
+					<td class="numeric">{SUPPLIER_RATE1}</td>
+					<td class="numeric">{SUPPLIER_RATE2}</td>
+					<td>{INPUT_DELSUPPLIER}</td>
+				</tr>
+				<!-- END: row -->
+			</table>
+			<!-- END: existing -->
+			<!-- END: page_4 -->
+
+			<!-- BEGIN: page_5 -->
+			<h2>Add Prices</h2>
+			<table style="margin: 0 auto;">
+				<tr class="header">
+					<td>Rate</td>
+					<td>Supplier</td>
+					<td>RRP</td>
+					<td>Price</td>
+					<td colspan="2">Profit</td>
+				</tr>
+				<!-- BEGIN: row --><tr>
+					<td colspan="6">&nbsp;</td>
+				</tr>
+				<tr style="color: #aa0000; font-weight:bold">
+					<td style="vertical-align: middle;">{DETAIL_NAME}</td>
+					<td style="vertical-align: middle;">{CO_SHORTNAME}</td>
+					<td style="vertical-align: middle;" class="numeric">{DETAIL_RRP}</td>
+					<td class="numeric"><input class="numeric" type="text" name="txtDetailPrice_{DETAIL_ID}" size="4" value="{DETAIL_PRICE}" /></td>
+					<td style="color: black;font-size:0.9em; font-weight:normal">ex VAT = {DETAIL_PRICEEX}</td>
+					<td>&nbsp;</td>
+				</tr>
+				<!-- BEGIN: price1 --><tr style="background-color: #eeeecc">
+					<td>Disc:</td>
+					<td>{SUPPLIER_NAME}</td>
+					<td>&nbsp;</td>
+					<td class="numeric">{SUPPLIER_PRICE1}</td>
+					<td style="text-align: right;color: #0000aa; font-weight:bold">{SUPPLIER_PROFIT1}</td>
+					<td style="text-align: right;color: #0000aa; font-weight:bold">{SUPPLIER_PERCENT1}</td>
+				</tr>
+				<!-- END: price1 -->
+				<!-- BEGIN: price2 --><tr>
+					<td>PreSeas:</td>
+					<td>{SUPPLIER_NAME}</td>
+					<td>&nbsp;</td>
+					<td class="numeric">{SUPPLIER_PRICE2}</td>
+					<td style="text-align: right;color: #0000aa; font-weight:bold">{SUPPLIER_PROFIT2}</td>
+					<td style="text-align: right;color: #0000aa; font-weight:bold">{SUPPLIER_PERCENT2}</td>
+				</tr>
+				<!-- END: price2 -->
+				<!-- END: row -->
+				<tr>
+					<td colspan="6">&nbsp;<br />Note: All prices are ex-VAT, appart from the RRP and <br />the {CO_SHORTNAME} prices in the text-boxes</td>
+				</tr>
+			</table>
+			<!-- END: page_5 -->
+
+			<!-- BEGIN: page_6 -->
+			<h2>Finished</h2>
+			<table style="margin: 0 auto;">
+			</table>
+			<!-- END: page_6 -->
+		</td>
+	</tr>
+	<tr>
+		<td class="buttons">
+			<!-- BEGIN: btn_apply --> <input name="cmdApply"  type="submit" value="Apply"  tabindex="10000" /><!-- END: btn_apply -->
+			<!-- BEGIN: btn_next -->  <input name="cmdNext"   type="submit" value="Next"   tabindex="10001" /><!-- END: btn_next -->
+			<!-- BEGIN: btn_back -->  <input name="cmdBack"   type="submit" value="Back"   tabindex="10002" /><!-- END: btn_back -->
+			<!-- BEGIN: btn_finish --><input name="cmdFinish" type="submit" value="Finish" tabindex="10003" /><!-- END: btn_finish -->
+			<!-- BEGIN: btn_cancel --><input name="cmdCancel" type="submit" value="Cancel" tabindex="10004" /><!-- END: btn_cancel -->
+			<!-- BEGIN: btn_close --> <input name="cmdClose"  type="submit" value="Close"  tabindex="10005" onClick="window.close()" /><!-- END: btn_close -->
+		</td>
+	</tr>
+</table>
+</form>
+
+</body>
+</html>
+<!-- END: main -->

@@ -1,0 +1,506 @@
+<!-- BEGIN: main -->
+				<!-- BEGIN: popup -->
+				<!-- BEGIN: override -->
+				<form enctype="multipart/form-data" name="frmEditItem" id="frmEditItem" method="post" action="{PROTOCOL}{SERVERHOST}{ENIGMA_ROOT}{CONTROL}/item/{DETAIL_ID}/0/0/1">
+				<input type="hidden" name="MAX_FILE_SIZE" value="262144" />
+				<input name="hidItemID" id="hidItemID" type="hidden" value="{ITEM_ID}" />
+				<h3>Editing Item {ITEM_NAME} - {DETAIL_NAME}</h3>
+				<table class="panel" cellpadding="0" cellspacing="0">
+					<tr class="header">
+						<td style="text-align:center">Our Price</td>
+						<td style="text-align:center">Web Price</td>
+						<td style="text-align:center">Discount Price</td>
+						<td style="text-align:center">Start Date</td>
+						<td style="text-align:center">End Date</td>
+						<td style="text-align:center">&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;vertical-align:middle">{OUR_PRICE}</td>
+						<td style="text-align:center;vertical-align:middle">{WEB_PRICE}</td>
+						<td style="text-align:center"><input name="txtOverridePrice_{DETAIL_ID}" id="txtOverridePrice_{DETAIL_ID}" type="text" size="4" value="{OVERRIDE_PRICE}" class="currency" /></td>
+						<td style="text-align:center"><input name="txtOverrideStart_{DETAIL_ID}" id="txtOverrideStart_{DETAIL_ID}" type="text" size="20" value="{OVERRIDE_START}" /></td>
+						<td style="text-align:center"><input name="txtOverrideEnd_{DETAIL_ID}" id="txtOverrideEnd_{DETAIL_ID}" type="text" size="20" value="{OVERRIDE_END}"   /></td>
+						<td style="text-align:center"><input onmouseover="MM_swapImage('imgUpdateOverride_{DETAIL_ID}','','{ENIGMA_ROOT}img/ui/button_update_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgUpdateOverride_{DETAIL_ID}" id="imgUpdateDetail_{DETAIL_ID}" type="image"  src="{ENIGMA_ROOT}img/ui/button_update.gif"  width="16"  height="16"  alt="Update {DETAIL_ID}" />
+							 <input onmouseover="MM_swapImage('imgDeleteOverride_{DETAIL_ID}','','{ENIGMA_ROOT}img/ui/button_delete_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgDeleteOverride_{DETAIL_ID}" id="imgDeleteDetail_{DETAIL_ID}" type="image"  src="{ENIGMA_ROOT}img/ui/button_delete.gif"  width="16"  height="16"  alt="Delete {DETAIL_ID}" /></td>
+					</tr>
+				</table>
+				</form>
+				<!-- END: override -->
+				<!-- BEGIN: dimensions -->
+				<form enctype="multipart/form-data" name="frmEditItem" id="frmEditItem" method="post" action="{PROTOCOL}{SERVERHOST}{ENIGMA_ROOT}{CONTROL}/item/{DETAIL_ID}/0/0/1">
+				<input type="hidden" name="MAX_FILE_SIZE" value="262144" />
+				<input name="hidItemID" id="hidItemID" type="hidden" value="{ITEM_ID}" />
+				<h3>Editing Item {ITEM_NAME} - {DETAIL_NAME}</h3>
+				<table class="panel" cellpadding="0" cellspacing="0">
+					<tr class="header">
+						<td style="text-align:center">Length</td>
+						<td style="text-align:center">Width</td>
+						<td style="text-align:center">Height</td>
+						<td style="text-align:center">Weight</td>
+						<td style="text-align:center">Volume</td>
+						<td style="text-align:center">&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="text-align:right"><input class="numeric" name="txtDimLength_{DETAIL_ID}" id="txtDimLength_{DETAIL_ID}" type="text" size="4" value="{DIM_LENGTH}" />{UNIT_LENGTH}</td>
+						<td style="text-align:right"><input class="numeric" name="txtDimWidth_{DETAIL_ID}" id="txtDimWidth_{DETAIL_ID}" type="text" size="4" value="{DIM_WIDTH}" />{UNIT_WIDTH}</td>
+						<td style="text-align:right"><input class="numeric" name="txtDimHeight_{DETAIL_ID}" id="txtDimHeight_{DETAIL_ID}" type="text" size="4" value="{DIM_HEIGHT}" />{UNIT_HEIGHT}</td>
+						<td style="text-align:right"><input class="numeric" name="txtDimWeight_{DETAIL_ID}" id="txtDimWeight_{DETAIL_ID}" type="text" size="4" value="{DIM_WEIGHT}"   />{UNIT_WEIGHT}</td>
+						<td style="text-align:right"><input class="numeric" name="txtDimVolume_{DETAIL_ID}" id="txtDimVolume_{DETAIL_ID}" type="text" size="4" value="{DIM_VOLUME}"   />{UNIT_VOLUME}</td>
+						<td style="text-align:right">
+							<input onmouseover="MM_swapImage('imgUpdateDimensions_{DETAIL_ID}','','{ENIGMA_ROOT}img/ui/button_update_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgUpdateDimensions_{DETAIL_ID}" id="imgUpdateDimensions_{DETAIL_ID}" type="image"  src="{ENIGMA_ROOT}img/ui/button_update.gif"  width="16"  height="16"  alt="Update {DETAIL_ID}" />
+							<input onmouseover="MM_swapImage('imgDeleteDimensions_{DETAIL_ID}','','{ENIGMA_ROOT}img/ui/button_delete_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgDeleteDimensions_{DETAIL_ID}" id="imgDeleteDimensions_{DETAIL_ID}" type="image"  src="{ENIGMA_ROOT}img/ui/button_delete.gif"  width="16"  height="16"  alt="Delete {DETAIL_ID}" />
+						</td>
+					</tr>
+				</table>
+				</form>
+				<!-- END: dimensions -->
+				<!-- BEGIN: reloadparent -->
+				<script language="JavaScript"><!--
+					window.opener.location.reload();
+				//-->
+				</script>
+				<!-- END: reloadparent -->
+				<!-- BEGIN: closepopup -->
+				<script language="JavaScript"><!--
+					window.close();
+				//-->
+				</script>
+				<!-- END: closepopup -->
+				<!-- END: popup -->
+
+				<!-- BEGIN: maintabs --><a name="1"></a>
+				<div class={DIVCLASS}>
+				<form enctype="multipart/form-data" name="frmEditItem" id="frmEditItem" method="post" action="{PROTOCOL}{SERVERHOST}{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/0/{TABID}#1">
+				<input name="hidItemID" id="hidItemID" type="hidden" value="{ITEM_ID}" />
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td colspan="2">
+							{ITEM_TITLE}
+						</td>
+					</tr>
+					<tr class="header">
+						<td><!-- BEGIN: alert -->{ALERT_ICON}<!-- END: alert -->&nbsp;</td>
+						<td class="roomy" style="text-align:right">
+							<a {TABCLASS_1} href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/0/1#1">general</a>
+							<!-- BEGIN: moretabs --> | <a {TABCLASS_3} href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/0/3#1">categories</a>
+							| <a {TABCLASS_2} href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/0/2#1">details</a>
+							| <a {TABCLASS_4} href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/0/4#1">suppliers</a>
+							| <a {TABCLASS_5} href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/0/5#1">postage</a>
+							| <a {TABCLASS_6} href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/0/6#1">pictures</a>
+							| <a {TABCLASS_7} href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/0/7#1">stock</a>
+							| <a {TABCLASS_8} href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/0/8#1">links</a>
+							<!-- END: moretabs -->
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+				<!-- BEGIN: tab_1 -->
+							<table>
+								<tr>
+									<td>Name:</td>
+									<td colspan="2"><input name="txtItemName" type="text" size="30" width="50" id="txtItemName" value="{ITEM_NAME}" /></td>
+								</tr>
+								<!-- BEGIN: morefields --><tr>
+									<td>Visible on Website:</td>
+									<td colspan="2"><input name="chkWebView" id="chkWebView" type="checkbox" value="1" {WEB_VIEW} /></td>
+								</tr>
+								<tr>
+									<td>Recommended:</td>
+									<td colspan="2"><input name="chkRecommended" id="chkRecommended" type="checkbox" value="1" {RECOMMENDED} /></td>
+								</tr>
+								<tr>
+									<td>Article Code:</td>
+									<td colspan="2"><input name="txtArticle" type="text" size="30" width="50" id="txtArticle" value="{ARTICLE}" /></td>
+								</tr>
+								<!-- END: morefields -->
+								<tr>
+									<td>Description:</td>
+									<td colspan="2"><textarea cols="150" rows="15" name="txtItemDescription" id="txtItemDescription">{ITEM_DESCRIPTION}</textarea></td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<!-- BEGIN: addbutton --><input onmouseover="MM_swapImage('imgAddItemGeneral','','{ENIGMA_ROOT}img/ui/cmd_add_f2.gif', 1)" onmouseout="MM_swapImgRestore()"  name="imgAddItemGeneral" id="imgAddItemGeneral" type="image"  src="{ENIGMA_ROOT}img/ui/cmd_save.gif"  width="45"  height="20" alt="Add New Item" /><!-- END: addbutton -->
+										<!-- BEGIN: savebutton --><input onmouseover="MM_swapImage('imgSaveItemGeneral','','{ENIGMA_ROOT}img/ui/cmd_save_f2.gif', 1)" onmouseout="MM_swapImgRestore()"  name="imgSaveItemGeneral" id="imgSaveItemGeneral" type="image"  src="{ENIGMA_ROOT}img/ui/cmd_save.gif"  width="45"  height="20" alt="Save Changes" /><!-- END: savebutton -->
+										<!-- BEGIN: deletebutton --><input onmouseover="MM_swapImage('imgDeleteItem','','{ENIGMA_ROOT}img/ui/cmd_delete_f2.gif', 1)" onmouseout="MM_swapImgRestore()"  name="imgDeleteItem" id="imgDeleteItem" type="image"  src="{ENIGMA_ROOT}img/ui/cmd_delete.gif"  width="45"  height="20" alt="Delete Item" /><!-- END: deletebutton -->
+										<!-- BEGIN: undeletebutton --><input onmouseover="MM_swapImage('imgUnDeleteItem','','{ENIGMA_ROOT}img/ui/cmd_undelete_f2.gif', 1)" onmouseout="MM_swapImgRestore()"  name="imgUnDeleteItem" id="imgUnDeleteItem" type="image"  src="{ENIGMA_ROOT}img/ui/cmd_undelete.gif"  width="53"  height="20" alt="UnDelete Item" /><!-- END: undeletebutton -->
+									</td>
+								</tr>
+								<tr>
+									<td>Customer preview:</td>
+									<td><div class="boxed">{LIVE_ITEM_DESCRIPTION}</div></td>
+								</tr>
+							</table>
+				<!-- END: tab_1 -->
+				<!-- BEGIN: tab_2 -->
+							<table style="margin: 0 auto;" cellspacing="0" cellpadding="0">
+								<tr class="caption">
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td colspan="3" class="centre">Price</td>
+									<td colspan="2" class="centre">Web</td>
+									<td colspan="2" class="centre">Cat</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr class="caption">
+									<td class="centre">SC</td>
+									<td class="centre">Name</td>
+									<td class="centre">Shop</td>
+									<td class="centre">Web</td>
+									<td class="centre">RRP</td>
+									<td class="centre"><img src="{ENIGMA_ROOT}img/ui/label_view.gif" width="16" height="15" alt="Item can be seen"></td>
+									<td class="centre"><img src="{ENIGMA_ROOT}img/ui/label_buy.gif" width="9" height="15" alt="Item can be bought"></td>
+									<td class="centre"><img src="{ENIGMA_ROOT}img/ui/label_view.gif" width="16" height="15" alt="Item can be seen"></td>
+									<td class="centre"><img src="{ENIGMA_ROOT}img/ui/label_buy.gif" width="9" height="15" alt="Item can be bought"></td>
+									<td class="centre">Size</td>
+									<td class="centre">Units</td>
+									<td class="centre">Print</td>
+									<td class="centre"><img src="{ENIGMA_ROOT}img/ui/label_delete.gif" width="26" height="15" alt="Select to delete item"></td>
+									<td>&nbsp;</td>
+								</tr>
+								<!-- BEGIN: row --><tr{ROW_CLASS}>
+									<td>{DETAIL_STOCKCODE}</td>
+									<td><input name="txtDetailName_{DETAIL_ID}" id="txtDetailName_{DETAIL_ID}" type="text" size="10" value="{DETAIL_NAME}" /></td>
+									<td class="centre"><input name="txtDetailPrice_{DETAIL_ID}" id="txtDetailPrice_{DETAIL_ID}" type="text" size="3" value="{DETAIL_PRICE}" class="currency" /></td>
+									<td class="centre"><input name="txtDetailWebPrice_{DETAIL_ID}" id="txtDetailWebPrice_{DETAIL_ID}" type="text" size="3" value="{DETAIL_WEBPRICE}" class="currency" /></td>
+									<td class="centre"><input name="txtDetailRRP_{DETAIL_ID}" id="txtDetailRRP_{DETAIL_ID}" type="text" size="3" value="{DETAIL_RRP}" class="currency" /></td>
+									<td><input name="chkDetailVisWeb_{DETAIL_ID}" id="chkDetailVisWeb_{DETAIL_ID}" type="checkbox" value="1" {DETAIL_VISWEB} /></td>
+									<td><input name="chkDetailBuyWeb_{DETAIL_ID}" id="chkDetailBuyWeb_{DETAIL_ID}" type="checkbox" value="1" {DETAIL_BUYWEB} /></td>
+									<td><input name="chkDetailVisCat_{DETAIL_ID}" id="chkDetailVisCat_{DETAIL_ID}" type="checkbox" value="1" {DETAIL_VISCAT} /></td>
+									<td><input name="chkDetailBuyCat_{DETAIL_ID}" id="chkDetailBuyCat_{DETAIL_ID}" type="checkbox" value="1" {DETAIL_BUYCAT} /></td>
+									<td class="centre"><input name="txtDetailSize_{DETAIL_ID}" id="txtDetailSize_{DETAIL_ID}" type="text" size="2" value="{DETAIL_SIZE}"  class="numeric"/></td>
+									<td>{DETAIL_UNITSELECTOR}</td>
+									<td><a href="javascript:MM_openBrWindow('{ENIGMA_ROOT}{CONTROL}/wizard/print_item/a/{DETAIL_ID}','PrintItemPopup','width=800,height=600,resizable=yes,menubar=1')">print</a></td>
+									<td class="centre"><input name="chkDetailDelete_{DETAIL_ID}" id="chkDetailDelete_{DETAIL_ID}" type="checkbox" value="1" /></td>
+									<!--
+									<input onmouseover="MM_swapImage('imgUpdateDetail_{DETAIL_ID}','','{ENIGMA_ROOT}img/ui/button_update_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgUpdateDetail_{DETAIL_ID}" id="imgUpdateDetail_{DETAIL_ID}" type="image"  src="{ENIGMA_ROOT}img/ui/button_update.gif"  width="16"  height="16"  alt="Update {DETAIL_ID}" />
+									<input onmouseover="MM_swapImage('imgDeleteDetail_{DETAIL_ID}','','{ENIGMA_ROOT}img/ui/button_delete_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgDeleteDetail_{DETAIL_ID}" id="imgDeleteDetail_{DETAIL_ID}" type="image"  src="{ENIGMA_ROOT}img/ui/button_delete.gif"  width="16"  height="16"  alt="Delete {DETAIL_ID}" />
+									-->
+									<td>
+										<a href="javascript:MM_openBrWindow('{ENIGMA_ROOT}{CONTROL}/item/{DETAIL_ID}/0/0/1','EditItemPopup','width=600,height=80,resizable=yes')" onmouseover="MM_swapImage('imgCurrency_{DETAIL_ID}','','{ENIGMA_ROOT}img/ui/button_override_{OVERRIDE}_f2.gif', 1)" onmouseout="MM_swapImgRestore()"><img style="vertical-align:top" src="{ENIGMA_ROOT}img/ui/button_override_{OVERRIDE}.gif" name="imgCurrency_{DETAIL_ID}" id="imgCurrency_{DETAIL_ID}" width="16" height="16" alt="{OVERRIDE_ALT}" /></a>
+										<a href="javascript:MM_openBrWindow('{ENIGMA_ROOT}{CONTROL}/item/{DETAIL_ID}/0/0/2','EditItemPopup','width=600,height=80,resizable=yes')" onmouseover="MM_swapImage('imgDims_{DETAIL_ID}','','{ENIGMA_ROOT}img/ui/button_dims_{DIMS}_f2.gif', 1)" onmouseout="MM_swapImgRestore()"><img style="vertical-align:top" src="{ENIGMA_ROOT}img/ui/button_dims_{DIMS}.gif" name="imgDims_{DETAIL_ID}" id="imgDims_{DETAIL_ID}" width="16" height="16" alt="{DIMS_ALT}" /></a>
+									</td>
+
+								</tr>
+								<!-- END: row -->
+								<tr>
+									<td>&nbsp;</td>
+									<td><input name="txtDetailName_0" id="txtDetailName_0" type="text" size="10" value="" /></td>
+									<td class="centre"><input name="txtDetailPrice_0" id="txtDetailPrice_0" type="text" size="3" value="" class="currency" /></td>
+									<td class="centre"><input name="txtDetailWebPrice_0" id="txtDetailWebPrice_0" type="text" size="3" value="" class="currency" /></td>
+									<td class="centre"><input name="txtDetailRRP_0" id="txtDetailRRP_0" type="text" size="3" value="" class="currency" /></td>
+									<td><input name="chkDetailVisWeb_0" id="chkDetailVisWeb_0" type="checkbox" value="1" /></td>
+									<td><input name="chkDetailBuyWeb_0" id="chkDetailBuyWeb_0" type="checkbox" value="1" /></td>
+									<td><input name="chkDetailVisCat_0" id="chkDetailVisCat_0" type="checkbox" value="1" /></td>
+									<td><input name="chkDetailBuyCat_0" id="chkDetailBuyCat_0" type="checkbox" value="1" /></td>
+									<td><input name="txtDetailSize_0" id="txtDetailSize_0" type="text" size="2"  class="numeric"/></td>
+									<td>{DETAIL_UNITSELECTOR}</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<!--
+									<td><img src="{ENIGMA_ROOT}img/spacer.gif"  width="16"  height="16"  alt=" " />
+									<input onmouseover="MM_swapImage('imgAddDetail','','{ENIGMA_ROOT}img/ui/button_add_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgAddDetail" id="imgAddDetail" type="image"  src="{ENIGMA_ROOT}img/ui/button_add.gif"  width="16"  height="16"  alt="Add" /></td>
+									-->
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td colspan="11">{INPUT_SUBMIT}</td>
+								</tr>
+							</table>
+							<!-- BEGIN: summary -->
+							&nbsp;<br />
+							<table class="grid" style="margin: 0 auto;" cellspacing="0" cellpadding="0">
+								<tr class="boldheader">
+									<td class="centre">&nbsp;</td>
+									<td class="centre">&nbsp;</td>
+									<td class="centre">&nbsp;</td>
+									<td class="centre">&nbsp;</td>
+									<td class="centre" colspan="4">Shop</td>
+									<td class="spacer">&nbsp;</td>
+									<td class="centre" colspan="4">Web</td>
+									<!--
+									<td class="centre">&nbsp;&nbsp;&nbsp;</td>
+									<td style="color:#ffffcc;" class="centre" colspan="3">Pre-Season</td>
+									-->
+								</tr>
+								<tr class="boldheader">
+									<td class="centre">Item</td>
+									<td class="centre">Supplier</td>
+									<td class="centre">Cost</td>
+									<td class="spacer">&nbsp;</td>
+									<td class="centre">inc</td>
+									<td class="centre">ex</td>
+									<td class="centre">Profit</td>
+									<td class="centre">Markup</td>
+									<td class="spacer">&nbsp;</td>
+									<td class="centre">inc</td>
+									<td class="centre">ex</td>
+									<td class="centre">Profit</td>
+									<td class="centre">Markup</td>
+									<!--
+									<td class="centre">&nbsp;&nbsp;&nbsp;</td>
+									<td style="color:#ffffcc;" class="centre">Cost</td>
+									<td style="color:#ffffcc;" class="centre">Profit</td>
+									<td style="color:#ffffcc;" class="centre">Markup</td>
+									-->
+								</tr>
+								<!-- BEGIN: row --><tr{ROW_CLASS}>
+									<td class="first">{DETAIL_NAME}</td>
+									<td>{SUPPLIER_NAME}</td>
+									<td style="background-color:#ccffcc;" class="{CHEAPEST_PRICE1}currency">{SUPPLIER_PRICE1}</td>
+									<td class="spacer">&nbsp;</td>
+									<td class="currency" style="background-color:#ccccff;">{DETAIL_PRICE}</td>
+									<td class="boldcurrency">{DETAIL_PRICEEX}</td>
+									<td class="currency">{PROFIT_SHOP}</td>
+									<td class="currency{RATE_SHOP_WARNING}">{RATE_SHOP}</td>
+									<td class="spacer">&nbsp;</td>
+									<td class="currency" style="background-color:#ccccff;">{DETAIL_WEBPRICE}</td>
+									<td class="boldcurrency">{DETAIL_WEBPRICEEX}</td>
+									<td class="currency">{PROFIT_WEB}</td>
+									<td class="currency{RATE_WEB_WARNING}">{RATE_WEB}</td>
+									<!--
+									<td>&nbsp;&nbsp;&nbsp;</td>
+									<td style="background-color:#ffffcc;" class="{CHEAPEST_PRICE2}currency">{SUPPLIER_PRICE2}</td>
+									<td style="background-color:#ffffee;" class="currency">{PROFIT2}</td>
+									<td style="background-color:#ffffee;" class="currency">{RATE2}{RATESPINNER2}</td>
+									-->
+								</tr>
+								<!-- END: row -->
+							</table>
+							&nbsp;<br />
+							<!-- END: summary -->
+				<!-- END: tab_2 -->
+				<!-- BEGIN: tab_3 -->
+							<table>
+								<!-- BEGIN: cat -->
+								<tr>
+									<td>{CATEGORY_LABEL}</td>
+									<td>
+									<!-- BEGIN: objectdeleted --><img class="icon" src="{ENIGMA_ROOT}img/ui/object_deleted.gif" width="10" height="16" alt="x"><!-- END: objectdeleted -->
+									<!-- BEGIN: objectnotdeleted --><img class="icon" src="{ENIGMA_ROOT}img/spacer.gif" width="10" height="16" alt=" "><!-- END: objectnotdeleted -->
+									{CATEGORY_SELECTOR}</td>
+									<td>
+									<!-- BEGIN: notprimary --><input onmouseover="MM_swapImage('imgNewPrimaryCategory_{CATEGORY_ID}','','{ENIGMA_ROOT}img/ui/check_off_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgNewPrimaryCategory_{CATEGORY_ID}" id="imgNewPrimaryCategory_{CATEGORY_ID}" type="image" src="{ENIGMA_ROOT}img/ui/check_off.gif" width="14" height="16" alt="Click to make primary" /><!-- END: notprimary -->
+									<!-- BEGIN: primary --><img name="imgPrimary_{CATEGORY_ID}" id="imgPrimary_{CATEGORY_ID}"  src="{ENIGMA_ROOT}img/ui/check_on.gif"  width="14"  height="16"  alt="Primary category" /><!-- END: primary -->
+									</td>
+									<td><input onmouseover="MM_swapImage('imgDeleteCategory_{CATEGORY_ID}','','{ENIGMA_ROOT}img/ui/button_delete_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgDeleteCategory_{CATEGORY_ID}" id="imgDeleteCategory_{CATEGORY_ID}" type="image" src="{ENIGMA_ROOT}img/ui/button_delete.gif" width="16" height="16" alt="Delete" /></td>
+								</tr><!-- END: cat -->
+								<tr>
+									<td class="label">&nbsp;</td>
+									<td>{CATEGORY_SELECTOR}</td>
+									<td><img src="{ENIGMA_ROOT}img/spacer.gif" width="14" height="16" alt=" "></td>
+									<td><input onmouseover="MM_swapImage('imgAddCategory','','{ENIGMA_ROOT}img/ui/button_add_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgAddCategory" id="imgAddCategory" type="image" src="{ENIGMA_ROOT}img/ui/button_add.gif" width="16" height="16" alt="Add" /></td>
+								</tr>
+							</table>
+				<!-- END: tab_3 -->
+				<!-- BEGIN: tab_4 -->
+							<table style="margin: 0 auto;" cellspacing="0" cellpadding="0">
+								<tr class="caption">
+									<td class="centre">Name</td>
+									<td class="centre">Supplier</td>
+									<td class="centre">list</td>
+									<td class="centre" colspan="2">Std</td>
+									<td class="centre" colspan="2">Pre</td>
+									<td class="centre"><img src="{ENIGMA_ROOT}img/ui/label_delete.gif" width="26" height="15" alt="Select to delete item"></td>
+								</tr>
+								<!-- BEGIN: row -->
+								<!-- BEGIN: spacer --><tr>
+									<td colspan="11" class="sepparator"><img src="{ENIGMA_ROOT}img/spacer.gif" width="1" height="1" alt=" "></td>
+								</tr>
+								<!-- END: spacer -->
+								<tr class="mid">
+									<td>{DETAIL_NAME}</td>
+									<td>{SUPPLIER_NAME}</td>
+									<td class="numeric"><input name="txtDetailTradePrice_{DETAIL_ID}_{SUPPLIER_ID}" id="txtDetailTradePrice_{DETAIL_ID}_{SUPPLIER_ID}" type="text" size="5" width="5" value="{SUPPLIER_PRICE}"     class="currency" /></td>
+									<td class="numeric"><input name="txtDetailTradeDiscount_{DETAIL_ID}_{SUPPLIER_ID}" id="txtDetailTradeDiscount_{DETAIL_ID}_{SUPPLIER_ID}" type="text" size="3" width="3" value="{SUPPLIER_BASEDISC}"  class="currency" /></td>
+									<td style="font-size:0.8em">={DETAIL_PRICE_BASE}</td>
+									<td class="numeric"><input name="txtDetailPreSeasonDiscount_{DETAIL_ID}_{SUPPLIER_ID}" id="txtDetailPreSeasonDiscount_{DETAIL_ID}_{SUPPLIER_ID}" type="text" size="3" width="3" value="{SUPPLIER_EXTRADISC}" class="currency" /></td>
+									<td style="font-size:0.8em">={DETAIL_PRICE_EXTRA}</td>
+									<td class="centre"><input name="chkDelete_{DETAIL_ID}_{SUPPLIER_ID}" id="chkDelete_{DETAIL_ID}_{SUPPLIER_ID}" type="checkbox" value="1" /></td>
+								</tr>
+								<!-- END: row -->
+								<tr>
+									<td colspan="11" class="sepparator"><img src="{ENIGMA_ROOT}img/spacer.gif" width="1" height="1" alt=" "></td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										{DETAIL_SELECTOR}
+										{SUPPLIER_SELECTOR}
+										<input name="txtDetailTradePrice_0_0" id="txtDetailTradePrice_0_0" type="text" size="5" width="5" value="{TRADE_PRICE}" class="currency" />
+									</td>
+									<td><input name="txtDetailTradeDiscount_0_0" id="txtDetailTradeDiscount_0_0" type="text" size="3" width="3" value="{SUPPLIER_BASEDISC}" class="currency" /></td>
+									<td>&nbsp;</td>
+									<td><input name="txtDetailPreSeasonDiscount_0_0" id="txtDetailPreSeasonDiscount_0_0" type="text" size="3" width="3" value="{SUPPLIER_EXTRADISC}" class="currency" /></td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td colspan="6">{INPUT_SUBMIT}</td>
+								</tr>
+							</table>
+				<!-- END: tab_4 -->
+				<!-- BEGIN: tab_5 -->
+							<table cellspacing="0" cellpadding="0">
+								<tr class="caption">
+									<td>Item</td>
+									<td>Surcharge Type</td>
+									<td class="centre"># In Pallet</td>
+									<td class="centre">Price</td>
+									<td>&nbsp;</td>
+								</tr>
+								<!-- BEGIN: row -->
+								<tr>
+									<td>{DETAIL_NAME}</td>
+									<td>{POSTAGECHARGE_NAME}</td>
+									<td class="numeric">{POSTAGECHARGE_PALLET}</td>
+									<td class="numeric">{POSTAGECHARGE_CHARGE}</td>
+									<td><input onmouseover="MM_swapImage('imgDeletePostageCharge_{DETAIL_ID}_{POSTAGECHARGE_ID}','','{ENIGMA_ROOT}img/ui/button_delete_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgDeletePostageCharge_{DETAIL_ID}_{POSTAGECHARGE_ID}" id="imgDeleteSupplier_{DETAIL_ID}_{SUPPLIER_ID}" type="image"  src="{ENIGMA_ROOT}img/ui/button_delete.gif"  width="16"  height="16"  alt="Delete" /></td>
+								</tr>
+								<tr>
+									<td colspan="5" class="sepparator"><img src="{ENIGMA_ROOT}img/spacer.gif" width="1" height="1" alt=" "></td>
+								</tr>
+								<!-- END: row -->
+								<tr>
+									<td>{DETAIL_SELECTOR}</td>
+									<td>{POSTAGECHARGE_SELECTOR}</td>
+									<td class="centre"><input class="numeric" name="txtNewPostagePallet" size="4" type="text" value="0" /></td>
+									<td class="centre"><input class="numeric" name="txtNewPostageCharge" size="4" type="text" value="0.00" /></td>
+									<td><input onmouseover="MM_swapImage('imgAddPostageCharge_{DETAIL_ID}','','{ENIGMA_ROOT}img/ui/button_add_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgAddPostageCharge_{DETAIL_ID}" id="imgAddSupplier_{DETAIL_ID}" type="image"  src="{ENIGMA_ROOT}img/ui/button_add.gif"  width="16"  height="16"  alt="Add" /></td>
+								</tr>
+							</table>
+				<!-- END: tab_5 -->
+				<!-- BEGIN: tab_6 -->
+							<table cellpadding="0" cellspacing="0">
+								<tr class="caption">
+									<td>Image</td>
+									<td>Item</td>
+									<td>Primary</td>
+									<td>Delete</td>
+								</tr>
+								<!-- BEGIN: row --><tr>
+									<td>{IMAGE}</td>
+									<td>{DETAIL_NAME}</td>
+									<td class="centre"><!-- BEGIN: notprimary --><input onmouseover="MM_swapImage('imgNewPrimaryPicture_{ITEMPICTURE_ID}','','{ENIGMA_ROOT}img/ui/check_off_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgNewPrimaryPicture_{ITEMPICTURE_ID}" id="imgNewPrimaryPicture_{ITEMPICTURE_ID}" type="image" src="{ENIGMA_ROOT}img/ui/check_off.gif" width="14" height="16" alt="Click to make primary" /><!-- END: notprimary -->
+									<!-- BEGIN: primary --><img name="imgNewPrimaryPicture_{ITEMPICTURE_ID}" id="imgNewPrimaryPicture_{ITEMPICTURE_ID}"  src="{ENIGMA_ROOT}img/ui/check_on.gif"  width="14"  height="16"  alt="Primary picture" /><!-- END: primary --></td>
+									<td class="centre"><input onmouseover="MM_swapImage('imgDeletePicture_{ITEMPICTURE_ID}','','{ENIGMA_ROOT}img/ui/button_delete_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgDeletePicture_{ITEMPICTURE_ID}" id="imgDeletePicture_{ITEMPICTURE_ID}" type="image"  src="{ENIGMA_ROOT}img/ui/button_delete.gif"  width="16"  height="16"  alt="Delete" /></td>
+								</tr>
+								<!-- END: row -->
+							</table>
+							<br />
+							<table cellpadding="0" cellspacing="0">
+								<tr class="caption">
+									<td>New picture<br />Applies to item</td>
+									<td>Picture</td>
+									<td>&nbsp;</td>
+								</tr>
+								<!-- BEGIN: newrow --><tr>
+									<td>{DETAIL_SELECTOR}</td>
+									<td><input type="file" name="fileNew" /></td>
+									<td><input onmouseover="MM_swapImage('imgAddPicture','','{ENIGMA_ROOT}img/ui/cmd_add_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgAddPicture" id="imgAddPicture" type="image"  src="{ENIGMA_ROOT}img/ui/cmd_add.gif"  width="45"  height="20"  alt="Add" /></td>
+								</tr>
+								<!-- END: newrow -->
+							</table>
+				<!-- END: tab_6 -->
+				<!-- BEGIN: tab_7 -->
+				<table class="grid" cellspacing="0" cellspacing="0" style="margin: 0 auto;">
+					<tr>
+						<td class="clear" colspan="7">
+							<strong>Current Stock Levels:</strong>
+							<table class="grid" cellspacing="0" cellspacing="0">
+							<tr class="boldheader">
+								<td class="first">Item</td>
+								<td>Remaining</td>
+								<td>Value</td>
+							</tr>
+							<!-- BEGIN: currentrow --><tr>
+								<td class="first">{DETAIL_NAME}</td>
+								<td class="numeric"><input name="txtSetStock_{DETAIL_ID}" class="numeric" style="font-size: 0.9em" type="text" size="3" value="{REMAINING}" tabindex="{TAB_INDEX}" /></td>
+								<td class="numeric">{VALUE}</td>
+							</tr>
+							<!-- END: currentrow -->
+							</table>
+						</td>
+					</tr>
+				</table>
+
+				<table class="grid" cellspacing="0" cellspacing="0" style="margin: 0 auto;">
+					<tr class="header">
+						<td colspan="7"><strong><br />Receive new stock:</strong></td>
+					</tr>
+					<tr class="boldheader">
+						<td class="first">Item</td>
+						<td>Supplier</td>
+						<td>Date</td>
+						<td>Price</td>
+						<td colspan="3">Qty</td>
+					</tr>
+					<tr class="first">
+						<td class="first">{DETAIL_SELECTOR}</td>
+						<td>{SUPPLIER_SELECTOR}</td>
+						<td><input name="txtStockDate_0" type="text" size="5" width="5" tabindex="3" /></td>
+						<td><input name="txtStockPrice_0" type="text" size="5" width="5" tabindex="4" /></td>
+						<td colspan="3">
+							<input name="txtStockQtyBought_0" type="text" size="3" width="3" tabindex="5" />
+							<input name="chkDelete_0" type="hidden" value="0" />
+						</td>
+					</tr>
+				</table>
+
+
+				<table class="grid" cellspacing="0" cellspacing="0" style="margin: 0 auto;">
+					<tr class="header">
+						<td colspan="7"><strong><br />Purchase History:</strong></td>
+					</tr>
+					<tr class="boldheader">
+						<td class="first">Item</td>
+						<td>Supplier</td>
+						<td>Date</td>
+						<td>Price</td>
+						<td>Ordered</td>
+						<td>Left</td>
+						<td class="centre"><img src="{ENIGMA_ROOT}img/ui/label_delete_inv.gif" width="26" height="15" alt="Select to delete item"></td>
+					</tr>
+					<!-- BEGIN: historyrow --><tr>
+						<td class="first"><div id="hov_{STOCKID}_1">{DETAIL_NAME}</div></td>
+						<td><div id="hov_{STOCKID}_1">{SUPPLIER_NAME}</div></td>
+						<td><div id="hov_{STOCKID}_2">{DATE}</div></td>
+						<td class="numeric"><div id="hov_{STOCKID}_3">{PRICE}</div></td>
+						<td class="numeric"><div id="hov_{STOCKID}_4">{QUANTITY}</div></td>
+						<td class="numeric"><div id="hov_{STOCKID}_5">{REMAINING}</div></td>
+						<td class="centre"><div id="hov_{STOCKID}_6"><input name="chkDelete_{STOCK_ID}" type="checkbox" value="1" tabindex="{TAB_INDEX}" /></div></td>
+					</tr>
+					<!-- END: historyrow -->
+					<tr class="header">
+						<td colspan="7"><br />{INPUT_SUBMIT}</td>
+					</tr>
+				</table>
+				<!-- END: tab_7 -->
+				<!-- BEGIN: tab_8 -->
+							<table>
+								<!-- BEGIN: link -->
+								<tr>
+									<td>{LINK_LABEL}</td>
+									<td>{LINK_IMAGE}</td>
+									<td>{ITEM_SELECTOR}</td>
+									<td><input onmouseover="MM_swapImage('imgDeleteLink_{LINK_ID}','','{ENIGMA_ROOT}img/ui/button_delete_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgDeleteLink_{LINK_ID}" id="imgDeleteLink_{LINK_ID}" type="image" src="{ENIGMA_ROOT}img/ui/button_delete.gif" width="16" height="16" alt="Delete" /></td>
+								</tr><!-- END: link -->
+								<tr>
+									<td class="label">{LINK_LABEL}</td>
+									<td>&nbsp;</td>
+									<td>{ITEM_SELECTOR}</td>
+									<td><input onmouseover="MM_swapImage('imgAddLink','','{ENIGMA_ROOT}img/ui/button_add_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgAddLink" id="imgAddLink" type="image" src="{ENIGMA_ROOT}img/ui/button_add.gif" width="16" height="16" alt="Add" /></td>
+								</tr>
+							</table>
+				<!-- END: tab_8 -->
+						</td>
+					</tr>
+				</table>
+				</form>
+				</div>
+				<br />
+				<img src="{ENIGMA_ROOT}img/spacer.gif" height="200" width="1" alt=" " />
+				<!-- END: maintabs -->
+<!-- END: main -->

@@ -1,17 +1,11 @@
 <?php
-/**
- * Enigma : Online Sales Management. (http://www.enigmagen.org)
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- **/
-
-Configure::write('sef', true);
-
-Configure::write('migrate.productImages', ROOT.DS.'products'.DS);
-
-/* Config.language sets the global system language for the application.
- * Set to your three-letter country-code, matching the language translation
- * files in /locale/.
- * Set to 'xxx' to use the test strings; useful for finding untranslated strings.
- */
-//Configure::write('Config.language', 'xxx');
+$OPT->storedatabasehost = 'localhost';
+$OPT->storedatabasename = 'enigma';
+$OPT->storedatabaseuser = 'enigma';
+$OPT->storedatabasepass = 'enigma';
+$OPT->admindatabaseuser = 'enigma';
+$OPT->admindatabasepass = 'enigma';
+$OPT->tableprefix       = 'store_';
+$OPT->storedatebasekey  = 'enigma';
+$OPT->bannerroot        = $_SERVER['DOCUMENT_ROOT'].'/images/banners/store';
+?>

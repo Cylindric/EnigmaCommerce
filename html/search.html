@@ -1,0 +1,25 @@
+<!-- BEGIN: main -->
+   <!-- BEGIN: noquery -->Search text too short! (Search text needs to be at least 4 characters)<br />
+   <!-- END: noquery -->
+
+   <!-- BEGIN: results -->
+   <table class="panel" cellspacing="0" cellpadding="0">
+      <tr class="header">
+         <td>Found {RESULT_COUNT} result(s)...</td>
+      </tr>
+      <!-- BEGIN: row -->
+      <tr class="list">
+         <td>
+         	<dl>
+         		<dt><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/1#item_{ITEM_ID}">{ITEM_NAME}</a></dt>
+         		<dd>{ITEM_DESCRIPTION}</dd>
+         	</dl>
+         	</td>
+      </tr>
+      <!-- END: row -->
+   </table>
+   <!-- END: results -->
+
+   <!-- BEGIN: noresults -->Sorry, no results found<br />
+   <!-- END: noresults -->
+<!-- END: main -->

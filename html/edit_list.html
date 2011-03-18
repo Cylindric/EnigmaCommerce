@@ -1,0 +1,34 @@
+<!-- BEGIN: main -->
+<table class="shrink"><tr><td>
+<table class="shrink"><tr><td>
+
+<h1>{LIST_NAME}</h1>
+<form name="frmeditlist" action="" method="post" >
+<input type="hidden" name="currentpage" value="{PAGE}" />
+<input type="hidden" name="listtype" value="{LIST_TYPE}" />
+
+<!-- BEGIN: list -->
+<table class="panel" cellspacing="0" cellpadding="0">
+	<tr class="header">
+		<!-- BEGIN: heading --><td>{TEXT}</td><!-- END: heading -->
+	</tr>
+	<!-- BEGIN: row --><tr>
+		<!-- BEGIN: field --><td {CLASS}>
+			<!-- BEGIN: input --><input name="{NAME}" type="{TYPE}" value="{VALUE}" tabindex={TAB} />
+			<!-- END: input --><!-- BEGIN: checkbox --><input name="{NAME}" type="checkbox" value="{VALUE}" {CHECKED} tabindex={TAB} />
+			<!-- END: checkbox --><!-- BEGIN: textarea --><textarea name="{NAME}" tabindex={TAB}>{VALUE}</textarea>
+			<!-- END: textarea --><!-- BEGIN: text -->{VALUE}
+			<!-- END: text -->
+		</td>
+		<!-- END: field -->
+	</tr><!-- END: row -->
+</table>
+<!-- END: list -->
+<br />
+<input name="cmdApply"  type="submit" value="Apply" tabindex="10000" />
+</form>
+
+
+</td></tr></table>
+</td></tr></table>
+<!-- END: main -->

@@ -1,0 +1,50 @@
+<!-- BEGIN: main -->
+<form enctype="multipart/form-data" name="frmEditItem" id="frmStockTake" method="post" action="{PROTOCOL}{SERVERHOST}{ENIGMA_ROOT}{CONTROL}/stocktake">
+Select Category: {CATEGORY_SELECTOR}{SELECT_BUTTON}
+<!-- BEGIN: mainlist -->
+<table class="grid" cellpadding="0" cellspacing="0">
+	<!-- BEGIN: category -->
+	<tr {SEPP_STYLE}>
+		<td class="clear" colspan="4">{SEPP_TEXT}&nbsp;</td>
+	</tr>
+	<tr class="boldheader">
+		<td colspan="5">{CAT1_NAME} - {CAT2_NAME}</td>
+		<td colspan="2">{WIDGET_SAVE}</td>
+	</tr>
+	<!-- BEGIN: row -->
+	<tr>
+		<td class="first" style="padding-left: 2em;">{STOCKCODE}</a></td>
+		<td><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/0/7#1" tabindex="100000{TABINDEX}" target="_blank">{ITEM_NAME}</a></td>
+		<td>{DETAIL_NAME}</td>
+		<td class="numeric">{CURRENT_STOCK}</td>
+		<td class="numeric">{CURRENT_VALUE}</td>
+		<td class="numeric"><input style="font-size: 0.8em" type="text" name="txtnewstocklevel_{DETAIL_ID}" size="3" tabindex="{TABINDEX}" /></td>
+		<td>{WIDGET_SUPPLIER}</td>
+	</tr>
+	<!-- END: row -->
+	<tr>
+		<td class="first">&nbsp;</a></td>
+		<td colspan="3"><strong>Sub Total: {CAT1_NAME} - {CAT2_NAME}</strong></td>
+		<td class="numeric"><strong>{TOTAL_CATEGORY}</strong></td>
+		<td colspan="2">&nbsp;</td>
+	</tr>
+
+	<!-- BEGIN: maintotal -->
+	<tr>
+		<td class="first">&nbsp;</a></td>
+		<td colspan="3"><strong>Sub Total: {CAT1_NAME}</strong></td>
+		<td class="numeric"><strong>{TOTAL_MAINCATEGORY}</strong></td>
+		<td colspan="2">&nbsp;</td>
+	</tr>
+	<!-- END: maintotal -->
+	<!-- END: category -->
+	<tr>
+		<td class="first">&nbsp;</a></td>
+		<td colspan="3"><strong>Grand Total</strong></td>
+		<td class="numeric"><strong>{TOTAL_GRAND}</strong></td>
+		<td colspan="2">&nbsp;</td>
+	</tr>
+</table>
+<!-- END: mainlist -->
+</form>
+<!-- END: main -->

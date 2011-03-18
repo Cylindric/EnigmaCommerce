@@ -1,0 +1,85 @@
+<!-- BEGIN: main -->
+	<!-- BEGIN: saving -->
+	Saving Order...<br>
+	<!-- END: saving -->
+	<!-- BEGIN: orderconf -->
+	<h3>Thank you for your order.  Your order reference is {ORDER_ID}.</h3>
+	We will send out a confirmation email once we have processed your order.
+	<!-- END: orderconf -->
+
+	<!--  BEGIN: form -->
+	<form name="delivery" action="{PHP_SELF}" method="post">
+	<input type="hidden" name="formsubmitted" value="delivery" />
+
+	<table>
+		<tr>
+			<td style="width: 150px;">Delivering To:</td>
+			<td>
+				<!-- BEGIN: inputdelzone --><input type="radio" name="deliveryzone" onClick="form.submit();" value="{DELZONE_ID}"{DELZONE_CHECKED}>{DELZONE_TEXT}</input><br />
+				<!-- END: inputdelzone -->
+			</td>
+		</tr>
+		<!-- BEGIN: deliverydate -->
+		<tr>
+			<td style="height: 20px;">Preferred Delivery Date:</td>
+			<td>
+				<select name="deliverydate" onChange="form.submit();">
+				<!-- BEGIN: inputdeldate --><option value="{DELDATE_VALUE}"{DELDATE_SELECTED}>{DELDATE_TEXT}</option>
+				<!-- END: inputdeldate -->
+				</select><br />{DELIVERYDATE_NOTE}
+			</td>
+		</tr>
+		<!-- END: deliverydate -->
+		<!-- BEGIN: nodeliverydate -->
+		<tr>
+			<td style="height: 20px;">&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<!-- END: nodeliverydate -->
+	</table>
+	</form>
+	<!-- END: form -->
+	<div class="basket">
+		<table class="panel" cellspacing="0" cellpadding="0">
+			<tr class="header">
+				<td class="centre">Product Code</td>
+				<td>Description</td>
+				<td class="numeric">Unit Price</td>
+				<td class="centre">Qty</td>
+				<td class="numeric">Price</td>
+				<td class="centre"><!-- BEGIN: ammendlabel --> <!-- END: ammendlabel --></td>
+			</tr>
+		</div>
+
+		<!-- BEGIN: row --><tr {ROW_CLASS}>
+			<td class="centre">
+			{DETAIL_STOCKCODE}</td>
+			<td>{ITEM_NAME}</td>
+			<td class="numeric">{DETAIL_PRICE}</td>
+			<td class="centre">{DETAIL_QTY}</td>
+			<td class="numeric">{DETAIL_TOTAL}</td>
+			<td class="centre">&nbsp;<!-- BEGIN: ammend --><em><a href="{ENIGMA_ROOT}{CONTROL}/basket/remove/{DETAIL_ID}/1">Remove</a>&nbsp;|&nbsp;<a href="{ENIGMA_ROOT}{CONTROL}/basket/add/{DETAIL_ID}/1">Add</a></em><!-- END: ammend --></td>
+		</tr>
+		<!-- END: row -->
+
+		<tr class="list">
+			<td class="numeric" colspan="4"><strong>Order Total:</strong></td>
+			<td class="numeric"><strong>{ORDER_TOTAL}</strong></td>
+			<td class="left"><strong>{ORDER_TOTAL_NOTE}</strong></td>
+		</tr>
+
+	</table>
+
+	<!-- BEGIN: notes -->&nbsp;<br />
+	<table>
+		<!-- BEGIN: row --><tr><td>Note&nbsp;{NOTE_NUMBER}:</td><td>{NOTE_TEXT}</td></tr>
+		<!-- END: row -->
+	</table>
+	<!-- END: notes -->
+
+	<!-- BEGIN: shopbutton --><br />
+	<form action="{ENIGMA_ROOT}{CONTROL}/checkout" method="post">
+		<p class="submit" style="text-align: center;"><input class="submit" type="submit" value="Proceed to Checkout..."></p>
+	</form>
+	<!-- END: shopbutton -->
+<!-- END: main -->

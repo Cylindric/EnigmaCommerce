@@ -1,0 +1,122 @@
+<!-- BEGIN: main --><!-- itemlist#main -->
+	<!-- BEGIN: compact --><!-- itemlist#main.compact -->
+				<table class="panel" cellspacing="0" cellpadding="0">
+
+					<tr class="header">
+						<td>Item Name</td>
+						<td class="currency">Price from</td>
+					</tr>
+
+					<!-- BEGIN: row --><tr class="list{CLASS}">
+						<td><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}{PAGE_ANCHOR}">{ITEM_NAME}</a><!-- BEGIN: recommended -->&nbsp;<img src="{SKIN_PATH}/recommend1.gif" height="22" width="22" alt="recommended!" /><!-- END: recommended --></td>
+						<td class="currency" width="0">{ITEM_PRICE}</td>
+					</tr>
+					<!-- END: row -->
+
+					<!-- BEGIN: newlink --><tr class="list{CLASS}">
+						<td><a href="javascript:MM_openBrWindow('{ENIGMA_ROOT}{CONTROL}/wizard/new_item','WizardNewItemPopup','width=800,height=600,resizable=no')">Add New Item</a></td>
+						<td>&nbsp;</td>
+					</tr>
+					<!-- END: newlink -->
+
+					</tr>
+				</table>
+	<!-- !itemlist#main.compact --><!-- END: compact -->
+
+	<!-- BEGIN: expanded --><!-- itemlist#main.expanded -->
+				<table cellpadding="0" cellspacing="0">
+					<!-- BEGIN: row --><tr>
+						<!-- BEGIN: cell --><td width="20%">
+						<table class="panel">
+							<tr><td>{ITEM_NAME}</td></tr>
+							<tr><td>{IMAGE}</td></tr>
+						</table>
+
+						</td><td>&nbsp;</td><!-- END: cell -->
+					<!-- BEGIN: span --><td colspan="{COLSPAN}" width="150px">&nbsp;</td><!-- END: span -->
+					</tr>
+					<!-- END: row -->
+				</table>
+	<!-- END: expanded -->
+	<!-- BEGIN: complete -->
+				<!-- <table class="shrink" align="center"><tr><td> -->
+					<table class="panel" align="center" cellspacing="0" cellpadding="0">
+						<tr class="item_header">
+							<td colspan="3"><a name="item_{ITEM_ID}"></a>{ITEM_NAME}</td>
+						</tr>
+						<tr>
+							<td class="spacious" rowspan="2">{IMAGE}<br />
+							<!-- BEGIN: imagespinners -->
+							<a href="#" onClick="prevImage('prodimg_720'); clearTimeout(timerID)">previous</a>
+							<a href="#" onClick="switchImage('prodimg_720'); clearTimeout(timerID)">next</a>
+							<!-- END: imagespinners -->
+							<!-- BEGIN: icons --><div class="icons">
+							<!-- BEGIN: recommended --><div class="row"><div class="recommended"><div class="icon"><img style="vertical-align:middle" src="{ENIGMA_ROOT}img/ui/recommended.gif" height="22" width="22" alt="Recommended" /></div><div class="label">Recommended</div></div></div><!-- END: recommended -->
+							<!-- BEGIN: article --><div class="article"><div class="icon"><img style="vertical-align:middle" src="{ENIGMA_ROOT}img/ui/moreinfo.gif" height="25" width="28" alt="More Info" /><a href="{ENIGMA_ROOT}{CONTROL}/article/{ARTICLE}"></div><div class="label">More Info</a></div></div><!-- END: article -->
+							</div><!-- END: icons -->
+							</td>
+							<td width="10">&nbsp;</td>
+							<td class="spacious">
+							{ITEM_DESCRIPTION}
+							<br />&nbsp;<br />
+							<table class="grid" cellspacing="0" cellpadding="0">
+									<tr class="header">
+										<td colspan="2">&nbsp;</td>
+										<!-- BEGIN: rrp_header --><td class="centre">RRP</td><!-- END: rrp_header -->
+										<td class="centre">Our&nbsp;Price</td>
+										<!-- BEGIN: buy_header --><td>&nbsp;</td><!-- END: buy_header -->
+									</tr>
+									<!-- BEGIN: row --><tr{ROW_CLASS}>
+										<td class="first"><div class="stockcode">{DETAIL_STOCKCODE}</div></td>
+										<td>{DETAIL_NAME}</td>
+										<!-- BEGIN: rrp --><td class="currencyrrp">{DETAIL_RRP}</td><!-- END: rrp -->
+										<td class="currencybuy">{DETAIL_PRICE}</td>
+										<!-- BEGIN: buy_cell --><td style="white-space:nowrap">
+											<!-- BEGIN: buy --><a href="{ENIGMA_ROOT}{CONTROL}/basket/add/{DETAIL_ID}/1" class="buy">Add to basket</a><!-- END: buy -->
+											<!-- BEGIN: nobuy -->&nbsp;<!-- END: nobuy -->
+											<!-- BEGIN: postagecharge -->
+											<img style="vertical-align:middle" src="{ENIGMA_ROOT}img/ui/{POSTAGECHARGE_ICON}" alt="{POSTAGECHARGE_NAME}" />
+											<!-- END: postagecharge -->
+										</td><!-- END: buy_cell -->
+									</tr><!-- END: row -->
+								</table>
+								<br />
+								<!-- BEGIN: related -->
+								<div class="related">
+  								<table class="panel" cellspacing="0" cellpadding="0">
+  									<tr class="header">
+  										<td colspan="4">Related Items</td>
+  									</tr>
+  									<!-- BEGIN: row --><tr>
+  										<!-- BEGIN: cell --><td style="padding: 4px;"><a href="{ENIGMA_ROOT}{CONTROL}/category/{RELATED_ITEM_CATEGORY}/{RELATED_ITEM_SUBCATEGORY}/{RELATED_ITEM_CATEGORY_PAGE}#{ITEM_ID}">{RELATED_ITEM_IMAGE}</a></td>
+  										<td style="padding: 4px;"><a href="{ENIGMA_ROOT}{CONTROL}/category/{RELATED_ITEM_CATEGORY}/{RELATED_ITEM_SUBCATEGORY}/{RELATED_ITEM_CATEGORY_PAGE}#{ITEM_ID}">{RELATED_ITEM_NAME}</a></td>
+  										<!-- END: cell -->
+  										<!-- BEGIN: empty_cell --><td style="padding: 4px;">&nbsp;</td>
+  										<td style="padding: 4px;">&nbsp;</td>
+  										<!-- END: empty_cell -->
+  									</tr>
+  									<!-- END: row -->
+  								</table>
+								</div>
+								<!-- END: related -->
+							</td>
+						</tr>
+					</table>
+
+					<!--</td></tr></table>-->
+					<br />
+	<!-- END: complete -->
+
+				<div style="font-size: 1.3em;">
+				<p>displaying results <strong>{START_ITEM}</strong> to <strong>{END_ITEM}</strong> (of <strong>{TOTAL_ITEMS}</strong> items)
+
+				<strong>
+				<!-- BEGIN: prevlink -->&nbsp;&nbsp;&nbsp;<a href="{ENIGMA_ROOT}{CONTROL}/category/{MAINCAT_ID}/{SUBCAT_ID}/{PREVIOUS_PAGE}">Previous</a><!-- END: prevlink -->
+				<!-- BEGIN: nextlink -->&nbsp;&nbsp;&nbsp;<a href="{ENIGMA_ROOT}{CONTROL}/category/{MAINCAT_ID}/{SUBCAT_ID}/{NEXT_PAGE}">Next</a><!-- END: nextlink -->
+				</strong>
+				</p>
+				</div>
+
+
+
+<!-- !itemlist#main --><!-- END: main -->

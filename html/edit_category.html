@@ -1,0 +1,90 @@
+<!-- BEGIN: main -->
+				<table class="shrink" align="center"><tr><td>
+				<!-- BEGIN: hide-->
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td>Edit Category</td>
+						<td style="text-align:right">
+						<a href="{ENIGMA_ROOT}{CONTROL}/category/{MAINCAT_ID}/{SUBCAT_ID}/0/1	" onmouseover="MM_swapImage('imgHide','','{ENIGMA_ROOT}img/ui/button_hide_inv_f2.gif', 1)" onmouseout="MM_swapImgRestore()">
+						<img src="{ENIGMA_ROOT}img/ui/button_hide_inv.gif" name="imgHide" id="imgHide" width="23" height="16" alt="Hide edit box" />
+						</a>
+						</td>
+					</tr>
+				</table>
+				<!-- END: hide -->
+				<!-- BEGIN: show -->
+				<div class="{DIVCLASS}">
+				<form name="updatecategory" id="updatecategory" method="post" action=""  onsubmit="return submitForm();">
+				<input type="hidden" name="hidFormSubmitted" id="hidFormSubmitted" value="edit_category" />
+				<input type="hidden" name="hidCategoryID" id="hidCategoryID" value="{CATEGORY_ID}" />
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td colspan="2">{CATEGORY_TITLE}</td>
+						<td style="text-align:right">
+						<a href="{ENIGMA_ROOT}{CONTROL}/category/{MAINCAT_ID}/{SUBCAT_ID}/0/0" onmouseover="MM_swapImage('imgShow','','{ENIGMA_ROOT}img/ui/button_show_inv_f2.gif', 1)" onmouseout="MM_swapImgRestore()">
+						<img src="{ENIGMA_ROOT}img/ui/button_show_inv.gif" name="imgShow" id="imgShow" width="23" height="16" alt="Hide edit box" />
+						</a>
+						</td>
+					<tr>
+					<tr>
+						<td>Name:</td>
+						<td colspan="2"><input name="txtCategoryName" type="text" size="30" width="50" id="txtCategoryName" value="{CATEGORY_NAME}" /></td>
+					</tr>
+					<tr>
+						<td>Parent Category:</td>
+						<td colspan="2">{CATEGORY_SELECTOR}</td>
+					</tr>
+					<tr>
+						<td>Visible on Website:</td>
+						<td colspan="2"><input name="chkWebView" id="chkWebView" type="checkbox" value="1" {WEB_VIEW} /></td>
+					</tr>
+					<tr>
+						<td>Description:</td>
+						<td colspan="2">&nbsp;</td>
+					<tr>
+						<td colspan="3">
+						<!-- BEGIN: rich_edit_mode -->
+							<script language="JavaScript" type="text/javascript">
+							<!--
+							function submitForm() {
+								//make sure hidden and iframe values are in sync before submitting form
+								//to sync only 1 rte, use updateRTE(rte)
+								//to sync all rtes, use updateRTEs
+								updateRTE('txtDescription');
+								//updateRTEs();
+								//alert("rte1 = " + document.RTEDemo.rte1.value);
+
+								//change the following line to true to submit form
+								return true;
+							}
+
+							//Usage: initRTE(imagesPath, includesPath, cssFile)
+							initRTE("{ENIGMA_ROOT}img/ui/rte/", "", "");
+
+							//Usage: writeRichText(fieldname, html, width, height, buttons)
+							writeRichText('txtDescription', '{DESCRIPTION}', 500, 200, true, false);
+							//-->
+							</script>
+							<noscript><p><b>Javascript must be enabled to use this form.</b></p></noscript>
+
+						<!-- END: rich_edit_mode -->
+						<!-- BEGIN: normal_edit_mode -->
+							<textarea cols="100" rows="10" name="txtDescription" id="txtCategoryDescription">{DESCRIPTION}</textarea>
+						<!-- END: normal_edit_mode -->
+						</td>
+					</tr>
+					<tr>
+						<td class="spacious" colspan="3">
+							<!-- BEGIN: cmdadd --><input onmouseover="MM_swapImage('imgAdd','','{ENIGMA_ROOT}img/ui/cmd_add_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgAdd" id="imgAdd" type="image" src="{ENIGMA_ROOT}img/ui/cmd_add.gif" width="45" height="20" alt="Add" /><!-- END: cmdadd -->
+							<!-- BEGIN: cmdsave --><input onmouseover="MM_swapImage('imgSave','','{ENIGMA_ROOT}img/ui/cmd_save_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgSave" id="imgSave" type="image" src="{ENIGMA_ROOT}img/ui/cmd_save.gif" width="45" height="20" alt="Save" /><!-- END: cmdsave -->
+							<!-- BEGIN: cmddelete --><input onmouseover="MM_swapImage('imgDelete','','{ENIGMA_ROOT}img/ui/cmd_delete_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgDelete" id="imgDelete" type="image" src="{ENIGMA_ROOT}img/ui/cmd_delete.gif" width="45" height="20" alt="Delete" /><!-- END: cmddelete -->
+							<!-- BEGIN: cmdundelete --><input onmouseover="MM_swapImage('imgUnDelete','','{ENIGMA_ROOT}img/ui/cmd_undelete_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgUnDelete" id="imgUnDelete" type="image" src="{ENIGMA_ROOT}img/ui/cmd_undelete.gif" width="53" height="20" alt="UnDelete" /><!-- END: cmdundelete -->
+						</td>
+					</tr>
+				</table>
+				</form>
+				</div>
+				<!-- END: show -->
+				</td></tr></table>
+				<br />
+<!-- END: main -->

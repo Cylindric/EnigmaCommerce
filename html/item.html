@@ -1,0 +1,49 @@
+<!-- BEGIN: main --><!-- item -->
+				<!-- <table class="shrink" align="center"><tr><td> -->
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td colspan="3">{ITEM_NAME}</td>
+					</tr>
+					<tr>
+						<td class="spacious" rowspan="2">{IMAGE}<br />
+						<!-- BEGIN: imagespinners -->
+						<a href="#" onClick="prevImage('prodimg_720'); clearTimeout(timerID)">previous</a>
+						<a href="#" onClick="switchImage('prodimg_720'); clearTimeout(timerID)">next</a>
+						<!-- END: imagespinners -->
+
+						<table>
+						<!-- BEGIN: recommended --><tr><td class="centre"><img style="vertical-align:middle" src="{ENIGMA_ROOT}img/ui/recommended.gif" height="22" width="22" alt="Recommended" /></td><td>Recommended</td></tr><!-- END: recommended -->
+						<!-- BEGIN: article --><tr><td class="centre"><img style="vertical-align:middle" src="{ENIGMA_ROOT}img/ui/moreinfo.gif" height="25" width="28" alt="More Info" /></td><td><a href="{ENIGMA_ROOT}{CONTROL}/article/{ARTICLE}">More Info</a></td></tr><!-- END: article -->
+						</table>
+
+						<td width="10">&nbsp;</td>
+						<td class="spacious">
+{ITEM_DESCRIPTION}
+						<br />&nbsp;<br />
+							<table class="grid" cellspacing="0" cellpadding="0">
+								<tr class="header">
+									<td colspan="2">&nbsp;</td>
+									<!-- BEGIN: rrp_header --><td class="centre">RRP</td><!-- END: rrp_header -->
+									<td class="centre">Our<br />Price</td>
+									<td>&nbsp;</td>
+								</tr>
+								<!-- BEGIN: row --><tr{ROW_CLASS}>
+									<td class="first"><div class="stockcode">{DETAIL_STOCKCODE}</div></td>
+									<td>{DETAIL_NAME}</td>
+									<!-- BEGIN: rrp --><td class="currencyrrp">{DETAIL_RRP}</td><!-- END: rrp -->
+									<td class="currency">{DETAIL_PRICE}</td>
+									<td style="white-space:nowrap">
+										<!-- BEGIN: buy --><a href="{ENIGMA_ROOT}{CONTROL}/basket/add/{DETAIL_ID}/1" class="buy">Add</a><!-- END: buy -->
+										<!-- BEGIN: nobuy -->&nbsp;<!-- END: nobuy -->
+										<!-- BEGIN: postagecharge -->
+										<img style="vertical-align:middle" src="{ENIGMA_ROOT}img/ui/{POSTAGECHARGE_ICON}" alt="{POSTAGECHARGE_NAME}" />
+										<!-- END: postagecharge -->
+									</td>
+								</tr><!-- END: row -->
+							</table>
+						</td>
+					</tr>
+				</table>
+				<!-- </td></tr></table> -->
+				<br />
+<!-- !item --><!-- END: main -->

@@ -1,0 +1,63 @@
+<!-- BEGIN: main -->
+<table class="shrink"><tr><td>
+<table class="shrink"><tr><td>
+
+<!-- BEGIN: icons -->
+<div class="centre">
+<table class="icons" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><a href="{ENIGMA_ROOT}{CONTROL}/picture/add" onmouseover="MM_swapImage('icon_add','','{ENIGMA_ROOT}img/ui/icon_add_f2.gif', 1)" onmouseout="MM_swapImgRestore()"><img name="icon_add" id="icon_add" src="{ENIGMA_ROOT}img/ui/icon_add.gif" width="48" height="48" alt="Add Image" /></a></td>
+		<td><a href="{ENIGMA_ROOT}{CONTROL}/picture/remove" onmouseover="MM_swapImage('icon_remove','','{ENIGMA_ROOT}img/ui/icon_remove_f2.gif', 1)" onmouseout="MM_swapImgRestore()"><img name="icon_remove" id="icon_remove" src="{ENIGMA_ROOT}img/ui/icon_remove.gif" width="48" height="48" alt="Remove Image" /></a></td>
+	</tr>
+	<tr>
+		<td><a href="{ENIGMA_ROOT}{CONTROL}/picture/add" onmouseover="MM_swapImage('icon_add','','{ENIGMA_ROOT}img/ui/icon_add_f2.gif', 1)" onmouseout="MM_swapImgRestore()">Add<br />Image</a></td>
+		<td><a href="{ENIGMA_ROOT}{CONTROL}/picture/remove" onmouseover="MM_swapImage('icon_remove','','{ENIGMA_ROOT}img/ui/icon_remove_f2.gif', 1)" onmouseout="MM_swapImgRestore()">Remove<br />Image</a></td>
+	</tr>
+</table>
+</div>
+<!-- END: icons -->
+
+<!-- BEGIN: add -->
+<form name="frmAdd" action="" method="post" enctype="multipart/form-data">
+	<table>
+		<tr>
+			<td>File:</td>
+			<td><input type="hidden" name="MAX_FILE_SIZE" value="524288"><input type="file" name="fileNew"></td>
+		</tr>
+		<tr>
+			<td>Name:</td>
+			<td><input type="text" name="txtName" value=""></td>
+		</tr>
+		<tr>
+			<td>Caption:</td>
+			<td><input type="text" name="txtCaption"></td>
+		</tr>
+		<tr>
+			<td>Description:</td>
+			<td><textarea name="txtDescription"></textarea></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input type="submit" value="Add"></td>
+		</tr>
+	</table>
+</form>
+<!-- END: add -->
+
+<!-- BEGIN: list -->
+<table class="panel" cellspacing="0" cellpadding="0">
+	<tr class="header">
+		<td>Picture</td>
+		<td>Filename</td>
+	</tr>
+	<!-- BEGIN: row --><tr>
+		<td>{PICTURE_NAME}</td>
+		<td>{FILENAME}</td>
+	</tr>
+	<!-- END: row -->
+</table>
+<!-- END: list -->
+
+</td></tr></table>
+</td></tr></table>
+<!-- END: main -->

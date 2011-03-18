@@ -1,0 +1,18 @@
+# Apply to all robots
+User-agent: *
+
+
+# Some folders are out-of-bounds
+Disallow: /doc/
+Disallow: /html/
+Disallow: /img/
+Disallow: /include/
+Disallow: /webalizer/
+Disallow: /go/basket/
+Disallow: /go.php/basket/
+
+# Some specific files are also out-of-bounds
+Disallow: /application.php
+Disallow: /config.php
+Disallow: /orders.php
+Disallow: /login.php

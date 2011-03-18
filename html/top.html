@@ -1,0 +1,161 @@
+<!-- BEGIN: main -->
+	<!-- BEGIN: criticalnote --><table class="critical">
+		<tr>
+			<td><strong>Warning:</strong> {CRITICAL_MESSAGE}</td>
+		</tr>
+	</table>
+<!-- END: criticalnote -->
+
+	<div id="header">
+		<table class="menu" cellpadding="0" cellspacing="0">
+			<tr>
+				<td id="topnav">
+					<ul><li><a href="/index.php?option=com_content&amp;task=view&amp;id=16&amp;Itemid=33" class="mainlevel-nav" >Home</a></li><li><a href="/index.php?option=com_content&amp;task=view&amp;id=10&amp;Itemid=34" class="mainlevel-nav" >Company Information</a></li><li><a href="/index.php?option=com_content&amp;task=view&amp;id=17&amp;Itemid=35" class="mainlevel-nav" >Contact Details</a></li><li class="last"><a href="/content/view/25/45/">Delivery Information</a></li></ul>
+				</td>
+				<td id="toprightnav">
+					<ul><li><a href="/store/" class="mainlevel">Home Shopping</a></li></ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+	<table width="98%" cellpadding="4" cellspacing="0">
+		<tr>
+			<td class="leftnav" width="150" valign="top">
+				<!-- BEGIN: minisearch -->
+				<form name="quicksearch" action="{ENIGMA_ROOT}{CONTROL}/search/" method="get"><table class="panel" cellspacing="0" cellpadding="0">
+					<tr class="header"><td>Search</td></tr>
+					<tr>
+						<td><input name="q" type="text" size="10" /><a href="#" onClick="document.quicksearch.submit();return false">go&nbsp;&gt;</a></td>
+					</tr>
+				</table></form>
+				<br />
+				<!-- END: minisearch -->
+				<!-- BEGIN: admintools1 -->
+				<table class="panel" cellpadding="0" cellspacing="0">
+					<tr class="header"><td>Admin Tools</td></tr>
+					<tr><td><a href="{ENIGMA_ROOT}{CONTROL}/order">View Orders</a></td></tr>
+					<tr><td><a href="{ENIGMA_ROOT}{CONTROL}/weblog">Access Log</a></td></tr>
+					<tr><td><a href="{ENIGMA_ROOT}{CONTROL}/picture">Pictures</a></td></tr>
+					<tr><td><a href="{ENIGMA_ROOT}{CONTROL}/login">Log out</a></td></tr>
+				</table>
+				<br />
+				<!-- END: admintools1 -->
+				<!-- BEGIN: bulkbuys -->
+				<table class="panel" cellpadding="0" cellspacing="0">
+					<tr class="header">
+						<td>Bulk Buys</td>
+					</tr>
+					<tr>
+						<td style="text-align: center;color: red; font-size: 1.5em; font-weight: bold;"><a href="{ENIGMA_ROOT}{CONTROL}/category/144">Bulk Buy Koi Products</a></td>
+					</tr>
+				</table>
+				<br />
+				<!-- END: bulkbuys -->
+				{ITEMCOUNTER}
+				<!-- BEGIN: keyproducts -->
+				<table class="panel" cellpadding="0" cellspacing="0">
+					<tr class="header">
+						<td>Product Information</td>
+					</tr>
+					<tr>
+						<td style="text-align: center;color: red; font-size: 1.5em; font-weight: bold;"><a href="{ENIGMA_ROOT}{CONTROL}/category/157">Koi Product Guide</a></td>
+					</tr>
+				</table>
+				<br />
+				<!-- END: keyproducts -->
+
+
+				<!-- BEGIN: maincats -->
+				<table class="panel" cellpadding="0" cellspacing="0">
+					<tr class="header"><td>{MAINCAT_LABEL}</td></tr>
+					<!-- BEGIN: row --><tr class="{ROW_CLASS}"><td><a href="{ENIGMA_ROOT}{CONTROL}/category/{CAT_ID}">{CAT_NAME}</a></td></tr><!-- END: row -->
+					<!-- BEGIN: customrow --><tr class="{ROW_CLASS}"><td><a href="{DESTINATION}">{NAME}</a></td></tr><!-- END: customrow -->
+				</table>
+				<br />
+				<!-- END: maincats -->
+
+
+				<!-- BEGIN: brands --><table class="panel" cellpadding="0" cellspacing="0">
+					<tr class="header"><td>We Stock</td></tr>
+					<tr>
+						<td style="text-align:center">
+							{SPACER_10}<br />
+							<a href="{ENIGMA_ROOT}{CONTROL}/article/stoneandwater"><img src="{ENIGMA_ROOT}img/brand_logos/stoneandwater.gif" width="120" height="20" alt="Stone And Water" /></a><br />{SPACER_10}<br />
+							<a href="{ENIGMA_ROOT}{CONTROL}/article/rockways"><img src="{ENIGMA_ROOT}img/brand_logos/rockways_small.gif" width="120" height="24" alt="Rockways" /></a><br />{SPACER_10}<br />
+							<a href="{ENIGMA_ROOT}{CONTROL}/search/?q=oase"><img src="{ENIGMA_ROOT}img/brand_logos/oase_small.gif" width="40" height="44" alt="Oase" /></a><br />{SPACER_10}<br />
+							<a href="{ENIGMA_ROOT}{CONTROL}/search/?q=kusuri"><img src="{ENIGMA_ROOT}img/brand_logos/kusuri_small.gif" width="120" height="26" alt="Kusuri" /></a><br />{SPACER_10}<br />
+							<a href="{ENIGMA_ROOT}{CONTROL}/category/0/143"><img src="{ENIGMA_ROOT}img/brand_logos/tap.gif" width="94" height="29" alt="TAP" /></a><br />{SPACER_10}<br />
+							<a href="{ENIGMA_ROOT}{CONTROL}/search/?q=kockney,yamitsu"><img src="{ENIGMA_ROOT}img/brand_logos/kockney_koi_small.gif" width="120" height="62" alt="Kockney Koi" /></a><br />{SPACER_10}<br />
+							<a href="{ENIGMA_ROOT}{CONTROL}/search/?q=interpet"><img src="{ENIGMA_ROOT}img/brand_logos/interpet_small.gif" width="80" height="59" alt="Interpet" /></a><br />{SPACER_10}<br />
+							<a href="{ENIGMA_ROOT}{CONTROL}/search/?q=hikari"><img src="{ENIGMA_ROOT}img/brand_logos/hikari_small.gif" width="80" height="48" alt="Hikari" /></a><br />{SPACER_10}<br />
+						</td>
+					</tr>
+				</table>
+				<br />
+				<!-- END: brands -->
+				<!-- BEGIN: securelogo -->
+				<center>
+				<a href="http://www.instantssl.com/" target="_blank"><img src="{ENIGMA_ROOT}img/comodo.gif" alt="SSL Certificate Authority" width="80" height="52" border="0" /></a>
+				</center>
+				<!-- END: securelogo -->
+				&nbsp;<br />
+				<table class="panel" cellpadding="0" cellspacing="0">
+					<tr class="header"><td>Credit cards taken</td></tr>
+					<tr>
+						<td style="text-align:center">
+              <img src="{ENIGMA_ROOT}/img/cards/amex_online_multi3_white_small.gif" alt="Amex" /><br />
+              <img src="{ENIGMA_ROOT}/img/cards/Switch_025.gif" alt="Switch" /><img src="{ENIGMA_ROOT}/img/cards/maestro_brand_050_gif.gif" alt="Maestro" /><br />
+              &nbsp;
+            </td>
+					</tr>
+				</table>
+
+			</td>
+			<td valign="top">
+
+
+				<!-- BEGIN: admintools --><div class="centre">
+				<table class="icons" cellpadding="0" cellspacing="0">
+					<tr>
+						<!-- BEGIN: icon --><td><a href="{TARGET}"  onmouseover="MM_swapImage('icon_{ICON}','','{ENIGMA_ROOT}img/ui/icon_{ICON}_f2.gif', 1)" onmouseout="MM_swapImgRestore()"><img name="icon_{ICON}" id="icon_{ICON}" src="{ENIGMA_ROOT}img/ui/icon_{ICON}.gif" width="64" height="64" alt="{ALT}" /></a></td>
+						<!-- END: icon -->
+					</tr>
+					<tr>
+						<!-- BEGIN: label --><td>{LABEL}</td>
+						<!-- END: label -->
+					</tr>
+				</table>
+				</div>
+				<!-- END: admintools -->
+
+				<!-- BEGIN: banner -->
+				<div class="centre" style="margin-bottom: 10px;">
+					<a href="{ENIGMA_ROOT}"><img src="/images/banners/store/{BANNER_FILE}" alt="{BANNER_NAME}" {BANNER_ATTR} /></a>
+				</div>
+				<!-- END: banner -->
+
+
+				<!--
+				<h1 style="margin-bottom:0;">
+				<img src="{ENIGMA_ROOT}img/spacer.gif" alt=" " width="1" height="62" align="middle" />
+				<!-- BEGIN: heading -->{PAGE_HEADING}<!-- END: heading --></h1>
+				-->
+				
+				<!-- BEGIN: promo_panels --><table style="margin-top:0px;margin-left:auto;margin-right:auto;">
+					<tr>
+						<!-- BEGIN: panel -->
+						<td class="centre" style="padding: 0px 12px;">
+							<table class="panel" cellpadding="0" cellspacing="0">
+								<tr class="header"><td class="centre">{PANEL_NAME}</td></tr>
+								<tr><td class="centre"><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/1">{ITEM_NAME}</a></td></tr>
+								<tr><td class="centre" style="padding-bottom: 8px"><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/1"><img src="{ITEM_IMAGE}" alt="{ITEM_NAME}" {IMAGE_PROPS} /></a></td></tr>
+							</table>
+						</td>
+						<!-- END: panel -->
+					</tr>
+				</table>
+				<!-- END: promo_panels -->
+<!-- END: main -->
+

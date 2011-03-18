@@ -1,0 +1,162 @@
+<!-- BEGIN: main -->
+			</td>
+			<td class="rightnav"  width="150" valign="top">
+
+			<!-- BEGIN: featureditems -->
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td colspan="3">Featured Items</td>
+					</tr>
+					<!-- BEGIN: row -->
+					<tr class="listfaint">
+						<td class="indent" colspan="3"><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/1#item_{ITEM_ID}">{ITEM_NAME}</a></td>
+					</tr>
+					<!-- END: row -->
+				</table>
+				<br />
+			<!-- END: featureditems -->
+
+			<!-- BEGIN: specials -->
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td colspan="3">Special Offers</td>
+					</tr>
+					<!-- BEGIN: row -->
+					<tr class="listfaint">
+						<td class="indent" colspan="3"><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/1#item_{ITEM_ID}">{ITEM_NAME}</a></td>
+					</tr>
+					<!-- END: row -->
+				</table>
+				<br />
+			<!-- END: specials -->
+
+			<!-- BEGIN: minibasket -->
+			<div class="minibasket">
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td colspan="4"><a href="{ENIGMA_ROOT}{CONTROL}/basket/view"><img src="{ENIGMA_ROOT}img/ui/small_basket.png" width=26 height=22 alt="Go" />&nbsp;Basket&nbsp;</a></td>
+					</tr>
+					<!-- BEGIN: row -->
+					<!-- BEGIN: headerrow -->
+					<tr class="subheader">
+						<td colspan="4"><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}">{ITEM_NAME}</a></td>
+					</tr>
+					<!-- END: headerrow -->
+					<!-- BEGIN: headerrownohref -->
+					<tr class="subheader">
+						<td colspan="4">{HYPERLINK_START}{ITEM_NAME}{HYPERLINK_END}</td>
+					</tr>
+					<!-- END: headerrownohref -->
+					<tr>
+						<td>{DETAIL_QTY}</td>
+						<td>{DETAIL_NAME}</td>
+						<td class="currency">{DETAIL_VALUE}</td>
+						<td width="8"><!-- BEGIN: remove --><a href="{ENIGMA_ROOT}{CONTROL}/basket/remove/{DETAIL_ID}/1">x</a><!-- END: remove -->&nbsp;</td>
+					</tr>
+					<!-- END: row -->
+					<!-- BEGIN: mergedrow -->
+					<tr class="subheader">
+						<td colspan="4">{HYPERLINK_START}{ITEM_NAME}{HYPERLINK_END}</td>
+					</tr>
+					<tr>
+						<td>{DETAIL_QTY}</td>
+						<td colspan="2">{DETAIL_NAME}</td>
+						<td width="8"><!-- BEGIN: remove --><a href="{ENIGMA_ROOT}{CONTROL}/basket/remove/{DETAIL_ID}/1">x</a><!-- END: remove -->&nbsp;</td>
+					</tr>
+					<!-- END: mergedrow -->
+					<tr class="subheader">
+						<td colspan="2">Total</td>
+						<td colspan="1" class="currency">{BASKET_TOTAL}</td>
+						<td width="8"><a href="{ENIGMA_ROOT}{CONTROL}/basket/clear">x</a></td>
+					</tr>
+					<!-- BEGIN: additionalpp -->
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td colspan="2">plus P&amp;P</td>
+					</tr>
+					<!-- END: additionalpp -->
+					<tr class="header">
+						<td colspan="4"><a href="{ENIGMA_ROOT}{CONTROL}/basket/view">Go to checkout...</a></td>
+					</tr>
+				</table>
+				</div>
+				<br />
+			<!-- END: minibasket -->
+
+			<!-- BEGIN: christmas -->
+				<table class="panelchristmas" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td colspan="3">Christmas Gift Ideas</td>
+					</tr>
+					<!-- BEGIN: row -->
+					<tr class="listfaint">
+						<td class="indent" colspan="3"><img src="{ENIGMA_ROOT}img/ui/christmas_holly.gif" width="24" height="25" alt="*" /><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/1#item_{ITEM_ID}">{ITEM_NAME}</a></td>
+					</tr>
+					<!-- END: row -->
+				</table>
+				<br />
+			<!-- END: christmas -->
+
+			<!-- BEGIN: klfilter -->
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td colspan="3"><a href="{ENIGMA_ROOT}{CONTROL}/article/klfilter">Koi Logic Filtration</a></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<div align="center"><a href="{ENIGMA_ROOT}{CONTROL}/article/klfilter"><img src="{ENIGMA_ROOT}img/articles/klfilter/spinning3.gif" width="80" height="96" alt="Koi Logic Filtration" /></a><br />
+							The most professional range of Koi filters available</div>
+						</td>
+					</tr>
+				</table>
+				<br />
+			<!-- END: klfilter -->
+
+			<!-- BEGIN: newitems -->
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td colspan="3">NEW Products!</td>
+					</tr>
+					<!-- BEGIN: row -->
+					<tr class="listfaint">
+						<td class="indent" colspan="3"><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/1#item_{ITEM_ID}">{ITEM_NAME}</a></td>
+					</tr>
+					<!-- END: row -->
+				</table>
+				<br />
+			<!-- END: newitems -->
+
+			<!-- BEGIN: legend -->
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr class="header">
+						<td colspan="2">Key to symbols</td>
+					</tr>
+					<!-- BEGIN: postagecharge --><tr>
+						<td><img src="{ENIGMA_ROOT}img/ui/{POSTAGECHARGE_IMG}" alt="{POSTAGECHARGE_NAME}" /></td><td>{POSTAGECHARGE_NAME}</td>
+					</tr>
+					<!-- END: postagecharge -->
+				</table>
+				<br />
+			<!-- END: legend -->
+			
+			<!-- BEGIN: we_stock -->
+				<table class="panel" align="center" cellspacing="0" cellpadding="0">
+					<tr>
+						<td>{WE_STOCK_TEXT}</td>
+					</tr>
+				</table>
+				<br />
+			<!-- END: we_stock -->
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="3" align="center" class="copyright">
+        In-store prices may vary from online prices<br />
+        Copyright &copy; {YEAR} Koi Logic<br />
+      	<span style="font-size: 0.8em;">Powered by <a href="http://www.enigmagen.com" target="_blank">EnigmaGen</a></span>
+      </td>
+		</tr>
+	</table>
+<!-- END: main -->

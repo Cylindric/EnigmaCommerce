@@ -1,0 +1,76 @@
+<!-- BEGIN: main --><form name="frmwizprintitem" action="" method="post" >
+<input type="hidden" name="currentpage" value="{PAGE}" />
+<table class="wizard" cellspacing="0" cellpadding="0">
+	<tr>
+		<td rowspan="2" class="print_item" style="background: url({ENIGMA_ROOT}img/ui/wiz_new_item{FRAME}.png);">
+			<h1>Print Item</h1>
+			<ul>
+				<li><a href="{ENIGMA_ROOT}{CONTROL}/wizard/print_item/a/{DETAIL_ID}">Large</a></li>
+				<li><a href="{ENIGMA_ROOT}{CONTROL}/wizard/print_item/b/{DETAIL_ID}">Medium</a></li>
+				<li><a href="{ENIGMA_ROOT}{CONTROL}/wizard/print_item/c/{DETAIL_ID}">Small</a></li>
+			</ul>
+		</td>
+		<td class="label">
+			<!-- BEGIN: type_a -->
+			<div class="label_a">
+				<table>
+					<tr>
+						<td>{PICTURE_A}</td>
+						<td>
+							&nbsp;<br />
+							{ITEM_NAME}<br />
+							&nbsp;<br />
+							{RETAIL_PRICE}<br />
+							&nbsp;<br />
+							{DETAIL_NAME}<br />
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br />
+			<!-- END: type_a -->
+
+			<!-- BEGIN: type_b -->
+			<div class="label_b">
+				<table>
+					<tr>
+						<td>{PICTURE_B}</td>
+						<td>
+							{ITEM_NAME}<br />
+							{RETAIL_PRICE}<br />
+							{DETAIL_NAME}<br />
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br />
+			<!-- END: type_b -->
+
+			<!-- BEGIN: type_c -->
+			<div class="label_c">
+				<table>
+					<tr>
+						<td>
+							{ITEM_NAME}<br />
+							&nbsp;<br />
+							{RETAIL_PRICE}&nbsp;&nbsp;&nbsp;{DETAIL_NAME}<br />
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br />
+			<!-- END: type_c -->
+
+		</td>
+	</tr>
+	<tr>
+		<td class="buttons">
+			<!-- BEGIN: btn_close --><input name="cmdClose"  type="submit" value="Close"  tabindex="10005" onClick="window.close()" /><!-- END: btn_close -->
+		</td>
+	</tr>
+</table>
+</form>
+
+</body>
+</html>
+<!-- END: main -->

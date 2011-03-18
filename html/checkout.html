@@ -1,0 +1,197 @@
+<!-- BEGIN: main -->
+	<table class="shrink"><tr><td>
+	<table class="shrink"><tr><td>
+
+	<!-- BEGIN: orderconfirmation -->
+	<p>Thank you for your order.<br />
+	Your order number is {ORDER_ID}</p>
+	<!-- END: orderconfirmation -->
+
+	<!-- BEGIN: form -->
+	<p>Please fill out all fields marked with a <strong class="required">+</strong></p>
+	<p>{ERR.top}</p>
+	<form name="checkout" action="{PROTOCOL}{SERVERHOST}{ENIGMA_ROOT}{CONTROL}/checkout" method="post">
+	<input type="hidden" name="formsubmitted" value="1" />
+
+	<table class="panel" cellpadding="0" cellspacing="0">
+		<tr class="header">
+			<td colspan="3">Contact details</td>
+		</tr>
+		<tr>
+			<td>First Name:</td>
+			<td><input type="text" size="20" name="firstname" value="{SUB.firstname}" /><strong class="required">+</strong></td>
+			<td>{ERR.firstname}</td>
+		</tr>
+		<tr>
+			<td>Last Name:</td>
+			<td><input type="text" size="20" name="lastname"  value="{SUB.lastname}" /><strong class="required">+</strong></td>
+			<td>{ERR.lastname}</td>
+		</tr>
+		<tr>
+			<td>Email Address:</td>
+			<td><input type="text" size="20" name="email"	  value="{SUB.email}" /><strong class="required">+</strong></td>
+			<td>{ERR.email}</td>
+		</tr>
+		<tr>
+			<td>Daytime Phone:</td>
+			<td><input type="text" size="20" name="dayphone"  value="{SUB.dayphone}" /><strong class="required">+</strong></td>
+			<td>{ERR.dayphone}</td>
+		</tr>
+
+		<tr>
+			<td colspan="3">&nbsp;</td>
+		</tr>
+		<tr class="header">
+			<td colspan="3">Home/invoice address</td>
+		</tr>
+
+		<tr>
+			<td>Card-holder's address:</td>
+			<td><input type="text" size="20" name="invaddress1"  value="{SUB.invaddress1}" /><strong class="required">+</strong></td>
+			<td>{ERR.invaddress1}</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input type="text" size="20" name="invaddress2"  value="{SUB.invaddress2}" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input type="text" size="20" name="invaddress3"  value="{SUB.invaddress3}" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Town:</td>
+			<td><input type="text" size="20" name="invtown"		value="{SUB.invtown}" /><strong class="required">+</strong></td>
+			<td>{ERR.invtown}</td>
+		</tr>
+		<tr>
+			<td>County:</td>
+			<td><input type="text" size="20" name="invcounty"	 value="{SUB.invcounty}" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Postcode:</td>
+			<td><input type="text" size="20" name="invpostcode"  value="{SUB.invpostcode}" /><strong class="required">+</strong></td>
+			<td>{ERR.invpostcode}</td>
+		</tr>
+		<tr>
+			<td>Country:</td>
+			<td><input type="text" size="20" name="invcountry"	value="{SUB.invcountry}" /><strong class="required">+</strong></td>
+			<td>{ERR.invcountry}</td>
+		</tr>
+
+		<tr>
+			<td colspan="3">&nbsp;</td>
+		</tr>
+		<tr class="header">
+			<td colspan="3">Delivery address (Leave blank to use the same address as above)</td>
+		</tr>
+
+		<tr>
+			<td rowspan=3>Delivery address:</td>
+			<td><input type="text" size="20" name="deladdress1"  value="{SUB.deladdress1}" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><input type="text" size="20" name="deladdress2"  value="{SUB.deladdress2}" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><input type="text" size="20" name="deladdress3"  value="{SUB.deladdress3}" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Town:</td>
+			<td><input type="text" size="20" name="deltown"		value="{SUB.deltown}" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>County:</td>
+			<td><input type="text" size="20" name="delcounty"	 value="{SUB.delcounty}" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Postcode:</td>
+			<td><input type="text" size="20" name="delpostcode"  value="{SUB.delpostcode}" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Country:</td>
+			<td><input type="text" size="20" name="delcountry"  value="{SUB.delcountry}" /></td>
+			<td>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td colspan="3">&nbsp;</td>
+		</tr>
+		<tr class="header">
+			<td colspan="3">Payment Details</td>
+		</tr>
+
+		<tr>
+			<td>Card Type:</td>
+			<td>{SELECTOR_CCTYPE}<strong class="required">+</strong></td>
+			<td>{ERR.cctype}</td>
+		</tr>
+		<tr>
+			<td>Card Number:</td>
+			<td><input type="text" size="20" name="ccno" value="{SUB.ccno}" /><strong class="required">+</strong></td>
+			<td>{ERR.ccno}</td>
+		</tr>
+		<tr>
+			<td>Name on Card:</td>
+			<td><input type="text" size="20" name="ccname" value="{SUB.ccname}" /><strong class="required">+</strong></td>
+			<td>{ERR.ccname}</td>
+		</tr>
+		<tr>
+			<td>Expiry Date (mm/yy):</td>
+			<td>{SELECT_EXPMONTH}{SELECT_EXPYEAR}<strong class="required">+</strong></td>
+			<td>{ERR.ccexpdate}</td>
+		</tr>
+		<tr>
+			<td>Security code on back of card:<br /><span style="font-size: 0.7em">(for AmEx leave blank)</span></td>
+			<td><input type="text" size="4" name="cccode" value="{SUB.cccode}" /><strong class="required">+</strong></td>
+			<td>{ERR.cccode}</td>
+		</tr>
+
+		<tr><td colspan="3"><hr /></td></tr>
+
+		<tr>
+			<td>Issue Number:</td>
+			<td><input type="text" size="4"  name="ccissue" value="{SUB.ccissue}" /></td>
+			<td>{ERR.ccissnumber}</td>
+		</tr>
+		<tr>
+			<td>Issue Date (mm/yy):</td>
+			<td>{SELECT_ISSMONTH}{SELECT_ISSYEAR}
+			</td>
+			<td>{ERR.ccissdate}</td>
+		</tr>
+
+		<tr>
+			<td colspan="3">&nbsp;</td>
+		</tr>
+		<tr class="header">
+			<td colspan="3">&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td colspan="3">
+				<p class="centre">
+					<input type="submit" value="Submit Order" />
+				</p>
+				<p class="centre">
+					<img src="{ENIGMA_ROOT}img/padlock.jpg" width="144" height="144" align="middle">
+					<a href="http://www.instantssl.com/" target="_blank"><img src="{ENIGMA_ROOT}img/comodo.gif" alt="SSL Certificate Authority" border="0" align="middle"></a>
+				</p>
+			</td>
+		</tr>
+
+	</table>
+	</form>
+	<!-- END: form -->
+
+	</td></tr></table>
+	</td></tr></table>
+<!-- END: main -->

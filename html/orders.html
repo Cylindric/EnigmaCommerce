@@ -1,0 +1,131 @@
+<!-- BEGIN: main -->
+
+<!-- BEGIN: ordersummary -->
+<table class="panel" cellspacing="0" cellpadding="0">
+  <tr class="header">
+    <td>ID</td>
+    <td>Date</td>
+    <td>Customer</td>
+    <td class="currency">Total</td>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  <!-- BEGIN: row -->
+  <tr>
+    <td><a href="{PHP_SELF}/{ORDER_ID}">{ORDER_ID}</a></td>
+    <td><a href="{PHP_SELF}/{ORDER_ID}">{ORDER_DATE}</a></td>
+    <td><a href="{PHP_SELF}/{ORDER_ID}">{CUSTOMER_NAME}</a></td>
+    <td class="currency">{ORDER_TOTAL}</td>
+    <td><!-- BEGIN: new --><img src="{ENIGMA_ROOT}img/ui/new_order.gif" height="16" width="16" alt="New Order" /><!-- END: new --><!-- BEGIN: notnew -->&nbsp;<!-- END: notnew --></td>
+    <td>{ORDER_WIPECC}</td>
+  </tr>
+  <!-- END: row -->
+</table>
+<!-- END: ordersummary -->
+
+
+<!-- BEGIN: orderdetails -->
+<!-- BEGIN: wipeccwarning -->
+<div class="error">WARNING - To confirm you want to wipe the CC details, click the link again</div>
+<!-- END: wipeccwarning -->
+
+<table>
+	<tr>
+		<td style="text-align:right"><h3>Order Number:</h3></td>
+		<td><h3>{ORDER_ID}</h3></td>
+	</tr>
+	<tr>
+		<td style="text-align:right"><h3>Order Date:</h3></td>
+		<td><h3>{ORDER_DATE}</h3></td>
+	</tr>
+	<tr>
+		<td style="text-align:right"><h3>Delivery Date:</h3></td>
+		<td>{TEST}<h3 <!-- BEGIN: specialdate -->class="emphasis"<!-- END: specialdate -->>{DELIVERY_DATE}{STD_DATE}</h3></td>
+	</tr>
+</table>
+
+
+
+<table class="panel" border=0 cellspacing="0" cellpadding="0">
+  <tr class="header">
+    <td colspan="2">Customer Details</td>
+    <td colspan="4">Credit Card Details</td>
+  </tr>
+  <tr>
+    <td colspan="2">{CUSTOMER_NAME}<br /> <a href="mailto:{CUSTOMER_EMAIL}">{CUSTOMER_EMAIL}</a><br />{CUSTOMER_PHONE}</td>
+    <!-- BEGIN: stdcc --><td colspan="4"><a href="{ENIGMA_ROOT}{CONTROL}/order/{ORDER_ID}/wipecc{CONFIRMWIPE}">{CC_DETAILS}</a></td><!-- END: stdcc -->
+    <!-- BEGIN: mailcc --><td colspan="4">{CC_DETAILS}</td><!-- END: mailcc -->
+  </tr>
+  <tr class="header">
+    <td colspan="2">Card Holder/Invoice Address</td>
+    <td colspan="4">Delivery Address</td>
+  </tr>
+  <tr class="details">
+    <td colspan="2">{INVOICE_ADDRESS}</td>
+    <td colspan="4">{DELIVERY_ADDRESS}</td>
+  </tr>
+  <tr class="header">
+    <td colspan="6">Order Lines</td>
+  </tr>
+  <!-- BEGIN: detailrow -->
+  <tr>
+    <td><a href="{ENIGMA_ROOT}{CONTROL}/item/{ITEM_ID}/1">{ITEM_STOCKCODE}</a></td>
+    <td>{ITEM_NAME}</td>
+    <td>{DETAIL_NAME}</td>
+    <td class="currency">{DETAIL_PRICE}</td>
+    <td class="numeric">{DETAIL_QTY}</td>
+    <td class="currency">{DETAIL_TOTAL}</td>
+  </tr>
+  <!-- END: detailrow -->
+  <tr class="list">
+    <td colspan="5"><strong>Subtotal:</strong></td>
+    <td class="currency"><strong>{ORDER_SUBTOTAL}</strong></td>
+  </tr>
+  <tr class="header">
+    <td colspan="6">Postage</td>
+  </tr>
+  <!-- BEGIN: postagerow -->
+  <tr>
+    <td colspan="3">{TEXT}</td>
+    <td class="currency">{PRICE}</td>
+    <td class="numeric">{QTY}</td>
+    <td class="currency">{TOTAL}</td>
+  </tr>
+  <!-- END: postagerow -->
+  <tr class="list">
+    <td colspan="5"><strong>Total:</strong></td>
+    <td class="currency"><strong>{ORDER_TOTAL}</strong></td>
+  </tr>
+</table>
+	<!-- END: orderdetails -->
+	<!-- end of order list -->
+
+<!-- BEGIN: mail_log -->
+<h3>Message Log</h3>
+<span class="noprint">
+<form action="{ENIGMA_ROOT}{CONTROL}/order/{ORDER_ID}/send_desp" method="post">
+	<table class="centre">
+		<tr><td>{IMG_SEND_DESP}</td><td>{IMG_SEND_MAIL}</td></tr>
+		<tr><td><input size="8" name="DeliveryDate" value="{SEND_DELIVERY_DATE}" /></td><td>&nbsp;</td></tr>
+	</table>
+</form>
+</span>
+<table class="panel" border=0 cellspacing="0" cellpadding="0">
+  <tr class="header">
+    <td>Date</td>
+    <td>Subject</td>
+  </tr>
+  <!-- BEGIN: row -->
+  <tr>
+  	<td>{DATE}</td>
+  	<td>{SUBJECT}</td>
+  </tr>
+  <!-- END: row -->
+</table>
+<span class="noprint">
+<p>{IMG_SEND_CONF}</p>
+</span>
+<!-- END: mail_log -->
+
+
+{CUSTOMER_EMAIL_TEXT}
+<!-- END: main -->

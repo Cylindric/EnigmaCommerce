@@ -1,0 +1,200 @@
+body {
+	color:            #000000;
+	background-color: #ffffcc;
+	font-family:      Arial, Helvetica, sans-serif;
+	font-size:        12px;
+	font-weight:      400;
+	text-align:       left;
+	margin: 0px;
+}
+
+img {
+	border: none;
+	vertical-align: middle;
+}
+
+
+h1 {
+	color:            #b1d9ff;
+	font-size:        18px;
+}
+
+input, textarea {
+	font-family:      Arial, Helvetica, sans-serif;
+	font-size:        12px;
+}
+
+a {
+	color:            #000000;
+	text-decoration:  none;
+}
+a:visited {
+	color:            #000000;
+	text-decoration:  none;
+}
+a:hover {
+	text-decoration:  underline;
+}
+a.obvious, a.obvious:visited {
+	color:				#0088b6;
+	text-decoration:	underline;
+}
+a.obvious:hover {
+	color:				#ffffff;
+	text-decoration:	underline;
+}
+a.email, a.email:visited {
+	color:				#0088b6;
+	text-decoration:	underline;
+}
+a.email:hover {
+	color:				#ffffff;
+	text-decoration:	underline;
+}
+
+td {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:   12px;
+	vertical-align: top;
+}
+
+table.shrink {
+	width:  80%;
+	margin: 0 auto;
+}
+
+div {
+	margin: 0;
+	padding: 0;
+}
+
+table.panel {
+	color:            #000000;
+	background-color: #ffffff;
+	padding: 0px;
+	margin:  0 auto;
+	width:   100%;
+	border:  2px solid #0088b6;
+}
+table.panel td {
+	font-size:  12px;
+	padding:    0px 3px;
+	vertical-align:   top;
+}
+table.panel tr.header td {
+	color:            #ffffff;
+	background-color: #0088b6;
+	padding:          1px 3px;
+	margin:           0px;
+	border-top:       none;
+	vertical-align:   middle;
+}
+table.panel tr.item_header td {
+	font-size:		  1.3em;
+	color:            #ffffff;
+	background-color: #0088b6;
+	padding:          1px 3px;
+	margin:           0px;
+	border-top:       none;
+	vertical-align:   middle;
+}
+table.panel tr.header img {
+	vertical-align:   middle;
+}
+table.panel tr.header a {
+	font-size:        12px;
+	color:            #ffffff;
+	background-color: #0088b6;
+}
+table.panel tr.header a.current {
+	font-weight:		600;
+}
+table.panel tr.subheader td {
+	font-weight:		600;
+	padding:				0px 2px 0px 2px;
+	border-top:			1px solid #0088b6;
+}
+table.panel tr.caption td {
+	font-weight:		600;
+	padding:				0px 2px 0px 2px;
+}
+table.panel tr.list td {
+	border-top: 1px solid #ffffff;
+}
+table.panel tr.listfaint td {
+	border-top: 1px solid #737b18;
+}
+table.panel tr.listunavailable td,
+table.panel tr.listunavailable td a {
+	color:            #6666ff;
+	background-color: #ddddff;
+	border-top: 1px solid #ffffff;
+}
+
+table.panel tr.unavailable td a {
+	color:            #6666ff;
+	background-color: #ddddff;
+}
+
+table.panel tr.listdeleted td,
+table.panel tr.listdeleted a {
+	color:            #aa0000;
+	background-color: #ffffcc;
+	border-top: 1px solid #ffffff;
+}
+
+table.panel tr.current td {
+	color:            #ffffff;
+	background-color: #BC4E89;
+	border-top:       1px solid #ffffcc;
+}
+table.panel tr.current a {
+	color:            #ffffff;
+	background-color: #BC4E89;
+}
+table.panel td.spacious {
+	padding: 10px;
+	vertical-align: top;
+}
+table.panel td.roomy {
+	padding: 4px;
+	vertical-align: top;
+}
+table.panel td.indent {
+	font-size:  12px;
+	padding:    0px 3px 0px 12px;
+	vertical-align:   middle;
+	text-indent: -8px;
+}
+table.panel tr.mid td {
+	vertical-align: middle;
+
+}
+
+.border {
+	border: 1px solid black;
+}
+
+.right, .currency, .numeric, .currencyrrp {
+	text-align: right;
+}
+.currencyrrp {
+	color: #ee9999;
+	text-decoration: line-through;
+}
+.centre {
+	text-align: center;
+}
+.stockcode {
+	font-family:      Arial, Helvetica, sans-serif;
+	font-size:        10px;
+	font-weight:      400;
+	color:				#000000;
+	vertical-align:   middle;
+}
+.buy, .buy:visited {
+	color:				#ffffff;
+	background-color:	#ffffff;
+	font-size:        14px;
+	font-weight:      800;
+}

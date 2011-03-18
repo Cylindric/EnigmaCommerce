@@ -1,8 +1,1 @@
 !.gitignore
-/config/database.php
-/locale/xxx
-/locale/deu
-/tmp/cache/models/*
-/tmp/cache/persistent/*
-/tmp/logs/*
-!empty
