@@ -4,3 +4,7 @@ php_flag short_open_tag on
 <Files go>
 	ForceType application/x-httpd-php
 </Files>
+<FilesMatch "\.(css|style)$">
+    SetHandler application/x-httpd-php
+</FilesMatch>
+

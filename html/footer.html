@@ -1,53 +1,6 @@
 <!-- BEGIN: main -->
 </div>
 
-<!-- BEGIN: googleurchin -->
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-8234921-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
-
-<!-- BEGIN: transaction -->
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-<script type="text/javascript">
-  var pageTracker = _gat._getTracker("UA-8234921-1");
-  pageTracker._trackPageview();
-  pageTracker._addTrans(
-    "{TX_ID}",                                     // Order ID
-    "{TX_AFFILIATION}",                            // Affiliation
-    "{TX_TOTAL}",                                    // Total
-    "{TX_TAX}",                                     // Tax
-    "{TX_SHIPPING}",                                        // Shipping
-    "{TX_CITY}",                                 // City
-    "{TX_COUNTY}",                               // State
-    "{TX_COUNTRY}"                                       // Country
-  );
-
-<!-- BEGIN: item -->
-  pageTracker._addItem(
-    "{TXL_ID}",                                     // Order ID
-    "{TXL_SKU}",                                     // SKU
-    "{TXL_NAME}",                                  // Product Name
-    "{TXL_CATEGORY}",                             // Category
-    "{TXL_PRICE}",                                    // Price
-    "{TXL_QTY}"                                         // Quantity
-  );
-<!-- END: item -->
-
-  pageTracker._trackTrans();
-</script>
-<!-- END: transaction -->
-<!-- END: googleurchin -->
-
 </body>
 </html>
 <!-- END: main -->
