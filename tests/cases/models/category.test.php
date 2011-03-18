@@ -15,21 +15,20 @@ class CategoryTestCase extends CakeTestCase {
         'app.status',
     );
     
-    function setup() {
+    public function setup() {
+        parent::setup();
         $this->Category = ClassRegistry::init('Category');
 //        $this->Category->recover();
     }
 
-    function testMenuNodes() {
-        $this->Category = ClassRegistry::init('Category');
+    public function testMenuNodes() {
         $nodes = $this->Category->menuNodes(0);
         
         $this->assertTrue(count($nodes)==1);
         $this->assertEqual('catrootnode', $nodes[0]['Category']['name']);
     }
     
-    function testMenuNodesContainsChildren() {
-        $this->Category = ClassRegistry::init('Category');
+    public function testMenuNodesContainsChildren() {
         $rootNode = $this->getCategory('catrootnode');
         $rootId = $rootNode['Category']['id'];
 
@@ -45,8 +44,7 @@ class CategoryTestCase extends CakeTestCase {
         $this->assertEqual($expectedChildren, count($nodes[0]['children']));
     }
 
-    function testMenuNodesContainsChildrensChildren() {
-        $this->Category = ClassRegistry::init('Category');
+    public function testMenuNodesContainsChildrensChildren() {
         $rootNode = $this->getCategory('catrootnode');
         $rootId = $rootNode['Category']['id'];
 
@@ -58,8 +56,7 @@ class CategoryTestCase extends CakeTestCase {
         $this->assertGreaterThan(0, count($firstChild['children']));
     }
     
-    function testSubCatgories() {
-        $this->Category = ClassRegistry::init('Category');
+    public function testSubCatgories() {
         $rootNode = $this->getCategory('catrootnode');
         $rootId = $rootNode['Category']['id'];
         
@@ -71,7 +68,6 @@ class CategoryTestCase extends CakeTestCase {
         }
         
         $nodes = $this->Category->subCategories($rootId);
-//        var_dump($nodes);
         $this->assertEquals($expectedChildren, count($nodes));
     }
     
