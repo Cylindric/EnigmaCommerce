@@ -1,48 +1,48 @@
 <!-- BEGIN: main -->
-				<table class="shrink" align="center"><tr><td>
-				<table class="shrink" align="center"><tr><td>
-				<table class="shrink" align="center"><tr><td>
-				<table class="shrink" align="center"><tr><td>
-				<!-- BEGIN: loggedout -->
-				<form name="frmLogin" id="frmLogin" method="post" action="https://{SERVERHOST}{ENIGMA_ROOT}{CONTROL}/login">
-				<input type="hidden" name="hidFormSubmitted" id="hidFormSubmitted" value="login" />
-				<table class="panel" align="center" cellspacing="0" cellpadding="0">
-					<tr class="header">
-						<td colspan="2">Enter login details</td>
-					</tr>
-					<tr>
-						<td>Username:</td>
-						<td><input type="text" name="txtusername" id="txtusername" value="{USERNAME}" /></td>
-					</tr>
-					<tr>
-						<td>Password:</td>
-						<td><input type="password" name="txtpassword" id="txtpassword" value="{PASSWORD}" /></td>
-					</tr>
-					<tr>
-						<td colspan="2" class="spacious"><div class="centre"><input onmouseover="MM_swapImage('imgLogin','','{ENIGMA_ROOT}img/ui/cmd_login_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgLogin"  id="imgLogin"  type="image"  src="{ENIGMA_ROOT}img/ui/cmd_login.gif"  width="45"  height="20"  alt="Login" /></div></td>
-					</tr>
-				</table>
-				</form>
-				<!-- END: loggedout -->
-				<!-- BEGIN: loggedin -->
-				<form name="frmLogout" id="frmLogout" method="post" action="{PROTOCOL}{SERVERHOST}{ENIGMA_ROOT}{CONTROL}/login">
-				<input type="hidden" name="hidFormSubmitted" id="hidFormSubmitted" value="logout" />
-				<table class="panel" align="center" cellspacing="0" cellpadding="0">
-					<tr class="header">
-						<td>Logged in as {USERNAME}</td>
-					</tr>
-					<tr>
-						<td class="spacious">Currently logged in as {FIRSTNAME} {LASTNAME}</td>
-					</tr>
-					<tr>
-						<td class="spacious"><div class="centre"><input onmouseover="MM_swapImage('imgLogout','','{ENIGMA_ROOT}img/ui/cmd_logout_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgLogout"  id="imgLogout"  type="image"  src="{ENIGMA_ROOT}img/ui/cmd_logout.gif"  width="45"  height="20"  alt="Logout" /></div></td>
-					</tr>
-				</table>
-				</form>
-				<!-- END: loggedin -->
-				</td></tr></table>
-				</td></tr></table>
-				</td></tr></table>
-				</td></tr></table>
-				<br />
+<table class="shrink" align="center"><tr><td>
+            <table class="shrink" align="center"><tr><td>
+                        <table class="shrink" align="center"><tr><td>
+                                    <table class="shrink" align="center"><tr><td>
+                                                <!-- BEGIN: loggedout -->
+                                                <form name="frmLogin" id="frmLogin" method="post" action="http://{SERVERHOST}{ENIGMA_ROOT}{CONTROL}/login">
+                                                    <input type="hidden" name="hidFormSubmitted" id="hidFormSubmitted" value="login" />
+                                                    <table class="panel" align="center" cellspacing="0" cellpadding="0">
+                                                        <tr class="header">
+                                                            <td colspan="2">Enter login details</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Username:</td>
+                                                            <td><input type="text" name="txtusername" id="txtusername" value="{USERNAME}" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Password:</td>
+                                                            <td><input type="password" name="txtpassword" id="txtpassword" value="{PASSWORD}" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" class="spacious"><div class="centre"><input onmouseover="MM_swapImage('imgLogin','','{ENIGMA_ROOT}img/ui/cmd_login_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgLogin"  id="imgLogin"  type="image"  src="{ENIGMA_ROOT}img/ui/cmd_login.gif"  width="45"  height="20"  alt="Login" /></div></td>
+                                                        </tr>
+                                                    </table>
+                                                </form>
+                                                <!-- END: loggedout -->
+                                                <!-- BEGIN: loggedin -->
+                                                <form name="frmLogout" id="frmLogout" method="post" action="{PROTOCOL}{SERVERHOST}{ENIGMA_ROOT}{CONTROL}/login">
+                                                    <input type="hidden" name="hidFormSubmitted" id="hidFormSubmitted" value="logout" />
+                                                    <table class="panel" align="center" cellspacing="0" cellpadding="0">
+                                                        <tr class="header">
+                                                            <td>Logged in as {USERNAME}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="spacious">Currently logged in as {FIRSTNAME} {LASTNAME}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="spacious"><div class="centre"><input onmouseover="MM_swapImage('imgLogout','','{ENIGMA_ROOT}img/ui/cmd_logout_f2.gif', 1)" onmouseout="MM_swapImgRestore()" name="imgLogout"  id="imgLogout"  type="image"  src="{ENIGMA_ROOT}img/ui/cmd_logout.gif"  width="45"  height="20"  alt="Logout" /></div></td>
+                                                        </tr>
+                                                    </table>
+                                                </form>
+                                                <!-- END: loggedin -->
+                                            </td></tr></table>
+                                </td></tr></table>
+                    </td></tr></table>
+        </td></tr></table>
+<br />
 <!-- END: main -->

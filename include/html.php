@@ -19,7 +19,7 @@ function start_page(&$objpage, $page, $pagetype=ENIGMA_HTML) {
     global $OPT;
     switch ($pagetype) {
         case ENIGMA_HTML:
-            $objpage = new XTemplate(dirname(dirname(__FILE__))."/html/$page.html");
+            $objpage = new XTemplate(dirname(dirname(__FILE__)) . "/html/$page.html");
             $objpage->assign('PAGE_TITLE', $OPT->pagetitle);
             break;
 
@@ -334,6 +334,8 @@ function mostext($categoryid = 0) {
  * ============================================================================ */
 
 function authorised() {
+    // TODO: Remove hack that bypasses all login!!
+    return true;
     return!empty($_SESSION['loggedin']);
 }
 
@@ -504,8 +506,8 @@ function img_safe($src, $alt=' ', $class='', $name='', $fix_height=0) {
 
     $localimage = $_SERVER['DOCUMENT_ROOT'] . $src;
     if (($src == $OPT->productimageroot) || (!file_exists($localimage))) {
-        $newsrc = $OPT->enigmaroot . "img/noproduct.png";
-        $localimage = $_SERVER['DOCUMENT_ROOT'] . $newsrc;
+        $newsrc = "/img/noproduct.png";
+        $localimage = dirname(dirname(__FILE__)) . $newsrc;
         $imageprops = getimagesize($localimage);
         $imagewidth = $imageprops[0];
         $imageheight = $imageprops[1];
