@@ -1,27 +1,27 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- **/
+ * 
+ * @package core
+ * @subpackage models
+ */
 class Category extends AppModel {
 
     var $name = 'Category';
-
     var $actsAs = array(
         'Tree',
-        'Sluggable' => array('label'=>'name', 'ignore'=>array()),
+        'Sluggable' => array('label' => 'name', 'ignore' => array()),
     );
-
     var $belongsTo = array(
         'ParentCategory' => array(
             'className' => 'Category',
             'foreignKey' => 'parent_id'),
         'Status'
     );
-
     var $hasMany = array('CategoryItem');
-
     var $validate = array(
         'name' => array(
             'notEmpty' => array('rule' => 'notEmpty'),
@@ -35,11 +35,11 @@ class Category extends AppModel {
 
     public function menuNodes($parent_id) {
         $categories = $this->find('threaded', array(
-            'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
-            'conditions' => array(
-                'Category.visible_on_web' => true,
-            ),
-        ));
+                    'fields' => array('Category.id', 'Category.name', 'Category.slug', 'Category.parent_id'),
+                    'conditions' => array(
+                        'Category.visible_on_web' => true,
+                    ),
+                ));
         return $categories;
     }
 
@@ -58,15 +58,15 @@ class Category extends AppModel {
         $settings = array_merge(array(
             'order' => array('Category.name'),
             'find' => 'all',
-        ), $settings);
+                ), $settings);
 
         $categories = $this->find($settings['find'], array(
-            'fields' => array('Category.id', 'Category.name', 'Category.slug'),
-            'conditions' => array(
-                'Category.parent_id' => $parent_id,
-            ),
-            'order' => $settings['order']
-        ));
+                    'fields' => array('Category.id', 'Category.name', 'Category.slug'),
+                    'conditions' => array(
+                        'Category.parent_id' => $parent_id,
+                    ),
+                    'order' => $settings['order']
+                ));
         return $categories;
     }
 

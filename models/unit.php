@@ -1,21 +1,22 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
+ * 
+ * @package core
+ * @subpackage models
  */
-
 class Unit extends AppModel {
 
     var $name = 'Unit';
-
     var $belongsTo = array(
         'ParentUnit' => array(
             'className' => 'Unit',
             'foreignKey' => 'parent_id'
         )
     );
-
     var $hasMany = array(
         'ChildUnit' => array(
             'className' => 'Unit',
@@ -23,7 +24,6 @@ class Unit extends AppModel {
             'dependent' => false
         )
     );
-
     var $validate = array(
         'name' => array(
             'notempty' => array(

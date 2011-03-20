@@ -1,38 +1,14 @@
 <?php
-/**
- * This is core configuration file.
- *
- * Use it to configure core behavior of Cake.
- *
- * PHP 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.config
- * @since         CakePHP(tm) v 0.2.9
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- */
 
 /**
- * CakePHP Debug Level:
- *
- * Production Mode:
- *  0: No error messages, errors, or warnings shown. Flash messages redirect.
- *
- * Development Mode:
- *  1: Errors and warnings shown, model caches refreshed, flash messages halted.
- *  2: As in 1, but also with full debug messages and SQL output.
- *
- * In production mode, flash messages redirect after a time interval.
- * In development mode, you need to click the flash message to continue.
+ * Enigma : Online Sales Management. (http://www.enigmagen.org)
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ * 
+ * @package core
+ * @subpackage config
  */
-    Configure::write('debug', 2);
+Configure::write('debug', 2);
 
 /**
  * Configure the Error handler used to handle errors for your application.  By default
@@ -48,11 +24,11 @@
  *
  * @see ErrorHandler for more information on error handling and configuration.
  */
-    Configure::write('Error', array(
-        'handler' => 'ErrorHandler::handleError',
-        'level' => E_ALL & ~E_DEPRECATED,
-        'trace' => true
-    ));
+Configure::write('Error', array(
+            'handler' => 'ErrorHandler::handleError',
+            'level' => E_ALL & ~E_DEPRECATED,
+            'trace' => true
+        ));
 
 /**
  * Configure the Exception handler used for uncaught exceptions.  By default, 
@@ -70,16 +46,16 @@
  *
  * @see ErrorHandler for more information on exception handling and configuration.
  */
-    Configure::write('Exception', array(
-        'handler' => 'ErrorHandler::handleException',
-        'renderer' => 'ExceptionRenderer',
-        'log' => true
-    ));
+Configure::write('Exception', array(
+            'handler' => 'ErrorHandler::handleException',
+            'renderer' => 'ExceptionRenderer',
+            'log' => true
+        ));
 
 /**
  * Application wide charset encoding
  */
-    Configure::write('App.encoding', 'UTF-8');
+Configure::write('App.encoding', 'UTF-8');
 
 /**
  * To configure CakePHP *not* to use mod_rewrite and to
@@ -92,7 +68,7 @@
  *
  * And uncomment the App.baseUrl below:
  */
-    //Configure::write('App.baseUrl', env('SCRIPT_NAME'));
+//Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 
 /**
  * Uncomment the define below to use CakePHP prefix routes.
@@ -110,13 +86,13 @@
  *  `manager_index()` and `/manager/controller/index`
  *
  */
-    //Configure::write('Routing.prefixes', array('admin'));
+//Configure::write('Routing.prefixes', array('admin'));
 
 /**
  * Turn off all caching application-wide.
  *
  */
-    //Configure::write('Cache.disable', true);
+//Configure::write('Cache.disable', true);
 
 /**
  * Enable cache checking.
@@ -127,13 +103,13 @@
  * or in each action using $this->cacheAction = true.
  *
  */
-    //Configure::write('Cache.check', true);
+//Configure::write('Cache.check', true);
 
 /**
  * Defines the default error type when using the log() function. Used for
  * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
  */
-    define('LOG_ERROR', 2);
+define('LOG_ERROR', 2);
 
 /**
  * Session configuration.
@@ -172,24 +148,24 @@
  * the cake shell command: cake schema create Sessions
  *
  */
-    Configure::write('Session', array(
-        'defaults' => 'php'
-    ));
+Configure::write('Session', array(
+            'defaults' => 'php'
+        ));
 
 /**
  * The level of CakePHP security.
  */
-    Configure::write('Security.level', 'medium');
+Configure::write('Security.level', 'medium');
 
 /**
  * A random string used in security hashing methods.
  */
-    Configure::write('Security.salt', '1eb8cb89ee5ac01b340bee697393fb53683a81e3');
+Configure::write('Security.salt', '1eb8cb89ee5ac01b340bee697393fb53683a81e3');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-    Configure::write('Security.cipherSeed', '336635333137356333316434326664');
+Configure::write('Security.cipherSeed', '336635333137356333316434326664');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -199,7 +175,7 @@
  * Set to `true` to apply timestamps, when debug = 0, or set to 'force' to always enable
  * timestamping.
  */
-    //Configure::write('Asset.timestamp', true);
+//Configure::write('Asset.timestamp', true);
 /**
  * Compress CSS output by removing comments, whitespace, repeating tags, etc.
  * This requires a/var/cache directory to be writable by the web server for caching.
@@ -207,7 +183,7 @@
  *
  * To use, prefix the CSS link URL with '/ccss/' instead of '/css/' or use HtmlHelper::css().
  */
-    //Configure::write('Asset.filter.css', 'css.php');
+//Configure::write('Asset.filter.css', 'css.php');
 
 /**
  * Plug in your own custom JavaScript compressor by dropping a script in your webroot to handle the
@@ -215,20 +191,20 @@
  *
  * To use, prefix your JavaScript link URLs with '/cjs/' instead of '/js/' or use JavaScriptHelper::link().
  */
-    //Configure::write('Asset.filter.js', 'custom_javascript_output_filter.php');
+//Configure::write('Asset.filter.js', 'custom_javascript_output_filter.php');
 
 /**
  * The classname and database used in CakePHP's
  * access control lists.
  */
-    Configure::write('Acl.classname', 'DbAcl');
-    Configure::write('Acl.database', 'default');
+Configure::write('Acl.classname', 'DbAcl');
+Configure::write('Acl.database', 'default');
 
 /**
  * If you are on PHP 5.3 uncomment this line and correct your server timezone
  * to fix the date & time related errors.
  */
-    //date_default_timezone_set('UTC');
+//date_default_timezone_set('UTC');
 
 /**
  *
@@ -283,6 +259,6 @@
  *  ));
  *
  */
-    Cache::config('default', array('engine' => 'File'));
+Cache::config('default', array('engine' => 'File'));
 
-    config('config');
+config('config');

@@ -1,19 +1,21 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
+ * 
+ * @package install_component
+ * @subpackage controllers
  */
-
 App::import('model', 'connection_manager');
 
-class MigrateController extends InstallAppController
-{
+class MigrateController extends InstallAppController {
+
     var $components = array();
     var $uses = array('Category', 'CategoryItem', 'Item', 'ItemPicture', 'Picture', 'Unit', 'Variation');
     var $db;
     var $old_db;
-
     private $sequence = array(
         'CreateBlank',
         'Categories',
@@ -25,28 +27,24 @@ class MigrateController extends InstallAppController
         'Pictures',
         'ItemPictures',
     );
-    
     private $settings = array();
-    
-    function beforeFilter()
-    {
+
+    function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('index', 'start');
         $this->db = ConnectionManager::getDataSource('default');
     }
 
-    function index()
-    {
+    function index() {
         $this->Session->delete('migration_settings');
-        $this->set('sequence', array('Sequence'=>$this->sequence));
+        $this->set('sequence', array('Sequence' => $this->sequence));
     }
 
-    function start()
-    {
+    function start() {
         $this->settings = array();
         if ($this->Session->check('migration_settings')) {
             $this->settings = $this->Session->read('migration_settings');
-        } 
+        }
 
         $this->settings = array_merge(array(
             'queue' => $this->sequence,
@@ -57,7 +55,7 @@ class MigrateController extends InstallAppController
             'status' => 'start',
             'messages' => array(),
             'disableTrees' => false,
-        ), $this->settings);
+                ), $this->settings);
 
         if ($this->data) {
             $this->settings['queue'] = array();
@@ -69,21 +67,21 @@ class MigrateController extends InstallAppController
         @$this->old_db = ConnectionManager::getDataSource($this->settings['source']);
         if (is_null($this->old_db)) {
             $this->Session->setFlash(__("Error - you need to define a '%s' db connection to migrate.", $this->settings['source']));
-            $this->redirect(array('action'=>'index'));
+            $this->redirect(array('action' => 'index'));
         }
-        
+
         if ($this->settings['status'] == 'done') {
             $this->settings['offset'] = 0;
             $this->settings['status'] = 'migrating';
             array_shift($this->settings['queue']);
-        } 
-        
+        }
+
         if (count($this->settings['queue']) == 0) {
             $this->settings['status'] = 'finished';
             $this->msg('Migration', 'Complete!');
             $this->Session->delete('migration_settings');
         } else {
-            $method = 'migrate'.$this->settings['queue'][0];
+            $method = 'migrate' . $this->settings['queue'][0];
             $this->{$method}();
         }
 
@@ -106,11 +104,10 @@ class MigrateController extends InstallAppController
         }
         $this->msg($name, $msg);
     }
-    
+
     private function migrateCategories() {
-        $name = 'Categories';     
-        $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM #__category ');
+        $name = 'Categories';
+        $count = $this->getCount($name, 'SELECT COUNT(*) count FROM #__category ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -125,8 +122,8 @@ class MigrateController extends InstallAppController
         if ($this->settings['disableTrees']) {
             $this->Category->Behaviors->disable('Tree');
         }
-        
-        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'category ';
+
+        $query = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'category ';
         $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
 
         $rows = $this->old_db->query($query);
@@ -149,7 +146,7 @@ class MigrateController extends InstallAppController
             }
             $this->Category->save($newObject);
         }
-        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+        $msg .= $this->progressBar($this->settings['offset'] + count($rows), $count);
 
         // Reenable the MPTT behavior
         if ($this->settings['disableTrees']) {
@@ -166,7 +163,7 @@ class MigrateController extends InstallAppController
     }
 
     private function migrateCategoryParents() {
-        $name = 'CategoryParents';     
+        $name = 'CategoryParents';
         $count = $this->Category->find('count');
 
         if ($count == 0) {
@@ -182,13 +179,13 @@ class MigrateController extends InstallAppController
         if ($this->settings['disableTrees']) {
             $this->Category->Behaviors->disable('Tree');
         }
-        
+
         $params = array(
             'conditions' => array('Category.legacy_id !=' => 0),
             'limit' => $this->settings['limit'],
             'offset' => $this->settings['offset']
         );
-        $rootnode = $this->Category->find('first', array('conditions'=>array('Category.slug' => 'catrootnode')));
+        $rootnode = $this->Category->find('first', array('conditions' => array('Category.slug' => 'catrootnode')));
 
         $rows = $this->Category->find('all', $params);
 
@@ -197,7 +194,7 @@ class MigrateController extends InstallAppController
                 if ($row['Category']['legacy_parent_id'] == 0) {
                     $parentcat = $rootnode;
                 } else {
-                    $parentcat = $this->Category->find('first', array('conditions'=>array('Category.legacy_id' => $row['Category']['legacy_parent_id'])));
+                    $parentcat = $this->Category->find('first', array('conditions' => array('Category.legacy_id' => $row['Category']['legacy_parent_id'])));
                 }
                 $this->Category->id = $row['Category']['id'];
                 $this->Category->saveField('parent_id', $parentcat['Category']['id']);
@@ -219,7 +216,7 @@ class MigrateController extends InstallAppController
 
         $this->msg($name, $msg);
     }
-    
+
     private function migrateCategoryTreeRepair() {
         $name = 'CategoryTreeRepair';
         $msg = __('Repairing %s tree...', __('Category'));
@@ -238,9 +235,8 @@ class MigrateController extends InstallAppController
     }
 
     private function migrateItems() {
-        $name = 'Items';     
-        $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM #__item ');
+        $name = 'Items';
+        $count = $this->getCount($name, 'SELECT COUNT(*) count FROM #__item ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -249,8 +245,8 @@ class MigrateController extends InstallAppController
         }
 
         $msg = __('Processing %d %s...', $count, __('Items'));
-        
-        $query  = 'SELECT * '
+
+        $query = 'SELECT * '
                 . 'FROM ' . $this->old_db->config['prefix'] . 'item '
                 . 'ORDER BY ItemID '
                 . 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
@@ -271,7 +267,7 @@ class MigrateController extends InstallAppController
             }
             $this->Item->save($newObject);
         }
-        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+        $msg .= $this->progressBar($this->settings['offset'] + count($rows), $count);
 
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
@@ -283,9 +279,8 @@ class MigrateController extends InstallAppController
     }
 
     private function migrateCategoryItems() {
-        $name = 'CategoryItems';     
-        $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM #__itemcategory ');
+        $name = 'CategoryItems';
+        $count = $this->getCount($name, 'SELECT COUNT(*) count FROM #__itemcategory ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -294,8 +289,8 @@ class MigrateController extends InstallAppController
         }
 
         $msg = __('Processing %d %s-%s links...', $count, _('Category'), _('Item'));
-        
-        $query  = 'SELECT * '
+
+        $query = 'SELECT * '
                 . 'FROM ' . $this->old_db->config['prefix'] . 'itemcategory '
                 . 'ORDER BY CategoryID, ItemID '
                 . 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
@@ -303,9 +298,9 @@ class MigrateController extends InstallAppController
         $rows = $this->old_db->query($query);
         foreach ($rows as $row) {
             $oldObject = $row[$this->old_db->config['prefix'] . 'itemcategory'];
-            $item = $this->Item->find('first', array('conditions'=>array('Item.legacy_id'=>$oldObject['ItemID'])));
-            $cat = $this->Category->find('first', array('conditions'=>array('Category.legacy_id'=>$oldObject['CategoryID'])));
-            
+            $item = $this->Item->find('first', array('conditions' => array('Item.legacy_id' => $oldObject['ItemID'])));
+            $cat = $this->Category->find('first', array('conditions' => array('Category.legacy_id' => $oldObject['CategoryID'])));
+
             $newObject = $this->CategoryItem->create();
             $newObject['CategoryItem']['item_id'] = $oldObject['ItemID'];
             $newObject['CategoryItem']['category_id'] = $oldObject['CategoryID'];
@@ -316,7 +311,7 @@ class MigrateController extends InstallAppController
                 $this->CategoryItem->save($newObject);
             }
         }
-        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+        $msg .= $this->progressBar($this->settings['offset'] + count($rows), $count);
 
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
@@ -328,9 +323,8 @@ class MigrateController extends InstallAppController
     }
 
     private function migrateItemDetails() {
-        $name = 'Variations';     
-        $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM #__detail ');
+        $name = 'Variations';
+        $count = $this->getCount($name, 'SELECT COUNT(*) count FROM #__detail ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -339,8 +333,8 @@ class MigrateController extends InstallAppController
         }
 
         $msg = __('Processing %d %s...', $count, __('Variations'));
-        
-        $query  = 'SELECT d.*, u.Code FROM ' . $this->old_db->config['prefix'] . 'detail d ';
+
+        $query = 'SELECT d.*, u.Code FROM ' . $this->old_db->config['prefix'] . 'detail d ';
         $query .= 'LEFT JOIN ' . $this->old_db->config['prefix'] . 'unit u ON (d.UnitID=u.UnitID) ';
         $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
 
@@ -348,8 +342,8 @@ class MigrateController extends InstallAppController
         foreach ($rows as $row) {
             $oldObject = $row['d'];
             $oldUnit = $row['u'];
-            $item = $this->Item->find('first', array('conditions'=>array('Item.legacy_id'=>$oldObject['ItemID'])));
-            $unit = $this->Unit->find('first', array('conditions'=>array('Unit.unit'=>$oldUnit['Code'])));
+            $item = $this->Item->find('first', array('conditions' => array('Item.legacy_id' => $oldObject['ItemID'])));
+            $unit = $this->Unit->find('first', array('conditions' => array('Unit.unit' => $oldUnit['Code'])));
             $newObject = $this->Variation->create();
             $newObject['Variation']['item_id'] = $item['Item']['id'];
             $newObject['Variation']['legacy_id'] = $oldObject['DetailID'];
@@ -359,7 +353,7 @@ class MigrateController extends InstallAppController
             $newObject['Variation']['price_rrp'] = $oldObject['RecommendedPrice'];
             $newObject['Variation']['created'] = $oldObject['CreateDate'];
             $newObject['Variation']['size'] = $oldObject['Size'];
-            $newObject['Variation']['modified'] = $oldObject['ModifyDate'];            
+            $newObject['Variation']['modified'] = $oldObject['ModifyDate'];
             if ($oldObject['DeleteDate'] == 0) {
                 $newObject['Variation']['status'] = 1;
             } else {
@@ -367,7 +361,7 @@ class MigrateController extends InstallAppController
             }
             $this->Variation->save($newObject);
         }
-        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+        $msg .= $this->progressBar($this->settings['offset'] + count($rows), $count);
 
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
@@ -377,11 +371,10 @@ class MigrateController extends InstallAppController
 
         $this->msg($name, $msg);
     }
-    
+
     private function migratePictures() {
-        $name = 'Pictures';     
-        $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM #__picture ');
+        $name = 'Pictures';
+        $count = $this->getCount($name, 'SELECT COUNT(*) count FROM #__picture ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -392,8 +385,8 @@ class MigrateController extends InstallAppController
         $imgPath = Configure::Read('migrate.productImages');
 
         $msg = __('Processing %d %s...', $count, __('Pictures'));
-        
-        $query  = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'picture picture ';
+
+        $query = 'SELECT * FROM ' . $this->old_db->config['prefix'] . 'picture picture ';
         $query .= 'LEFT JOIN ' . $this->old_db->config['prefix'] . 'itempicture itempicture ON (picture.PictureID=itempicture.PictureID) ';
         $query .= 'LEFT JOIN ' . $this->old_db->config['prefix'] . 'item item ON (itempicture.ItemID=item.ItemID) ';
         $query .= 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
@@ -406,7 +399,7 @@ class MigrateController extends InstallAppController
             $newObject['Picture']['legacy_id'] = $this->cleanString($row['picture']['PictureID']);
             $newObject['Picture']['created'] = $row['picture']['CreateDate'];
             $newObject['Picture']['modified'] = $row['picture']['ModifyDate'];
-            
+
             if (strlen($newObject['Picture']['name']) == 0) {
                 $itemName = $this->cleanString($row['item']['ItemName']);
                 if (strlen($itemName) == 0) {
@@ -415,7 +408,7 @@ class MigrateController extends InstallAppController
                     $newObject['Picture']['name'] = $itemName;
                 }
             }
-            
+
             if ($row['picture']['DeleteDate'] == 0) {
                 $this->Picture->save($newObject);
                 try {
@@ -428,7 +421,7 @@ class MigrateController extends InstallAppController
                 }
             }
         }
-        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+        $msg .= $this->progressBar($this->settings['offset'] + count($rows), $count);
 
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
@@ -438,11 +431,10 @@ class MigrateController extends InstallAppController
 
         $this->msg($name, $msg);
     }
-    
+
     private function migrateItemPictures() {
         $name = 'ItemPictures';
-        $count = $this->getCount($name, 
-            'SELECT COUNT(*) count FROM #__itempicture ');
+        $count = $this->getCount($name, 'SELECT COUNT(*) count FROM #__itempicture ');
 
         if ($count == 0) {
             $this->settings['status'] = 'done';
@@ -451,8 +443,8 @@ class MigrateController extends InstallAppController
         }
 
         $msg = __('Processing %d %s-%s links...', $count, _('Item'), _('Picture'));
-        
-        $query  = 'SELECT * '
+
+        $query = 'SELECT * '
                 . 'FROM ' . $this->old_db->config['prefix'] . 'itempicture '
                 . 'ORDER BY ItemID, PictureID '
                 . 'LIMIT ' . $this->settings['offset'] . ', ' . $this->settings['limit'];
@@ -460,9 +452,9 @@ class MigrateController extends InstallAppController
         $rows = $this->old_db->query($query);
         foreach ($rows as $row) {
             $oldObject = $row[$this->old_db->config['prefix'] . 'itempicture'];
-            $item = $this->Item->find('first', array('conditions'=>array('Item.legacy_id'=>$oldObject['ItemID'])));
-            $pic = $this->Picture->find('first', array('conditions'=>array('Picture.legacy_id'=>$oldObject['PictureID'])));
-            
+            $item = $this->Item->find('first', array('conditions' => array('Item.legacy_id' => $oldObject['ItemID'])));
+            $pic = $this->Picture->find('first', array('conditions' => array('Picture.legacy_id' => $oldObject['PictureID'])));
+
             $newObject = $this->ItemPicture->create();
             $newObject['ItemPicture']['item_id'] = $item['Item']['id'];
             $newObject['ItemPicture']['picture_id'] = $pic['Picture']['id'];
@@ -473,7 +465,7 @@ class MigrateController extends InstallAppController
                 $this->ItemPicture->save($newObject);
             }
         }
-        $msg .= $this->progressBar($this->settings['offset']+count($rows), $count);
+        $msg .= $this->progressBar($this->settings['offset'] + count($rows), $count);
 
         if (count($rows) < $this->settings['limit']) {
             $this->settings['status'] = 'done';
@@ -501,7 +493,7 @@ class MigrateController extends InstallAppController
         $out = strip_tags($out);
         return $out;
     }
-    
+
     private function getCount($name, $query) {
         $query = str_replace('#__', $this->old_db->config['prefix'], $query);
         if (!array_key_exists($name, $this->settings['count'])) {
@@ -513,25 +505,25 @@ class MigrateController extends InstallAppController
         }
         return $count;
     }
-    
+
     private function progressBar($current, $max) {
         $width = 20;
-        $current = (float)$current;
-        $max = (float)$max;
-        $percent = ($current/$max);
- 
-        $left = max(0, floor($percent*$width));
-        $right = min($width, $width-$left);
-        
+        $current = (float) $current;
+        $max = (float) $max;
+        $percent = ($current / $max);
+
+        $left = max(0, floor($percent * $width));
+        $right = min($width, $width - $left);
+
         $barLeft = str_repeat('=', $left);
         $barRight = str_repeat('-', $right);
         $bar = "[$barLeft$barRight]";
-        
-        $out  = '<span class="progress_bar">';
+
+        $out = '<span class="progress_bar">';
         $out .= '<span class="progress_a">' . $barLeft . '</span>';
         $out .= '<span class="progress_b">' . $barRight . '</span>';
         $out .= '</span>';
-        return sprintf('%s%d/%d: %d%%', $out, $current, $max, ($percent*100));
+        return sprintf('%s%d/%d: %d%%', $out, $current, $max, ($percent * 100));
     }
-    
+
 }

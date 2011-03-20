@@ -1,15 +1,18 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- **/
-
+ * 
+ * @package core
+ * @subpackage helpers
+ */
 class ImageHelper extends AppHelper {
 
     var $name = 'Image';
     var $settings = array();
-    var $helpers = array ('Html', 'Link');
+    var $helpers = array('Html', 'Link');
 
     function itemThumb($item, array $settings = array()) {
 
@@ -21,9 +24,9 @@ class ImageHelper extends AppHelper {
             'escape' => false,
             'blank' => true,
             'width' => 150,
-        ), $settings);
+                ), $settings);
         extract($this->settings);
-        
+
         $src = '';
         // pull out the primary picture
         $picture = null;
@@ -60,8 +63,8 @@ class ImageHelper extends AppHelper {
                 $out = $this->Link->link('Item', $item, $linkSettings);
             }
         }
-        
+
         return $out;
     }
-    
+
 }

@@ -1,22 +1,23 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
+ * 
+ * @package core
+ * @subpackage models
  */
-
 class Picture extends AppModel {
 
     var $name = 'Picture';
-    
     var $actsAs = array(
         'Sluggable' => array(
             'label' => 'name'
         ),
     );
-    
     var $hasMany = array('ItemPicture');
-    
+
     const ASPECT_SQUARE = 0;
     const ASPECT_LANDSCAPE = 1;
     const ASPECT_PORTRAIT = 2;
@@ -24,14 +25,14 @@ class Picture extends AppModel {
     public function beforeDelete() {
         $picture = $this->read();
         $filename = $this->productPath() . $picture['Picture']['filename'];
-        if (file_exists($filename) && is_file($filename) ) {
+        if (file_exists($filename) && is_file($filename)) {
             unlink($filename);
         }
         return true;
     }
-    
+
     public function productPath() {
-        return WWW_ROOT.'img'.DS.'products'.DS;        
+        return WWW_ROOT . 'img' . DS . 'products' . DS;
     }
 
     /**
@@ -54,17 +55,17 @@ class Picture extends AppModel {
         );
 
         if (is_array($filename)) {
-            $settings = array_merge($defaultSettings, $filename);            
+            $settings = array_merge($defaultSettings, $filename);
         } else {
             $settings = array_merge($defaultSettings, $settings);
             $settings['filename'] = $filename;
         }
         extract($settings);
-        
+
         if (!file_exists($filename)) {
             throw new InvalidArgumentException('Source file missing');
         }
-        
+
         $file = pathinfo($filename);
         $imageInfo = getimagesize($filename);
         if ($imageInfo !== false) {
@@ -82,25 +83,25 @@ class Picture extends AppModel {
                 }
                 $picture = $this->create();
                 $picture['Picture']['name'] = $name;
-                $picture = $this->save($picture);        
+                $picture = $this->save($picture);
             }
         }
         $picture = $this->read();
 
         // Move the image to the correct location
-        $destination = $imgPath . $this->data['Picture']['slug'].'.'.strtolower($file['extension']);
-        
+        $destination = $imgPath . $this->data['Picture']['slug'] . '.' . strtolower($file['extension']);
+
         $tmpName = '';
         if (file_exists($destination)) {
             if ($overwrite) {
-                $tmpName = $destination.'.old';
+                $tmpName = $destination . '.old';
                 rename($destination, $tmpName);
             } else {
                 $this->delete();
-                throw new FileExistsException($destination);                
+                throw new FileExistsException($destination);
             }
         }
-        
+
         // If the copy fails, delete the just-created record, and if a backup was made 
         // of a clobbered destination-file, put it back.
         try {
@@ -120,18 +121,18 @@ class Picture extends AppModel {
         if ($width > $height) {
             $picture['Picture']['aspect'] = Picture::ASPECT_LANDSCAPE;
         } elseif ($width < $height) {
-            $picture['Picture']['aspect'] = Picture::ASPECT_PORTRAIT;            
+            $picture['Picture']['aspect'] = Picture::ASPECT_PORTRAIT;
         } else {
             $picture['Picture']['aspect'] = Picture::ASPECT_SQUARE;
         }
-        
+
         $picture = $this->save($picture);
-        
-        if ((strlen($tmpName) > 0) && (file_exists($tmpName)) && (file_exists($destination)) ) {
+
+        if ((strlen($tmpName) > 0) && (file_exists($tmpName)) && (file_exists($destination))) {
             unlink($tmpName);
         }
-        
+
         return $picture;
     }
-    
+
 }

@@ -1,15 +1,17 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- **/
+ * 
+ * @package core
+ * @subpackage models
+ */
 class Basket extends AppModel {
 
     var $name = 'Basket';
-
     var $belongsTo = array('User');
-
     var $hasMany = array('Detail');
 
     function addDetail($detail) {
@@ -25,8 +27,6 @@ class Basket extends AppModel {
                 throw new InvalidArgumentException('Detail parameter must be a valid detail ID');
             }
         }
-
-        
     }
 
 }

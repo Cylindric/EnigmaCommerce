@@ -1,12 +1,19 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- **/
+ * 
+ * @package core
+ * @subpackage controllers
+ */
 
+/**
+ * Page Controller
+ */
 class PagesController extends AppController {
- 
+
     var $name = 'Pages';
     var $helpers = array('Html');
     var $uses = array();
@@ -15,7 +22,7 @@ class PagesController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('display');
     }
-    
+
     function display() {
         $path = func_get_args();
 
@@ -37,16 +44,16 @@ class PagesController extends AppController {
         $this->set(compact('page', 'subpage', 'title_for_layout'));
         $this->render(implode('/', $path));
     }
-    
+
     function admin_mainmenu() {
-        $this->ext = '.js';        
+        $this->ext = '.js';
     }
 
     function admin_mainmenuitems() {
         $nodes = array();
         $nodes[] = array(
             'text' => 'test1',
-            'id'   => '1'
+            'id' => '1'
         );
         $this->set('data', $nodes);
         $this->render('/elements/js_data', 'data');

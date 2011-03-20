@@ -1,10 +1,13 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- **/
-
+ * 
+ * @package admin_component
+ * @subpackage controllers
+ */
 class CategoriesController extends AdminAppController {
 
     var $name = 'Categories';
@@ -12,10 +15,11 @@ class CategoriesController extends AdminAppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->set('title_for_layout', __('Categories'));        
+        $this->set('title_for_layout', __('Categories'));
     }
 
     public function index() {
+        
     }
 
     public function view($id) {
@@ -27,7 +31,7 @@ class CategoriesController extends AdminAppController {
         $this->set('category', $category);
         $this->set('items', $this->Item->findInCategory($category['Category']['id']));
     }
-    
+
     public function add() {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
@@ -39,7 +43,7 @@ class CategoriesController extends AdminAppController {
         } else {
             $this->request->data = $this->Category->create();
         }
-        
+
         $this->set('parents', $this->Category->find('list'));
         $this->set('data', $this->request->data);
     }
@@ -69,7 +73,7 @@ class CategoriesController extends AdminAppController {
     public function menu_nodes() {
         $root = 0;
         if (isset($this->request->params['form']['node'])) {
-            $root = (int)$this->request->params['form']['node'];
+            $root = (int) $this->request->params['form']['node'];
         }
         if ($root == 0) {
             $root = $this->Category->field('id', array('slug' => 'catrootnode'));

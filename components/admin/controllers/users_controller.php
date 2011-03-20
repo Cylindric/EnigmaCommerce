@@ -1,10 +1,13 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- **/
-
+ * 
+ * @package admin_component
+ * @subpackage controllers
+ */
 class UsersController extends AdminAppController {
 
     var $name = 'Users';
@@ -13,7 +16,6 @@ class UsersController extends AdminAppController {
         parent::beforeFilter();
         $this->Auth->allow('login');
         $this->set('title_for_layout', __('Users'));
-
     }
 
     function login() {

@@ -1,22 +1,21 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
+ * 
+ * @package core
+ * @subpackage models
  */
-
 class Item extends AppModel {
 
     var $name = 'Item';
-
     var $actsAs = array(
-        'Sluggable' => array('label'=>'name'),
+        'Sluggable' => array('label' => 'name'),
     );
-
     var $belongsTo = array('Status');
-    
-    var $hasMany = array('CategoryItem', 'ItemPicture' , 'Variation');
-
+    var $hasMany = array('CategoryItem', 'ItemPicture', 'Variation');
     var $validate = array(
         'slug' => array(
             'rule' => 'isUnique',
@@ -29,17 +28,17 @@ class Item extends AppModel {
             $id = $this->id;
         }
         $item = $this->find('all', array(
-            'contain' => array(
-                'ItemPicture' => array(
-                    'Picture'
-                ),
-                'Variation',
-            ),
-            'conditions' => array('Item.id' => $id),
-        ));
+                    'contain' => array(
+                        'ItemPicture' => array(
+                            'Picture'
+                        ),
+                        'Variation',
+                    ),
+                    'conditions' => array('Item.id' => $id),
+                ));
         return $item[0];
     }
-    
+
     public function findInCategory($category_id, $options = array()) {
         $joins = array(
             array(
@@ -52,24 +51,23 @@ class Item extends AppModel {
                 ),
             ),
         );
-        
+
         $contain = array(
-            'CategoryItem', 
+            'CategoryItem',
             'ItemPicture' => 'Picture',
         );
-        
+
         $order = array(
             'Item.name',
         );
-        
+
         $options = array_merge(
-            array('joins' => $joins, 'contain' => $contain, 'order' => $order),
-            $options
+                array('joins' => $joins, 'contain' => $contain, 'order' => $order), $options
         );
 
         $items = $this->find('all', $options);
 
         return $items;
     }
-    
+
 }

@@ -1,19 +1,26 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- **/
+ * 
+ * @package core
+ * @subpackage controllers
+ */
 
+/**
+ * Item Controller
+ */
 class ItemsController extends AppController {
 
     var $name = 'Items';
-    
+
     function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('*');
     }
-    
+
     function index() {
         $this->Item->recursive = 0;
         $this->set('items', $this->paginate());

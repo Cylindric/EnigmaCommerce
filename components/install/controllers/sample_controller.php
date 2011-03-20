@@ -1,30 +1,30 @@
 <?php
+
 /**
  * Enigma : Online Sales Management. (http://www.enigmagen.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
+ * 
+ * @package install_component
+ * @subpackage controllers
  */
+class SampleController extends InstallAppController {
 
-class SampleController extends InstallAppController
-{
     var $components = array();
     var $uses = array('Category', 'CategoryItem', 'Item', 'ItemPicture', 'Picture', 'Unit', 'Variation');
-    
     var $cats = array();
     var $pics = array();
-    
-    function beforeFilter()
-    {
+
+    function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('index', 'start');
     }
 
-    function index()
-    {
+    function index() {
+        
     }
 
-    function start()
-    {
+    function start() {
         $this->requestAction('/install/create/blank');
         $this->createCategories();
         $this->createPictures();
@@ -36,167 +36,166 @@ class SampleController extends InstallAppController
 
         // pond
         $this->Category->save($this->Category->Create(array('Category' => array(
-            'name' => 'Pond', 'parent_id' => $cats['root']
-        ))));
+                        'name' => 'Pond', 'parent_id' => $cats['root']
+                        ))));
         $cats['pond'] = $this->Category->id;
 
         $this->Category->save($this->Category->Create(array('Category' => array(
-            'name' => 'Pumps', 'parent_id' => $cats['pond']
-        ))));
+                        'name' => 'Pumps', 'parent_id' => $cats['pond']
+                        ))));
         $cats['pond/pumps'] = $this->Category->id;
 
         $this->Category->save($this->Category->Create(array('Category' => array(
-            'name' => 'Sump Pumps', 'parent_id' => $cats['pond/pumps']
-        ))));
+                        'name' => 'Sump Pumps', 'parent_id' => $cats['pond/pumps']
+                        ))));
         $cats['pond/pumps/sump'] = $this->Category->id;
 
         $this->Category->save($this->Category->Create(array('Category' => array(
-            'name' => 'External Pumps', 'parent_id' => $cats['pond/pumps']
-        ))));
+                        'name' => 'External Pumps', 'parent_id' => $cats['pond/pumps']
+                        ))));
         $cats['pond/pumps/external'] = $this->Category->id;
 
         $this->Category->save($this->Category->Create(array('Category' => array(
-            'name' => 'Filters', 'parent_id' => $cats['pond']
-        ))));
+                        'name' => 'Filters', 'parent_id' => $cats['pond']
+                        ))));
         $cats['pond/filters'] = $this->Category->id;
 
         $this->Category->save($this->Category->Create(array('Category' => array(
-            'name' => 'Filter Equipment', 'parent_id' => $cats['pond/filters']
-        ))));
+                        'name' => 'Filter Equipment', 'parent_id' => $cats['pond/filters']
+                        ))));
         $cats['pond/filters/equipment'] = $this->Category->id;
-        
+
         $this->cats = $cats;
     }
 
     private function createPictures() {
         $pics = array('blank' => 1);
-        
-        $imgbase = App::pluginPath('install').'webroot'.DS.'img'.DS.'products'.DS;
+
+        $imgbase = App::pluginPath('install') . 'webroot' . DS . 'img' . DS . 'products' . DS;
 
         $dir = opendir($imgbase);
         if ($dir !== false) {
             while (($file = readdir($dir)) !== false) {
                 if (($file != '..') && ($file != '.')) {
-                    $file = pathinfo($imgbase.$file);
+                    $file = pathinfo($imgbase . $file);
                     $this->Picture->import(
-                        $imgbase . $file['basename'], 
-                        array('overwrite'=>true, 'create'=>true)
+                            $imgbase . $file['basename'], array('overwrite' => true, 'create' => true)
                     );
-                    $pics[$file['filename']] = (int)$this->Picture->id;
+                    $pics[$file['filename']] = (int) $this->Picture->id;
                 }
             }
         }
         $this->pics = $pics;
     }
-    
+
     private function createItems() {
         $cats = $this->cats;
         $pics = $this->pics;
-        
-        $this->Item->saveAll($this->Item->create(array(
-            'Item' => array(
-                'name'=>'Mega Sump Pump - Dirty Water',
-                'description'=>'A fairly standard item, with a couple of variants.',
-             ),
-            'Variation' => array(array(
-                'name' => 'Q400 with float', 'price' => 99.95), array(
-                'name' => 'Q700', 'price' => 129.99),
-            ),
-            'CategoryItem' => array(array(
-                'is_primary' => true, 'category_id' => $cats['pond/pumps/sump']),
-            ),
-            'ItemPicture' => array(array(
-                'is_primary' => true, 'picture_id' => $pics['mega-sump-pump']),
-            ),
-        )));
 
         $this->Item->saveAll($this->Item->create(array(
-            'Item' => array(
-                'name'=>'Mega Sump Pump - Clean Water',
-                'description'=>'A fairly standard item, with a couple of variants.',
-             ),
-            'Variation' => array(array(
-                'name' => 'Q2501 with float', 'price' => 82.49), array(
-                'name' => 'Q2501 no float', 'price' => 65.95),
-            ),
-            'CategoryItem' => array(array(
-                'is_primary' => true, 'category_id' => $cats['pond/pumps/sump']),
-            ),
-            'ItemPicture' => array(array(
-                'is_primary' => true, 'picture_id' => $pics['mega-sump-pump']),
-            ),
-        )));
+                    'Item' => array(
+                        'name' => 'Mega Sump Pump - Dirty Water',
+                        'description' => 'A fairly standard item, with a couple of variants.',
+                    ),
+                    'Variation' => array(array(
+                            'name' => 'Q400 with float', 'price' => 99.95), array(
+                            'name' => 'Q700', 'price' => 129.99),
+                    ),
+                    'CategoryItem' => array(array(
+                            'is_primary' => true, 'category_id' => $cats['pond/pumps/sump']),
+                    ),
+                    'ItemPicture' => array(array(
+                            'is_primary' => true, 'picture_id' => $pics['mega-sump-pump']),
+                    ),
+                )));
 
         $this->Item->saveAll($this->Item->create(array(
-            'Item' => array(
-                'name'=>'ITT Argonaut AG Series Pump',
-                'description'=>'A fairly standard item, with several variants and multiple pictures.',
-             ),
-            'Variation' => array(array(
-                'name' => 'ITT Series 8', 'price' => 214.99), array(
-                'name' => 'ITT Series 10', 'price' => 224.99), array(
-                'name' => 'ITT Series 14', 'price' => 234.99), array(
-                'name' => 'ITT Series 16', 'price' => 245.99),
-            ),
-            'CategoryItem' => array(array(
-                'is_primary' => true, 'category_id' => $cats['pond/pumps/external']),
-            ),
-            'ItemPicture' => array(array(
-                'is_primary' => true, 'picture_id' => $pics['itt-argonaut']), array(
-                'is_primary' => false, 'picture_id' => $pics['itt-argonaut-2'])
-            ),
-        )));
+                    'Item' => array(
+                        'name' => 'Mega Sump Pump - Clean Water',
+                        'description' => 'A fairly standard item, with a couple of variants.',
+                    ),
+                    'Variation' => array(array(
+                            'name' => 'Q2501 with float', 'price' => 82.49), array(
+                            'name' => 'Q2501 no float', 'price' => 65.95),
+                    ),
+                    'CategoryItem' => array(array(
+                            'is_primary' => true, 'category_id' => $cats['pond/pumps/sump']),
+                    ),
+                    'ItemPicture' => array(array(
+                            'is_primary' => true, 'picture_id' => $pics['mega-sump-pump']),
+                    ),
+                )));
 
         $this->Item->saveAll($this->Item->create(array(
-            'Item' => array(
-                'name'=>'Badu Magic Pond Pumps',
-                'description'=>'A fairly standard item, with a couple of variants.',
-             ),
-            'Variation' => array(array(
-                'name' => 'Magic 4', 'price' => 219.95), array(
-                'name' => 'Magic 6', 'price' => 229.95), array(
-                'name' => 'Magic 8', 'price' => 239.95),
-            ),
-            'CategoryItem' => array(array(
-                'is_primary' => true, 'category_id' => $cats['pond/pumps/external']),
-            ),
-            'ItemPicture' => array(array(
-                'is_primary' => true, 'picture_id' => $pics['speck-badu']),
-            ),
-        )));
+                    'Item' => array(
+                        'name' => 'ITT Argonaut AG Series Pump',
+                        'description' => 'A fairly standard item, with several variants and multiple pictures.',
+                    ),
+                    'Variation' => array(array(
+                            'name' => 'ITT Series 8', 'price' => 214.99), array(
+                            'name' => 'ITT Series 10', 'price' => 224.99), array(
+                            'name' => 'ITT Series 14', 'price' => 234.99), array(
+                            'name' => 'ITT Series 16', 'price' => 245.99),
+                    ),
+                    'CategoryItem' => array(array(
+                            'is_primary' => true, 'category_id' => $cats['pond/pumps/external']),
+                    ),
+                    'ItemPicture' => array(array(
+                            'is_primary' => true, 'picture_id' => $pics['itt-argonaut']), array(
+                            'is_primary' => false, 'picture_id' => $pics['itt-argonaut-2'])
+                    ),
+                )));
 
         $this->Item->saveAll($this->Item->create(array(
-            'Item' => array(
-                'name'=>'Filter Media Grid',
-                'description'=>'A fairly standard item, with a couple of variants.',
-             ),
-            'Variation' => array(array(
-                'name' => 'each', 'price' => 5.50),
-            ),
-            'CategoryItem' => array(array(
-                'is_primary' => true, 'category_id' => $cats['pond/filters/equipment']),
-            ),
-            'ItemPicture' => array(array(
-                'is_primary' => true, 'picture_id' => $pics['filter-media-grid']),
-            ),
-        )));
+                    'Item' => array(
+                        'name' => 'Badu Magic Pond Pumps',
+                        'description' => 'A fairly standard item, with a couple of variants.',
+                    ),
+                    'Variation' => array(array(
+                            'name' => 'Magic 4', 'price' => 219.95), array(
+                            'name' => 'Magic 6', 'price' => 229.95), array(
+                            'name' => 'Magic 8', 'price' => 239.95),
+                    ),
+                    'CategoryItem' => array(array(
+                            'is_primary' => true, 'category_id' => $cats['pond/pumps/external']),
+                    ),
+                    'ItemPicture' => array(array(
+                            'is_primary' => true, 'picture_id' => $pics['speck-badu']),
+                    ),
+                )));
 
         $this->Item->saveAll($this->Item->create(array(
-            'Item' => array(
-                'name'=>'Poly Bead',
-                'description'=>'This item h as multiple pictures, but no primary one!',
-             ),
-            'Variation' => array(array(
-                'name' => 'each', 'price' => 5.50),
-            ),
-            'CategoryItem' => array(array(
-                'is_primary' => true, 'category_id' => $cats['pond/filters/equipment']),
-            ),
-            'ItemPicture' => array(
-                array('is_primary' => false, 'picture_id' => $pics['poly-bead']), 
-                array('is_primary' => false, 'picture_id' => $pics['poly-bead-2']),
-            ),
-        )));
+                    'Item' => array(
+                        'name' => 'Filter Media Grid',
+                        'description' => 'A fairly standard item, with a couple of variants.',
+                    ),
+                    'Variation' => array(array(
+                            'name' => 'each', 'price' => 5.50),
+                    ),
+                    'CategoryItem' => array(array(
+                            'is_primary' => true, 'category_id' => $cats['pond/filters/equipment']),
+                    ),
+                    'ItemPicture' => array(array(
+                            'is_primary' => true, 'picture_id' => $pics['filter-media-grid']),
+                    ),
+                )));
+
+        $this->Item->saveAll($this->Item->create(array(
+                    'Item' => array(
+                        'name' => 'Poly Bead',
+                        'description' => 'This item h as multiple pictures, but no primary one!',
+                    ),
+                    'Variation' => array(array(
+                            'name' => 'each', 'price' => 5.50),
+                    ),
+                    'CategoryItem' => array(array(
+                            'is_primary' => true, 'category_id' => $cats['pond/filters/equipment']),
+                    ),
+                    'ItemPicture' => array(
+                        array('is_primary' => false, 'picture_id' => $pics['poly-bead']),
+                        array('is_primary' => false, 'picture_id' => $pics['poly-bead-2']),
+                    ),
+                )));
 
 //        
 //        $this->createItem(
@@ -243,4 +242,5 @@ class SampleController extends InstallAppController
 //        $this->createCategory('fittings', 'Hose &amp; Fittings');
 //        $this->createCategory('fittings', 'Glue &amp; Silicone');
     }
+
 }
