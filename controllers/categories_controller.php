@@ -10,20 +10,32 @@
  */
 
 /**
- * Category Controller
+ * The Category controller is used to drive interaction with Categories.
  */
 class CategoriesController extends AppController {
 
-    var $name = 'Categories';
+    /**
+     * Imports the category and item models for use in this controller.
+     * @var array
+     */
     var $uses = array('Category', 'Item');
 
+    /**
+     * Callback executed before any other actions are called.
+     */
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('*');
     }
 
+    /**
+     * Displays the main category index.
+     * Sets a view variable containing all categories directly below the main 
+     * parent node.
+     * 
+     * @viewvar categories
+     */
     public function index() {
-
         $parentid = $this->Category->field('id', array('Category.slug' => 'catrootnode'));
 
         $categories = $this->Category->find('all', array(
@@ -35,6 +47,16 @@ class CategoriesController extends AppController {
         $this->set('categories', $categories);
     }
 
+    /**
+     * Displays a specific category.
+     * Sets view vars for the selected category, all subcategories, and any items
+     * in the specified category.
+     * 
+     * @param mixed $id The id or slug of the category to display.
+     * @viewvar category
+     * @viewvar subCategories
+     * @viewvar relatedItems
+     */
     public function view($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Invalid %s', __('category')));
@@ -50,6 +72,11 @@ class CategoriesController extends AppController {
         $this->set('relatedItems', $relatedItems);
     }
 
+    /**
+     * Returns an array of categories organised in a tree layout.
+     * 
+     * @return array
+     */
     public function menu_nodes() {
         $root = 0;
         if (isset($this->request->params['form']['node'])) {
