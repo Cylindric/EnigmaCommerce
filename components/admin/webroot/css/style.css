@@ -28,6 +28,11 @@ h1 {
     font-size: 1.2em;
 }
 
+h2 {
+    margin-top: 0.5em;
+    font-size: 1.0em;
+}
+
 a, a:visited {
     text-decoration: none;
     color: darkblue;

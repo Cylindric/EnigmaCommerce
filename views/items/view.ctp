@@ -2,6 +2,9 @@
 
     <?php echo $this->Image->itemThumb($item, array('link' => false, 'blank' => false)); ?>
     <h1><?php echo $item['Item']['name']; ?></h1>
+    <?php if($item['Item']['recommended']): ?>
+        <?php echo __('Recommended'); ?>
+    <?php endif; ?>
     <p><?php echo $item['Item']['description']; ?></p>
     <?php if (count($item['Variation'])>0): ?>
         <div class="x-list">

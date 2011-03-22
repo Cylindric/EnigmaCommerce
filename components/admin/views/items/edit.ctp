@@ -1,31 +1,19 @@
 <div class="content-1">
-    <?php echo $this->Session->flash(); ?>                    
-    <h1><?php echo __('Item'); ?></h1>
-    <?php
-    echo $this->Form->create('Item', array('inputDefaults' => array('label' => false)));
+    <?php echo $this->Session->flash(); ?>
 
-    echo $this->Form->input(
-            'id');
+    <div class="panel-1">
+        <?php echo $this->element('items/edit_main', $this->data); ?>
+    </div>
 
-    echo $this->Html->tag('label', __('Name'));
-    echo $this->Form->input(
-            'name', array(
-        'error' => array('notEmpty' => __('The %s cannot be blank', __('name')))));
+    <div class="panel-2">
+        <?php echo $this->element('items/category_list', array('categories' => $this->data)); ?>
+    </div>
 
-    echo $this->Html->tag('label', __('Slug'));
-    echo $this->Form->input(
-            'slug', array(
-        'error' => array('unique' => __('The %s must be unique', __('slug')))));
+    <div class="panel-3">
+        <?php echo $this->element('items/variation_list', array('variations' => $this->data)); ?>
+    </div>
 
-    echo $this->Html->tag('label', __('Description'));
-    echo $this->Form->input(
-            'description');
-
-    echo $this->Form->submit(__('Save'));
-    echo $this->Form->end();
-    ?>
 </div>
-
-<div class="content-2"> 
+<div class="content-2">
     <?php echo $this->element('items/menu'); ?>
 </div>
