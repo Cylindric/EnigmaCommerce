@@ -30,7 +30,5 @@ echo $this->Form->inputs(array(
 
 echo $this->Form->submit(__('Save'));
 echo $this->Form->end();
-?>
 
-<label><?php echo __('Created'); ?></label><?php echo $this->data['Item']['created']; ?>
-<label><?php echo __('Modified'); ?></label><?php echo $this->data['Item']['modified']; ?>
+echo $this->element('common/dates', array('dates' => $this->data['Item']));

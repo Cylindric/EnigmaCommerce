@@ -29,9 +29,13 @@ class Item extends AppModel {
         }
         $item = $this->find('all', array(
                     'contain' => array(
-                        'ItemPicture' => array(
-                            'Picture'
+                        'CategoryItem' => array(
+                            'Category',
                         ),
+                        'ItemPicture' => array(
+                            'Picture',
+                        ),
+                        'Status',
                         'Variation',
                     ),
                     'conditions' => array('Item.id' => $id),

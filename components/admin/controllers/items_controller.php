@@ -11,7 +11,7 @@
 class ItemsController extends AdminAppController {
 
     var $name = 'Items';
-    var $uses = array('Category', 'Item');
+    var $uses = array('Category', 'CategoryItem', 'Item');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -50,10 +50,27 @@ class ItemsController extends AdminAppController {
                 $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('item')), 'flash_failure');
             }
         } else {
-            $this->request->data = $this->Item->findById($id);
+            $this->request->data = $this->Item->details($id);
         }
 
+        $this->set('categories', $this->Category->find('list'));
         $this->set('data', $this->request->data);
+    }
+
+    function addCategory() {
+        var_dump($this->request->data);
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $ci = $this->CategoryItem->create();
+            var_dump($ci);
+            if ($this->CategoryItem->save($this->request->data)) {
+                $this->Session->setFlash(__('The %s has been saved', __('link')), 'flash_success');
+            } else {
+                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('link')), 'flash_failure');
+            }
+//            $this->redirect(array('action' => 'edit', $this->Item->id));
+        } else {
+            $this->redirect(array('action' => 'index'));
+        }
     }
 
 }
