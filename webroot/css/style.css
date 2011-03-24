@@ -148,6 +148,19 @@ a:hover {
     padding-left: 0.5em;
 }
 
+/* Lists */
+.x-list {
+}
+
+.x-listitem {
+    clear: both;
+}
+
+.x-list div.thumb {
+    float: left;
+}
+
+/* Footer */
 ul.footer {
     padding: 0;
     margin: 0;
