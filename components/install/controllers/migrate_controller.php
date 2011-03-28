@@ -66,7 +66,7 @@ class MigrateController extends InstallAppController {
 
         @$this->old_db = ConnectionManager::getDataSource($this->settings['source']);
         if (is_null($this->old_db)) {
-            $this->Session->setFlash(__("Error - you need to define a '%s' db connection to migrate.", $this->settings['source']));
+            $this->Session->setFlash(__("Error - you need to define a '%s' db connection to migrate.", $this->settings['source']), 'flash/error');
             $this->redirect(array('action' => 'index'));
         }
 

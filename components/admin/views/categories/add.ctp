@@ -1,5 +1,4 @@
 <div class="content-1">
-    <?php echo $this->Session->flash(); ?>                    
     <?php 
         echo $this->Form->create('Category');
         

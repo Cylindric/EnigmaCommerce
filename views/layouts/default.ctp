@@ -13,9 +13,12 @@
     <body>
 
         <div id="header">
-            
+            <?php echo __('EnigmaGen Commerce'); ?>
         </div>
-
+        <div id="flash">
+            <?php echo $this->Session->flash(); ?>
+        </div>
+        
         <div class="col-mask three-col"> 
             <div class="col-mid"> 
                 <div class="col-left">

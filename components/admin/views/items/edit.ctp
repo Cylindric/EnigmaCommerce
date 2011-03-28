@@ -1,5 +1,4 @@
 <div class="content-1">
-    <?php echo $this->Session->flash(); ?>
 
     <div class="panel-1">
         <?php echo $this->element('items/edit_main', $this->data); ?>

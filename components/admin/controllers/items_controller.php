@@ -38,16 +38,16 @@ class ItemsController extends AdminAppController {
 
     function edit($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid %s', __('item')));
+            $this->Session->setFlash(__('Invalid %s', __('item')), 'flash/error');
             $this->redirect(array('action' => 'index'));
         }
 
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Item->save($this->request->data)) {
-                $this->Session->setFlash(__('The %s has been saved', __('item')), 'flash_success');
+                $this->Session->setFlash(__('The %s has been saved', __('item')), 'flash/success');
                 $this->redirect(array('action' => 'edit', $this->Item->id));
             } else {
-                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('item')), 'flash_failure');
+                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('item')), 'flash/failure');
             }
         } else {
             $this->request->data = $this->Item->details($id);
@@ -63,9 +63,9 @@ class ItemsController extends AdminAppController {
             $ci = $this->CategoryItem->create();
             var_dump($ci);
             if ($this->CategoryItem->save($this->request->data)) {
-                $this->Session->setFlash(__('The %s has been saved', __('link')), 'flash_success');
+                $this->Session->setFlash(__('The %s has been saved', __('link')), 'flash/success');
             } else {
-                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('link')), 'flash_failure');
+                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('link')), 'flash/failure');
             }
 //            $this->redirect(array('action' => 'edit', $this->Item->id));
         } else {

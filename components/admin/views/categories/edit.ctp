@@ -1,5 +1,4 @@
 <div class="content-1">
-    <?php echo $this->Session->flash(); ?>                    
     <h1><?php echo __('Category'); ?></h1>
     <?php 
         echo $this->Form->create('Category', array('inputDefaults' => array('label' => false)));

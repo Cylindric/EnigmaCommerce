@@ -28,7 +28,7 @@ class ItemsController extends AppController {
 
     function view($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid %s', __('item')));
+            $this->Session->setFlash(__('Invalid %s', __('item')), 'flash/error');
             $this->redirect(array('action' => 'index'));
         }
         $item = $this->Item->details($id);

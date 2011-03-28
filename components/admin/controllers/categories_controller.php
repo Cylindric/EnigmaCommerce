@@ -24,7 +24,7 @@ class CategoriesController extends AdminAppController {
 
     public function view($id) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid %s', __('category')));
+            $this->Session->setFlash(__('Invalid %s', __('category')), 'flash/error');
             $this->redirect(array('action' => 'index'));
         }
         $category = $this->Category->findById($id);
@@ -35,10 +35,10 @@ class CategoriesController extends AdminAppController {
     public function add() {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
-                $this->Session->setFlash(__('The %s has been saved', __('category')));
+                $this->Session->setFlash(__('The %s has been saved', __('category')), 'flash/success');
                 $this->redirect(array('action' => 'edit', $this->Category->id));
             } else {
-                $this->Session->setFlash(__('The %s could not be created. Please, try again.', __('category')));
+                $this->Session->setFlash(__('The %s could not be created. Please, try again.', __('category')), 'flash/failure');
             }
         } else {
             $this->request->data = $this->Category->create();
@@ -50,16 +50,16 @@ class CategoriesController extends AdminAppController {
 
     public function edit($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid %s', __('category')));
+            $this->Session->setFlash(__('Invalid %s', __('category')), 'flash/error');
             $this->redirect(array('action' => 'index'));
         }
 
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
-                $this->Session->setFlash(__('The %s has been saved', __('category')), 'flash_success');
+                $this->Session->setFlash(__('The %s has been saved', __('category')), 'flash/success');
                 $this->redirect(array('action' => 'edit', $this->Category->id));
             } else {
-                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('category')), 'flash_failure');
+                $this->Session->setFlash(__('The %s could not be saved. Please, try again.', __('category')), 'flash/failure');
             }
         } else {
             $this->request->data = $this->Category->findById($id);

@@ -16,9 +16,9 @@ class CategoryItemsController extends AdminAppController {
     public function add() {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->CategoryItems->save($this->request->data)) {
-                $this->Session->setFlash(__('The %s has been saved', __('link')));
+                $this->Session->setFlash(__('The %s has been saved', __('link')), 'flash/success');
             } else {
-                $this->Session->setFlash(__('The %s could not be created. Please, try again.', __('link')));
+                $this->Session->setFlash(__('The %s could not be created. Please, try again.', __('link')), 'flash/failure');
             }
             $this->redirect($this->referer());
         } else {

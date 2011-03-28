@@ -59,7 +59,7 @@ class CategoriesController extends AppController {
      */
     public function view($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Invalid %s', __('category')));
+            $this->Session->setFlash(__('Invalid %s', __('category')), 'flash/error');
             $this->redirect(array('action' => 'index'));
         }
 

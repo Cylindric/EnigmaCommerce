@@ -26,7 +26,8 @@ class BasketController extends AppController {
     }
 
     function add() {
-        
+        $this->Session->setFlash(__('Added to %s', __('basket')));
+        $this->redirect(array('action' => 'view'));
     }
 
 }

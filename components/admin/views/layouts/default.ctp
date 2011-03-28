@@ -17,6 +17,10 @@
             <?php echo $this->Html->link(__('Categories'), '/admin/categories'); ?> |
             <?php echo $this->Html->link(__('Items'), '/admin/items'); ?>
         </div>
+        
+        <div id="flash">
+            <?php echo $this->Session->flash(); ?>
+        </div>
 
         <div class="col-mask three-col"> 
             <div class="col-mid"> 

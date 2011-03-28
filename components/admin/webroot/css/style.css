@@ -1,4 +1,5 @@
 <?php
+    header("Content-type: text/css");
     $rightColWidth = 25;
     $rightPaddingRight = 2;
     $rightPaddingLeft = 2;
@@ -49,6 +50,22 @@ a:hover {
 }
 #header {
     border-bottom: 1px solid #000;
+}
+
+#flash {
+    position: absolute;
+    top: 1.2em;
+    width: 40%;
+    margin: 0 30%;
+    padding: 0.2em;
+    z-index: 1;
+}
+
+#flash > div {
+    padding: 0.3em;
+    color: #555;
+    border: 2px solid #555;
+    background-color: #ddd;
 }
 
 .col-mask {
@@ -123,20 +140,15 @@ a:hover {
 }
 
 /* Flash Messages */
-.flash {
-    margin: 1em 0;
-    padding: 0.3em;    
-}
-
-.flash_failure {
+#flash div.flash_error {
     color: #a00;
-    border: 1px solid #a00;
+    border: 2px solid #a00;
     background-color: #fdd;
 }
 
-.flash_success {
+#flash div.flash_success {
     color: #0a0;
-    border: 1px solid #0a0;
+    border: 2px solid #0a0;
     background-color: #dfd;
 }
 

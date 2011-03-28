@@ -4,8 +4,6 @@
 		<h1><?php echo($title); ?></h1>
 <?php endif; ?>
 
-<?php echo $this->Session->flash(); ?>
-
 	<table class="list">
 		<tr>
 			<th><?php echo $this->Paginator->sort(__('Name', true), 'name'); ?></th>
