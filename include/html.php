@@ -334,8 +334,6 @@ function mostext($categoryid = 0) {
  * ============================================================================ */
 
 function authorised() {
-    // TODO: Remove hack that bypasses all login!!
-    return true;
     return!empty($_SESSION['loggedin']);
 }
 
