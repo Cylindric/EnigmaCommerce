@@ -6,6 +6,11 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
+ */
+
+/**
+ * Manages the automatic loading and configuration of plugins.
+ * @package core
  * @subpackage components
  */
 class PluginHandlerComponent extends Component {

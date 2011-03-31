@@ -6,6 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package admin_component
+ */
+
+/**
+ * Base object for all Admin Controllers
+ * 
+ * @package admin_component
  * @subpackage controllers
  */
 class AdminAppController extends AppController {

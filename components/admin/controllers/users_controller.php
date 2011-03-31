@@ -6,6 +6,11 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package admin_component
+ */
+
+/**
+ * Handles interactions with Users, such as basic CRUD.
+ * @package admin_component
  * @subpackage controllers
  */
 class UsersController extends AdminAppController {

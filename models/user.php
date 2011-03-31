@@ -6,11 +6,13 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
- * @subpackage models
  */
 
 /**
- * The User model contains all the logic for manipulating Users.
+ * Model for manipulating Users.
+ * 
+ * @package core
+ * @subpackage models
  */
 class User extends AppModel {
 

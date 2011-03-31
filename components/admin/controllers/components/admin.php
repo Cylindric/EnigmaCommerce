@@ -6,9 +6,13 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package admin_component
- * @subpackage components
  */
 
+/**
+ * 
+ * @package admin_component
+ * @subpackage components
+ */
 class AdminComponent extends Object {
 
     var $components = array('Layout');

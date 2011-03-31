@@ -6,6 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
+ */
+
+/**
+ * Model for manipulating Units.
+ * 
+ * @package core
  * @subpackage models
  */
 class Unit extends AppModel {

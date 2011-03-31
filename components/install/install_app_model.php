@@ -6,6 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package install_component
+ */
+
+/**
+ * Base object for all Install Models
+ * 
+ * @package install_component
  * @subpackage models
  */
 class InstallAppModel extends AppModel {

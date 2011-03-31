@@ -6,6 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
+ */
+
+/**
+ * Model for manipulating Variations.
+ * 
+ * @package core
  * @subpackage models
  */
 class Variation extends AppModel {

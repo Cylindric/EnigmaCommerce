@@ -6,6 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
+ */
+
+/**
+ * Slug functionality for models.
+ * 
+ * @package core
  * @subpackage behaviors
  */
 class SluggableBehavior extends ModelBehavior {

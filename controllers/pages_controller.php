@@ -6,11 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
- * @subpackage controllers
  */
 
 /**
- * Page Controller
+ * Handles display of static Pages.
+ * @package core
+ * @subpackage controllers
  */
 class PagesController extends AppController {
 

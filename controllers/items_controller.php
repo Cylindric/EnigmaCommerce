@@ -6,11 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
- * @subpackage controllers
  */
 
 /**
- * Item Controller
+ * Handles interactions with Items.
+ * @package core
+ * @subpackage controllers
  */
 class ItemsController extends AppController {
 

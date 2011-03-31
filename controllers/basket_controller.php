@@ -6,11 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
- * @subpackage controllers
  */
 
 /**
- * Basket Controller
+ * Handles interactions with Baskets.
+ * @package core
+ * @subpackage controllers
  */
 class BasketController extends AppController {
 

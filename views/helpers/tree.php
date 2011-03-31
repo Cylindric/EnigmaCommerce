@@ -6,6 +6,10 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
+ */
+
+/**
+ * @package core
  * @subpackage helpers
  */
 class TreeHelper extends AppHelper {

@@ -6,6 +6,11 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
+ */
+
+/**
+ * Provides additional functionality for adding output to the final rendered output.
+ * @package core
  * @subpackage components
  */
 class RendererComponent extends Component {

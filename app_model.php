@@ -6,7 +6,13 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
- * @subpackage models
+ */
+
+/**
+ * Base object for all Models
+ * 
+ * @package core
+ * @subpackage controllers
  */
 class AppModel extends Model {
 

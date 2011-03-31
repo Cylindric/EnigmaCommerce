@@ -6,6 +6,11 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package admin_component
+ */
+
+/**
+ * Handles interactions with Categories, such as basic CRUD.
+ * @package admin_component
  * @subpackage controllers
  */
 class CategoriesController extends AdminAppController {

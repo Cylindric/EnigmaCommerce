@@ -6,6 +6,11 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package install_component
+ */
+
+/**
+ * Handles the installation of the core schema and data
+ * @package install_component
  * @subpackage controllers
  */
 class InstallController extends InstallAppController {

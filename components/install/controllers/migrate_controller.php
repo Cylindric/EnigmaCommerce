@@ -6,10 +6,14 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package install_component
- * @subpackage controllers
  */
 App::import('model', 'connection_manager');
 
+/**
+ * Handles the migration of old data
+ * @package install_component
+ * @subpackage controllers
+ */
 class MigrateController extends InstallAppController {
 
     var $components = array();

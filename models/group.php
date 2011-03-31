@@ -6,11 +6,13 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
- * @subpackage models
  */
 
 /**
- * The Group model contains all the logic for manipulating Groups.
+ * Model for manipulating Groups.
+ * 
+ * @package core
+ * @subpackage models
  */
 class Group extends AppModel {
 

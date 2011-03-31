@@ -6,6 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package install_component
+ */
+
+/**
+ * Auto-loader for the Install component
+ * 
+ * @package install_component
  * @subpackage core
  */
 class InstallAutoLoader extends object {

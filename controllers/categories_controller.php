@@ -6,11 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
- * @subpackage controllers
  */
 
 /**
- * The Category controller is used to drive interaction with Categories.
+ * Handles interactions with Categories.
+ * @package core
+ * @subpackage controllers
  */
 class CategoriesController extends AppController {
 

@@ -6,13 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
- * @subpackage helpers
  */
 
 /**
- * Tree Menu helper
- *
- * Helper to generate tree representations of MPTT or recursively nested data.
+ * Generates tree representations of MPTT or recursively nested data
+ * @package core
+ * @subpackage helpers
  */
 class TreeMenuHelper extends AppHelper {
 

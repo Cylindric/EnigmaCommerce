@@ -6,11 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
- * @subpackage controllers
  */
 
 /**
- * User Controller
+ * Handles interactions with Users
+ * @package core
+ * @subpackage controllers
  */
 class UsersController extends AppController {
 

@@ -6,6 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package admin_component
+ */
+
+/**
+ * Auto-loader for the Admin component
+ * 
+ * @package admin_component
  * @subpackage core
  */
 class AdminAutoLoader extends object {

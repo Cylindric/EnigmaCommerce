@@ -6,6 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package install_component
+ */
+
+/**
+ * Base object for all Instal Controllers
+ * 
+ * @package install_component
  * @subpackage controllers
  */
 class InstallAppController extends AppController {

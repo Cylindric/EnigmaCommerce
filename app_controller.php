@@ -6,6 +6,12 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package core
+ */
+
+/**
+ * Base object for all Controllers
+ * 
+ * @package core
  * @subpackage controllers
  */
 class AppController extends Controller {

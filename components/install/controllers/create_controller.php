@@ -6,13 +6,14 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package install_component
- * @subpackage controllers
  */
 App::import('model', 'connection_manager');
 
 /**
  * Manages the installation of new database structures and the migration of
  * data from previous versions.
+ * @package install_component
+ * @subpackage controllers
  */
 class CreateController extends InstallAppController {
 

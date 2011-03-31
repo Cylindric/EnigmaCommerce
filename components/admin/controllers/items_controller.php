@@ -6,6 +6,11 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package admin_component
+ */
+
+/**
+ * Handles interaction with Items.
+ * @package admin_component
  * @subpackage controllers
  */
 class ItemsController extends AdminAppController {
@@ -13,6 +18,9 @@ class ItemsController extends AdminAppController {
     var $name = 'Items';
     var $uses = array('Category', 'CategoryItem', 'Item');
 
+    /**
+     * Prepares the Controller.
+     */
     public function beforeFilter() {
         parent::beforeFilter();
         $this->set('title_for_layout', __('Items'));
@@ -21,7 +29,9 @@ class ItemsController extends AdminAppController {
     /**
      * Shows a list of all items in the specified category.
      * TODO: Do something interesting for the "all" case (id=null)
-     * @param mixed $category_id
+     * @param mixed $category_id The id or slug of a Category
+     * @viewvar array $category
+     * @viewvar array $items
      */
     function index($category_id = null) {
         if (!$category_id) {
@@ -36,6 +46,13 @@ class ItemsController extends AdminAppController {
         $this->set('items', $items);
     }
 
+    /**
+     * Shows an edit form for the specified item, and handles submissions of the
+     * form.
+     * @param mixed $id The id or slug of the item
+     * @viewvar array $categories
+     * @viewvar array $data
+     */
     function edit($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Invalid %s', __('item')), 'flash/error');
@@ -57,6 +74,9 @@ class ItemsController extends AdminAppController {
         $this->set('data', $this->request->data);
     }
 
+    /**
+     * Accepts form data specifying a category to add to an item.
+     */
     function addCategory() {
         var_dump($this->request->data);
         if ($this->request->is('post') || $this->request->is('put')) {

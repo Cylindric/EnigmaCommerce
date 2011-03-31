@@ -6,6 +6,11 @@
  * Redistributions of files must retain the above copyright notice.
  * 
  * @package admin_component
+ */
+
+/**
+ * Handles interactions with the connections between Categories and Items.
+ * @package admin_component
  * @subpackage controllers
  */
 class CategoryItemsController extends AdminAppController {
