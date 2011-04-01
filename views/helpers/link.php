@@ -39,6 +39,42 @@ class LinkHelper extends AppHelper {
         return $this->link($model, $data, $settings);
     }
 
+    /**
+     * Returns a fully-formed HTML A tag for the specified model
+     * 
+     * A hyperlink is created based on the supplied data, for the specified model.
+     * 
+     * The data should be a standard Cake-style data array, with the required model at the 
+     * top-most level:
+     * 
+     * <code>
+     * <?php
+     *  $data = array(
+     *      'Item' => array('field', 'field', 'field'),
+     *      'SomeOtherModel' => array('field', 'field', 'field'),
+     *  );
+     * ?>
+     * </code>
+     * 
+     * The Settings array consists of the following keys:
+     * <code>
+     * <?php
+     * $settings = array(
+     * 	'sef' => false,    // Wether or not to create SEF links 
+     * 	'action' => null,  // The action on the model to perform
+     * 	'id' => 'id',
+     * 	'slug' => 'slug',
+     * 	'name' => 'name',
+     * 	'content' => null,
+     * );
+     * ?>
+     * </code>
+     * 
+     * @param string $model Name of the model to use
+     * @param array $data Array of data to use
+     * @param array $settings Settings
+     * @return string A fully-formed HTML A tag
+     */
     function link($model, $data, array $settings = array()) {
         $settings = array_merge(array(
             'sef' => $this->settings['sef'],
@@ -47,7 +83,7 @@ class LinkHelper extends AppHelper {
             'slug' => 'slug',
             'name' => 'name',
             'content' => null,
-                ), $settings);
+            ), $settings);
         extract($settings);
 
         if ($name === false) {

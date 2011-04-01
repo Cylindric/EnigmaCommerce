@@ -20,4 +20,21 @@ class AdminAppController extends AppController {
         parent::beforeFilter();
     }
 
+    protected function action_id() {
+        $sessionKey = $this->Request->params['controller'] . '.id';
+        if (count($this->passedArgs) > 0) {
+            $passedId = $this->passedArgs[0];
+            $this->Session->write($sessionKey, $passedId);
+            return $passedId;
+        }
+
+        $sessionId = $this->Session->read($sessionKey);
+        if (!empty($sessionId)) {
+            return $sessionId;
+        }
+
+        $this->Session->setFlash(__('Invalid %s', __($this->name)), 'flash/error');
+        $this->redirect(array('action' => 'index'));
+    }
+
 }

@@ -28,10 +28,7 @@ class CategoriesController extends AdminAppController {
     }
 
     public function view($id) {
-        if (!$id) {
-            $this->Session->setFlash(__('Invalid %s', __('category')), 'flash/error');
-            $this->redirect(array('action' => 'index'));
-        }
+        $id = $this->action_id();
         $category = $this->Category->findById($id);
         $this->set('category', $category);
         $this->set('items', $this->Item->findInCategory($category['Category']['id']));
@@ -54,10 +51,7 @@ class CategoriesController extends AdminAppController {
     }
 
     public function edit($id = null) {
-        if (!$id) {
-            $this->Session->setFlash(__('Invalid %s', __('category')), 'flash/error');
-            $this->redirect(array('action' => 'index'));
-        }
+        $id = $this->action_id();
 
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
@@ -73,6 +67,19 @@ class CategoriesController extends AdminAppController {
         $this->set('parents', $this->Category->find('list'));
         $this->set('items', $this->Item->findInCategory($this->request->data['Category']['id']));
         $this->set('data', $this->request->data);
+    }
+
+    public function edit_items($id = null) {
+        $id = $this->action_id();
+        $data = $this->Category->findById($id);
+        $this->set('items', $this->Item->findInCategory($data['Category']['id']));
+        $this->set('data', $data);
+    }
+
+    public function edit_pictures($id = null) {
+        $id = $this->action_id();
+        $data = $this->Category->findById($id);
+        $this->set('data', $data);
     }
 
     public function menu_nodes() {
